@@ -1,0 +1,57 @@
+* {
+	font-family: 'Rubik', sans-serif;
+	color: black;
+}
+
+@keyframes fadeIn {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #FAFAFA;
+
+	animation-name: fadeIn;
+	animation-duration: .3s;
+	animation-timing-function: ease-out;
+}
+
+header {
+	background-color: #B9F6CA;
+	padding: 0.4em 2em;
+	height: 5em;
+}
+
+header>h1 {
+	font-weight: bolder;
+	font-family: 'Spinnaker', sans-serif;
+	font-size: 2em;
+	margin: 0.67em 0;
+}
+
+nav {
+	padding: 0.8em 1.4em;
+	background-color: #FFF;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+nav>span {
+	display: inline-block;
+	padding: 0 0.6em;
+	font-weight: bold;
+
+	-moz-transition: color .25s;
+	-o-transition: color .25s;
+	-webkit-transition: color .25s;
+	transition: color .25s;
+}
+
+nav>span:hover {
+	color: #2A8843;
+}
+
+main {
+	display: block;
+}
