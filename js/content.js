@@ -11,9 +11,24 @@ function getFeatured(element, method) {
 
 function getCategories(element, method) {
 	element.innerHTML = "";
-	var categories = ["apps", "games"];
+	var categories = [{
+			"name": "apps",
+			"description": "A bunch of apps.",
+			"image": "https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/headers/highway.jpg",
+			"color": "#303030",
+			"background": "#FAFAFA"
+		},
+		{
+			"name": "games",
+			"description": "A bunch of games.",
+			"image": "https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/headers/cabbage.jpg",
+			"color": "#679235",
+			"background": "#847367"
+		}
+	];
+
 	for (var i = 0; i < categories.length; i++) {
-		element.innerHTML += "<div id=\"" + categories[i] + "Category\"></div>";
+		element.innerHTML += "<div id=\"" + categories[i].name + "Category\"></div>";
 	}
 
 	setTimeout(function() {
@@ -24,10 +39,9 @@ function getCategories(element, method) {
 }
 
 function getCategory(category, method) {
-	console.log(category + "Category");
-	var element = document.getElementById(category + "Category");
-	element.innerHTML = "<h1 class=\"indented\">" + category.charAt(0).toUpperCase() + category.substring(1) + "</h1>"
-		+ "<div class=\"row\">"
+	var element = document.getElementById(category.name + "Category");
+	element.innerHTML = "<div class=\"category row\" style=\"color: " + category.color + "; background: linear-gradient(to right, " + category.background + ", transparent), url(" + category.image + "), " + category.background + "; background-repeat: no-repeat; background-size: cover; background-position: center;\">"
+		+ "<div style=\"vertical-align: top; margin-top: 3.5em;\"><h1>" + category.name.charAt(0).toUpperCase() + category.name.substring(1) + "</h1><p>" + category.description + "</p></div>"
 		+ method("Status", "8.9/10", "https://github.com/TheAndroidMaster/Status", "https://raw.githubusercontent.com/TheAndroidMaster/Status/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_web.png")
 	  + method("Metronome", "9.2/10", "https://github.com/TheAndroidMaster/Metronome", "https://raw.githubusercontent.com/TheAndroidMaster/Metronome-Android/master/app/src/main/res/mipmap/ic_launcher_web.png")
 		+ method("Status", "8.9/10", "https://github.com/TheAndroidMaster/Status", "https://raw.githubusercontent.com/TheAndroidMaster/Status/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_web.png")

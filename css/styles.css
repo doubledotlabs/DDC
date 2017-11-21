@@ -77,8 +77,7 @@ img {
 }
 
 .indented {
-	margin: 0 1em;
-	margin-top: 1.25em;
+	display: none;
 }
 
 .row {
@@ -186,9 +185,33 @@ img {
 	background-color: #FFF;
 }
 
+.category {
+	padding: 0 2em;
+	color: black;
+}
+
+.category>*:nth-child(1) {
+	color: inherit !important;
+	width: 200px;
+}
+
+.category>*:nth-child(1) * {
+	color: inherit !important;
+}
+
 @media(min-width: 600px) {
+	.indented {
+		display: block;
+		margin: 0 1em;
+		margin-top: 1.25em;
+	}
+
 	.row {
 		padding: 0 1em;
+	}
+
+	.category {
+		padding: 0 2em;
 	}
 
 	.largecard {
