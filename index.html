@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-title" content="DDStore">
   <!-- <link rel="apple-touch-icon-precomposed" href="/images/favicon-152.png"> -->
 
-	<link href="https://fonts.googleapis.com/css?family=Rubik|Spinnaker" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
 
@@ -39,10 +39,22 @@
 			display: none;
 		}
 
-		#signin {
+		#signin, #profile {
 			position: absolute;
-			top: 2.5em;
-			right: 2em;
+			padding: 0.5em;
+			top: 2em;
+			right: 1.5em;
+			cursor: pointer;
+
+			-moz-transition: background-color .25s;
+			-o-transition: background-color .25s;
+			-webkit-transition: background-color .25s;
+			transition: background-color .25s;
+		}
+
+		#signin:hover {
+			background-color: rgba(0, 0, 0, 0.1);
+			border-radius: 0.2em;
 		}
 
 		#profile {
@@ -78,6 +90,13 @@
 		<span id="bug">Report an Issue</span>
 	</nav>
 	<main>
+		<div id="featured" class="row"></div>
 	</main>
+	<script type="text/javascript" src="js/methods.js"></script>
+	<script type="text/javascript" src="js/featured.js"></script>
+	<script>
+		var featured = document.getElementById("featured");
+		getFeatured(featured, getLargeCardsMethod());
+	</script>
 </body>
 </html>

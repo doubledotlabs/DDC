@@ -1,5 +1,5 @@
 * {
-	font-family: 'Rubik', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	color: black;
 }
 
@@ -26,7 +26,6 @@ header {
 
 header>h1 {
 	font-weight: bolder;
-	font-family: 'Spinnaker', sans-serif;
 	font-size: 2em;
 	margin: 0.67em 0;
 }
@@ -41,6 +40,7 @@ nav>span {
 	display: inline-block;
 	padding: 0 0.6em;
 	font-weight: bold;
+	cursor: pointer;
 
 	-moz-transition: color .25s;
 	-o-transition: color .25s;
@@ -54,4 +54,24 @@ nav>span:hover {
 
 main {
 	display: block;
+}
+
+img {
+	max-width: 100%;
+}
+
+.row {
+	display: table-row;
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+
+.row>* {
+	display: table-cell;
+	display: inline-block;
+}
+
+.largecard {
+	width: 400px;
+	height: 500px;
 }
