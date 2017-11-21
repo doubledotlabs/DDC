@@ -101,6 +101,10 @@ button.outline:hover {
 	filter: opacity(0.8);
 }
 
+small {
+	font-size: 0.7em;
+}
+
 .indented {
 	display: none;
 }
