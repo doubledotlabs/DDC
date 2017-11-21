@@ -19,7 +19,7 @@ body {
 }
 
 header {
-	background-color: #B9F6CA;
+	background-color: #FFF;
 	padding: 0.4em 2em;
 	height: 5em;
 }
@@ -58,20 +58,55 @@ main {
 
 img {
 	max-width: 100%;
+	max-height: 100%;
 }
 
 .row {
-	display: table-row;
 	overflow-x: auto;
 	overflow-y: hidden;
+	white-space: nowrap;
 }
 
 .row>* {
-	display: table-cell;
 	display: inline-block;
+	position: relative;
 }
 
 .largecard {
-	width: 400px;
-	height: 500px;
+	width: 100%;
+	height: 250px;
+	background-color: #FFF;
+	cursor: pointer;
+
+	-moz-transition: box-shadow .25s;
+	-o-transition: box-shadow .25s;
+	-webkit-transition: box-shadow .25s;
+	transition: box-shadow .25s;
+}
+
+.largecard>.info {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 0 2em;
+	text-align: center;
+}
+
+@media(min-width: 600px) {
+	.row {
+		padding: 0 1em;
+	}
+
+	.largecard {
+		width: 512px;
+		height: 250px;
+		margin: 1em;
+		border-radius: 0.2em;
+		box-shadow: 0 0.2em 0.6em rgba(0, 0, 0, 0.2);
+	}
+
+	.largecard:hover {
+		box-shadow: 0 0.35em 0.8em rgba(0, 0, 0, 0.3);
+	}
 }
