@@ -91,12 +91,15 @@
 	</nav>
 	<main>
 		<div id="featured" class="row"></div>
+		<div id="something" class="row"></div>
 	</main>
 	<script type="text/javascript" src="js/methods.js"></script>
-	<script type="text/javascript" src="js/featured.js"></script>
+	<script type="text/javascript" src="js/content.js"></script>
 	<script>
 		var featured = document.getElementById("featured");
+		var something = document.getElementById("something");
 		getFeatured(featured, getLargeCardsMethod());
+		getFeatured(something, getSmallCardsMethod());
 	</script>
 </body>
 </html>

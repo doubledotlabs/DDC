@@ -5,3 +5,11 @@ function getLargeCardsMethod() {
     + "><p class=\"info\"><b>" + title + "</b> - " + content + "</p></div>"
   };
 }
+
+function getSmallCardsMethod() {
+  return function(title, content, url, image) {
+    return "<div class=\"smallcard\" onclick=\"location.href = \'" + url + "\';\">"
+    + (image ? "<img src=\"" + image + "\">" : "")
+    + "<p class=\"info\"><b>" + title + "</b><br>" + content + "</p></div>"
+  };
+}
