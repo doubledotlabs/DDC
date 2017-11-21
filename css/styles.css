@@ -90,7 +90,7 @@ button {
 }
 
 button:hover {
-	background-color: rgba(0, 0, 0, 0.15);
+	background-color: rgba(0, 0, 0, 0.1);
 }
 
 button.outline {
@@ -113,7 +113,6 @@ button.outline:hover {
 .row>* {
 	display: inline-block;
 	position: relative;
-	break-inside: avoid;
 }
 
 .row>*:nth-child(2) {
@@ -227,6 +226,8 @@ button.outline:hover {
 	color: inherit !important;
 	margin: 0;
 	margin-top: 0.2em;
+	margin-right: 1em;
+	white-space: pre-wrap;
 }
 
 @media(min-width: 600px) {
@@ -241,7 +242,7 @@ button.outline:hover {
 	}
 
 	.category {
-		padding: 0 2em;
+		padding: 0.5em 2em;
 	}
 
 	.largecard {

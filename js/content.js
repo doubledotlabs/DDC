@@ -11,7 +11,14 @@ function getFeatured(element, method) {
 
 function getCategories(element, method) {
 	element.innerHTML = "";
-	var categories = [{
+	var categories = [
+    {
+  			"name": "stuff",
+  			"description": "A bunch of stuff.",
+  			"color": "#000",
+  			"background": "transparent"
+  	},
+    {
 			"name": "apps",
 			"description": "A bunch of apps.",
 			"color": "#BDBDBD",
@@ -22,6 +29,12 @@ function getCategories(element, method) {
 			"description": "A bunch of games.",
 			"color": "#177323",
 			"background": "#7CF38B"
+		},
+    {
+			"name": "more stuff",
+			"description": "A bunch of more stuff with a long description.",
+			"color": "#000",
+			"background": "transparent"
 		}
 	];
 
