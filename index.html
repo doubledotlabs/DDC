@@ -90,16 +90,17 @@
 		<span id="bug">Report an Issue</span>
 	</nav>
 	<main>
+		<h1 class="indented">Featured</h1>
 		<div id="featured" class="row"></div>
-		<div id="something" class="row"></div>
+		<div id="categories"></div>
 	</main>
 	<script type="text/javascript" src="js/methods.js"></script>
 	<script type="text/javascript" src="js/content.js"></script>
 	<script>
 		var featured = document.getElementById("featured");
-		var something = document.getElementById("something");
+		var categories = document.getElementById("categories");
 		getFeatured(featured, getLargeCardsMethod());
-		getFeatured(something, getSmallCardsMethod());
+		getCategories(categories, getSmallCardsMethod());
 	</script>
 </body>
 </html>

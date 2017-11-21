@@ -76,6 +76,11 @@ img {
 	max-height: 100%;
 }
 
+.indented {
+	margin: 0 1em;
+	margin-top: 1.25em;
+}
+
 .row {
 	overflow-x: auto;
 	overflow-y: hidden;
@@ -105,17 +110,31 @@ img {
 .row>*:nth-child(7) {
 	animation-delay: 0.6s;
 }
+.row>*:nth-child(8) {
+	animation-delay: 0.65s;
+}
+.row>*:nth-child(9) {
+	animation-delay: 0.7s;
+}
+.row>*:nth-child(10) {
+	animation-delay: 0.75s;
+}
+.row>*:nth-child(11) {
+	animation-delay: 0.8s;
+}
+.row>*:nth-child(12) {
+	animation-delay: 0.85s;
+}
 
 .largecard, .smallcard {
 	opacity: 0;
-	transform: scale(0.5);
 
 	-moz-transition: box-shadow .25s;
 	-o-transition: box-shadow .25s;
 	-webkit-transition: box-shadow .25s;
 	transition: box-shadow .25s;
 
-	animation-name: fadeScaleIn;
+	animation-name: fadeIn;
 	animation-duration: .3s;
 	animation-timing-function: ease-out;
 	animation-fill-mode: forwards;
@@ -126,6 +145,9 @@ img {
 	height: 250px;
 	background-color: #FFF;
 	cursor: pointer;
+
+	animation-name: fadeScaleIn;
+	transform: scale(0.5);
 }
 
 .smallcard {
@@ -143,7 +165,8 @@ img {
 	top: 0.5em;
 	left: 0.5em;
 	right: 0.5em;
-	width: calc(100% - 1em);
+	width: calc(100% - 3em);
+	padding: 1em;
 }
 
 .info {
