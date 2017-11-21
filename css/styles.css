@@ -81,14 +81,14 @@ img {
 }
 
 .row {
-	overflow-x: auto;
-	overflow-y: hidden;
+	overflow: hidden;
 	white-space: nowrap;
 }
 
 .row>* {
 	display: inline-block;
 	position: relative;
+	break-inside: avoid;
 }
 
 .row>*:nth-child(2) {
@@ -152,6 +152,7 @@ img {
 .smallcard {
 	height: 200px;
 	width: 150px;
+	min-width: 150px;
 	background-color: #FFF;
 	cursor: pointer;
 	margin: 1em;
