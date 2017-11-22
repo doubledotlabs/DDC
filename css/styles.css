@@ -34,21 +34,20 @@ body {
 }
 
 header {
+	position: relative;
 	background-color: #FFF;
 	padding: 0.4em 2em;
 	height: 5em;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 header>h1 {
+	position: absolute;
 	font-weight: bolder;
 	font-size: 2em;
-	margin: 0.67em 0;
-}
-
-nav {
-	padding: 0.8em 1.4em;
-	background-color: #FFF;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+	margin: 0;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 nav>span {
