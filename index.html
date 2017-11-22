@@ -111,7 +111,7 @@
 				clearElement(main);
 			} else if (page.startsWith("category=")) {
 				clearElement(main);
-				main.appendChild(createElement(overflowListMethod(getCategory(page.substring(9)), apps, smallCardsMethod)));
+				main.appendChild(createElement(overflowListMethod(getCategory(page.substring(9)), apps, tinyCardsMethod	)));
 			} else {
 				page = "404";
 				clearElement(main);

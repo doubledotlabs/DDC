@@ -4,14 +4,14 @@ function largeCardsMethod(app) {
     + "><p class=\"info\"><b>" + app.name + "</b> - " + app.rating + "/10</p></div>";
 }
 
-function tinyCardsMethod(app) {
+function smallCardsMethod(app) {
   return "<div class=\"smallcard\" onclick=\"setPage(\'app=" + app.package + "\');\">"
     + "<img src=\"" + app.icon + "\">"
     + "<p class=\"info\"><b>" + app.name + "</b><br><small style=\"position: absolute;\">" + app.author + "</small><small style=\"float: right;\"><b>" + app.rating + "</b></small></p></div>";
 }
 
-function smallCardsMethod(app) {
-  return "<div class=\"smallcard\" onclick=\"setPage(\'app=" + app.package + "\');\">"
+function tinyCardsMethod(app) {
+  return "<div class=\"tinycard\" onclick=\"setPage(\'app=" + app.package + "\');\">"
     + "<img src=\"" + app.icon + "\">"
     + "<p class=\"info\"><b>" + app.name + "</b><br><small style=\"position: absolute;\">" + app.author + "</small><small style=\"float: right;\"><b>" + app.rating + "</b></small></p></div>";
 }
@@ -30,7 +30,7 @@ function rowListMethod(category, apps, method) {
 }
 
 function overflowListMethod(category, apps, method) {
-	var html = "<div class=\"category\" style=\"background-color: " + category.background + "; color: " + category.color + ";\">"
+	var html = "<div class=\"category\" style=\"background-color: " + category.background + "; color: " + category.color + "; min-height: 100vh;\">"
 	  + "<div style=\"margin: 2em 0;\"><h1>" + category.name + "</h1><p>" + category.description + "</p></div><div class=\"row overflow\">";
 
 	for (var i = 0; i < apps.length; i++) {

@@ -124,6 +124,7 @@ div.indented {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	margin: 0 -2em;
 }
 
 .row>* {
@@ -165,8 +166,10 @@ div.indented {
 	animation-delay: 0.85s;
 }
 
-.largecard, .smallcard {
+.largecard, .smallcard, .tinycard {
 	opacity: 0;
+	background-color: #FFF;
+	cursor: pointer;
 
 	-moz-transition: box-shadow .25s;
 	-o-transition: box-shadow .25s;
@@ -179,11 +182,13 @@ div.indented {
 	animation-fill-mode: forwards;
 }
 
+.smallcard, .tinycard {
+	margin: 1em;
+}
+
 .largecard {
 	width: 100%;
 	height: 250px;
-	background-color: #FFF;
-	cursor: pointer;
 
 	animation-name: fadeScaleIn;
 	transform: scale(0.5);
@@ -193,11 +198,26 @@ div.indented {
 	height: 200px;
 	width: 150px;
 	min-width: 150px;
-	background-color: #FFF;
-	cursor: pointer;
-	margin: 1em;
 	border-radius: 0.25em;
 	box-shadow: 0 0.15em 0.4em rgba(0, 0, 0, 0.2);
+}
+
+.tinycard {
+	height: 70px;
+	width: 100%;
+	min-width: 200px;
+	background-color: transparent;
+	margin: 0 1em;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.tinycard>img {
+	position: absolute;
+	height: calc(70px - 2em);
+	top: 0;
+	left: 0;
+	right: 0;
+	padding: 1em;
 }
 
 .smallcard>img {
@@ -226,6 +246,10 @@ div.indented {
 
 .smallcard>.info {
 	background-color: #FFF;
+}
+
+.tinycard>.info {
+	left: calc(70px - 1em);
 }
 
 .category {
@@ -269,7 +293,16 @@ div.indented {
 		box-shadow: 0 0.2em 0.6em rgba(0, 0, 0, 0.2);
 	}
 
-	.largecard:hover, .smallcard:hover {
+	.largecard:hover, .smallcard:hover, .tinycard:hover {
 		box-shadow: 0 0.35em 0.8em rgba(0, 0, 0, 0.3);
+	}
+
+	.tinycard {
+		width: 200px;
+		border: none;
+		border-radius: 0.25em;
+		box-shadow: 0 0.15em 0.4em rgba(0, 0, 0, 0.2);
+		background-color: #FFF;
+		margin: 1em;
 	}
 }
