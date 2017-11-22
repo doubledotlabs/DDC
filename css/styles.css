@@ -105,8 +105,12 @@ small {
 	font-size: 0.7em;
 }
 
-.indented {
+h1.indented {
 	display: none;
+}
+
+div.indented {
+	padding: 0 2em;
 }
 
 .row {
@@ -235,7 +239,7 @@ small {
 }
 
 @media(min-width: 600px) {
-	.indented {
+	h1.indented {
 		display: block;
 		margin: 0 1em;
 		margin-top: 1.25em;

@@ -89,18 +89,40 @@
 		<span id="about">About</span>
 		<span id="bug">Report an Issue</span>
 	</nav>
-	<main>
-		<h1 class="indented">Featured</h1>
-		<div id="featured" class="row"></div>
-		<div id="categories"></div>
-	</main>
+	<main id="main"></main>
 	<script type="text/javascript" src="js/methods.js"></script>
 	<script type="text/javascript" src="js/content.js"></script>
 	<script>
-		var featuredElement = document.getElementById("featured");
-		var categoriesElement = document.getElementById("categories");
-		getFeatured(featuredElement, largeCardsMethod);
-		getCategories(categoriesElement, rowListMethod, smallCardsMethod);
+		var main = document.getElementById("main");
+
+		function getPage() {
+    	if (window.location.search)
+      	return window.location.search.replace("?", "");
+    	else return "home";
+  	}
+
+		function setPage(page) {
+			if (page == "home") {
+				page = null;
+				clearElement(main);
+				getFeatured(main, rowListMethod, largeCardsMethod);
+				getCategories(main, rowListMethod, smallCardsMethod);
+			} else {
+				page = "404";
+				clearElement(main);
+				main.appendChild(createElement("<div class=\"indented\"><h1>Error 404</h1><p>Sorry, we couldn\'t find what you\'re looking for.</p><button class=\"outline\" onclick=\"setPage(\'home\');\">GO BACK</button></div>"))
+			}
+
+			window.history.replaceState(null, null, page ? "?" + page : "?");
+		}
+
+		function clearElement(element) {
+			while (element.firstChild) {
+				element.removeChild(element.firstChild);
+			}
+		}
+
+		setPage(getPage());
 	</script>
 </body>
 </html>

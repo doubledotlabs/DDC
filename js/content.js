@@ -93,10 +93,8 @@ var apps = [
   }
 ];
 
-function getFeatured(element, method) {
-  for (var i = 0; i < apps.length; i++) {
-		element.appendChild(createElement(method(apps[i])))
-  }
+function getFeatured(element, listMethod, method) {
+  element.appendChild(createElement(listMethod({"name": "Featured"}, apps, method)));
 }
 
 function getCategories(element, listMethod, method) {

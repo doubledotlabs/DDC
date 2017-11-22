@@ -11,9 +11,10 @@ function smallCardsMethod(app) {
 }
 
 function rowListMethod(category, apps, method) {
-	var html = "<div id=\"category" + category.name.replace(" ", "") + "\" class=\"category row\" style=\"color: " + category.color + "; background-color: " + category.background + ";\">"
-		+ "<div style=\"vertical-align: top; margin-top: 3.5em;\"><h1>" + category.name + "</h1><p>" + category.description
-		+ "</p><br><button class=\"outline\">MORE</button></div>";
+	var html = (category.description ? "" : "<h1 class=\"indented\">" + category.name + "</h1>") + "<div class=\"" + (category.description ? "category " : "") + "row\""
+		+ (category.color && category.background ? " style=\"color: " + category.color + "; background-color: " + category.background + ";\"" : "") + ">"
+		+ (category.description ? "<div style=\"vertical-align: top; margin-top: 3.5em;\"><h1>" + category.name + "</h1><p>" + category.description
+		+ "</p><br><button class=\"outline\">MORE</button></div>" : "");
 
 	for (var i = 0; i < apps.length; i++) {
 		html += method(apps[i]);
