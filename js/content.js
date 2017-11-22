@@ -1,25 +1,25 @@
 //this is all test data, it means nothing
 var categories = [
   {
-      "name": "stuff",
+      "name": "Stuff",
       "description": "A bunch of stuff.",
       "color": "#000",
       "background": "transparent"
   },
   {
-    "name": "apps",
+    "name": "Apps",
     "description": "A bunch of apps.",
     "color": "#BDBDBD",
     "background": "#303030"
   },
   {
-    "name": "games",
+    "name": "Games",
     "description": "A bunch of games.",
     "color": "#177323",
     "background": "#7CF38B"
   },
   {
-    "name": "more stuff",
+    "name": "More Stuff",
     "description": "A bunch of more stuff with a long description.",
     "color": "#000",
     "background": "transparent"
@@ -28,6 +28,54 @@ var categories = [
 
 var apps = [
   {
+    "name": "Status",
+    "author": "James Fenn",
+    "rating": "8.9",
+    "package": "com.james.status",
+    "header": "https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/headers/status_bg.png",
+    "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Status/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_web.png"
+  },
+  {
+    "name": "Metronome",
+    "author": "James Fenn",
+    "rating": 9.2,
+    "package": "james.metronome",
+    "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
+    "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Metronome-Android/master/app/src/main/res/mipmap/ic_launcher_web.png"
+  },
+	{
+    "name": "Status",
+    "author": "James Fenn",
+    "rating": "8.9",
+    "package": "com.james.status",
+    "header": "https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/headers/status_bg.png",
+    "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Status/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_web.png"
+  },
+  {
+    "name": "Metronome",
+    "author": "James Fenn",
+    "rating": 9.2,
+    "package": "james.metronome",
+    "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
+    "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Metronome-Android/master/app/src/main/res/mipmap/ic_launcher_web.png"
+  },
+	{
+    "name": "Status",
+    "author": "James Fenn",
+    "rating": "8.9",
+    "package": "com.james.status",
+    "header": "https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/headers/status_bg.png",
+    "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Status/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_web.png"
+  },
+  {
+    "name": "Metronome",
+    "author": "James Fenn",
+    "rating": 9.2,
+    "package": "james.metronome",
+    "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
+    "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Metronome-Android/master/app/src/main/res/mipmap/ic_launcher_web.png"
+  },
+	{
     "name": "Status",
     "author": "James Fenn",
     "rating": "8.9",
@@ -52,7 +100,7 @@ function getFeatured(element, method) {
   }
 }
 
-function getCategories(element, method) {
+function getCategories(element, listMethod, method) {
 	element.innerHTML = "";
   console.log("called" + categories.length);
 	for (var i = 0; i < categories.length; i++) {
@@ -62,24 +110,12 @@ function getCategories(element, method) {
 
 	setTimeout(function() {
 		for (var i = 0; i < categories.length; i++) {
-			getCategory(categories[i], method);
+			getCategory(categories[i], listMethod, method);
 		}
 	}, 100);
 }
 
-function getCategory(category, method) {
+function getCategory(category, listMethod, method) {
   var element = document.getElementById(category.name + "Category");
-	element.innerHTML = "<div class=\"category row\" style=\"color: " + category.color + "; background-color: " + category.background + ";\">"
-		+ "<div style=\"vertical-align: top; margin-top: 3.5em;\"><h1>" + category.name.charAt(0).toUpperCase() + category.name.substring(1) + "</h1><p>" + category.description + "</p><br><button class=\"outline\">MORE</button></div>"
-		+ method(apps[0])
-    + method(apps[1])
-    + method(apps[0])
-    + method(apps[1])
-    + method(apps[0])
-    + method(apps[1])
-    + method(apps[0])
-    + method(apps[1])
-    + method(apps[0])
-    + method(apps[1])
-		+ "</div>";
+	element.innerHTML = listMethod(category, apps, method);
 }
