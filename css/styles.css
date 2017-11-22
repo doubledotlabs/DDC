@@ -98,10 +98,6 @@ button.outline {
 	border: 1px solid currentColor;
 }
 
-button.outline:hover {
-	filter: opacity(0.8);
-}
-
 small {
 	font-size: 0.7em;
 }
@@ -120,8 +116,6 @@ div.indented {
 }
 
 .overflow {
-	overflow: hidden;
-	white-space: nowrap;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
