@@ -113,10 +113,10 @@
 			}
 		}
 
-		setPage(getPage());
+		setPage(getPage(), true);
 
 		window.onpopstate = function() {
-			setPage(getPage());
+			setPage(getPage(), true);
 		}
 	</script>
 </body>
