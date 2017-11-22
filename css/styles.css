@@ -120,6 +120,8 @@ div.indented {
 }
 
 .overflow {
+	overflow: hidden;
+	white-space: nowrap;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
