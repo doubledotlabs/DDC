@@ -120,42 +120,48 @@ div.indented {
 	white-space: nowrap;
 }
 
+.overflow {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
 .row>* {
 	display: inline-block;
 	position: relative;
 }
 
-.row>*:nth-child(2) {
+.row:not(.overflow)>*:nth-child(2) {
 	animation-delay: 0.1s;
 }
-.row>*:nth-child(3) {
+.row:not(.overflow)>*:nth-child(3) {
 	animation-delay: 0.2s;
 }
-.row>*:nth-child(4) {
+.row:not(.overflow)>*:nth-child(4) {
 	animation-delay: 0.3s;
 }
-.row>*:nth-child(5) {
+.row:not(.overflow)>*:nth-child(5) {
 	animation-delay: 0.4s;
 }
-.row>*:nth-child(6) {
+.row:not(.overflow)>*:nth-child(6) {
 	animation-delay: 0.5s;
 }
-.row>*:nth-child(7) {
+.row:not(.overflow)>*:nth-child(7) {
 	animation-delay: 0.6s;
 }
-.row>*:nth-child(8) {
+.row:not(.overflow)>*:nth-child(8) {
 	animation-delay: 0.65s;
 }
-.row>*:nth-child(9) {
+.row:not(.overflow)>*:nth-child(9) {
 	animation-delay: 0.7s;
 }
-.row>*:nth-child(10) {
+.row:not(.overflow)>*:nth-child(10) {
 	animation-delay: 0.75s;
 }
-.row>*:nth-child(11) {
+.row:not(.overflow)>*:nth-child(11) {
 	animation-delay: 0.8s;
 }
-.row>*:nth-child(12) {
+.row:not(.overflow)>*:nth-child(12) {
 	animation-delay: 0.85s;
 }
 

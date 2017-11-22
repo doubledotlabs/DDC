@@ -101,19 +101,27 @@
     	else return "home";
   	}
 
-		function setPage(page) {
+		function setPage(page, replace) {
 			if (page == "home") {
 				page = null;
 				clearElement(main);
 				getFeatured(main, rowListMethod, largeCardsMethod);
 				getCategories(main, rowListMethod, smallCardsMethod);
+			} else if (page.startsWith("app=")) {
+				clearElement(main);
+			} else if (page.startsWith("category=")) {
+				clearElement(main);
+				main.appendChild(createElement(overflowListMethod(getCategory(page.substring(9)), apps, smallCardsMethod)));
 			} else {
 				page = "404";
 				clearElement(main);
 				main.appendChild(createElement("<div class=\"indented\"><h1>Error 404</h1><p>Sorry, we couldn\'t find what you\'re looking for.</p><button class=\"outline\" onclick=\"setPage(\'home\');\">GO BACK</button></div>"))
 			}
 
-			window.history.replaceState(null, null, page ? "?" + page : "?");
+		  if (replace)
+				window.history.replaceState(null, null, page ? "?" + page : "?");
+			else window.history.pushState("", "", page ? "?" + page : "?");
+			window.scrollTo(0, 0);
 		}
 
 		function clearElement(element) {
@@ -123,6 +131,10 @@
 		}
 
 		setPage(getPage());
+
+		window.onpopstate = function() {
+			setPage(getPage());
+		}
 	</script>
 </body>
 </html>

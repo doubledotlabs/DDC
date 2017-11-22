@@ -1,24 +1,28 @@
 //this is all test data, it means nothing
 var categories = [
   {
-      "name": "Stuff",
-      "description": "A bunch of stuff.",
-      "color": "#000",
-      "background": "transparent"
+		"id": "stuff",
+    "name": "Stuff",
+    "description": "A bunch of stuff.",
+    "color": "#000",
+    "background": "transparent"
   },
   {
+		"id": "apps",
     "name": "Apps",
     "description": "A bunch of apps.",
     "color": "#BDBDBD",
     "background": "#303030"
   },
   {
+		"id": "games",
     "name": "Games",
     "description": "A bunch of games.",
     "color": "#177323",
     "background": "#7CF38B"
   },
   {
+		"id": "morestuff",
     "name": "More Stuff",
     "description": "A bunch of more stuff with a long description.",
     "color": "#000",
@@ -100,6 +104,13 @@ function getFeatured(element, listMethod, method) {
 function getCategories(element, listMethod, method) {
 	for (var i = 0; i < categories.length; i++) {
 		element.appendChild(createElement(listMethod(categories[i], apps, method)));
+	}
+}
+
+function getCategory(id) {
+	for (var i = 0; i < categories.length; i++) {
+		if (categories[i].id == id)
+			return categories[i];
 	}
 }
 
