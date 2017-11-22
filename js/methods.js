@@ -11,7 +11,7 @@ function smallCardsMethod(app) {
 }
 
 function rowListMethod(category, apps, method) {
-	var html = "<div class=\"category row\" style=\"color: " + category.color + "; background-color: " + category.background + ";\">"
+	var html = "<div id=\"category" + category.name.replace(" ", "") + "\" class=\"category row\" style=\"color: " + category.color + "; background-color: " + category.background + ";\">"
 		+ "<div style=\"vertical-align: top; margin-top: 3.5em;\"><h1>" + category.name + "</h1><p>" + category.description
 		+ "</p><br><button class=\"outline\">MORE</button></div>";
 

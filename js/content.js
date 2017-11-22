@@ -94,28 +94,24 @@ var apps = [
 ];
 
 function getFeatured(element, method) {
-  element.innerHTML = "";
   for (var i = 0; i < apps.length; i++) {
-    element.innerHTML += method(apps[i]);
+		element.appendChild(createElement(method(apps[i])))
   }
 }
 
 function getCategories(element, listMethod, method) {
-	element.innerHTML = "";
-  console.log("called" + categories.length);
 	for (var i = 0; i < categories.length; i++) {
-    console.log(i);
-		element.innerHTML += "<div id=\"" + categories[i].name + "Category\"></div>";
+		element.appendChild(createElement(listMethod(categories[i], apps, method)));
 	}
-
-	setTimeout(function() {
-		for (var i = 0; i < categories.length; i++) {
-			getCategory(categories[i], listMethod, method);
-		}
-	}, 100);
 }
 
-function getCategory(category, listMethod, method) {
-  var element = document.getElementById(category.name + "Category");
-	element.innerHTML = listMethod(category, apps, method);
+function createElement(html) {
+    var fragment = document.createDocumentFragment();
+    var temp = document.createElement('div');
+    temp.innerHTML = html;
+    while (temp.firstChild) {
+        fragment.appendChild(temp.firstChild);
+    }
+
+    return fragment;
 }
