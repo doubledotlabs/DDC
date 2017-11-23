@@ -42,6 +42,7 @@
 			margin: 0;
 			top: 50%;
 			transform: translateY(-50%);
+			cursor: pointer;
 		}
 
 		#signin, #profile {
@@ -85,7 +86,7 @@
 </head>
 <body>
 	<header>
-		<h1 id="logo">DDStore</h1>
+		<h1 id="logo" onclick="setPage('home');">DDStore</h1>
 		<input id="search" type="text" placeholder="Search for Apps..."></input>
 		<button id="signin" class="outline">
 			SIGN IN
@@ -120,7 +121,7 @@
 			} else if (page.startsWith("app=")) {
 				clearElement(main);
 				var app = getApp(page.substring(4));
-				document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat";
+				document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
 				main.style.background = "rgba(255, 255, 255, 0.5)";
 				main.appendChild(createElement("<img class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\">"));
 				main.appendChild(createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\">DOWNLOAD</button></div>"
