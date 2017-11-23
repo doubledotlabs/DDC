@@ -25,7 +25,7 @@ var categories = [
 		"id": "morestuff",
     "name": "More Stuff",
     "description": "A bunch of more stuff with a long description.",
-    "color": "#448AFF",
+    "color": "#82B1FF",
     "background": "#0D47A1"
   }
 ];

@@ -35,6 +35,16 @@
   <link href="css/styles.css" rel="stylesheet">
 
 	<style>
+		#logo {
+			color: #2962FF;
+			position: absolute;
+			font-weight: bolder;
+			font-size: 1.75em;
+			margin: 0;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+
 		#signin, #profile {
 			position: absolute;
 			padding: 0.4em 0.8em;
@@ -80,7 +90,7 @@
 </head>
 <body>
 	<header>
-		<h1>DDStore</h1>
+		<h1 id="logo">DDStore</h1>
 		<input id="search" type="text" placeholder="Search for Apps..."></input>
 		<button id="signin" class="outline">
 			SIGN IN

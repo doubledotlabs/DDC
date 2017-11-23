@@ -39,15 +39,6 @@ header {
 	height: 5em;
 }
 
-header>h1 {
-	position: absolute;
-	font-weight: bolder;
-	font-size: 2em;
-	margin: 0;
-	top: 50%;
-	transform: translateY(-50%);
-}
-
 nav>span {
 	display: inline-block;
 	padding: 0 0.6em;
@@ -193,7 +184,7 @@ div.indented {
 	width: 150px;
 	min-width: 150px;
 	border-radius: 0.25em;
-	box-shadow: 0 0.15em 0.4em rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.37);
 }
 
 .tinycard {
@@ -288,18 +279,18 @@ div.indented {
 		height: 250px;
 		margin: 1em;
 		border-radius: 0.25em;
-		box-shadow: 0 0.2em 0.6em rgba(0, 0, 0, 0.2);
+		box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.37);
 	}
 
 	.largecard:hover, .smallcard:hover, .tinycard:hover {
-		box-shadow: 0 0.35em 0.8em rgba(0, 0, 0, 0.3);
+		box-shadow: 0 0.4em 1.2em rgba(0, 0, 0, 0.3);
 	}
 
 	.tinycard {
 		width: 200px;
 		border: none;
 		border-radius: 0.25em;
-		box-shadow: 0 0.15em 0.4em rgba(0, 0, 0, 0.2);
+		box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.37);
 		background-color: #FFF;
 		margin: 1em;
 	}
