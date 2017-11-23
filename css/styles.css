@@ -111,6 +111,7 @@ img.header {
 img.appicon {
 	width: 8em;
 	margin: 1em auto;
+	filter: drop-shadow(0 0.2em 0.7em rgba(0, 0, 0, 0.35));
 	opacity: 0;
 	transform: scale(0.5);
 
