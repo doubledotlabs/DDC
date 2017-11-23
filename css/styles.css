@@ -343,6 +343,10 @@ div.indented {
 	padding: 0 1em;
 }
 
+.appinfo ~ .carousel > .slick-list {
+	padding: 0 2em;
+}
+
 @media(min-width: 600px) {
 	h1.indented {
 		display: block;
@@ -412,5 +416,9 @@ div.indented {
 	.appinfo ~ h1.indented {
 		margin: 0 2em;
 		margin-top: 1.25em;
+	}
+
+	.appinfo ~ .carousel > .slick-list {
+		padding: 0 4em;
 	}
 }

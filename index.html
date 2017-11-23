@@ -183,8 +183,40 @@
 				main.appendChild(createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\">DOWNLOAD</button></div>"
 				  + "<div class=\"appnameinfo\"><h1 class=\"appname\">" + app.name + "</h1><p class=\"appdesc\">" + app.description + "</p></div></div>"));
 
-				main.appendChild(createElement(rowListMethod({}, app.screenshots, imageCardsMethod)));
+				main.appendChild(createElement(carouselListMethod({
+					autoplay: true,
+  				slidesToShow: 4,
+					dots: app.screenshots.length > 4,
+					arrows: false,
+					variableWidth: true,
+					infinite: false,
+  				responsive: [
+						{
+      				breakpoint: 1600,
+      				settings: {
+								dots: app.screenshots.length > 3,
+        				slidesToShow: 3
+      				}
+    				},
+    				{
+      				breakpoint: 900,
+      				settings: {
+								dots: app.screenshots.length > 2,
+        				slidesToShow: 2
+      				}
+    				},
+    				{
+      				breakpoint: 600,
+      				settings: {
+								dots: app.screenshots.length > 1,
+        				slidesToShow: 1
+      				}
+    				}
+  				]
+				}, app.screenshots, imageCardsMethod)));
 				main.appendChild(createElement(rowListMethod({"name": "Related Apps"}, apps, smallCardsMethod)));
+
+				$(".carousel").slick();
 			} else if (page.startsWith("category=")) {
 				clearElement(main);
 				var category = getCategory(page.substring(9));
