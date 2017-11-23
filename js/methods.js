@@ -38,15 +38,16 @@ function carouselListMethod(options, apps, method) {
 
 function rowListMethod(category, apps, method) {
 	var html = (category.description || !category.name ? "" : "<h1 class=\"indented\">" + category.name + "</h1>") + "<div class=\"" + (category.description ? "category " : "") + "row\""
-		+ (category.color && category.background ? " style=\"color: " + category.color + "; background-color: " + category.background + ";\"" : "") + ">"
-		+ (category.description ? "<div style=\"vertical-align: top; margin-top: 3.5em;\"><h1>" + category.name + "</h1><p>" + category.description
+		+ (category.color && category.background ? " style=\"position: relative; color: " + category.color + "; background-color: " + category.background + ";\">" : " style=\"position: relative;\">")
+    + (category.description ? "<div style=\"vertical-align: top; margin-top: 3.5em;\"><h1>" + category.name + "</h1><p>" + category.description
 		+ "</p><br><button class=\"outline\" onclick=\"setPage(\'category=" + category.id + "\')\">MORE</button></div>" : "");
 
 	for (var i = 0; i < apps.length; i++) {
 		html += method(apps[i]);
 	}
 
-	return html + "</div>";
+	return html + "<div style=\"position: absolute; width: 150px; top: 0; bottom: 0; right: 0; z-index: 100; background: linear-gradient(to right, transparent, "
+    + (category.background && category.background != "transparent" ? category.background : "#FFF") + ");\"></div></div>";
 }
 
 function overflowListMethod(category, apps, method) {
