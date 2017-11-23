@@ -171,6 +171,16 @@ button.outline {
 	border: 1px solid currentColor;
 }
 
+a {
+	color: #2962FF;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+p > a {
+	text-decoration: underline;
+}
+
 small {
 	font-size: 0.7em;
 }
