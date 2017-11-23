@@ -118,7 +118,8 @@
 			} else if (page.startsWith("app=")) {
 				clearElement(main);
 				var app = getApp(page.substring(4));
-				document.body.style.background = "url(\"" + app.header + "\") center 0 / 100% auto no-repeat, url(\"" + app.header + "\") center / 9999% 9999% no-repeat";
+				document.body.style.background = "url(\"" + app.header + "\") center / 9999% 9999% no-repeat";
+				main.appendChild(createElement("<img class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\">"))
 			} else if (page.startsWith("category=")) {
 				clearElement(main);
 				var category = getCategory(page.substring(9));
