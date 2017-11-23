@@ -23,7 +23,7 @@
 body {
 	margin: 0;
 	padding: 0;
-	background-color: #FAFAFA;
+	background-color: #FFF;
 	opacity: 0;
 
 	animation-name: fadeIn;
@@ -35,10 +35,8 @@ body {
 
 header {
 	position: relative;
-	background-color: #FFF;
 	padding: 0.4em 2em;
 	height: 5em;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 header>h1 {

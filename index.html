@@ -53,21 +53,39 @@
 			color: #2962FF;
 		}
 
-		#profile {
+		#search {
 			display: none;
 			position: absolute;
-			top: 2.5em;
-			right: 2em;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 50%;
+			border: none;
+			background-color: rgba(0, 0, 0, 0.075);
+			padding: 1em 1.4em;
+			border-radius: 0.4em;
+		}
+
+		#search::placeholder {
+			color: rgba(0, 0, 0, 0.5);
+			font-weight: bold;
+		}
+
+		@media(min-width: 900px) {
+			#search {
+				display: block;
+			}
 		}
 	</style>
 </head>
 <body>
 	<header>
 		<h1>DDStore</h1>
+		<input id="search" type="text" placeholder="Search for Apps..."></input>
 		<button id="signin" class="outline">
 			SIGN IN
 		</button>
-		<span id="profile">
+		<span id="profile" style="display: none;">
 			<span id="profileName"></span>
 			<img id="profilePicture">
 		</span>
@@ -98,7 +116,7 @@
 			} else {
 				page = "404";
 				clearElement(main);
-				main.appendChild(createElement("<div class=\"indented\"><h1>Error 404</h1><p>Sorry, we couldn\'t find what you\'re looking for.</p><button class=\"outline\" onclick=\"setPage(\'home\');\">GO BACK</button></div>"))
+				main.appendChild(createElement("<div class=\"indented\"><h1>Error 404</h1><p>Sorry, we couldn\'t find what you\'re looking for.</p><button class=\"outline\" onclick=\"window.history.back();\">GO BACK</button></div>"))
 			}
 
 		  if (replace)
