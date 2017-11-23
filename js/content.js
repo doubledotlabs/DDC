@@ -114,6 +114,13 @@ function getCategory(id) {
 	}
 }
 
+function getApp(id) {
+	for (var i = 0; i < categories.length; i++) {
+		if (apps[i].package == id)
+			return apps[i];
+	}
+}
+
 function createElement(html) {
     var fragment = document.createDocumentFragment();
     var temp = document.createElement('div');

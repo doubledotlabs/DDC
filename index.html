@@ -98,6 +98,7 @@
 	<main id="main"></main>
 	<script type="text/javascript" src="js/methods.js"></script>
 	<script type="text/javascript" src="js/content.js"></script>
+	<script type="text/javascript" src="http://lokeshdhakar.com/projects/color-thief/js/color-thief.min.js"></script>
 	<script>
 		var main = document.getElementById("main");
 
@@ -116,7 +117,8 @@
 				getCategories(main, rowListMethod, smallCardsMethod);
 			} else if (page.startsWith("app=")) {
 				clearElement(main);
-				document.body.style.background = "inherit";
+				var app = getApp(page.substring(4));
+				document.body.style.background = "url(\"" + app.header + "\") center 0 / 100% auto no-repeat, url(\"" + app.header + "\") center / 9999% 9999% no-repeat";
 			} else if (page.startsWith("category=")) {
 				clearElement(main);
 				var category = getCategory(page.substring(9));

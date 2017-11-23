@@ -21,6 +21,9 @@
 }
 
 body {
+	height: 100vh;
+	width: 100%;
+	overflow-x: hidden;
 	margin: 0;
 	padding: 0;
 	background-color: #FFF;
