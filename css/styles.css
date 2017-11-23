@@ -214,25 +214,25 @@ div.indented {
 	animation-delay: 0.4s;
 }
 .row:not(.overflow)>*:nth-child(6) {
-	animation-delay: 0.5s;
+	animation-delay: 0.45s;
 }
 .row:not(.overflow)>*:nth-child(7) {
-	animation-delay: 0.6s;
+	animation-delay: 0.5s;
 }
 .row:not(.overflow)>*:nth-child(8) {
-	animation-delay: 0.65s;
+	animation-delay: 0.55s;
 }
 .row:not(.overflow)>*:nth-child(9) {
-	animation-delay: 0.7s;
+	animation-delay: 0.6s;
 }
 .row:not(.overflow)>*:nth-child(10) {
-	animation-delay: 0.75s;
+	animation-delay: 0.65s;
 }
 .row:not(.overflow)>*:nth-child(11) {
-	animation-delay: 0.8s;
+	animation-delay: 0.7s;
 }
 .row:not(.overflow)>*:nth-child(12) {
-	animation-delay: 0.85s;
+	animation-delay: 0.75s;
 }
 
 .largecard, .smallcard, .tinycard {
@@ -326,12 +326,12 @@ div.indented {
 	color: black;
 }
 
-.category>*:nth-child(1) {
+.row>.rowinfo {
 	color: inherit !important;
 	width: 200px;
 }
 
-.category>*:nth-child(1) * {
+.row>.rowinfo * {
 	color: inherit !important;
 	margin: 0;
 	margin-top: 0.2em;
@@ -340,7 +340,7 @@ div.indented {
 }
 
 .appinfo ~ .row {
-	padding: 0 1em;
+	padding: 0 2em;
 }
 
 .appinfo ~ .carousel > .slick-list {
@@ -410,7 +410,7 @@ div.indented {
 	}
 
 	.appinfo ~ .row {
-		padding: 0 3em;
+		padding: 0 4em;
 	}
 
 	.appinfo ~ h1.indented {

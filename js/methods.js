@@ -26,7 +26,7 @@ function chipsMethod(data) {
   return "<p class=\"chip\"" + (data.onclick ? " onclick=\"" + data.onclick + "\"" : "") + ">" + data.name + "</p>";
 }
 
-function carouselListMethod(options, apps, method) {
+function carouselListMethod(options, apps, method) {  
   var html = "<div class=\"carousel\" data-slick=\'" + JSON.stringify(options) + "\'>";
 
   for (var i = 0; i < apps.length; i++) {
@@ -37,10 +37,10 @@ function carouselListMethod(options, apps, method) {
 }
 
 function rowListMethod(category, apps, method) {
-	var html = (category.description || !category.name ? "" : "<h1 class=\"indented\">" + category.name + "</h1>") + "<div class=\"" + (category.description ? "category " : "") + "row\""
+	var html = (category.description || category.id ? "" : "<h1 class=\"indented\">" + category.name + "</h1>") + "<div class=\"" + (category.description ? "category " : "") + "row\""
 		+ (category.color && category.background ? " style=\"position: relative; color: " + category.color + "; background-color: " + category.background + ";\">" : " style=\"position: relative;\">")
-    + (category.description ? "<div style=\"vertical-align: top; margin-top: 3.5em;\"><h1>" + category.name + "</h1><p>" + category.description
-		+ "</p><br><button class=\"outline\" onclick=\"setPage(\'category=" + category.id + "\')\">MORE</button></div>" : "");
+    + (category.id && category.name ? "<div class=\"rowinfo\" style=\"vertical-align: top; transform: translateY(30%);\"><h1>" + category.name + "</h1>" + (category.description ? "<p>" + category.description
+		+ "</p>" : "") + "<br><button class=\"outline\" onclick=\"setPage(\'category=" + category.id + "\')\">MORE</button></div>" : "");
 
 	for (var i = 0; i < apps.length; i++) {
 		html += method(apps[i]);

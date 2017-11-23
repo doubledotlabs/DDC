@@ -172,56 +172,62 @@
   				]
 				}, apps, largeCardsMethod)));
 				getCategories(main, rowListMethod, smallCardsMethod);
-
-				$(".carousel").slick();
 			} else if (page.startsWith("app=")) {
 				clearElement(main);
 				var app = getApp(page.substring(4));
-				document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
-				main.style.background = "#FFF";
-				main.appendChild(createElement("<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"));
-				main.appendChild(createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\">DOWNLOAD</button></div>"
-				  + "<div class=\"appnameinfo\"><h1 class=\"appname\">" + app.name + "</h1><p class=\"appdesc\">" + app.description + "</p></div></div>"));
+				if (app) {
+					document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
+					main.style.background = "#FFF";
+					main.appendChild(createElement("<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"));
+					main.appendChild(createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\">DOWNLOAD</button></div>"
+					  + "<div class=\"appnameinfo\"><h1 class=\"appname\">" + app.name + "</h1><p class=\"appdesc\">" + app.description + "</p></div></div>"));
 
-				main.appendChild(createElement(carouselListMethod({
-					autoplay: true,
-  				slidesToShow: 4,
-					dots: app.screenshots.length > 4,
-					arrows: false,
-					variableWidth: true,
-					infinite: false,
-  				responsive: [
-						{
-      				breakpoint: 1600,
-      				settings: {
-								dots: app.screenshots.length > 3,
-        				slidesToShow: 3
-      				}
-    				},
-    				{
-      				breakpoint: 900,
-      				settings: {
-								dots: app.screenshots.length > 2,
-        				slidesToShow: 2
-      				}
-    				},
-    				{
-      				breakpoint: 600,
-      				settings: {
-								dots: app.screenshots.length > 1,
-        				slidesToShow: 1
-      				}
-    				}
-  				]
-				}, app.screenshots, imageCardsMethod)));
-				main.appendChild(createElement(rowListMethod({"name": "Related Apps"}, apps, smallCardsMethod)));
-
-				$(".carousel").slick();
+					main.appendChild(createElement(carouselListMethod({
+						autoplay: true,
+	  				slidesToShow: 4,
+						dots: app.screenshots.length > 4,
+						arrows: false,
+						variableWidth: true,
+						infinite: false,
+	  				responsive: [
+							{
+	      				breakpoint: 1600,
+	      				settings: {
+									dots: app.screenshots.length > 3,
+	        				slidesToShow: 3
+	      				}
+	    				},
+	    				{
+	      				breakpoint: 900,
+	      				settings: {
+									dots: app.screenshots.length > 2,
+	        				slidesToShow: 2
+	      				}
+	    				},
+	    				{
+	      				breakpoint: 600,
+	      				settings: {
+									dots: app.screenshots.length > 1,
+	        				slidesToShow: 1
+	      				}
+	    				}
+	  				]
+					}, app.screenshots, imageCardsMethod)));
+					main.appendChild(createElement(rowListMethod({"name": "Related<br>Apps", "id": "similar/" + app.package}, apps, smallCardsMethod)));
+				} else {
+					setPage("404");
+					return;
+				}
 			} else if (page.startsWith("category=")) {
 				clearElement(main);
 				var category = getCategory(page.substring(9));
-				document.body.style.background = category.background ? category.background : "inherit";
-				main.appendChild(createElement(overflowListMethod(category, apps, tinyCardsMethod)));
+				if (category) {
+					document.body.style.background = category.background ? category.background : "inherit";
+					main.appendChild(createElement(overflowListMethod(category, apps, tinyCardsMethod)));
+				} else {
+					setPage("404");
+					return;
+				}
 			} else {
 				page = "404";
 				clearElement(main);
@@ -232,6 +238,7 @@
 				window.history.replaceState(null, null, page ? "?" + page : "?");
 			else window.history.pushState("", "", page ? "?" + page : "?");
 			window.scrollTo(0, 0);
+			$(".carousel").slick();
 		}
 
 		function clearElement(element) {
