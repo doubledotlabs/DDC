@@ -137,7 +137,7 @@
 				var app = getApp(page.substring(4));
 				document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
 				main.style.background = "#FFF";
-				main.appendChild(createElement("<img class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\">"));
+				main.appendChild(createElement("<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"));
 				main.appendChild(createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\">DOWNLOAD</button></div>"
 				  + "<div class=\"appnameinfo\"><h1 class=\"appname\">" + app.name + "</h1><p class=\"appdesc\">" + app.description + "</p></div></div>"));
 				main.appendChild(createElement(rowListMethod({}, app.screenshots, imageCardsMethod)));
