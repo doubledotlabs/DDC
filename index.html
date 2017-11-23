@@ -37,12 +37,26 @@
 	<style>
 		#logo {
 			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			white-space: nowrap;
+			cursor: pointer;
+		}
+
+		#logo>* {
 			font-weight: bolder;
 			font-size: 1.75em;
 			margin: 0;
-			top: 50%;
-			transform: translateY(-50%);
-			cursor: pointer;
+			display: inline-block;
+			margin-right: 0.5em;
+		}
+
+		#logo>img {
+			height: 1.5em;
+		}
+
+		#logo>h1 {
+			position: absolute;
 		}
 
 		#signin, #profile {
@@ -86,7 +100,7 @@
 </head>
 <body>
 	<header>
-		<h1 id="logo" onclick="setPage('home');">DDStore</h1>
+		<div id="logo" onclick="setPage('home');"><img src="https://doubledotlabs.github.io/images/logo.svg"><h1>Store</h1></div>
 		<input id="search" type="text" placeholder="Search for Apps..."></input>
 		<button id="signin" class="outline">
 			SIGN IN
