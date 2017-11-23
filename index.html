@@ -36,7 +36,6 @@
 
 	<style>
 		#logo {
-			color: #2962FF;
 			position: absolute;
 			font-weight: bolder;
 			font-size: 1.75em;
@@ -57,10 +56,6 @@
 			-o-transition: background-color .25s;
 			-webkit-transition: background-color .25s;
 			transition: background-color .25s;
-		}
-
-		#signin {
-			color: #2962FF;
 		}
 
 		#search {
@@ -115,16 +110,21 @@
 		function setPage(page, replace) {
 			if (page == "home") {
 				page = null;
+				document.body.style.background = "inherit";
 				clearElement(main);
 				getFeatured(main, rowListMethod, largeCardsMethod);
 				getCategories(main, rowListMethod, smallCardsMethod);
 			} else if (page.startsWith("app=")) {
 				clearElement(main);
+				document.body.style.background = "inherit";
 			} else if (page.startsWith("category=")) {
 				clearElement(main);
-				main.appendChild(createElement(overflowListMethod(getCategory(page.substring(9)), apps, tinyCardsMethod	)));
+				var category = getCategory(page.substring(9));
+				document.body.style.background = category.background ? category.background : "inherit";
+				main.appendChild(createElement(overflowListMethod(category, apps, tinyCardsMethod	)));
 			} else {
 				page = "404";
+				document.body.style.background = "inherit";
 				clearElement(main);
 				main.appendChild(createElement("<div class=\"indented\"><h1>Error 404</h1><p>Sorry, we couldn\'t find what you\'re looking for.</p><button class=\"outline\" onclick=\"window.history.back();\">GO BACK</button></div>"))
 			}

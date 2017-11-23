@@ -37,6 +37,7 @@ header {
 	position: relative;
 	padding: 0.4em 2em;
 	height: 5em;
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
 }
 
 nav>span {

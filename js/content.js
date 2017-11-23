@@ -11,8 +11,8 @@ var categories = [
 		"id": "apps",
     "name": "Apps",
     "description": "A bunch of apps.",
-    "color": "#BDBDBD",
-    "background": "#303030"
+    "color": "#303030",
+    "background": "#BDBDBD"
   },
   {
 		"id": "games",
@@ -25,8 +25,8 @@ var categories = [
 		"id": "morestuff",
     "name": "More Stuff",
     "description": "A bunch of more stuff with a long description.",
-    "color": "#82B1FF",
-    "background": "#0D47A1"
+    "color": "#0D47A1",
+    "background": "#82B1FF"
   }
 ];
 
