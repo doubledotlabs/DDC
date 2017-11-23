@@ -118,6 +118,7 @@ div.indented {
 	flex-direction: row;
 	flex-wrap: wrap;
 	margin: 0 -2em;
+	background-color: #FFF;
 }
 
 .row>* {
@@ -246,7 +247,7 @@ div.indented {
 }
 
 .category {
-	padding: 0 2em;
+	padding: 1px 2em;
 	color: black;
 }
 
@@ -272,6 +273,10 @@ div.indented {
 
 	.row {
 		padding: 0 1em;
+	}
+
+	.overflow {
+		background-color: transparent;
 	}
 
 	.category {
