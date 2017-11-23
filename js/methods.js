@@ -18,8 +18,16 @@ function tinyCardsMethod(app) {
     + "</small><small style=\"float: right;\"><b>" + app.rating + "&nbsp;&#9733;</b></small></p></div>";
 }
 
+function imageCardsMethod(image) {
+  return "<img class=\"card\" src=\"" + image.url + "\" onclick=\"location.href=\'" + image.url + "\';\">";
+}
+
+function chipsMethod(data) {
+  return "<p class=\"chip\"" + (data.onclick ? " onclick=\"" + data.onclick + "\"" : "") + ">" + data.name + "</p>";
+}
+
 function rowListMethod(category, apps, method) {
-	var html = (category.description ? "" : "<h1 class=\"indented\">" + category.name + "</h1>") + "<div class=\"" + (category.description ? "category " : "") + "row\""
+	var html = (category.description || !category.name ? "" : "<h1 class=\"indented\">" + category.name + "</h1>") + "<div class=\"" + (category.description ? "category " : "") + "row\""
 		+ (category.color && category.background ? " style=\"color: " + category.color + "; background-color: " + category.background + ";\"" : "") + ">"
 		+ (category.description ? "<div style=\"vertical-align: top; margin-top: 3.5em;\"><h1>" + category.name + "</h1><p>" + category.description
 		+ "</p><br><button class=\"outline\" onclick=\"setPage(\'category=" + category.id + "\')\">MORE</button></div>" : "");

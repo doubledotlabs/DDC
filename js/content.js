@@ -35,8 +35,13 @@ var apps = [
     "name": "Status",
     "author": "James Fenn",
     "rating": "8.9",
+    "ratings": 8273,
     "package": "com.james.status",
     "description": "Status is a thing that does stuff with things and uses those things to do stuff. Status is a thing that does stuff with things and uses those things to do stuff. Status is a thing that does stuff with things and uses those things to do stuff.",
+    "screenshots": [
+      {"url":"https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/screenshots/ColorPickerDialog-Color.png"},
+      {"url":"https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/screenshots/ColorPickerDialog-Image.png"}
+    ],
     "header": "https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/headers/status_bg.png",
     "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Status/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_web.png"
   },
@@ -44,8 +49,14 @@ var apps = [
     "name": "Metronome",
     "author": "James Fenn",
     "rating": 9.2,
+    "ratings": 4985,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff. Metronome is a thing that does stuff with things and uses those things to do stuff. Metronome is a thing that does stuff with things and uses those things to do stuff.",
+    "screenshots": [
+      {"url":"https://camo.githubusercontent.com/db497d07ffe194806fbdc2b9892fbe6975403ffe/68747470733a2f2f746865616e64726f69646d61737465722e6769746875622e696f2f617070732f6d6574726f6e6f6d652f696d616765732f6d61696e2e706e67"},
+      {"url":"https://camo.githubusercontent.com/a7d712e1e207893363b9fbabf649f10f79a1145e/68747470733a2f2f746865616e64726f69646d61737465722e6769746875622e696f2f617070732f6d6574726f6e6f6d652f696d616765732f61626f75742e706e67"},
+      {"url":"https://camo.githubusercontent.com/70da392453b2c1ff894603fcb9920142164e2541/68747470733a2f2f746865616e64726f69646d61737465722e6769746875622e696f2f617070732f6d6574726f6e6f6d652f696d616765732f7468656d65732e706e67"}
+    ],
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
     "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Metronome-Android/master/app/src/main/res/mipmap/ic_launcher_web.png"
   },
