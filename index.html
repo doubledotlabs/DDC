@@ -109,17 +109,22 @@
   	}
 
 		function setPage(page, replace) {
+			document.body.style.background = "inherit";
+			main.style.background = null;
+
 			if (page == "home") {
 				page = null;
-				document.body.style.background = "inherit";
 				clearElement(main);
 				getFeatured(main, rowListMethod, largeCardsMethod);
 				getCategories(main, rowListMethod, smallCardsMethod);
 			} else if (page.startsWith("app=")) {
 				clearElement(main);
 				var app = getApp(page.substring(4));
-				document.body.style.background = "url(\"" + app.header + "\") center / 9999% 9999% no-repeat";
-				main.appendChild(createElement("<img class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\">"))
+				document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat";
+				main.style.background = "rgba(255, 255, 255, 0.5)";
+				main.appendChild(createElement("<img class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\">"));
+				main.appendChild(createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\">DOWNLOAD</button></div>"
+				  + "<div class=\"appnameinfo\"><h1 class=\"appname\">" + app.name + "</h1><p class=\"appdesc\">" + app.description + "</p></div></div>"));
 			} else if (page.startsWith("category=")) {
 				clearElement(main);
 				var category = getCategory(page.substring(9));
@@ -127,9 +132,8 @@
 				main.appendChild(createElement(overflowListMethod(category, apps, tinyCardsMethod	)));
 			} else {
 				page = "404";
-				document.body.style.background = "inherit";
 				clearElement(main);
-				main.appendChild(createElement("<div class=\"indented\"><h1>Error 404</h1><p>Sorry, we couldn\'t find what you\'re looking for.</p><button class=\"outline\" onclick=\"window.history.back();\">GO BACK</button></div>"))
+				main.appendChild(createElement("<div class=\"indented\"><h1>Error 404</h1><p>Sorry, we couldn\'t find what you\'re looking for.</p><button class=\"outline\" onclick=\"window.history.back();\">GO BACK</button></div>"));
 			}
 
 		  if (replace)

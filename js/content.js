@@ -36,6 +36,7 @@ var apps = [
     "author": "James Fenn",
     "rating": "8.9",
     "package": "com.james.status",
+    "description": "Status is a thing that does stuff with things and uses those things to do stuff. Status is a thing that does stuff with things and uses those things to do stuff. Status is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/headers/status_bg.png",
     "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Status/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_web.png"
   },
@@ -44,6 +45,7 @@ var apps = [
     "author": "James Fenn",
     "rating": 9.2,
     "package": "james.metronome",
+    "description": "Metronome is a thing that does stuff with things and uses those things to do stuff. Metronome is a thing that does stuff with things and uses those things to do stuff. Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
     "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Metronome-Android/master/app/src/main/res/mipmap/ic_launcher_web.png"
   },
@@ -52,6 +54,7 @@ var apps = [
     "author": "James Fenn",
     "rating": "8.9",
     "package": "com.james.status",
+    "description": "Status is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/headers/status_bg.png",
     "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Status/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_web.png"
   },
@@ -60,6 +63,7 @@ var apps = [
     "author": "James Fenn",
     "rating": 9.2,
     "package": "james.metronome",
+    "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
     "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Metronome-Android/master/app/src/main/res/mipmap/ic_launcher_web.png"
   },
@@ -68,6 +72,7 @@ var apps = [
     "author": "James Fenn",
     "rating": "8.9",
     "package": "com.james.status",
+    "description": "Status is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/headers/status_bg.png",
     "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Status/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_web.png"
   },
@@ -76,6 +81,7 @@ var apps = [
     "author": "James Fenn",
     "rating": 9.2,
     "package": "james.metronome",
+    "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
     "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Metronome-Android/master/app/src/main/res/mipmap/ic_launcher_web.png"
   },
@@ -84,6 +90,7 @@ var apps = [
     "author": "James Fenn",
     "rating": "8.9",
     "package": "com.james.status",
+    "description": "Status is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/headers/status_bg.png",
     "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Status/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_web.png"
   },
@@ -92,6 +99,7 @@ var apps = [
     "author": "James Fenn",
     "rating": 9.2,
     "package": "james.metronome",
+    "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
     "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Metronome-Android/master/app/src/main/res/mipmap/ic_launcher_web.png"
   }
