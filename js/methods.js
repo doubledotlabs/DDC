@@ -26,6 +26,16 @@ function chipsMethod(data) {
   return "<p class=\"chip\"" + (data.onclick ? " onclick=\"" + data.onclick + "\"" : "") + ">" + data.name + "</p>";
 }
 
+function carouselListMethod(options, apps, method) {
+  var html = "<div class=\"carousel\" data-slick=\'" + JSON.stringify(options) + "\'>";
+
+  for (var i = 0; i < apps.length; i++) {
+		html += method(apps[i]);
+	}
+
+  return html + "</div>";
+}
+
 function rowListMethod(category, apps, method) {
 	var html = (category.description || !category.name ? "" : "<h1 class=\"indented\">" + category.name + "</h1>") + "<div class=\"" + (category.description ? "category " : "") + "row\""
 		+ (category.color && category.background ? " style=\"color: " + category.color + "; background-color: " + category.background + ";\"" : "") + ">"

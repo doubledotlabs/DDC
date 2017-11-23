@@ -32,6 +32,8 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
 
 	<style>
@@ -111,9 +113,13 @@
 		</span>
 	</header>
 	<main id="main"></main>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
 	<script type="text/javascript" src="js/methods.js"></script>
 	<script type="text/javascript" src="js/content.js"></script>
-	<script type="text/javascript" src="http://lokeshdhakar.com/projects/color-thief/js/color-thief.min.js"></script>
 	<script>
 		var main = document.getElementById("main");
 
@@ -130,8 +136,44 @@
 			if (page == "home") {
 				page = null;
 				clearElement(main);
-				getFeatured(main, rowListMethod, largeCardsMethod);
+				main.appendChild(createElement(carouselListMethod({
+					autoplay: true,
+  				centerMode: true,
+  				centerPadding: '80px',
+  				slidesToShow: 4,
+					dots: true,
+					arrows: false,
+  				infinite: true,
+  				responsive: [
+						{
+      				breakpoint: 1600,
+      				settings: {
+        				centerMode: true,
+        				centerPadding: '60px',
+        				slidesToShow: 3
+      				}
+    				},
+    				{
+      				breakpoint: 900,
+      				settings: {
+        				centerMode: true,
+        				centerPadding: '40px',
+        				slidesToShow: 2
+      				}
+    				},
+    				{
+      				breakpoint: 600,
+      				settings: {
+        				centerMode: true,
+        				centerPadding: '0px',
+        				slidesToShow: 1
+      				}
+    				}
+  				]
+				}, apps, largeCardsMethod)));
 				getCategories(main, rowListMethod, smallCardsMethod);
+
+				$(".carousel").slick();
 			} else if (page.startsWith("app=")) {
 				clearElement(main);
 				var app = getApp(page.substring(4));
@@ -140,7 +182,9 @@
 				main.appendChild(createElement("<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"));
 				main.appendChild(createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\">DOWNLOAD</button></div>"
 				  + "<div class=\"appnameinfo\"><h1 class=\"appname\">" + app.name + "</h1><p class=\"appdesc\">" + app.description + "</p></div></div>"));
+
 				main.appendChild(createElement(rowListMethod({}, app.screenshots, imageCardsMethod)));
+				main.appendChild(createElement(rowListMethod({"name": "Related Apps"}, apps, smallCardsMethod)));
 			} else if (page.startsWith("category=")) {
 				clearElement(main);
 				var category = getCategory(page.substring(9));
