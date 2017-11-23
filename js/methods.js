@@ -26,7 +26,7 @@ function chipsMethod(data) {
   return "<p class=\"chip\"" + (data.onclick ? " onclick=\"" + data.onclick + "\"" : "") + ">" + data.name + "</p>";
 }
 
-function carouselListMethod(options, apps, method) {  
+function carouselListMethod(options, apps, method) {
   var html = "<div class=\"carousel\" data-slick=\'" + JSON.stringify(options) + "\'>";
 
   for (var i = 0; i < apps.length; i++) {
@@ -39,7 +39,7 @@ function carouselListMethod(options, apps, method) {
 function rowListMethod(category, apps, method) {
 	var html = (category.description || category.id ? "" : "<h1 class=\"indented\">" + category.name + "</h1>") + "<div class=\"" + (category.description ? "category " : "") + "row\""
 		+ (category.color && category.background ? " style=\"position: relative; color: " + category.color + "; background-color: " + category.background + ";\">" : " style=\"position: relative;\">")
-    + (category.id && category.name ? "<div class=\"rowinfo\" style=\"vertical-align: top; transform: translateY(30%);\"><h1>" + category.name + "</h1>" + (category.description ? "<p>" + category.description
+    + (category.id && category.name ? "<div class=\"rowinfo\" style=\"vertical-align: top; transform: translateY(calc(4em - 20%));\"><h1>" + category.name + "</h1>" + (category.description ? "<p>" + category.description
 		+ "</p>" : "") + "<br><button class=\"outline\" onclick=\"setPage(\'category=" + category.id + "\')\">MORE</button></div>" : "");
 
 	for (var i = 0; i < apps.length; i++) {
@@ -51,8 +51,8 @@ function rowListMethod(category, apps, method) {
 }
 
 function overflowListMethod(category, apps, method) {
-	var html = "<div class=\"category\" style=\"color: " + category.color + "; min-height: 100vh;\">"
-	  + "<div style=\"margin: 2em 0;\"><h1>" + category.name + "</h1><p>" + category.description + "</p></div><div class=\"row overflow\">";
+	var html = "<div class=\"category\" style=\"min-height: 100vh;\">"
+	  + "<div style=\"margin: 2em 0;\"><h1 style=\"color: " + category.color + ";\">" + category.name + "</h1><p style=\"color: " + category.color + ";\">" + category.description + "</p></div><div class=\"row overflow\">";
 
 	for (var i = 0; i < apps.length; i++) {
 		html += method(apps[i]);

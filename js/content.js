@@ -8,16 +8,16 @@ var categories = [
     "background": "transparent"
   },
   {
-		"id": "apps",
-    "name": "Apps",
-    "description": "A bunch of apps.",
-    "color": "#303030",
-    "background": "#BDBDBD"
+		"id": "thanksgiving",
+    "name": "Thanksgiving",
+    "description": "Enjoy this collection of apps that we are thankful for.",
+    "color": "#DC9755",
+    "background": "#692806"
   },
   {
 		"id": "games",
     "name": "Games",
-    "description": "A bunch of games.",
+    "description": "These games show off some beautiful graphics without impacting performance.",
     "color": "#177323",
     "background": "#7CF38B"
   },
@@ -25,8 +25,8 @@ var categories = [
 		"id": "morestuff",
     "name": "More Stuff",
     "description": "A bunch of more stuff with a long description.",
-    "color": "#0D47A1",
-    "background": "#82B1FF"
+    "color": "#82B1FF",
+    "background": "#0D47A1"
   }
 ];
 

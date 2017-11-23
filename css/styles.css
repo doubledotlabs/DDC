@@ -328,6 +328,11 @@ div.indented {
 
 .row>.rowinfo {
 	color: inherit !important;
+	max-width: 200px;
+	margin-right: 1em;
+}
+
+.category>.rowinfo {
 	width: 200px;
 }
 
