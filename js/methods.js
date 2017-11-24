@@ -23,7 +23,7 @@ function imageCardsMethod(image) {
 }
 
 function chipsMethod(data) {
-  return "<p class=\"chip\"" + (data.onclick ? " onclick=\"" + data.onclick + "\"" : "") + ">" + data.name + "</p>";
+  return "<p class=\"chip\"" + (data.id ? " onclick=\"setPage(\'category=" + data.id + "\');\"" : "") + ">" + data.name + "</p>";
 }
 
 function carouselListMethod(options, apps, method) {
@@ -51,13 +51,15 @@ function rowListMethod(category, apps, method) {
 }
 
 function overflowListMethod(category, apps, method) {
-	var html = "<div class=\"category\" style=\"min-height: 100vh;\">"
-	  + "<div style=\"margin: 2em 0;\"><h1 style=\"color: " + category.color + ";\">" + category.name + "</h1><p style=\"color: " + category.color + ";\">" + category.description + "</p></div><div class=\"row overflow\">";
+	var html = (category.description ? "<div class=\"category\">"
+	  + "<div style=\"margin: 2em 0;\"><h1 style=\"color: " + category.color + ";\">" + category.name + "</h1><p style=\"color: " + category.color + ";\">" + category.description + "</p></div>" : "")
+    + "<div class=\"row overflow\">";
 
 	for (var i = 0; i < apps.length; i++) {
 		html += method(apps[i]);
 	}
 
-	html += "</div></div>";
-	return html;
+	if (category.description)
+  html += "</div>";
+	return html + "</div>";
 }

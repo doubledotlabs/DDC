@@ -55,6 +55,16 @@ var apps = [
     "package": "com.james.status",
     "summary": "Status is a thing that does stuff with things and uses those things to do stuff.",
     "description": "Status is a thing that does stuff with things and uses those things to do stuff. Status is a thing that does stuff with things and uses those things to do stuff. Status is a thing that does stuff with things and uses those things to do stuff.",
+    "categories": [
+      {
+        "id": "actiongames",
+        "name": "Action Games"
+      },
+      {
+        "id": "thanksgiving",
+        "name": "Thanksgiving"
+      }
+    ],
     "screenshots": [
       {"url":"https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/screenshots/ColorPickerDialog-Color.png"},
       {"url":"https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/screenshots/ColorPickerDialog-Image.png"}
@@ -112,6 +122,20 @@ var apps = [
     "package": "james.metronome",
     "summary": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff. Metronome is a thing that does stuff with things and uses those things to do stuff. Metronome is a thing that does stuff with things and uses those things to do stuff.",
+    "categories": [
+      {
+        "id": "morestuff",
+        "name": "More Stuff"
+      },
+      {
+        "id": "thanksgiving",
+        "name": "Thanksgiving"
+      },
+      {
+        "id": "stuff",
+        "name": "Stuff"
+      }
+    ],
     "screenshots": [
       {"url":"https://camo.githubusercontent.com/db497d07ffe194806fbdc2b9892fbe6975403ffe/68747470733a2f2f746865616e64726f69646d61737465722e6769746875622e696f2f617070732f6d6574726f6e6f6d652f696d616765732f6d61696e2e706e67"},
       {"url":"https://camo.githubusercontent.com/a7d712e1e207893363b9fbabf649f10f79a1145e/68747470733a2f2f746865616e64726f69646d61737465722e6769746875622e696f2f617070732f6d6574726f6e6f6d652f696d616765732f61626f75742e706e67"},
