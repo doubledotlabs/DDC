@@ -73,7 +73,7 @@ var apps = [
     "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Status/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_web.png",
     "reviews": [
       {
-        "id": "31938ffas9d833",
+        "id": "com.james.status/31938ffas9d833",
         "user": {
           "id": "aora4nf844tt",
           "name": "Jim Person",
@@ -83,7 +83,7 @@ var apps = [
         "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
       },
       {
-        "id": "9wd98d023urcm",
+        "id": "com.james.status/9wd98d023urcm",
         "user": {
           "id": "aora4nf844tt",
           "name": "Jim Person",
@@ -93,7 +93,7 @@ var apps = [
         "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
       },
       {
-        "id": "qowidjq0d29fj4",
+        "id": "com.james.status/qowidjq0d29fj4",
         "user": {
           "id": "aora4nf844tt",
           "name": "Jim Person",
@@ -103,7 +103,7 @@ var apps = [
         "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
       },
       {
-        "id": "i319jdqa9d332",
+        "id": "com.james.status/i319jdqa9d332",
         "user": {
           "id": "aora4nf844tt",
           "name": "Jim Person",
@@ -145,7 +145,7 @@ var apps = [
     "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Metronome-Android/master/app/src/main/res/mipmap/ic_launcher_web.png",
     "reviews": [
       {
-        "id": "31938ffas9d833",
+        "id": "james.metronome/31938ffas9d833",
         "user": {
           "id": "aora4nf844tt",
           "name": "Jim Person",
@@ -155,7 +155,7 @@ var apps = [
         "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
       },
       {
-        "id": "9wd98d023urcm",
+        "id": "james.metronome/9wd98d023urcm",
         "user": {
           "id": "aora4nf844tt",
           "name": "Jim Person",
@@ -165,7 +165,7 @@ var apps = [
         "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
       },
       {
-        "id": "qowidjq0d29fj4",
+        "id": "james.metronome/qowidjq0d29fj4",
         "user": {
           "id": "aora4nf844tt",
           "name": "Jim Person",
@@ -175,7 +175,7 @@ var apps = [
         "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
       },
       {
-        "id": "i319jdqa9d332",
+        "id": "james.metronome/i319jdqa9d332",
         "user": {
           "id": "aora4nf844tt",
           "name": "Jim Person",
@@ -262,7 +262,7 @@ var apps = [
 
 var reviews = [
   {
-    "id": "31938ffas9d833",
+    "id": "com.james.status/31938ffas9d833",
     "user": {
       "id": "aora4nf844tt",
       "name": "Jim Person",
@@ -272,7 +272,7 @@ var reviews = [
     "review": "I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff."
   },
   {
-    "id": "9wd98d023urcm",
+    "id": "com.james.status/9wd98d023urcm",
     "user": {
       "id": "aora4nf844tt",
       "name": "Jim Person",
@@ -282,7 +282,7 @@ var reviews = [
     "review": "I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff."
   },
   {
-    "id": "qowidjq0d29fj4",
+    "id": "com.james.status/qowidjq0d29fj4",
     "user": {
       "id": "aora4nf844tt",
       "name": "Jim Person",
@@ -292,7 +292,7 @@ var reviews = [
     "review": "I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff."
   },
   {
-    "id": "i319jdqa9d332",
+    "id": "com.james.status/i319jdqa9d332",
     "user": {
       "id": "aora4nf844tt",
       "name": "Jim Person",

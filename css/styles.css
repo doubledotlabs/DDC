@@ -200,9 +200,10 @@ div.indented {
 	display: flex !important;
 	align-items: center;
 	height: 3em;
+	cursor: pointer;
 }
 
-.reviewinfo > img {
+.review > .reviewinfo > img {
 	position: absolute;
 	width: 3em;
 	height: 3em;
@@ -210,7 +211,7 @@ div.indented {
 	border: 1px solid #000;
 }
 
-.reviewinfo > div {
+.review > .reviewinfo > div {
 	position: absolute;
 	right: 0;
 	left: 4em;
