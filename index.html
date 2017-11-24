@@ -180,7 +180,7 @@
 					main.style.background = "#FFF";
 					main.appendChild(createElement("<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"));
 					main.appendChild(createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\">DOWNLOAD</button></div>"
-					  + "<div class=\"appnameinfo\"><h1 class=\"appname\">" + app.name + "</h1><p class=\"appdesc\">" + app.description + "</p></div></div>"));
+					  + "<div class=\"appnameinfo\"><h1 class=\"appname\">" + app.name + "</h1><p>" + app.summary + "</p></div></div>"));
 
 					main.appendChild(createElement(carouselListMethod({
 						autoplay: true,
@@ -213,7 +213,7 @@
 	    				}
 	  				]
 					}, app.screenshots, imageCardsMethod)));
-					main.appendChild(createElement("<div style=\"padding: 1em 4em; margin-bottom: 2em;\"><p>" + app.description + "</p><a>READ MORE</a></div>"));
+					main.appendChild(createElement("<div class=\"appdesc\"><p>" + app.description + "</p><a>READ MORE</a></div>"));
 					main.appendChild(createElement(rowListMethod({"name": "Related<br>Apps", "id": "similar/" + app.package}, apps, smallCardsMethod)));
 				} else {
 					setPage("404");

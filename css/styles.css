@@ -146,7 +146,9 @@ h1.appname {
 	margin-bottom: 0.5em;
 }
 
-p.appdesc {
+.appdesc {
+	padding: 1em 2em;
+	margin-bottom: 2em;
 }
 
 button {
@@ -428,12 +430,12 @@ div.indented {
 		padding: 0 4em;
 	}
 
-	.appinfo ~ h1.indented {
-		margin: 0 2em;
-		margin-top: 1.25em;
-	}
-
 	.appinfo ~ .carousel > .slick-list {
 		padding: 0 4em;
+	}
+
+	.appdesc {
+		padding: 1em 4em;
+		margin-bottom: 2em;
 	}
 }

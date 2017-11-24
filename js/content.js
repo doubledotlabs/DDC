@@ -37,13 +37,36 @@ var apps = [
     "rating": "8.9",
     "ratings": 8273,
     "package": "com.james.status",
+    "summary": "Status is a thing that does stuff with things and uses those things to do stuff.",
     "description": "Status is a thing that does stuff with things and uses those things to do stuff. Status is a thing that does stuff with things and uses those things to do stuff. Status is a thing that does stuff with things and uses those things to do stuff.",
     "screenshots": [
       {"url":"https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/screenshots/ColorPickerDialog-Color.png"},
       {"url":"https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/screenshots/ColorPickerDialog-Image.png"}
     ],
     "header": "https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/headers/status_bg.png",
-    "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Status/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_web.png"
+    "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Status/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_web.png",
+    "reviews": [
+      {
+        "id": "31938ffas9d833",
+        "rating": 10,
+        "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
+      },
+      {
+        "id": "9wd98d023urcm",
+        "rating": 9,
+        "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
+      },
+      {
+        "id": "qowidjq0d29fj4",
+        "rating": 5,
+        "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
+      },
+      {
+        "id": "i319jdqa9d332",
+        "rating": 7,
+        "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
+      }
+    ]
   },
   {
     "name": "Metronome",
@@ -51,6 +74,7 @@ var apps = [
     "rating": 9.2,
     "ratings": 4985,
     "package": "james.metronome",
+    "summary": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff. Metronome is a thing that does stuff with things and uses those things to do stuff. Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "screenshots": [
       {"url":"https://camo.githubusercontent.com/db497d07ffe194806fbdc2b9892fbe6975403ffe/68747470733a2f2f746865616e64726f69646d61737465722e6769746875622e696f2f617070732f6d6574726f6e6f6d652f696d616765732f6d61696e2e706e67"},
@@ -58,7 +82,29 @@ var apps = [
       {"url":"https://camo.githubusercontent.com/70da392453b2c1ff894603fcb9920142164e2541/68747470733a2f2f746865616e64726f69646d61737465722e6769746875622e696f2f617070732f6d6574726f6e6f6d652f696d616765732f7468656d65732e706e67"}
     ],
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
-    "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Metronome-Android/master/app/src/main/res/mipmap/ic_launcher_web.png"
+    "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Metronome-Android/master/app/src/main/res/mipmap/ic_launcher_web.png",
+    "reviews": [
+      {
+        "id": "31938ffas9d833",
+        "rating": 10,
+        "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
+      },
+      {
+        "id": "9wd98d023urcm",
+        "rating": 9,
+        "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
+      },
+      {
+        "id": "qowidjq0d29fj4",
+        "rating": 5,
+        "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
+      },
+      {
+        "id": "i319jdqa9d332",
+        "rating": 7,
+        "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
+      }
+    ]
   },
 	{
     "name": "Status",
