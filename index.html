@@ -217,13 +217,32 @@
 
 					main.appendChild(createElement("<div class=\"appdesc\"><p>" + app.description + "</p><a>READ MORE</a></div>"));
 					main.appendChild(createElement(overflowListMethod({}, app.categories, chipsMethod)));
+
+					var ratingColor = "#15AF5E";
+					if (app.rating < 5.5)
+						ratingColor = "#E24E0D";
+					else if (app.rating < 7)
+						ratingColor = "#E29D0D";
+					else if (app.rating < 8.5)
+						ratingColor = "#E2BB0D";
+
+					var downloadsColor = "#000";
+					if (app.downloads > 50000)
+					  downloadsColor = "#3F51B5";
+					else if (app.downloads > 5000)
+						downloadsColor = "#15AF5E";
+					else if (app.downloads > 1000)
+						downloadsColor = "#2962FF";
+
+					main.appendChild(createElement("<div class=\"row grid inner-shadow\"><div style=\"text-align: center;\"><h1 style=\"color: " + ratingColor + ";\">" + app.rating + "</h1><h4>Average Rating</h4></div><div style=\"text-align: center;\"><h1 style=\"color: " + downloadsColor + ";\">" + app.downloads + "</h1><h4>Downloads</h4></div></div>"));
 					main.appendChild(createElement(gridListMethod({"name": "Reviews"}, app.reviews, reviewMethod)));
-					main.appendChild(createElement(rowListMethod({
+					main.appendChild(createElement("<div class=\"inner-shadow\">" + rowListMethod({
 						"name": "Related<br>Apps",
 						"id": "similar/" + app.package,
 						"color": "#000",
-						"background": "#F5F5F5"
-					}, apps, smallCardsMethod)));
+						"background": "transparent",
+						"shade": "#F5F5F5"
+					}, apps, smallCardsMethod) + "</div>"));
 				} else {
 					setPage("404");
 					return;

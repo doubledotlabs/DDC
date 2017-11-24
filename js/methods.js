@@ -53,7 +53,7 @@ function rowListMethod(category, apps, method) {
 	}
 
 	return html + "<div style=\"position: absolute; width: 150px; top: 0; bottom: 0; right: 0; z-index: 100; background: linear-gradient(to right, transparent, "
-    + (category.background && category.background != "transparent" ? category.background : "#FFF") + ");\"></div></div>";
+    + (category.shade ? category.shade : (category.background && category.background != "transparent" ? category.background : "#FFF")) + ");\"></div></div>";
 }
 
 function overflowListMethod(category, apps, method) {
