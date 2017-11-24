@@ -191,6 +191,35 @@ div.indented {
 	padding: 0 2em;
 }
 
+.dropdown {
+	position: relative;
+}
+
+.dropdown > .content {
+	display: none;
+	position: absolute;
+	background-color: #FFF;
+	left: -1px;
+	right: -1px;
+	border: 1px solid #000;
+	border-radius: 0.25em;
+}
+
+.dropdown > .content > * {
+	padding: 0.4em 0.8em;
+	display: block;
+	text-align: center;
+
+	-moz-transition: color .25s, background-color .25s, border .25s, filter .25s;
+	-o-transition: color .25s, background-color .25s, border .25s, filter .25s;
+	-webkit-transition: color .25s, background-color .25s, border .25s, filter .25s;
+	transition: color .25s, background-color .25s, border .25s, filter .25s;
+}
+
+.dropdown:hover > .content {
+	display: block;
+}
+
 .review {
 	width: 100%;
 	margin: 1em 2em;
@@ -423,6 +452,10 @@ div.indented {
 		background-color: rgba(0, 0, 0, 0.1);
 	}
 
+	.dropdown > .content > *:hover {
+		background-color: rgba(0, 0, 0, 0.1);
+	}
+
 	h1.indented {
 		display: block;
 		margin: 0 1em;
@@ -474,7 +507,7 @@ div.indented {
 @media (min-width: 800px) {
 	.appinfo {
 		display: flex;
-		margin-bottom: 0;
+		margin-bottom: -3em;
 	}
 
 	.review {

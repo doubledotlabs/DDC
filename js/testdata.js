@@ -77,7 +77,7 @@ var apps = [
         "user": {
           "id": "aora4nf844tt",
           "name": "Jim Person",
-          "image": "https://theandroidmaster.github.io/images/headers/jamesorange.png"
+          "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
         "rating": 10,
         "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
@@ -87,7 +87,7 @@ var apps = [
         "user": {
           "id": "aora4nf844tt",
           "name": "Jim Person",
-          "image": "https://theandroidmaster.github.io/images/headers/jamesorange.png"
+          "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
         "rating": 9,
         "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
@@ -97,7 +97,7 @@ var apps = [
         "user": {
           "id": "aora4nf844tt",
           "name": "Jim Person",
-          "image": "https://theandroidmaster.github.io/images/headers/jamesorange.png"
+          "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
         "rating": 5,
         "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
@@ -107,7 +107,7 @@ var apps = [
         "user": {
           "id": "aora4nf844tt",
           "name": "Jim Person",
-          "image": "https://theandroidmaster.github.io/images/headers/jamesorange.png"
+          "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
         "rating": 7,
         "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
@@ -149,7 +149,7 @@ var apps = [
         "user": {
           "id": "aora4nf844tt",
           "name": "Jim Person",
-          "image": "https://theandroidmaster.github.io/images/headers/jamesorange.png"
+          "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
         "rating": 10,
         "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
@@ -159,7 +159,7 @@ var apps = [
         "user": {
           "id": "aora4nf844tt",
           "name": "Jim Person",
-          "image": "https://theandroidmaster.github.io/images/headers/jamesorange.png"
+          "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
         "rating": 9,
         "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
@@ -169,7 +169,7 @@ var apps = [
         "user": {
           "id": "aora4nf844tt",
           "name": "Jim Person",
-          "image": "https://theandroidmaster.github.io/images/headers/jamesorange.png"
+          "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
         "rating": 5,
         "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
@@ -179,7 +179,7 @@ var apps = [
         "user": {
           "id": "aora4nf844tt",
           "name": "Jim Person",
-          "image": "https://theandroidmaster.github.io/images/headers/jamesorange.png"
+          "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
         "rating": 7,
         "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
@@ -266,7 +266,7 @@ var reviews = [
     "user": {
       "id": "aora4nf844tt",
       "name": "Jim Person",
-      "image": "https://theandroidmaster.github.io/images/headers/jamesorange.png"
+      "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
     "rating": 10,
     "review": "I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff."
@@ -276,7 +276,7 @@ var reviews = [
     "user": {
       "id": "aora4nf844tt",
       "name": "Jim Person",
-      "image": "https://theandroidmaster.github.io/images/headers/jamesorange.png"
+      "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
     "rating": 9,
     "review": "I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff."
@@ -286,7 +286,7 @@ var reviews = [
     "user": {
       "id": "aora4nf844tt",
       "name": "Jim Person",
-      "image": "https://theandroidmaster.github.io/images/headers/jamesorange.png"
+      "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
     "rating": 5,
     "review": "I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff."
@@ -296,7 +296,7 @@ var reviews = [
     "user": {
       "id": "aora4nf844tt",
       "name": "Jim Person",
-      "image": "https://theandroidmaster.github.io/images/headers/jamesorange.png"
+      "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
     "rating": 7,
     "review": "I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff."
