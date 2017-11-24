@@ -26,6 +26,12 @@ function chipsMethod(data) {
   return "<p class=\"chip\"" + (data.id ? " onclick=\"setPage(\'category=" + data.id + "\');\"" : "") + ">" + data.name + "</p>";
 }
 
+function reviewMethod(data) {
+  return "<div class=\"review\"><div class=\"reviewinfo\"><img src=\"" + data.user.image + "\"><div><b>" + data.user.name + "</b><br>" + data.rating + "&nbsp;/&nbsp;10</div></div>"
+    + "<p>" + (data.review ? data.review : data.summary) + "</p>"
+    + "</div>"
+}
+
 function carouselListMethod(options, apps, method) {
   var html = "<div class=\"carousel\" data-slick=\'" + JSON.stringify(options) + "\'>";
 
@@ -60,6 +66,16 @@ function overflowListMethod(category, apps, method) {
 	}
 
 	if (category.description)
-  html += "</div>";
+    html += "</div>";
 	return html + "</div>";
+}
+
+function gridListMethod(category, apps, method) {
+  var html = (category.name ? "<h1 class=\"indented\">" + category.name + "</h1>" : "") + "<div class=\"row grid\">";
+
+  for (var i = 0; i < apps.length; i++) {
+		html += method(apps[i]);
+	}
+
+  return html + "</div>";
 }

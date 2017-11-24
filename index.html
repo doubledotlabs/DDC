@@ -217,7 +217,13 @@
 
 					main.appendChild(createElement("<div class=\"appdesc\"><p>" + app.description + "</p><a>READ MORE</a></div>"));
 					main.appendChild(createElement(overflowListMethod({}, app.categories, chipsMethod)));
-					main.appendChild(createElement(rowListMethod({"name": "Related<br>Apps", "id": "similar/" + app.package}, apps, smallCardsMethod)));
+					main.appendChild(createElement(gridListMethod({"name": "Reviews"}, app.reviews, reviewMethod)));
+					main.appendChild(createElement(rowListMethod({
+						"name": "Related<br>Apps",
+						"id": "similar/" + app.package,
+						"color": "#000",
+						"background": "#F5F5F5"
+					}, apps, smallCardsMethod)));
 				} else {
 					setPage("404");
 					return;
