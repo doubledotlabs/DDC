@@ -57,8 +57,9 @@ function rowListMethod(category, apps, method) {
 }
 
 function overflowListMethod(category, apps, method) {
-	var html = (category.description ? "<div class=\"category\">"
-	  + "<div style=\"margin: 2em 0;\"><h1 style=\"color: " + category.color + ";\">" + category.name + "</h1><p style=\"color: " + category.color + ";\">" + category.description + "</p></div>" : "")
+	var html = (category.name ? "<div class=\"category\">"
+	  + "<div style=\"margin: 2em 0;\"><h1" + (category.color ? " style=\"color: " + category.color + ";\"" : "") + ">" + category.name + "</h1>"
+    + (category.description ? "<p" + (category.color ? " style=\"color: " + category.color + ";\"" : "") + ">" + category.description + "</p>" : "") + "</div>" : "")
     + "<div class=\"row overflow\">";
 
 	for (var i = 0; i < apps.length; i++) {
