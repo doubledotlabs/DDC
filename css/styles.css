@@ -273,11 +273,6 @@ a.indented {
 	margin-bottom: 2em;
 }
 
-.appinfo ~ .grid {
-	margin-left: -2em;
-	margin-right: -2em;
-}
-
 .grid > * {
 	width: 100%;
 	margin: 1em 2em;
@@ -461,11 +456,12 @@ a.indented {
 	white-space: pre-wrap;
 }
 
-.appinfo ~ .row,
+.appinfo ~ .row:not(.grid),
 .appinfo ~ div>.row,
 .appinfo ~ .carousel > .slick-list {
 	padding: 0 2em;
 }
+
 @media(min-width: 600px) {
 	button:hover {
 		background-color: rgba(0, 0, 0, 0.1);
@@ -494,7 +490,7 @@ a.indented {
 	}
 
 	.appinfo ~ .grid {
-		padding: 0 1em;
+		padding: 0;
 	}
 
 	.overflow {
@@ -565,10 +561,14 @@ a.indented {
 		margin-right: 2em;
 	}
 
-	.appinfo ~ .row,
+	.appinfo ~ .row:not(.grid),
 	.appinfo ~ div>.row,
 	.appinfo ~ .carousel > .slick-list {
 		padding: 0 4em;
+	}
+
+	.appinfo ~ .grid {
+		padding: 0 2em;
 	}
 
 	.appdesc {
