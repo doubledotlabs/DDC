@@ -230,6 +230,15 @@ a.indented {
 	margin-top: 2em;
 }
 
+.single > .review {
+	width: calc(100% - 4em) !important;
+	margin: 2em;
+}
+
+.review {
+	position: relative;
+}
+
 .review > .reviewinfo {
 	display: flex !important;
 	align-items: center;
@@ -262,6 +271,9 @@ a.indented {
 	flex-direction: row;
 	flex-wrap: wrap;
 	margin-bottom: 2em;
+}
+
+.appinfo ~ .grid {
 	margin-left: -2em;
 	margin-right: -2em;
 }
@@ -474,6 +486,14 @@ a.indented {
 	}
 
 	.row {
+		padding: 0 1em;
+	}
+
+	.grid {
+		padding: 0;
+	}
+
+	.appinfo ~ .grid {
 		padding: 0 1em;
 	}
 

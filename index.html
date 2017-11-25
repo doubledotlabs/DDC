@@ -263,7 +263,7 @@
 
 				var review = getReview(page.substring(7));
 				if (review)
-					main.appendChild(createElement(reviewMethod(review)));
+					main.appendChild(createElement("<div class=\"single\">" + reviewMethod(review) + "</div>"));
 				else {
 					setPage("404");
 					return;
