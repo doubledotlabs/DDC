@@ -236,6 +236,7 @@
 
 					main.appendChild(createElement("<div class=\"row grid inner-shadow\"><div style=\"text-align: center;\"><h1 style=\"color: " + ratingColor + ";\">" + app.rating + "</h1><h4>Average Rating</h4></div><div style=\"text-align: center;\"><h1 style=\"color: " + downloadsColor + ";\">" + app.downloads + "</h1><h4>Downloads</h4></div></div>"));
 					main.appendChild(createElement(gridListMethod({"name": "Reviews"}, app.reviews, reviewMethod)));
+					main.appendChild(createElement("<a class=\"indented\" onclick=\"setPage(\'reviews=" + app.package + "\')\">ALL REVIEWS</a>"));
 					main.appendChild(createElement("<div class=\"inner-shadow\">" + rowListMethod({
 						"name": "Related<br>Apps",
 						"id": "similar/" + app.package,

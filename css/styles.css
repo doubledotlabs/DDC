@@ -191,6 +191,10 @@ div.indented {
 	padding: 0 2em;
 }
 
+a.indented {
+	margin: 0 2em;
+}
+
 .dropdown {
 	position: relative;
 }
@@ -223,7 +227,7 @@ div.indented {
 .inner-shadow {
 	box-shadow: inset 0 0.1em 0.3em rgba(0, 0, 0, 0.37);
 	background-color: #F5F5F5;
-	margin-top: 1em;
+	margin-top: 2em;
 }
 
 .review > .reviewinfo {
@@ -508,6 +512,10 @@ div.indented {
 }
 
 @media (min-width: 800px) {
+	a.indented {
+		margin: 0 4em;
+	}
+
 	.appinfo {
 		display: flex;
 		margin-bottom: -3em;
