@@ -248,6 +248,26 @@
 					setPage("404");
 					return;
 				}
+			} else if (page.startsWith("reviews=")) {
+				clearElement(main);
+
+				var reviews = getReviews(page.substring(8));
+				if (reviews && reviews.length > 0) {
+					main.appendChild(createElement(gridListMethod({"name": "Reviews"}, reviews, reviewMethod)));
+				} else {
+					setPage("404");
+					return;
+				}
+			} else if (page.startsWith("review=")) {
+				clearElement(main);
+
+				var review = getReview(page.substring(7));
+				if (review)
+					main.appendChild(createElement(reviewMethod(review)));
+				else {
+					setPage("404");
+					return;
+				}
 			} else if (page.startsWith("category=")) {
 				clearElement(main);
 				var category = getCategory(page.substring(9));
