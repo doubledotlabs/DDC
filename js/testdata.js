@@ -72,7 +72,7 @@ var apps = [
     ],
     "header": "https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/headers/status_bg.png",
     "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Status/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_web.png",
-    "reviews": [
+    "reviews": [ //reviews, when returned with apps, are limited to the most recent four, with only a "summary" shortened to "most convenient" 100 characters (don't break words) + "..."
       {
         "id": "com.james.status/31938ffas9d833",
         "user": {
@@ -81,7 +81,7 @@ var apps = [
           "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
         "rating": 10,
-        "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
+        "summary": "I really liked this app a lot. The idea that something could do something that does things..."
       },
       {
         "id": "com.james.status/9wd98d023urcm",
@@ -91,7 +91,7 @@ var apps = [
           "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
         "rating": 9,
-        "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
+        "summary": "I really liked this app a lot. The idea that something could do something that does things..."
       },
       {
         "id": "com.james.status/qowidjq0d29fj4",
@@ -101,7 +101,7 @@ var apps = [
           "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
         "rating": 5,
-        "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
+        "summary": "I really liked this app a lot. The idea that something could do something that does things..."
       },
       {
         "id": "com.james.status/i319jdqa9d332",
@@ -111,7 +111,7 @@ var apps = [
           "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
         "rating": 7,
-        "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
+        "summary": "I really liked this app a lot. The idea that something could do something that does things..."
       }
     ]
   },
@@ -154,7 +154,7 @@ var apps = [
           "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
         "rating": 10,
-        "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
+        "summary": "I really liked this app a lot. The idea that something could do something that does things..."
       },
       {
         "id": "james.metronome/9wd98d023urcm",
@@ -164,7 +164,7 @@ var apps = [
           "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
         "rating": 9,
-        "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
+        "summary": "I really liked this app a lot. The idea that something could do something that does things..."
       },
       {
         "id": "james.metronome/qowidjq0d29fj4",
@@ -174,7 +174,7 @@ var apps = [
           "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
         "rating": 5,
-        "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
+        "summary": "I really liked this app a lot. The idea that something could do something that does things..."
       },
       {
         "id": "james.metronome/i319jdqa9d332",
@@ -184,7 +184,7 @@ var apps = [
           "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
         "rating": 7,
-        "summary": "I really liked this app a lot. The idea that something could do something that does things is..."
+        "summary": "I really liked this app a lot. The idea that something could do something that does things..."
       }
     ]
   },
@@ -262,6 +262,7 @@ var apps = [
   }
 ];
 
+//reviews can be queried individually for full review data, or as a full list with the package name as a parameter, which only returns the shortened review "summary" (same as ones included with the app, like above)
 var reviews = [
   {
     "id": "com.james.status/31938ffas9d833",

@@ -8,7 +8,7 @@ function getCategory(id) {
 	if (id.startsWith("similar/")) {
 		return {
 			"id": id,
-			"name": "Similar to ..."
+			"name": "Similar to " + getApp(id.split("/")[1]).name
 		};
 	}
 
@@ -26,7 +26,14 @@ function getApp(id) {
 }
 
 function getReviews(id) {
-	return reviews;
+	var newReviews = [];
+	for (var i = 0; i < reviews.length; i++) {
+		var review = Object.assign({}, reviews[i]);
+		review.review = null;
+		review.summary = reviews[i].review.substring(0, 90) + "...";
+		newReviews[i] = review;
+	}
+	return newReviews;
 }
 
 function getReview(id) {
