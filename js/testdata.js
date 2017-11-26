@@ -55,6 +55,35 @@ var apps = [
     "downloads": 120562,
     "package": "com.james.status",
     "summary": "Status is a thing that does stuff with things and uses those things to do stuff.",
+    "releases": [
+      {
+        "version": "1.1",
+        "channel": "stable",
+        "downloads": [
+          {
+            "target": 25,
+            "min": 18,
+            "max": 25,
+            "dpi": "nodpi",
+            "size": "2.6 MB",
+            "url": "/status2.apk"
+          }
+        ]
+      },
+      {
+        "version": "1.0",
+        "channel": "beta",
+        "downloads": [
+          {
+            "target": 24,
+            "min": 18,
+            "dpi": "nodpi",
+            "size": "2.6 MB",
+            "url": "/status.apk"
+          }
+        ]
+      }
+    ],
     "description": "Status is a thing that does stuff with things and uses those things to do stuff. Status is a thing that does stuff with things and uses those things to do stuff. Status is a thing that does stuff with things and uses those things to do stuff.",
     "categories": [
       {
@@ -123,6 +152,44 @@ var apps = [
     "downloads": 5982,
     "package": "james.metronome",
     "summary": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
+    "releases": [
+      {
+        "version": "1.1",
+        "channel": "stable",
+        "date": "June 16, 2017",
+        "downloads": [
+          {
+            "target": 26,
+            "min": 18,
+            "dpi": "nodpi",
+            "size": "2.6 MB",
+            "url": "/metronome2.apk"
+          },
+          {
+            "target": 26,
+            "min": 21,
+            "dpi": "nodpi",
+            "config": "wear",
+            "size": "2.6 MB",
+            "url": "/metronome2-wear.apk"
+          }
+        ]
+      },
+      {
+        "version": "1.0",
+        "channel": "beta",
+        "date": "February 24, 2017",
+        "downloads": [
+          {
+            "target": 25,
+            "min": 16,
+            "dpi": "nodpi",
+            "size": "2.6 MB",
+            "url": "/metronome.apk"
+          }
+        ]
+      }
+    ],
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff. Metronome is a thing that does stuff with things and uses those things to do stuff. Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "categories": [
       {

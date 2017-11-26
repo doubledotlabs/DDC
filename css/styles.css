@@ -200,35 +200,6 @@ a.indented {
 	margin: 0 2em;
 }
 
-.dropdown {
-	position: relative;
-}
-
-.dropdown > .content {
-	display: none;
-	position: absolute;
-	background-color: #FFF;
-	left: -1px;
-	right: -1px;
-	border: 1px solid #000;
-	border-radius: 0.25em;
-}
-
-.dropdown > .content > * {
-	padding: 0.4em 0.8em;
-	display: block;
-	text-align: center;
-
-	-moz-transition: color .25s, background-color .25s, border .25s, filter .25s;
-	-o-transition: color .25s, background-color .25s, border .25s, filter .25s;
-	-webkit-transition: color .25s, background-color .25s, border .25s, filter .25s;
-	transition: color .25s, background-color .25s, border .25s, filter .25s;
-}
-
-.dropdown:hover > .content {
-	display: block;
-}
-
 .inner-shadow {
 	box-shadow: inset 0 0.1em 0.3em rgba(0, 0, 0, 0.37);
 	background-color: #F5F5F5;
