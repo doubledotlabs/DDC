@@ -183,6 +183,8 @@
 					main.appendChild(createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\">DOWNLOAD</button></div>"
 					  + "<div class=\"appnameinfo\"><h1 class=\"appname\">" + app.name + "</h1><p>" + app.summary + "</p></div></div>"));
 
+					main.appendChild(createElement(gridListMethod({}, app.releases[0].downloads, downloadMethod)));
+
 					main.appendChild(createElement(carouselListMethod({
 	  				slidesToShow: 4,
 						dots: app.screenshots.length > 4,

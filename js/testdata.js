@@ -162,6 +162,7 @@ var apps = [
             "target": 26,
             "min": 18,
             "dpi": "nodpi",
+            "arch": "arm, x86",
             "size": "2.6 MB",
             "url": "/metronome2.apk"
           },

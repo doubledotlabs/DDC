@@ -26,6 +26,18 @@ function chipsMethod(data) {
   return "<p class=\"chip\"" + (data.id ? " onclick=\"setPage(\'category=" + data.id + "\');\"" : "") + ">" + data.name + "</p>";
 }
 
+function downloadMethod(download) {
+  return "<div class=\"apk\" style=\"position: relative; padding-bottom: 4em;\">"
+    + "<b>Target SDK: </b>" + download.target + "<br>"
+    + (download.min ? "<b>Minimum SDK: </b>" + download.min + "<br>" : "")
+    + (download.max ? "<b>Maximum SDK: </b>" + download.max + "<br>" : "")
+    + (download.dpi ? "<b>Screen Density: </b>" + download.dpi + "<br>" : "")
+    + (download.arch ? "<b>Supported Architectures: </b>" + download.arch + "<br>" : "")
+    + (download.config ? "<b>Configuration: </b>" + download.config + "<br>" : "")
+    + "<button class=\"outline\" style=\"position: absolute; bottom: 0;\" onclick=\"location.href=\'download:" + download.url + "\';\">DOWNLOAD - " + download.size + "</button>"
+    + "</div>"
+}
+
 function reviewMethod(data) {
   return "<div class=\"review\"><div class=\"reviewinfo\" onclick=\"setPage(\'user=" + data.user.id + "\')\"><img src=\"" + data.user.image + "\"><div><b>" + data.user.name + "</b><br>" + data.rating + "&nbsp;/&nbsp;10</div></div>"
     + "<p>" + (data.review ? data.review + "</p>" : data.summary + "</p><a onclick=\"setPage(\'review=" + data.id + "\')\">Read More</a>")
