@@ -236,6 +236,36 @@ a.indented {
 	left: 4em;
 }
 
+.apk {
+	position: relative;
+	padding-bottom: 3em;
+	text-align: center;
+}
+
+.apk > div {
+	margin-bottom: 0.5em;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	padding: 0.4em 0;
+	border-radius: 0.4em;
+}
+
+.apk > div > span {
+	display: block;
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.apk > div > b {
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.apk > button {
+	position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .row {
 	overflow: hidden;
 	white-space: nowrap;

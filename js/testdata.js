@@ -64,7 +64,17 @@ var apps = [
             "target": 25,
             "min": 18,
             "max": 25,
-            "dpi": "nodpi",
+            "minDpi": 560,
+            "maxDpi": 800,
+            "size": "2.6 MB",
+            "url": "/status2.apk"
+          },
+          {
+            "target": 25,
+            "min": 18,
+            "max": 25,
+            "minDpi": 0,
+            "maxDpi": 480,
             "size": "2.6 MB",
             "url": "/status2.apk"
           }
@@ -77,7 +87,8 @@ var apps = [
           {
             "target": 24,
             "min": 18,
-            "dpi": "nodpi",
+            "minDpi": 240,
+            "maxDpi": 560,
             "size": "2.6 MB",
             "url": "/status.apk"
           }
@@ -161,7 +172,8 @@ var apps = [
           {
             "target": 26,
             "min": 18,
-            "dpi": "nodpi",
+            "minDpi": 240,
+            "maxDpi": 480,
             "arch": "arm, x86",
             "size": "2.6 MB",
             "url": "/metronome2.apk"
@@ -169,7 +181,6 @@ var apps = [
           {
             "target": 26,
             "min": 21,
-            "dpi": "nodpi",
             "config": "wear",
             "size": "2.6 MB",
             "url": "/metronome2-wear.apk"
