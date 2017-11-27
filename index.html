@@ -119,6 +119,7 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
 	<script type="text/javascript" src="js/testdata.js"></script>
+	<script type="text/javascript" src="js/utils.js"></script>
 	<script type="text/javascript" src="js/methods.js"></script>
 	<script type="text/javascript" src="js/content.js"></script>
 	<script>
@@ -183,7 +184,138 @@
 					main.appendChild(createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\">DOWNLOAD</button></div>"
 					  + "<div class=\"appnameinfo\"><h1 class=\"appname\">" + app.name + "</h1><p>" + app.summary + "</p></div></div>"));
 
-					main.appendChild(createElement(gridListMethod({}, app.releases[0].downloads, downloadMethod)));
+					{
+						var configurations = [];
+						var sdks = [];
+						var architectures = [];
+						var dpis = [];
+
+						for (var i = 0; i < app.releases.length; i++) {
+							var release = app.releases[i];
+							for (var i2 = 0; i2 < release.downloads.length; i2++) {
+								var download = release.downloads[i2];
+
+								var config = download.config ? download.config : "phone";
+								if (!configurations.includes(config))
+									configurations.push(config);
+
+								var sdk = null;
+								if (download.min && download.max) {
+									sdk = [download.min, download.max];
+								} else if (download.min) {
+									sdk = [download.min, -1];
+								}
+
+								var includesSdk = false;
+								for (var i3 = 0; i < sdks.length; i++) {
+									if (sdks[i3][0] <= sdk[1]) {
+										if (sdk[0] > sdks[i3][0])
+											sdks[i3][0] = sdk[0];
+
+										includesSdk = true;
+										break;
+									} else if (sdks[i3][1] >= sdk[0]) {
+										if (sdk[1] > sdks[i3][1])
+											sdks[i3][1] = sdk[1];
+
+										includesSdk = true;
+										break;
+									}
+								}
+
+								if (!includesSdk)
+									sdks.push(sdk);
+
+								var arch = download.arch ? download.arch : "all";
+								if (!architectures.includes(arch))
+									architectures.push(arch);
+
+								var dpi = null;
+								if (download.minDpi && download.maxDpi)
+									dpi = [download.minDpi, download.maxDpi];
+								else if (download.minDpi)
+									dpi = [download.minDpi, -1];
+								else if (download.maxDpi)
+									dpi = [0, download.maxDpi];
+
+								if (dpi) {
+									var includesDpi = false;
+									for (var i3 = 0; i < dpis.length; i++) {
+										if (dpis[i3][0] <= dpi[1]) {
+											if (dpi[0] > dpis[i3][0])
+												dpis[i3][0] = dpi[0];
+
+											includesDpi = true;
+											break;
+										} else if (dpis[i3][1] >= dpi[0]) {
+											if (dpi[1] > dpis[i3][1])
+												dpis[i3][1] = dpi[1];
+
+											includesDpi = true;
+											break;
+										}
+									}
+
+									if (!includesDpi)
+										dpis.push(dpi);
+								}
+							}
+						}
+
+						var configurationsHtml = "";
+						for (var i = 0; i < configurations.length; i++) {
+							var text = null;
+							if (configurations[i] == "phone")
+								text = "Phone";
+							else if (configurations[i] == "wear")
+								text = "Android Wear";
+							else if (configurations[i] == "auto")
+								text = "Android Auto";
+							else if (configurations[i] == "tv")
+								text = "Android TV";
+
+							configurationsHtml += "<option name=\"" + configurations[i] + "\">" + text + "</option>"
+						}
+
+						var sdksHtml = "";
+						for (var i = 0; i < sdks.length; i++) {
+							var text = null;
+							if (sdks[i][1] >= 0)
+								text = "Android " + sdkToVersion(sdks[i][0]) + " - " + sdkToVersion(sdks[i][1]);
+							else text = "Android " + sdkToVersion(sdks[i][0]) + "+";
+
+							sdksHtml += "<option name=\"" + sdks[i][0] + "-" + sdks[i][1] + "\">" + text + "</option>";
+						}
+
+						var architecturesHtml = "";
+						for (var i = 0; i < architectures.length; i++) {
+							architecturesHtml += "<option name=\"" + architectures[i] + "\">" + architectures[i] + "</option>"
+						}
+
+						var dpisHtml = dpis.length > 0 ? "" : "<option>nodpi</option>";
+						for (var i = 0; i < dpis.length; i++) {
+							var text = null;
+							if (dpis[i][0] && dpis[i][1])
+								text = dpis[i][0] + "dpi - " + dpis[i][1] + "dpi";
+							else if (dpis[i][0])
+								text = "&ge; " + dpis[i][0];
+							else if (dpis[i][1])
+								text = "&le; " + dpis[i][1];
+
+							dpisHtml += "<option name=\"" + dpis[i][0] + "-" + dpis[i][1] + "\">" + text + "</option>";
+						}
+
+						main.appendChild(createElement("<div class=\"row grid\">"
+							+ "<div><i class=\"material-icons\">devices_other</i><div class=\"dropdown\"><span>Configuration</span>"
+							+ "<select id=\"configSelect\"" + (configurations.length > 1 ? "" : " class=\"disabled\"") + ">" + configurationsHtml + "</select></div></div>"
+							+ "<div><i class=\"material-icons\">android</i><div class=\"dropdown\"><span>Android Version</span>"
+							+ "<select id=\"sdkSelect\"" + (sdks.length > 1 ? "" : " class=\"disabled\"") + ">" + sdksHtml + "</select></div></div>"
+							+ "<div><i class=\"material-icons\">memory</i><div class=\"dropdown\"><span>Architecture</span>"
+							+ "<select id=\"archSelect\"" + (architectures.length > 1 ? "" : " class=\"disabled\"") + ">" + architecturesHtml + "</select></div></div>"
+							+ "<div><i class=\"material-icons\">devices</i><div class=\"dropdown\"><span>Screen Density</span>"
+							+ "<select id=\"dpiSelect\"" + (dpis.length > 1 ? "" : " class=\"disabled\"") + ">" + dpisHtml + "</select></div></div>"
+							+ "</div>"));
+					}
 
 					main.appendChild(createElement(carouselListMethod({
 	  				slidesToShow: 4,
