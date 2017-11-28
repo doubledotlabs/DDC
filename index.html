@@ -274,7 +274,7 @@
 							else if (configurations[i] == "tv")
 								text = "Android TV";
 
-							configurationsHtml += "<option name=\"" + configurations[i] + "\">" + text + "</option>"
+							configurationsHtml += "<option value=\"" + configurations[i] + "\">" + text + "</option>"
 						}
 
 						var sdksHtml = "";
@@ -284,12 +284,12 @@
 								text = "Android " + sdkToVersion(sdks[i][0]) + " - " + sdkToVersion(sdks[i][1]);
 							else text = "Android " + sdkToVersion(sdks[i][0]) + "+";
 
-							sdksHtml += "<option name=\"" + sdks[i][0] + "-" + sdks[i][1] + "\">" + text + "</option>";
+							sdksHtml += "<option value=\"" + sdks[i][0] + "/" + sdks[i][1] + "\">" + text + "</option>";
 						}
 
 						var architecturesHtml = "";
 						for (var i = 0; i < architectures.length; i++) {
-							architecturesHtml += "<option name=\"" + architectures[i] + "\">" + architectures[i] + "</option>"
+							architecturesHtml += "<option value=\"" + architectures[i] + "\">" + architectures[i] + "</option>"
 						}
 
 						var dpisHtml = dpis.length > 0 ? "" : "<option>nodpi</option>";
@@ -302,7 +302,7 @@
 							else if (dpis[i][1])
 								text = "&le; " + dpis[i][1];
 
-							dpisHtml += "<option name=\"" + dpis[i][0] + "-" + dpis[i][1] + "\">" + text + "</option>";
+							dpisHtml += "<option value=\"" + dpis[i][0] + "/" + dpis[i][1] + "\">" + text + "</option>";
 						}
 
 						main.appendChild(createElement("<div class=\"row grid\">"
@@ -315,6 +315,52 @@
 							+ "<div><i class=\"material-icons\">devices</i><div class=\"dropdown\"><span>Screen Density</span>"
 							+ "<select id=\"dpiSelect\"" + (dpis.length > 1 ? "" : " class=\"disabled\"") + ">" + dpisHtml + "</select></div></div>"
 							+ "</div>"));
+
+						main.appendChild(createElement("<div id=\"releases\"></div>"))
+
+						var onSelect = function() {
+							var configSelect = document.getElementById("configSelect");
+							var config = configSelect.options[configSelect.selectedIndex].value;
+
+							var sdkSelect = document.getElementById("sdkSelect");
+							var sdk = sdkSelect.options[sdkSelect.selectedIndex].value.split("/");
+
+							var archSelect = document.getElementById("archSelect");
+							var arch = archSelect.options[archSelect.selectedIndex].value;
+
+							var dpiSelect = document.getElementById("dpiSelect");
+							var dpi = dpiSelect.options[dpiSelect.selectedIndex].value.split("/");
+
+							var items = [];
+							for (var i = 0; i < app.releases.length; i++) {
+								var release = app.releases[i];
+								for (var i2 = 0; i2 < release.downloads.length; i2++) {
+									var download = release.downloads[i2];
+
+									if ((download.config == config || (config == "phone" && !download.config))
+											&& download.min >= sdk[0] && (!download.max || download.max <= sdk[1] || sdk[1] == -1)/* && download.arch == arch*/
+										  && (!download.minDpi || download.minDpi >= dpi[0]) && (!download.maxDpi || download.maxDpi <= dpi[1] || dpi[1] == -1)) {
+										items.push({
+											"release": release,
+											"download": download
+										});
+									}
+								}
+							}
+
+							console.log(config);
+							console.log(items);
+
+							var releasesElement = document.getElementById("releases");
+							clearElement(releasesElement);
+							releasesElement.appendChild(createElement(gridListMethod({}, items, downloadMethod)));
+						}
+
+						document.getElementById("configSelect").addEventListener("change", onSelect);
+						document.getElementById("sdkSelect").addEventListener("change", onSelect);
+						document.getElementById("archSelect").addEventListener("change", onSelect);
+						document.getElementById("dpiSelect").addEventListener("change", onSelect);
+						onSelect();
 					}
 
 					main.appendChild(createElement(carouselListMethod({

@@ -32,6 +32,15 @@ function reviewMethod(data) {
     + "</div>"
 }
 
+function downloadMethod(data) {
+  return "<div class=\"download\">"
+    + "<span>" + data.release.version + " - " + data.release.channel + "</span>"
+    + "<button onclick=\"location.href=\'download:" + data.download.url + "\';\">DOWNLOAD (" + data.download.size + ")</button>"
+    + "<div class=\"info\">"
+    + "<b>Target SDK: </b>" + data.download.target
+    + "</div></div>";
+}
+
 function carouselListMethod(options, apps, method) {
   var html = "<div class=\"carousel\" data-slick=\'" + JSON.stringify(options) + "\'>";
 
@@ -52,7 +61,7 @@ function rowListMethod(category, apps, method) {
 		html += method(apps[i]);
 	}
 
-	return html + "<div style=\"position: absolute; pointer-events: none; width: 150px; top: 0.5em; bottom: 0.5em; right: 0; z-index: 100; background: linear-gradient(to right, transparent, "
+	return html + "<div style=\"position: absolute; pointer-events: none; width: calc(50vw - 300px); top: 0.5em; bottom: 0.5em; right: 0; z-index: 100; background: linear-gradient(to right, transparent, "
     + (category.shade ? category.shade : (category.background && category.background != "transparent" ? category.background : "#FFF")) + ");\"></div></div>";
 }
 

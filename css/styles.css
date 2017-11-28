@@ -186,9 +186,9 @@ select {
 }
 
 select.disabled {
-	background-color: rgba(0, 0, 0, 0.15);
+	background-color: rgba(0, 0, 0, 0.1);
 	box-shadow: none;
-	color: rgba(0, 0, 0, 0.7);
+	color: rgba(0, 0, 0, 0.5);
 	pointer-events: none;
 }
 

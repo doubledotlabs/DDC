@@ -12,12 +12,12 @@ var categories = [
     "permission": "developer"
   },
   {
-		"id": "thanksgiving",
-    "name": "Thanksgiving",
-    "description": "Enjoy this collection of apps that we are thankful for.",
-    "color": "#DC9755",
-    "background": "#692806",
-    "permission": "moderator"
+		"id": "actiongames",
+    "name": "Action Games",
+    "description": "These fast-paced games are sure to do something.",
+    "color": "#7CF38B",
+    "background": "#222",
+    "permission": "developer"
   },
   {
 		"id": "graphics",
@@ -26,14 +26,6 @@ var categories = [
     "color": "#177323",
     "background": "#7CF38B",
     "permission": "moderator"
-  },
-  {
-		"id": "actiongames",
-    "name": "Action Games",
-    "description": "These fast-paced games are sure to do something.",
-    "color": "#7CF38B",
-    "background": "#222",
-    "permission": "developer"
   },
   {
 		"id": "morestuff",
@@ -66,7 +58,7 @@ var apps = [
             "max": 25,
             "minDpi": 560,
             "maxDpi": 800,
-            "size": "2.6 MB",
+            "size": "2.3 MB",
             "url": "/status2.apk"
           },
           {
@@ -75,7 +67,7 @@ var apps = [
             "max": 25,
             "minDpi": 0,
             "maxDpi": 480,
-            "size": "2.6 MB",
+            "size": "2.4 MB",
             "url": "/status2.apk"
           }
         ]
@@ -89,7 +81,7 @@ var apps = [
             "min": 18,
             "minDpi": 240,
             "maxDpi": 560,
-            "size": "2.6 MB",
+            "size": "2.5 MB",
             "url": "/status.apk"
           }
         ]
