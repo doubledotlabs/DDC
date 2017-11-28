@@ -104,7 +104,7 @@
 	<header>
 		<div id="logo" onclick="setPage('home');"><img src="https://doubledotlabs.github.io/images/logo.svg"><h1>Store</h1></div>
 		<input id="search" type="text" placeholder="Search for Apps..."></input>
-		<button id="signin" class="outline">
+		<button id="signin" class="outline" onclick="setPage('signin');">
 			SIGN IN
 		</button>
 		<span id="profile" style="display: none;">
@@ -457,6 +457,28 @@
 					setPage("404");
 					return;
 				}
+			} else if (page == "signin") {
+				clearElement(main);
+				main.appendChild(createElement("<div style=\"padding: calc(5vw + 1em);\">"
+					+ "<h2>Open-Source Only</h2>"
+					+ "<p>To encourage openness and prevent the spread of malware and adware through devices, our app store only contains open source projects. "
+					+ "All apps are reviewed by real humans after submission, and their content is verified. Benefits to developers: free resource usage analysis "
+					+ "and an extra layer of error checking! Benefits to users: less worrying about the integrity of a product and more fun using it!</p>"
+					+ "<br><h2>Do No Evil</h2>"
+					+ "<p>Misleading apps are a bad thing, but shutting down a project because of a misunderstanding is unnecessary and stupid. "
+					+ "When an app submission results in an issue, we don't just tell the developer to go away. Instead, we strive to fix the issues we find "
+					+ "and help the project achieve success.</p>"
+					+ "<br><h2>Plagiarisms Beware</h2>"
+					+ "<p>While it isn't possible to check the entirety of the internet for duplicate code, we do our best to prevent copied or unattributed apps "
+					+ "from making their way onto our store. We keep documentation of all dependencies our apps use and what license they are published under to "
+					+ "ensure that no issues occur.</p>"
+					+ "<br><h2>But At What Cost?</h2>"
+					+ "<p>As I'm sure you can tell, we have put a lot of work into making this project a success. From the backend magic to our beautiful website "
+					+ "to our Android app, this project has taken months of planning and development to complete. And it's still not over. However, because all the "
+					+ "applications on here are free, we don't think it's right for their users to pay to use them or for their developers to pay to publish them. "
+					+ "That's why we intend to make all our money through donations, advertisements, and paid promotions. As the project expands, we may implement our "
+					+ "own method of donating to the developers of apps we host that we take a percentage of, but that will come later. Much, much later.</p>"
+					+ "</div>"));
 			} else {
 				page = "404";
 				clearElement(main);
