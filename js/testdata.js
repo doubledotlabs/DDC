@@ -59,7 +59,7 @@ var apps = [
             "minDpi": 560,
             "maxDpi": 800,
             "size": "2.3 MB",
-            "url": "/status2.apk"
+            "url": "/status1.apk"
           },
           {
             "target": 25,

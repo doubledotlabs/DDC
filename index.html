@@ -338,7 +338,7 @@
 									var download = release.downloads[i2];
 
 									if ((download.config == config || (config == "phone" && !download.config))
-											&& download.min >= sdk[0] && (!download.max || download.max <= sdk[1] || sdk[1] == -1)/* && download.arch == arch*/
+											&& download.min >= sdk[0] && (!download.max || download.max <= sdk[1] || sdk[1] == -1) && (download.arch == arch || arch == "all")
 										  && (!download.minDpi || download.minDpi >= dpi[0]) && (!download.maxDpi || download.maxDpi <= dpi[1] || dpi[1] == -1)) {
 										items.push({
 											"release": release,

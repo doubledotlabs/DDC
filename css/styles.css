@@ -224,6 +224,75 @@ a.indented {
 	margin-top: 2em;
 }
 
+.download {
+	position: relative;
+	background-color: #FFF;
+	border-radius: 0.25em;
+	box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.37);
+	padding: 1em;
+}
+
+.download > span {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.download > button {
+	float: right;
+}
+
+.download .expand {
+	display: block;
+	text-align: center;
+	cursor: pointer;
+	user-select: none;
+}
+
+.download > .expand {
+	position: absolute;
+	bottom: 0.3em;
+	left: 0;
+	right: 0;
+
+	-moz-transition: opacity .25s;
+	-o-transition: opacity .25s;
+	-webkit-transition: opacity .25s;
+	transition: opacity .25s;
+}
+
+.download > .content span {
+	display: block;
+	font-size: 0.85em;
+}
+
+.download > .content > .expand {
+	padding: 0.3em 0;
+	padding-top: 0.6em;
+}
+
+.download > .content.active ~ .expand {
+	opacity: 0;
+}
+
+.download > .expand ~ .content {
+	clear: both;
+	transform: translateY(50%);
+	opacity: 0;
+	pointer-events: none;
+
+	-moz-transition: transform .25s, opacity .25s, background-color .25s;
+	-o-transition: transform .25s, opacity .25s, background-color .25s;
+	-webkit-transition: transform .25s, opacity .25s, background-color .25s;
+	transition: transform .25s, opacity .25s, background-color .25s;
+}
+
+.download > .expand ~ .content.active {
+	transform: translateY(0);
+	opacity: 1;
+	pointer-events: all;
+	background-color: #FFF;
+}
+
 .single > .review {
 	width: calc(100% - 4em) !important;
 	margin: 2em;

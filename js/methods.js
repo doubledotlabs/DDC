@@ -33,11 +33,23 @@ function reviewMethod(data) {
 }
 
 function downloadMethod(data) {
-  return "<div class=\"download\">"
+	var dpi = null;
+	if (data.download.minDpi && data.download.maxDpi)
+		dpi = data.download.minDpi + " - " + data.download.maxDpi + "dpi";
+	else if (data.download.minDpi)
+		dpi = data.download.minDpi + "dpi+";
+	else if (data.download.maxDpi)
+		dpi = "0 - " + data.download.maxDpi + "dpi";
+
+  return "<div class=\"download\" style=\"margin: 0 2em 2em 0;\">"
     + "<span>" + data.release.version + " - " + data.release.channel + "</span>"
-    + "<button onclick=\"location.href=\'download:" + data.download.url + "\';\">DOWNLOAD (" + data.download.size + ")</button>"
-    + "<div class=\"info\">"
-    + "<b>Target SDK: </b>" + data.download.target
+    + "<button class=\"outline\" onclick=\"location.href=\'download:" + data.download.url + "\';\">DOWNLOAD (" + data.download.size + ")</button>"
+		+ "<i class=\"expand material-icons\" onclick=\"document.getElementById(\'downloadContent" + data.download.url + "\').classList.add(\'active\');\">expand_less</i>"
+    + "<div id=\"downloadContent" + data.download.url + "\" class=\"downloadinfo content\">"
+		+ "<i class=\"expand material-icons\" onclick=\"document.getElementById(\'downloadContent" + data.download.url + "\').classList.remove(\'active\');\">expand_more</i>"
+    + "<span><b>Target SDK:</b> Android " + sdkToVersion(data.download.target) + "</span>"
+		+ (data.download.arch ? "<span><b>Architecture:</b> " + data.download.arch + "</span>" : "")
+		+ (dpi ? "<span><b>Screen Scale:</b> " + dpi + "</span>" : "")
     + "</div></div>";
 }
 
