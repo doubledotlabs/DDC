@@ -142,7 +142,10 @@ img.card {
 }
 
 hr {
-	border-color: rgba(0, 0, 0, 0.1);
+	display: block;
+	height: 1px;
+	border: none;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .appnameinfo {
@@ -255,13 +258,30 @@ a.indented {
 	padding: 1em;
 }
 
-.download > span {
-	font-size: 1.2em;
-	font-weight: bold;
+.download > hr {
+	margin-left: -1em;
+	margin-right: -1em;
 }
 
-.download > button {
+.download > .releasecontent {
+	font-size: 0.85em;
+}
+
+.download > .downloadheader {
+	margin-top: -0.3em;
+	margin-bottom: 0.7em;
+}
+
+.download > .downloadheader > span {
+	font-size: 0.8em;
+	font-weight: bold;
+	color: rgba(0, 0, 0, 0.7);
+}
+
+.download > .downloadheader > .downloadicon {
 	float: right;
+	cursor: pointer;
+	user-select: none;
 }
 
 .download .expand {
@@ -289,7 +309,8 @@ a.indented {
 }
 
 .download > .content > .expand {
-	padding-top: 0.6em;
+	padding-top: 0.4em;
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .download > .content {
@@ -298,7 +319,6 @@ a.indented {
 	opacity: 0;
 	pointer-events: none;
 	margin: -1em;
-	padding-top: 1em;
 	padding-bottom: 1em;
 	border-bottom-left-radius: 0.25em;
 	border-bottom-right-radius: 0.25em;

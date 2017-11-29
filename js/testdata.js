@@ -51,6 +51,8 @@ var apps = [
       {
         "version": "1.1",
         "channel": "stable",
+        "date": "June 10, 2017",
+        "notes": "- did something\n- whatever\n- yes\n- added cabbage\n- heck",
         "downloads": [
           {
             "target": 25,
@@ -75,6 +77,8 @@ var apps = [
       {
         "version": "1.0",
         "channel": "beta",
+        "date": "February 2, 2017",
+        "notes": "- did something\n- whatever\n- yes\n- added cabbage\n- heck",
         "downloads": [
           {
             "target": 24,
@@ -160,6 +164,7 @@ var apps = [
         "version": "1.1",
         "channel": "stable",
         "date": "June 16, 2017",
+        "notes": "- did something\n- whatever\n- yes\n- added cabbage\n- heck",
         "downloads": [
           {
             "target": 26,
@@ -183,6 +188,7 @@ var apps = [
         "version": "1.0",
         "channel": "beta",
         "date": "February 24, 2017",
+        "notes": "- did something\n- whatever\n- yes\n- added cabbage\n- heck",
         "downloads": [
           {
             "target": 25,
