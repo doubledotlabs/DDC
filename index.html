@@ -320,6 +320,9 @@
 						main.appendChild(createElement("<div id=\"releases\"></div>"))
 
 						var onSelect = function() {
+							var releasesElement = document.getElementById("releases");
+							clearElement(releasesElement);
+
 							var configSelect = document.getElementById("configSelect");
 							var config = configSelect.options[configSelect.selectedIndex].value;
 
@@ -352,8 +355,6 @@
 							console.log(config);
 							console.log(items);
 
-							var releasesElement = document.getElementById("releases");
-							clearElement(releasesElement);
 							releasesElement.appendChild(createElement(gridListMethod({}, items, downloadMethod)));
 						}
 
