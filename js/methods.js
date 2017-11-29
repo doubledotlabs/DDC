@@ -73,6 +73,14 @@ function carouselListMethod(options, apps, method) {
   return html + "</div>";
 }
 
+function nothingListMethod(category, apps, method) {
+	var html = "";
+	for (var i = 0; i < apps.length; i++) {
+		html += method(apps[i]);
+	}
+	return html;
+}
+
 function rowListMethod(category, apps, method) {
 	var html = (category.id ? "" : "<h1 class=\"indented\">" + category.name + "</h1>") + "<div class=\"" + (category.description ? "category " : "") + "row\""
 		+ (category.color && category.background ? " style=\"position: relative; color: " + category.color + "; background-color: " + category.background + ";\">" : " style=\"position: relative;\">")

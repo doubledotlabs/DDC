@@ -317,7 +317,7 @@
 							+ "<select id=\"dpiSelect\"" + (dpis.length > 1 ? "" : " class=\"disabled\"") + ">" + dpisHtml + "</select></div></div>"
 							+ "</div>"));
 
-						main.appendChild(createElement("<div id=\"releases\"></div>"))
+						main.appendChild(createElement("<div id=\"releases\" class=\"row grid\"></div>"))
 
 						var onSelect = function() {
 							var releasesElement = document.getElementById("releases");
@@ -355,7 +355,7 @@
 							console.log(config);
 							console.log(items);
 
-							releasesElement.appendChild(createElement(gridListMethod({}, items, downloadMethod)));
+							releasesElement.appendChild(createElement(nothingListMethod({}, items, downloadMethod)));
 						}
 
 						document.getElementById("configSelect").addEventListener("change", onSelect);
