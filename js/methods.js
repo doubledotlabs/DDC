@@ -41,16 +41,21 @@ function downloadMethod(data) {
 	else if (data.download.maxDpi)
 		dpi = "0 - " + data.download.maxDpi + "dpi";
 
-  return "<div class=\"download\" style=\"margin: 0 2em 2em 0;\">"
+  return "<div class=\"download\" style=\"margin: 1em 2em 1em 0;\">"
     + "<span>" + data.release.version + " - " + data.release.channel + "</span>"
-    + "<button class=\"outline\" onclick=\"location.href=\'download:" + data.download.url + "\';\">DOWNLOAD (" + data.download.size + ")</button>"
-		+ "<i class=\"expand material-icons\" onclick=\"document.getElementById(\'downloadContent" + data.download.url + "\').classList.add(\'active\');\">expand_less</i>"
+    + "<button onclick=\"location.href=\'download:" + data.download.url + "\';\"><i class=\"material-icons\">file_download</i></button>"
     + "<div id=\"downloadContent" + data.download.url + "\" class=\"downloadinfo content\">"
-		+ "<i class=\"expand material-icons\" onclick=\"document.getElementById(\'downloadContent" + data.download.url + "\').classList.remove(\'active\');\">expand_more</i>"
+		+ "<i class=\"expand material-icons\" onclick=\"document.getElementById(\'downloadContent" + data.download.url + "\').classList.remove(\'active\');\">expand_more</i><hr>"
     + "<span><b>Target SDK:</b> Android " + sdkToVersion(data.download.target) + "</span>"
 		+ (data.download.arch ? "<span><b>Architecture:</b> " + data.download.arch + "</span>" : "")
 		+ (dpi ? "<span><b>Screen Scale:</b> " + dpi + "</span>" : "")
-    + "</div></div>";
+    + "<span><b>Download Size:</b> " + data.download.size + "</span>"
+    + "</div>"
+    + "<div class=\"expand\" onclick=\"document.getElementById(\'downloadContent" + data.download.url + "\').classList.add(\'active\');\">"
+    + "<i class=\"material-icons\">expand_less</i><hr>"
+    + "<div class=\"stat\"><i class=\"material-icons\">info</i><span>DOWNLOAD INFO</span></div>"
+    + "</div>"
+    + "</div>";
 }
 
 function carouselListMethod(options, apps, method) {

@@ -141,6 +141,10 @@ img.card {
 	animation-fill-mode: forwards;
 }
 
+hr {
+	border-color: rgba(0, 0, 0, 0.1);
+}
+
 .appnameinfo {
 	padding: 2em;
 }
@@ -163,6 +167,7 @@ button {
 	cursor: pointer;
 	user-select: none;
 	outline: none;
+	border: none;
 
 	-moz-transition: color .25s, background-color .25s, border .25s, filter .25s;
 	-o-transition: color .25s, background-color .25s, border .25s, filter .25s;
@@ -224,6 +229,24 @@ a.indented {
 	margin-top: 2em;
 }
 
+.stat {
+	display: table;
+}
+
+.stat > * {
+	display: inline-block;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.stat > i {
+	padding: 0.5em;
+}
+
+.stat > span {
+	font-weight: bold;
+}
+
 .download {
 	position: relative;
 	background-color: #FFF;
@@ -253,40 +276,50 @@ a.indented {
 	bottom: 0.3em;
 	left: 0;
 	right: 0;
-
-	-moz-transition: opacity .25s;
-	-o-transition: opacity .25s;
-	-webkit-transition: opacity .25s;
-	transition: opacity .25s;
 }
 
-.download > .content span {
+.download > .expand > div {
+	margin-left: 50%;
+	transform: translateX(-50%);
+}
+
+.download > .content > span {
 	display: block;
 	font-size: 0.85em;
 }
 
 .download > .content > .expand {
-	padding: 0.3em 0;
 	padding-top: 0.6em;
 }
 
-.download > .content.active ~ .expand {
-	opacity: 0;
-}
-
-.download > .expand ~ .content {
+.download > .content {
 	clear: both;
 	transform: translateY(50%);
 	opacity: 0;
 	pointer-events: none;
+	margin: -1em;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	border-bottom-left-radius: 0.25em;
+	border-bottom-right-radius: 0.25em;
 
-	-moz-transition: transform .25s, opacity .25s, background-color .25s;
-	-o-transition: transform .25s, opacity .25s, background-color .25s;
-	-webkit-transition: transform .25s, opacity .25s, background-color .25s;
-	transition: transform .25s, opacity .25s, background-color .25s;
+	-moz-transition: height .25s, transform .25s, opacity .25s, background-color .25s;
+	-o-transition: height .25s, transform .25s, opacity .25s, background-color .25s;
+	-webkit-transition: height .25s, transform .25s, opacity .25s, background-color .25s;
+	transition: height .25s, transform .25s, opacity .25s, background-color .25s;
 }
 
-.download > .expand ~ .content.active {
+.download > .content > *:not(hr) {
+	padding-left: 1em;
+	padding-right: 1em;
+}
+
+.download > .active ~ .expand {
+	height: 0;
+	opacity: 0;
+}
+
+.download > .content.active {
 	transform: translateY(0);
 	opacity: 1;
 	pointer-events: all;
