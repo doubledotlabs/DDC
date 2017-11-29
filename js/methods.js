@@ -41,7 +41,7 @@ function downloadMethod(data) {
 	else if (data.download.maxDpi)
 		dpi = "0 - " + data.download.maxDpi + "dpi";
 
-  return "<div class=\"download\" style=\"margin: 1em 2em 1em 0;\">"
+  return "<div class=\"download\">"
     + "<div class=\"downloadheader\">"
     + "<span>" + data.release.date + "</span>"
     + "<i class=\"material-icons downloadicon\" onclick=\"location.href=\'download:" + data.download.url + "\';\">file_download</i>"

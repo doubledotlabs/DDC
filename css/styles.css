@@ -256,6 +256,7 @@ a.indented {
 	border-radius: 0.25em;
 	box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.37);
 	padding: 1em;
+	margin: 1em 0 !important;
 }
 
 .download > hr {
@@ -613,6 +614,10 @@ a.indented {
 
 	.grid > * {
 		width: calc(50% - 4em);
+	}
+
+	.download {
+		margin: 1em 2em 1em 0 !important;
 	}
 
 	.row {
