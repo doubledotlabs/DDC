@@ -349,11 +349,6 @@ a.indented {
 	background-color: #FFF;
 }
 
-.single > .review {
-	width: calc(100% - 4em) !important;
-	margin: 2em;
-}
-
 .review {
 	position: relative;
 }
@@ -377,6 +372,27 @@ a.indented {
 	position: absolute;
 	right: 0;
 	left: 4em;
+}
+
+.single > .review {
+	width: calc(100% - 4em) !important;
+	margin: 2em;
+}
+
+.single > .review > .reviewinfo {
+	display: block !important;
+	text-align: center;
+	height: auto;
+}
+
+.single > .review > .reviewinfo > img {
+	position: inherit;
+}
+
+.single > .review > .reviewinfo > div {
+	position: inherit;
+	right: auto;
+	left: auto;
 }
 
 .dropdown {
