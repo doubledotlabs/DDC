@@ -646,6 +646,10 @@ a.indented {
 	}
 
 	.grid > * {
+		width: calc(50% - 4em);
+	}
+
+	.grid > .download {
 		width: calc(50% - 6em);
 	}
 
@@ -705,8 +709,12 @@ a.indented {
 		margin-bottom: -3em;
 	}
 
-	.review {
-		width: calc(33% - 6em);
+	.grid > * {
+		width: calc(33.33% - 4em);
+	}
+
+	.grid > .download {
+		width: calc(33.33% - 6em);
 	}
 
 	.appiconinfo {
@@ -747,6 +755,10 @@ a.indented {
 
 @media (min-width: 1400px) {
 	.grid > * {
+		width: calc(25% - 4em);
+	}
+
+	.grid > .download {
 		width: calc(25% - 6em);
 	}
 }
