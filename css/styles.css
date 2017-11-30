@@ -614,7 +614,7 @@ a.indented {
 	}
 
 	.grid > * {
-		width: calc(50% - 4em);
+		width: calc(50% - 6em);
 	}
 
 	.row {
@@ -674,7 +674,7 @@ a.indented {
 	}
 
 	.review {
-		width: calc(33% - 4em);
+		width: calc(33% - 6em);
 	}
 
 	.appiconinfo {
@@ -715,6 +715,6 @@ a.indented {
 
 @media (min-width: 1400px) {
 	.grid > * {
-		width: calc(25% - 4em);
+		width: calc(25% - 6em);
 	}
 }
