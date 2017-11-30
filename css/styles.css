@@ -210,6 +210,17 @@ p > a {
 	text-decoration: underline;
 }
 
+a > i.material-icons {
+	margin-right: 0.5em;
+	color: inherit;
+}
+
+main > a {
+	display: block;
+	float: none !important;
+	padding: 0.5em 0;
+}
+
 small {
 	font-size: 0.7em;
 }
@@ -615,6 +626,11 @@ a.indented {
 }
 
 @media(min-width: 600px) {
+	main > a {
+		display: inline;
+		padding: 0;
+	}
+
 	button:hover {
 		background-color: rgba(0, 0, 0, 0.1);
 	}

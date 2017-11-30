@@ -417,7 +417,7 @@
 
 					main.appendChild(createElement("<div class=\"row grid inner-shadow\"><div style=\"text-align: center;\"><h1 style=\"color: " + ratingColor + ";\">" + app.rating + "</h1><h4>Average Rating</h4></div><div style=\"text-align: center;\"><h1 style=\"color: " + downloadsColor + ";\">" + app.downloads + "</h1><h4>Downloads</h4></div></div>"));
 					main.appendChild(createElement(gridListMethod({"name": "Reviews"}, app.reviews, reviewMethod)));
-					main.appendChild(createElement("<a class=\"indented\" onclick=\"setPage(\'reviews=" + app.package + "\')\">ALL REVIEWS</a>"));
+					main.appendChild(createElement("<a class=\"indented\" onclick=\"setPage(\'reviews=" + app.package + "\')\"><i class=\"material-icons\" style=\"transform: translateY(25%);\">open_in_new</i>All Reviews</a><a class=\"indented\"><i class=\"material-icons\" style=\"transform: translateY(25%);\">rate_review</i>Write a Review</a>"));
 					main.appendChild(createElement("<div class=\"inner-shadow\">" + rowListMethod({
 						"name": "Related<br>Apps",
 						"id": "similar/" + app.package,
@@ -435,6 +435,7 @@
 				var reviews = getReviews(page.substring(8));
 				if (reviews && reviews.length > 0) {
 					main.appendChild(createElement(gridListMethod({"name": "Reviews"}, reviews, reviewMethod)));
+					main.appendChild(createElement("<hr><a style=\"display: block; text-align: center; padding: 0.5em 0;\"><i class=\"material-icons\" style=\"transform: translateY(25%);\">rate_review</i>Write a Review</a><br>"));
 				} else {
 					setPage("404");
 					return;
