@@ -430,11 +430,16 @@ a.indented {
 	flex-direction: row;
 	flex-wrap: wrap;
 	margin-bottom: 2em;
+	padding: 0 1em;
+}
+
+.single > .grid {
+	padding: 1em !important;
 }
 
 .grid > * {
 	width: 100%;
-	margin: 1em 2em;
+	margin: 1em;
 }
 
 .overflow {
@@ -646,11 +651,11 @@ a.indented {
 	}
 
 	.grid > * {
-		width: calc(50% - 4em);
+		width: calc(50% - 2em);
 	}
 
 	.grid > .download {
-		width: calc(50% - 6em);
+		width: calc(50% - 4em);
 	}
 
 	.row {
@@ -662,7 +667,7 @@ a.indented {
 	}
 
 	.appinfo ~ .grid {
-		padding: 0;
+		padding: 1em;
 	}
 
 	.overflow {
@@ -710,11 +715,11 @@ a.indented {
 	}
 
 	.grid > * {
-		width: calc(33.33% - 4em);
+		width: calc(33.33% - 2em);
 	}
 
 	.grid > .download {
-		width: calc(33.33% - 6em);
+		width: calc(33.33% - 4em);
 	}
 
 	.appiconinfo {
@@ -744,7 +749,7 @@ a.indented {
 	}
 
 	.appinfo ~ .grid {
-		padding: 0 2em;
+		padding: 0 3em;
 	}
 
 	.appdesc {
@@ -755,10 +760,10 @@ a.indented {
 
 @media (min-width: 1400px) {
 	.grid > * {
-		width: calc(25% - 4em);
+		width: calc(25% - 2em);
 	}
 
 	.grid > .download {
-		width: calc(25% - 6em);
+		width: calc(25% - 4em);
 	}
 }
