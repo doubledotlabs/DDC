@@ -1,21 +1,21 @@
 function largeCardsMethod(app) {
   return "<div class=\"largecard\" onclick=\"setPage(\'app=" + app.package + "\');\" "
     + "style=\"background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent), url(" + app.header + "), #FFF; background-repeat: no-repeat; background-size: cover; background-position: center;\""
-    + "><p class=\"info\"><b>" + app.name + "</b> - " + app.rating + "/10</p></div>";
+    + "><p class=\"info\"><b>" + app.name + "</b>&nbsp;&ndash;&nbsp;" + app.rating + "/10</p></div>";
 }
 
 function smallCardsMethod(app) {
   return "<div class=\"smallcard\" onclick=\"setPage(\'app=" + app.package + "\');\">"
     + "<img src=\"" + app.icon + "\">"
     + "<p class=\"info\"><b>" + app.name + "</b><br><small style=\"position: absolute;\">" + app.author
-    + "</small><small style=\"float: right;\"><b>" + app.rating + "&nbsp;&#9733;</b></small></p></div>";
+    + "</small><small style=\"float: right;\"><b style=\"color: " + getRatingColor(app.rating) + ";\">" + app.rating + "&nbsp;&#9733;</b></small></p></div>";
 }
 
 function tinyCardsMethod(app) {
   return "<div class=\"tinycard\" onclick=\"setPage(\'app=" + app.package + "\');\">"
     + "<img src=\"" + app.icon + "\">"
     + "<p class=\"info\"><b>" + app.name + "</b><br><small style=\"position: absolute;\">" + app.author
-    + "</small><small style=\"float: right;\"><b>" + app.rating + "&nbsp;&#9733;</b></small></p></div>";
+    + "</small><small style=\"float: right;\"><b style=\"color: " + getRatingColor(app.rating) + ";\">" + app.rating + "&nbsp;&#9733;</b></small></p></div>";
 }
 
 function imageCardsMethod(image) {
@@ -27,7 +27,8 @@ function chipsMethod(data) {
 }
 
 function reviewMethod(data) {
-  return "<div class=\"review\"><div class=\"reviewinfo\" onclick=\"setPage(\'user=" + data.user.id + "\')\"><img src=\"" + data.user.image + "\"><div><b>" + data.user.name + "</b><br>" + data.rating + "&nbsp;/&nbsp;10</div></div>"
+  return "<div class=\"review\"><div class=\"reviewinfo\" onclick=\"setPage(\'user=" + data.user.id + "\')\"><img src=\"" + data.user.image + "\"><div><b>" + data.user.name + "</b><br>"
+    + "<span style=\"color: " + getRatingColor(data.rating) + "; font-weight: bold;\">" + data.rating + "</span>&nbsp;/&nbsp;10</div></div>"
     + "<p>" + (data.review ? data.review + "</p>" : data.summary + "</p><a onclick=\"setPage(\'review=" + data.id + "\')\">Read More</a>")
     + "</div>"
 }

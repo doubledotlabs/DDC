@@ -139,46 +139,53 @@
 			if (page == "home") {
 				page = null;
 				clearElement(main);
-				main.appendChild(createElement(carouselListMethod({
-					autoplay: true,
-  				centerMode: true,
-  				centerPadding: '80px',
-  				slidesToShow: 4,
-					dots: true,
-					arrows: false,
-  				infinite: true,
-  				responsive: [
-						{
-      				breakpoint: 1600,
-      				settings: {
-        				centerMode: true,
-        				centerPadding: '60px',
-        				slidesToShow: 3
-      				}
-    				},
-    				{
-      				breakpoint: 900,
-      				settings: {
-        				centerMode: true,
-        				centerPadding: '40px',
-        				slidesToShow: 2
-      				}
-    				},
-    				{
-      				breakpoint: 600,
-      				settings: {
-        				centerMode: true,
-        				centerPadding: '0px',
-        				slidesToShow: 1
-      				}
-    				}
-  				]
-				}, apps, largeCardsMethod)));
-				getCategories(main, rowListMethod, smallCardsMethod);
+
+				getCategory("featured", function(category) {
+					main.appendChild(createElement(carouselListMethod({
+						autoplay: true,
+	  				centerMode: true,
+	  				centerPadding: '80px',
+	  				slidesToShow: 4,
+						dots: true,
+						arrows: false,
+	  				infinite: true,
+	  				responsive: [
+							{
+	      				breakpoint: 1600,
+	      				settings: {
+	        				centerMode: true,
+	        				centerPadding: '60px',
+	        				slidesToShow: 3
+	      				}
+	    				},
+	    				{
+	      				breakpoint: 900,
+	      				settings: {
+	        				centerMode: true,
+	        				centerPadding: '40px',
+	        				slidesToShow: 2
+	      				}
+	    				},
+	    				{
+	      				breakpoint: 600,
+	      				settings: {
+	        				centerMode: true,
+	        				centerPadding: '0px',
+	        				slidesToShow: 1
+	      				}
+	    				}
+	  				]
+					}, category.apps, largeCardsMethod)));
+				});
+
+				getCategories(function(categories) {
+					for (var i = 0; i < categories.length; i++) {
+						main.appendChild(createElement(rowListMethod(categories[i], categories[i].apps, smallCardsMethod)));
+					}
+				});
 			} else if (page.startsWith("app=")) {
 				clearElement(main);
-				var app = getApp(page.substring(4));
-				if (app) {
+				getApp(page.substring(4), function(app) {
 					document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
 					main.style.background = "#FFF";
 					main.appendChild(createElement("<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"));
@@ -399,14 +406,6 @@
 					main.appendChild(createElement("<div class=\"appdesc\"><p>" + app.description + "</p><a>READ MORE</a></div>"));
 					main.appendChild(createElement(overflowListMethod({}, app.categories, chipsMethod)));
 
-					var ratingColor = "#15AF5E";
-					if (app.rating < 5.5)
-						ratingColor = "#E24E0D";
-					else if (app.rating < 7)
-						ratingColor = "#E29D0D";
-					else if (app.rating < 8.5)
-						ratingColor = "#E2BB0D";
-
 					var downloadsColor = "#000";
 					if (app.downloads > 50000)
 					  downloadsColor = "#3F51B5";
@@ -415,7 +414,7 @@
 					else if (app.downloads > 1000)
 						downloadsColor = "#2962FF";
 
-					main.appendChild(createElement("<div class=\"row grid inner-shadow\"><div style=\"text-align: center;\"><h1 style=\"color: " + ratingColor + ";\">" + app.rating + "</h1><h4>Average Rating</h4></div><div style=\"text-align: center;\"><h1 style=\"color: " + downloadsColor + ";\">" + app.downloads + "</h1><h4>Downloads</h4></div></div>"));
+					main.appendChild(createElement("<div class=\"row grid inner-shadow\"><div style=\"text-align: center;\"><h1 style=\"color: " + getRatingColor(app.rating) + ";\">" + app.rating + "</h1><h4>Average Rating</h4></div><div style=\"text-align: center;\"><h1 style=\"color: " + downloadsColor + ";\">" + app.downloads + "</h1><h4>Downloads</h4></div></div>"));
 					main.appendChild(createElement(gridListMethod({"name": "Reviews"}, app.reviews, reviewMethod)));
 					main.appendChild(createElement("<a class=\"indented\" onclick=\"setPage(\'reviews=" + app.package + "\')\"><i class=\"material-icons\" style=\"transform: translateY(25%);\">open_in_new</i>All Reviews</a><a class=\"indented\"><i class=\"material-icons\" style=\"transform: translateY(25%);\">rate_review</i>Write a Review</a>"));
 					main.appendChild(createElement("<div class=\"inner-shadow\">" + rowListMethod({
@@ -425,41 +424,26 @@
 						"background": "transparent",
 						"shade": "#F5F5F5"
 					}, apps, smallCardsMethod) + "</div>"));
-				} else {
-					setPage("404");
-					return;
-				}
+				});
 			} else if (page.startsWith("reviews=")) {
 				clearElement(main);
 
-				var reviews = getReviews(page.substring(8));
-				if (reviews && reviews.length > 0) {
+				getReviews(page.substring(8), function(reviews) {
 					main.appendChild(createElement("<div class=\"single\">" + gridListMethod({"name": "Reviews"}, reviews, reviewMethod) + "</div>"));
 					main.appendChild(createElement("<hr><a style=\"display: block; text-align: center; padding: 0.5em 0;\"><i class=\"material-icons\" style=\"transform: translateY(25%);\">rate_review</i>Write a Review</a><br>"));
-				} else {
-					setPage("404");
-					return;
-				}
+				});
 			} else if (page.startsWith("review=")) {
 				clearElement(main);
 
-				var review = getReview(page.substring(7));
-				if (review)
+				getReview(page.substring(7), function(review) {
 					main.appendChild(createElement("<div class=\"single\">" + reviewMethod(review) + "</div>"));
-				else {
-					setPage("404");
-					return;
-				}
+				});
 			} else if (page.startsWith("category=")) {
 				clearElement(main);
-				var category = getCategory(page.substring(9));
-				if (category) {
+				getCategory(page.substring(9), function(category) {
 					document.body.style.background = category.background ? category.background : "inherit";
 					main.appendChild(createElement(overflowListMethod(category, apps, tinyCardsMethod)));
-				} else {
-					setPage("404");
-					return;
-				}
+				});
 			} else if (page == "signin") {
 				clearElement(main);
 				main.appendChild(createElement("<div style=\"padding: calc(5vw + 1em);\">"

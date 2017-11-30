@@ -1,31 +1,47 @@
-function getCategories(element, listMethod, method) {
+function getCategories(fun) {
 	for (var i = 0; i < categories.length; i++) {
-		element.appendChild(createElement(listMethod(categories[i], apps, method)));
+		categories[i].apps = apps;
+	}
+
+	fun(categories);
+}
+
+function getCategory(id, fun) {
+	if (id == "featured") {
+		fun({
+			"apps": apps
+		});
+	} else if (id.startsWith("similar/")) {
+		getApp(id.split("/")[1], function(app) {
+			fun({
+				"id": id,
+				"name": "Similar to " + getApp(id.split("/")[1]).name
+			});
+		});
+	} else {
+		for (var i = 0; i < categories.length; i++) {
+			if (categories[i].id == id) {
+				fun(categories[i]);
+				return;
+			}
+		}
+
+		setPage("404", true);
 	}
 }
 
-function getCategory(id) {
-	if (id.startsWith("similar/")) {
-		return {
-			"id": id,
-			"name": "Similar to " + getApp(id.split("/")[1]).name
-		};
+function getApp(id, fun) {
+	for (var i = 0; i < categories.length; i++) {
+		if (apps[i].package == id) {
+			fun(apps[i]);
+			return;
+		}
 	}
 
-	for (var i = 0; i < categories.length; i++) {
-		if (categories[i].id == id)
-			return categories[i];
-	}
+	setPage("404", true);
 }
 
-function getApp(id) {
-	for (var i = 0; i < categories.length; i++) {
-		if (apps[i].package == id)
-			return apps[i];
-	}
-}
-
-function getReviews(id) {
+function getReviews(id, fun) {
 	var newReviews = [];
 	for (var i = 0; i < reviews.length; i++) {
 		var review = Object.assign({}, reviews[i]);
@@ -33,23 +49,17 @@ function getReviews(id) {
 		review.summary = reviews[i].review.substring(0, 90) + "...";
 		newReviews[i] = review;
 	}
-	return newReviews;
+
+	fun(newReviews);
 }
 
-function getReview(id) {
+function getReview(id, fun) {
 	for (var i = 0; i < reviews.length; i++) {
-		if (reviews[i].id == id)
-			return reviews[i];
+		if (reviews[i].id == id) {
+			fun(reviews[i]);
+			return;
+		}
 	}
-}
 
-function createElement(html) {
-    var fragment = document.createDocumentFragment();
-    var temp = document.createElement('div');
-    temp.innerHTML = html;
-    while (temp.firstChild) {
-        fragment.appendChild(temp.firstChild);
-    }
-
-    return fragment;
+	setPage("404", true);
 }

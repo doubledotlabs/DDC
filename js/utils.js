@@ -41,5 +41,26 @@ function sdkToVersion(sdk) {
     return "7.1";
   else if (sdk == 26)
     return "8.0";
-  else return null;
+  else return sdk;
+}
+
+function createElement(html) {
+    var fragment = document.createDocumentFragment();
+    var temp = document.createElement('div');
+    temp.innerHTML = html;
+    while (temp.firstChild) {
+        fragment.appendChild(temp.firstChild);
+    }
+
+    return fragment;
+}
+
+function getRatingColor(rating) {
+  if (rating < 5.5)
+    return "#E24E0D";
+  else if (rating < 7)
+    return "#E29D0D";
+  else if (rating < 8.5)
+    return "#E2BB0D";
+  else return "#15AF5E";
 }
