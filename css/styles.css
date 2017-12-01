@@ -86,6 +86,13 @@ input, .input, textarea {
 	border: none;
 }
 
+[contentEditable=true]:empty:before{
+  content: attr(placeholder);
+  display: block;
+	color: rgba(0, 0, 0, 0.5);
+	font-weight: bold;
+}
+
 div.header {
 	width: 100%;
 	max-height: 50vh;
@@ -264,7 +271,7 @@ a.indented {
 .dialog > div {
 	width: 80vw;
 	max-height: 80vh;
-	padding: 1em;
+	padding: 1.5em;
 	background-color: #FFF;
 	border-radius: 0.25em;
 	box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.37);

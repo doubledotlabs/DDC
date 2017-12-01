@@ -262,10 +262,13 @@
 			} else if (args.page == "reviews") {
 				if (args.write) {
 					main.appendChild(createElement("<div class=\"dialog\"><div>"
-						+ "<h2 style=\"margin: 0; margin-bottom: 0.5em;\">Write a Review</h2>"
-						+ "<div class=\"input\" contentEditable=\"true\"></div>"
+						+ "<h2 style=\"margin: 0; margin-bottom: 0.5em;\">Rate / Review</h2>"
+						+ "<div class=\"input\" contentEditable=\"true\" placeholder=\"Write a review...\"></div>"
 						+ "<small>Reviews should be between 50 and 500 characters.</small>"
-						+ "<div><a style=\"float: right;\" onclick=\"window.history.back();\">CLOSE</a></div>"
+						+ "<div>"
+						+ "<a style=\"float: right;\" onclick=\"window.history.back();\">SUBMIT</a>"
+						+ "<a style=\"float: right; margin-right: 1em;\" onclick=\"window.history.back();\">CANCEL</a>"
+						+ "</div>"
 						+ "</div></div>"));
 
 						shouldScrollTop = false;
