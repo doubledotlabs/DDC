@@ -104,7 +104,7 @@
 <body>
 	<header>
 		<div id="logo" onclick="setPage('home');"><img src="https://doubledotlabs.github.io/images/logo.svg"><h1>Store</h1></div>
-		<input id="search" type="text" placeholder="Search for Apps..."></input>
+		<input id="search" type="text" placeholder="Search for Apps...">
 		<button id="signin" class="outline" onclick="setPage('signin');">
 			SIGN IN
 		</button>
@@ -184,247 +184,260 @@
 					}
 				});
 			} else if (page.startsWith("app=")) {
-				clearElement(main);
-				getApp(page.substring(4), function(app) {
-					document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
-					main.style.background = "#FFF";
-					main.appendChild(createElement("<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"));
-					main.appendChild(createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\">DOWNLOAD</button></div>"
-					  + "<div class=\"appnameinfo\"><h1 class=\"appname\">" + app.name + "</h1><p>" + app.summary + "</p></div></div>"));
+				if (page.includes("&writereview")) {
+					//TODO: add review dialog thing whatever
+					var id = page.replace("&writereview", "").substring(4);
+					main.appendChild(createElement("<div class=\"dialog\"><div>"
+						+ "<h2>Write a Review</h2>"
+						+ "<div class=\"input\" contentEditable=\"true\"></div>"
+						+ "<small>Reviews should be between 50 and 500 characters.</small>"
+						+ "<div><a style=\"float: right; clear: both;\" onclick=\"setPage(\'app=" + id + "\', true)\">CLOSE</a></div>"
+						+ "</div></div>"));
+				} else {
+					clearElement(main);
 
-					{
-						var configurations = [];
-						var sdks = [];
-						var architectures = [];
-						var dpis = [];
+					getApp(page.replace("&writereview", "").substring(4), function(app) {
+						document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
+						main.style.background = "#FFF";
+						main.appendChild(createElement("<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"));
+						main.appendChild(createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\">DOWNLOAD</button></div>"
+						  + "<div class=\"appnameinfo\"><h1 class=\"appname\">" + app.name + "</h1><p>" + app.summary + "</p></div></div>"));
 
-						for (var i = 0; i < app.releases.length; i++) {
-							var release = app.releases[i];
-							for (var i2 = 0; i2 < release.downloads.length; i2++) {
-								var download = release.downloads[i2];
+						{
+							var configurations = [];
+							var sdks = [];
+							var architectures = [];
+							var dpis = [];
 
-								var config = download.config ? download.config : "phone";
-								if (!configurations.includes(config))
-									configurations.push(config);
-
-								var sdk = null;
-								if (download.min && download.max) {
-									sdk = [download.min, download.max];
-								} else if (download.min) {
-									sdk = [download.min, -1];
-								}
-
-								var includesSdk = false;
-								for (var i3 = 0; i < sdks.length; i++) {
-									if (sdks[i3][0] <= sdk[1]) {
-										if (sdk[0] > sdks[i3][0])
-											sdks[i3][0] = sdk[0];
-
-										includesSdk = true;
-										break;
-									} else if (sdks[i3][1] >= sdk[0]) {
-										if (sdk[1] > sdks[i3][1])
-											sdks[i3][1] = sdk[1];
-
-										includesSdk = true;
-										break;
-									}
-								}
-
-								if (!includesSdk)
-									sdks.push(sdk);
-
-								var arch = download.arch ? download.arch : "all";
-								if (!architectures.includes(arch))
-									architectures.push(arch);
-
-								var dpi = null;
-								if (download.minDpi && download.maxDpi)
-									dpi = [download.minDpi, download.maxDpi];
-								else if (download.minDpi)
-									dpi = [download.minDpi, -1];
-								else if (download.maxDpi)
-									dpi = [0, download.maxDpi];
-
-								if (dpi) {
-									var includesDpi = false;
-									for (var i3 = 0; i < dpis.length; i++) {
-										if (dpis[i3][0] <= dpi[1]) {
-											if (dpi[0] > dpis[i3][0])
-												dpis[i3][0] = dpi[0];
-
-											includesDpi = true;
-											break;
-										} else if (dpis[i3][1] >= dpi[0]) {
-											if (dpi[1] > dpis[i3][1])
-												dpis[i3][1] = dpi[1];
-
-											includesDpi = true;
-											break;
-										}
-									}
-
-									if (!includesDpi)
-										dpis.push(dpi);
-								}
-							}
-						}
-
-						var configurationsHtml = "";
-						for (var i = 0; i < configurations.length; i++) {
-							var text = null;
-							if (configurations[i] == "phone")
-								text = "Phone";
-							else if (configurations[i] == "wear")
-								text = "Android Wear";
-							else if (configurations[i] == "auto")
-								text = "Android Auto";
-							else if (configurations[i] == "tv")
-								text = "Android TV";
-
-							configurationsHtml += "<option value=\"" + configurations[i] + "\">" + text + "</option>"
-						}
-
-						var sdksHtml = "";
-						for (var i = 0; i < sdks.length; i++) {
-							var text = null;
-							if (sdks[i][1] >= 0)
-								text = "Android " + sdkToVersion(sdks[i][0]) + " - " + sdkToVersion(sdks[i][1]);
-							else text = "Android " + sdkToVersion(sdks[i][0]) + "+";
-
-							sdksHtml += "<option value=\"" + sdks[i][0] + "/" + sdks[i][1] + "\">" + text + "</option>";
-						}
-
-						var architecturesHtml = "";
-						for (var i = 0; i < architectures.length; i++) {
-							architecturesHtml += "<option value=\"" + architectures[i] + "\">" + architectures[i] + "</option>"
-						}
-
-						var dpisHtml = dpis.length > 0 ? "" : "<option>nodpi</option>";
-						for (var i = 0; i < dpis.length; i++) {
-							var text = null;
-							if (dpis[i][0] && dpis[i][1])
-								text = dpis[i][0] + "dpi - " + dpis[i][1] + "dpi";
-							else if (dpis[i][0])
-								text = "&ge; " + dpis[i][0];
-							else if (dpis[i][1])
-								text = "&le; " + dpis[i][1];
-
-							dpisHtml += "<option value=\"" + dpis[i][0] + "/" + dpis[i][1] + "\">" + text + "</option>";
-						}
-
-						main.appendChild(createElement("<div class=\"row grid\">"
-							+ "<div><i class=\"material-icons\">devices_other</i><div class=\"dropdown\"><span>Configuration</span>"
-							+ "<select id=\"configSelect\"" + (configurations.length > 1 ? "" : " class=\"disabled\"") + ">" + configurationsHtml + "</select></div></div>"
-							+ "<div><i class=\"material-icons\">android</i><div class=\"dropdown\"><span>Android Version</span>"
-							+ "<select id=\"sdkSelect\"" + (sdks.length > 1 ? "" : " class=\"disabled\"") + ">" + sdksHtml + "</select></div></div>"
-							+ "<div><i class=\"material-icons\">memory</i><div class=\"dropdown\"><span>Architecture</span>"
-							+ "<select id=\"archSelect\"" + (architectures.length > 1 ? "" : " class=\"disabled\"") + ">" + architecturesHtml + "</select></div></div>"
-							+ "<div><i class=\"material-icons\">devices</i><div class=\"dropdown\"><span>Screen Density</span>"
-							+ "<select id=\"dpiSelect\"" + (dpis.length > 1 ? "" : " class=\"disabled\"") + ">" + dpisHtml + "</select></div></div>"
-							+ "</div>"));
-
-						main.appendChild(createElement("<div id=\"releases\" class=\"row grid\"></div>"))
-
-						var onSelect = function() {
-							var releasesElement = document.getElementById("releases");
-							clearElement(releasesElement);
-
-							var configSelect = document.getElementById("configSelect");
-							var config = configSelect.options[configSelect.selectedIndex].value;
-
-							var sdkSelect = document.getElementById("sdkSelect");
-							var sdk = sdkSelect.options[sdkSelect.selectedIndex].value.split("/");
-
-							var archSelect = document.getElementById("archSelect");
-							var arch = archSelect.options[archSelect.selectedIndex].value;
-
-							var dpiSelect = document.getElementById("dpiSelect");
-							var dpi = dpiSelect.options[dpiSelect.selectedIndex].value.split("/");
-
-							var items = [];
 							for (var i = 0; i < app.releases.length; i++) {
 								var release = app.releases[i];
 								for (var i2 = 0; i2 < release.downloads.length; i2++) {
 									var download = release.downloads[i2];
 
-									if ((download.config == config || (config == "phone" && !download.config))
-											&& download.min >= sdk[0] && (!download.max || download.max <= sdk[1] || sdk[1] == -1) && (download.arch == arch || arch == "all")
-										  && (!download.minDpi || download.minDpi >= dpi[0]) && (!download.maxDpi || download.maxDpi <= dpi[1] || dpi[1] == -1)) {
-										items.push({
-											"release": release,
-											"download": download
-										});
+									var config = download.config ? download.config : "phone";
+									if (!configurations.includes(config))
+										configurations.push(config);
+
+									var sdk = null;
+									if (download.min && download.max) {
+										sdk = [download.min, download.max];
+									} else if (download.min) {
+										sdk = [download.min, -1];
+									}
+
+									var includesSdk = false;
+									for (var i3 = 0; i < sdks.length; i++) {
+										if (sdks[i3][0] <= sdk[1]) {
+											if (sdk[0] > sdks[i3][0])
+												sdks[i3][0] = sdk[0];
+
+											includesSdk = true;
+											break;
+										} else if (sdks[i3][1] >= sdk[0]) {
+											if (sdk[1] > sdks[i3][1])
+												sdks[i3][1] = sdk[1];
+
+											includesSdk = true;
+											break;
+										}
+									}
+
+									if (!includesSdk)
+										sdks.push(sdk);
+
+									var arch = download.arch ? download.arch : "all";
+									if (!architectures.includes(arch))
+										architectures.push(arch);
+
+									var dpi = null;
+									if (download.minDpi && download.maxDpi)
+										dpi = [download.minDpi, download.maxDpi];
+									else if (download.minDpi)
+										dpi = [download.minDpi, -1];
+									else if (download.maxDpi)
+										dpi = [0, download.maxDpi];
+
+									if (dpi) {
+										var includesDpi = false;
+										for (var i3 = 0; i < dpis.length; i++) {
+											if (dpis[i3][0] <= dpi[1]) {
+												if (dpi[0] > dpis[i3][0])
+													dpis[i3][0] = dpi[0];
+
+												includesDpi = true;
+												break;
+											} else if (dpis[i3][1] >= dpi[0]) {
+												if (dpi[1] > dpis[i3][1])
+													dpis[i3][1] = dpi[1];
+
+												includesDpi = true;
+												break;
+											}
+										}
+
+										if (!includesDpi)
+											dpis.push(dpi);
 									}
 								}
 							}
 
-							console.log(config);
-							console.log(items);
+							var configurationsHtml = "";
+							for (var i = 0; i < configurations.length; i++) {
+								var text = null;
+								if (configurations[i] == "phone")
+									text = "Phone";
+								else if (configurations[i] == "wear")
+									text = "Android Wear";
+								else if (configurations[i] == "auto")
+									text = "Android Auto";
+								else if (configurations[i] == "tv")
+									text = "Android TV";
 
-							releasesElement.appendChild(createElement(nothingListMethod({}, items, downloadMethod)));
+								configurationsHtml += "<option value=\"" + configurations[i] + "\">" + text + "</option>"
+							}
+
+							var sdksHtml = "";
+							for (var i = 0; i < sdks.length; i++) {
+								var text = null;
+								if (sdks[i][1] >= 0)
+									text = "Android " + sdkToVersion(sdks[i][0]) + " - " + sdkToVersion(sdks[i][1]);
+								else text = "Android " + sdkToVersion(sdks[i][0]) + "+";
+
+								sdksHtml += "<option value=\"" + sdks[i][0] + "/" + sdks[i][1] + "\">" + text + "</option>";
+							}
+
+							var architecturesHtml = "";
+							for (var i = 0; i < architectures.length; i++) {
+								architecturesHtml += "<option value=\"" + architectures[i] + "\">" + architectures[i] + "</option>"
+							}
+
+							var dpisHtml = dpis.length > 0 ? "" : "<option>nodpi</option>";
+							for (var i = 0; i < dpis.length; i++) {
+								var text = null;
+								if (dpis[i][0] && dpis[i][1])
+									text = dpis[i][0] + "dpi - " + dpis[i][1] + "dpi";
+								else if (dpis[i][0])
+									text = "&ge; " + dpis[i][0];
+								else if (dpis[i][1])
+									text = "&le; " + dpis[i][1];
+
+								dpisHtml += "<option value=\"" + dpis[i][0] + "/" + dpis[i][1] + "\">" + text + "</option>";
+							}
+
+							main.appendChild(createElement("<div class=\"row grid\">"
+								+ "<div><i class=\"material-icons\">devices_other</i><div class=\"dropdown\"><span>Configuration</span>"
+								+ "<select id=\"configSelect\"" + (configurations.length > 1 ? "" : " class=\"disabled\"") + ">" + configurationsHtml + "</select></div></div>"
+								+ "<div><i class=\"material-icons\">android</i><div class=\"dropdown\"><span>Android Version</span>"
+								+ "<select id=\"sdkSelect\"" + (sdks.length > 1 ? "" : " class=\"disabled\"") + ">" + sdksHtml + "</select></div></div>"
+								+ "<div><i class=\"material-icons\">memory</i><div class=\"dropdown\"><span>Architecture</span>"
+								+ "<select id=\"archSelect\"" + (architectures.length > 1 ? "" : " class=\"disabled\"") + ">" + architecturesHtml + "</select></div></div>"
+								+ "<div><i class=\"material-icons\">devices</i><div class=\"dropdown\"><span>Screen Density</span>"
+								+ "<select id=\"dpiSelect\"" + (dpis.length > 1 ? "" : " class=\"disabled\"") + ">" + dpisHtml + "</select></div></div>"
+								+ "</div>"));
+
+							main.appendChild(createElement("<div id=\"releases\" class=\"row grid\"></div>"))
+
+							var onSelect = function() {
+								var releasesElement = document.getElementById("releases");
+								clearElement(releasesElement);
+
+								var configSelect = document.getElementById("configSelect");
+								var config = configSelect.options[configSelect.selectedIndex].value;
+
+								var sdkSelect = document.getElementById("sdkSelect");
+								var sdk = sdkSelect.options[sdkSelect.selectedIndex].value.split("/");
+
+								var archSelect = document.getElementById("archSelect");
+								var arch = archSelect.options[archSelect.selectedIndex].value;
+
+								var dpiSelect = document.getElementById("dpiSelect");
+								var dpi = dpiSelect.options[dpiSelect.selectedIndex].value.split("/");
+
+								var items = [];
+								for (var i = 0; i < app.releases.length; i++) {
+									var release = app.releases[i];
+									for (var i2 = 0; i2 < release.downloads.length; i2++) {
+										var download = release.downloads[i2];
+
+										if ((download.config == config || (config == "phone" && !download.config))
+												&& download.min >= sdk[0] && (!download.max || download.max <= sdk[1] || sdk[1] == -1) && (download.arch == arch || arch == "all")
+											  && (!download.minDpi || download.minDpi >= dpi[0]) && (!download.maxDpi || download.maxDpi <= dpi[1] || dpi[1] == -1)) {
+											items.push({
+												"release": release,
+												"download": download
+											});
+										}
+									}
+								}
+
+								console.log(config);
+								console.log(items);
+
+								releasesElement.appendChild(createElement(nothingListMethod({}, items, downloadMethod)));
+							}
+
+							document.getElementById("configSelect").addEventListener("change", onSelect);
+							document.getElementById("sdkSelect").addEventListener("change", onSelect);
+							document.getElementById("archSelect").addEventListener("change", onSelect);
+							document.getElementById("dpiSelect").addEventListener("change", onSelect);
+							onSelect();
 						}
 
-						document.getElementById("configSelect").addEventListener("change", onSelect);
-						document.getElementById("sdkSelect").addEventListener("change", onSelect);
-						document.getElementById("archSelect").addEventListener("change", onSelect);
-						document.getElementById("dpiSelect").addEventListener("change", onSelect);
-						onSelect();
-					}
+						main.appendChild(createElement(carouselListMethod({
+		  				slidesToShow: 4,
+							dots: app.screenshots.length > 4,
+							arrows: false,
+							variableWidth: true,
+							infinite: false,
+		  				responsive: [
+								{
+		      				breakpoint: 1600,
+		      				settings: {
+										dots: app.screenshots.length > 3,
+		        				slidesToShow: 3
+		      				}
+		    				},
+		    				{
+		      				breakpoint: 900,
+		      				settings: {
+										dots: app.screenshots.length > 2,
+		        				slidesToShow: 2
+		      				}
+		    				},
+		    				{
+		      				breakpoint: 600,
+		      				settings: {
+										dots: app.screenshots.length > 1,
+		        				slidesToShow: 1
+		      				}
+		    				}
+		  				]
+						}, app.screenshots, imageCardsMethod)));
 
-					main.appendChild(createElement(carouselListMethod({
-	  				slidesToShow: 4,
-						dots: app.screenshots.length > 4,
-						arrows: false,
-						variableWidth: true,
-						infinite: false,
-	  				responsive: [
-							{
-	      				breakpoint: 1600,
-	      				settings: {
-									dots: app.screenshots.length > 3,
-	        				slidesToShow: 3
-	      				}
-	    				},
-	    				{
-	      				breakpoint: 900,
-	      				settings: {
-									dots: app.screenshots.length > 2,
-	        				slidesToShow: 2
-	      				}
-	    				},
-	    				{
-	      				breakpoint: 600,
-	      				settings: {
-									dots: app.screenshots.length > 1,
-	        				slidesToShow: 1
-	      				}
-	    				}
-	  				]
-					}, app.screenshots, imageCardsMethod)));
+						main.appendChild(createElement("<div class=\"appdesc\"><p>" + app.description + "</p><a>READ MORE</a></div>"));
+						main.appendChild(createElement(overflowListMethod({}, app.categories, chipsMethod)));
 
-					main.appendChild(createElement("<div class=\"appdesc\"><p>" + app.description + "</p><a>READ MORE</a></div>"));
-					main.appendChild(createElement(overflowListMethod({}, app.categories, chipsMethod)));
+						var downloadsColor = "#000";
+						if (app.downloads > 50000)
+						  downloadsColor = "#3F51B5";
+						else if (app.downloads > 5000)
+							downloadsColor = "#15AF5E";
+						else if (app.downloads > 1000)
+							downloadsColor = "#2962FF";
 
-					var downloadsColor = "#000";
-					if (app.downloads > 50000)
-					  downloadsColor = "#3F51B5";
-					else if (app.downloads > 5000)
-						downloadsColor = "#15AF5E";
-					else if (app.downloads > 1000)
-						downloadsColor = "#2962FF";
+						main.appendChild(createElement("<div class=\"row grid inner-shadow\"><div style=\"text-align: center;\"><h1 style=\"color: " + getRatingColor(app.rating) + ";\">" + app.rating + "</h1><h4>Average Rating</h4></div><div style=\"text-align: center;\"><h1 style=\"color: " + downloadsColor + ";\">" + app.downloads + "</h1><h4>Downloads</h4></div></div>"));
+						main.appendChild(createElement(gridListMethod({"name": "Reviews"}, app.reviews, reviewMethod)));
+						main.appendChild(createElement("<a class=\"indented\" onclick=\"setPage(\'reviews=" + app.package + "\')\"><i class=\"material-icons\" style=\"transform: translateY(25%);\">open_in_new</i>All Reviews</a><a class=\"indented\" onclick=\"setPage(\'app=" + app.package + "&writereview\', true);\"><i class=\"material-icons\" style=\"transform: translateY(25%);\">rate_review</i>Write a Review</a>"));
+						main.appendChild(createElement("<div class=\"inner-shadow\">" + rowListMethod({
+							"name": "Related<br>Apps",
+							"id": "similar/" + app.package,
+							"color": "#000",
+							"background": "transparent",
+							"shade": "#F5F5F5"
+						}, apps, smallCardsMethod) + "</div>"));
+					});
+				}
 
-					main.appendChild(createElement("<div class=\"row grid inner-shadow\"><div style=\"text-align: center;\"><h1 style=\"color: " + getRatingColor(app.rating) + ";\">" + app.rating + "</h1><h4>Average Rating</h4></div><div style=\"text-align: center;\"><h1 style=\"color: " + downloadsColor + ";\">" + app.downloads + "</h1><h4>Downloads</h4></div></div>"));
-					main.appendChild(createElement(gridListMethod({"name": "Reviews"}, app.reviews, reviewMethod)));
-					main.appendChild(createElement("<a class=\"indented\" onclick=\"setPage(\'reviews=" + app.package + "\')\"><i class=\"material-icons\" style=\"transform: translateY(25%);\">open_in_new</i>All Reviews</a><a class=\"indented\"><i class=\"material-icons\" style=\"transform: translateY(25%);\">rate_review</i>Write a Review</a>"));
-					main.appendChild(createElement("<div class=\"inner-shadow\">" + rowListMethod({
-						"name": "Related<br>Apps",
-						"id": "similar/" + app.package,
-						"color": "#000",
-						"background": "transparent",
-						"shade": "#F5F5F5"
-					}, apps, smallCardsMethod) + "</div>"));
-				});
 			} else if (page.startsWith("reviews=")) {
 				clearElement(main);
 
@@ -474,8 +487,11 @@
 
 		  if (replace)
 				window.history.replaceState(null, null, page ? "?" + page : "?");
-			else window.history.pushState("", "", page ? "?" + page : "?");
-			window.scrollTo(0, 0);
+			else {
+				window.history.pushState("", "", page ? "?" + page : "?");
+				window.scrollTo(0, 0);
+			}
+
 			$(".carousel").slick();
 		}
 
