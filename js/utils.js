@@ -61,7 +61,7 @@ function clearElement(element) {
 	}
 }
 
-function argumentsToObject(args) {
+function stringToArguments(args) {
 	var array = args.split("&");
 	var args = {};
 	for (var i = 0; i < array.length; i++) {
@@ -72,6 +72,15 @@ function argumentsToObject(args) {
 	}
 
 	return args;
+}
+
+function argumentsToString(args) {
+	var string = "";
+	for (var i in args) {
+		string += i + "=" + args[i] + "&";
+	}
+
+	return string.substring(0, string.length - 1);
 }
 
 function getRatingColor(rating) {

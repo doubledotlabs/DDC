@@ -103,9 +103,9 @@
 </head>
 <body>
 	<header>
-		<div id="logo" onclick="setPage('home');"><img src="https://doubledotlabs.github.io/images/logo.svg"><h1>Store</h1></div>
+		<div id="logo" onclick="setPage('page=home');"><img src="https://doubledotlabs.github.io/images/logo.svg"><h1>Store</h1></div>
 		<input id="search" type="text" placeholder="Search for Apps...">
-		<button id="signin" class="outline" onclick="setPage('signin');">
+		<button id="signin" class="outline" onclick="setPage('page=signin');">
 			SIGN IN
 		</button>
 		<span id="profile" style="display: none;">
@@ -137,7 +137,17 @@
 			main.style.background = null;
 			var shouldScrollTop = true;
 
-			if (page == "home") {
+			var args = page;
+			if (typeof page == "string") {
+				args = stringToArguments(page);
+			} else page = argumentsToString(args);
+
+			if (!args.page) {
+				args.page = "home";
+				page = "?";
+			}
+
+			if (args.page == "home") {
 				page = null;
 				clearElement(main);
 
@@ -184,14 +194,14 @@
 						main.appendChild(createElement(rowListMethod(categories[i], categories[i].apps, smallCardsMethod)));
 					}
 				});
-			} else if (page.startsWith("app=")) {
+			} else if (args.page == "app") {
 				clearElement(main);
 
-				getApp(page.substring(4), function(app) {
+				getApp(args.package, function(app) {
 					document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
 					main.style.background = "#FFF";
 					main.appendChild(createElement("<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"));
-					main.appendChild(createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\" onclick=\"setPage(\'reviews=" + app.package + "&write\')\">RATE / REVIEW</button></div>"
+					main.appendChild(createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\" onclick=\"setPage(\'page=reviews&package=" + app.package + "&write\')\">RATE / REVIEW</button></div>"
 						+ "<div class=\"appnameinfo\"><h1 class=\"appname\">" + app.name + "</h1><p>" + app.summary + "</p></div></div>"));
 
 					appendAppDownloadSection(app, true);
@@ -240,7 +250,7 @@
 
 					main.appendChild(createElement("<div class=\"row grid inner-shadow\"><div style=\"text-align: center;\"><h1 style=\"color: " + getRatingColor(app.rating) + ";\">" + app.rating + "</h1><h4>Average Rating</h4></div><div style=\"text-align: center;\"><h1 style=\"color: " + downloadsColor + ";\">" + app.downloads + "</h1><h4>Downloads</h4></div></div>"));
 					main.appendChild(createElement(gridListMethod({"name": "Reviews"}, app.reviews, reviewMethod)));
-					main.appendChild(createElement("<a class=\"indented\" onclick=\"setPage(\'reviews=" + app.package + "\')\"><i class=\"material-icons\">open_in_new</i>All Reviews</a><a class=\"indented\" onclick=\"setPage(\'reviews=" + app.package + "&write\');\"><i class=\"material-icons\">rate_review</i>Write a Review</a>"));
+					main.appendChild(createElement("<a class=\"indented\" onclick=\"setPage(\'page=reviews&package=" + app.package + "\')\"><i class=\"material-icons\">open_in_new</i>All Reviews</a><a class=\"indented\" onclick=\"setPage(\'page=reviews&package=" + app.package + "&write\');\"><i class=\"material-icons\">rate_review</i>Write a Review</a>"));
 					main.appendChild(createElement("<div class=\"inner-shadow\">" + rowListMethod({
 						"name": "Related<br>Apps",
 						"id": "similar/" + app.package,
@@ -249,8 +259,8 @@
 						"shade": "#F5F5F5"
 					}, apps, smallCardsMethod) + "</div>"));
 				});
-			} else if (page.startsWith("reviews=")) {
-				if (page.includes("&write")) {
+			} else if (args.page == "reviews") {
+				if (args.write) {
 					main.appendChild(createElement("<div class=\"dialog\"><div>"
 						+ "<h2 style=\"margin: 0; margin-bottom: 0.5em;\">Write a Review</h2>"
 						+ "<div class=\"input\" contentEditable=\"true\"></div>"
@@ -262,28 +272,28 @@
 				} else {
 					clearElement(main);
 
-					getReviews(page.substring(8), function(reviews) {
+					getReviews(args.package, function(reviews) {
 						main.appendChild(createElement("<div class=\"single\">" + gridListMethod({"name": "Reviews"}, reviews, reviewMethod) + "</div>"));
-						main.appendChild(createElement("<hr><a style=\"display: block; text-align: center; padding: 0.5em 0;\" onclick=\"setPage(\'reviews=" + page.substring(8) + "&write\');\"><i class=\"material-icons\">rate_review</i>Write a Review</a><br>"));
+						main.appendChild(createElement("<hr><a style=\"display: block; text-align: center; padding: 0.5em 0;\" onclick=\"setPage(\'page=reviews&package=" + args.package + "&write\');\"><i class=\"material-icons\">rate_review</i>Write a Review</a><br>"));
 					});
 				}
-			} else if (page.startsWith("releases=")) {
+			} else if (args.page == "releases") {
 				clearElement(main);
 
 				//TODO: view releases
-			} else if (page.startsWith("review=")) {
+			} else if (args.page == "review") {
 				clearElement(main);
 
-				getReview(page.substring(7), function(review) {
+				getReview(args.id, function(review) {
 					main.appendChild(createElement("<div class=\"single\">" + reviewMethod(review) + "</div>"));
 				});
-			} else if (page.startsWith("category=")) {
+			} else if (args.page == "category") {
 				clearElement(main);
-				getCategory(page.substring(9), function(category) {
+				getCategory(args.id, function(category) {
 					document.body.style.background = category.background ? category.background : "inherit";
 					main.appendChild(createElement(overflowListMethod(category, apps, tinyCardsMethod)));
 				});
-			} else if (page == "signin") {
+			} else if (args.page = "signin") {
 				clearElement(main);
 				main.appendChild(createElement("<div style=\"padding: calc(5vw + 1em);\">"
 					+ "<h2>Open-Source Only</h2>"
@@ -306,10 +316,13 @@
 					+ "own method of donating to the developers of apps we host that we take a percentage of, but that will come later. Much, much later.</p>"
 					+ "</div>"));
 			} else {
-				page = "404";
+				page = "page=404";
 				clearElement(main);
 				main.appendChild(createElement("<div class=\"indented\"><h1>Error 404</h1><p>Sorry, we couldn\'t find what you\'re looking for.</p><button class=\"outline\" onclick=\"window.history.back();\">GO BACK</button></div>"));
 			}
+
+			console.log(args);
+			console.log(page);
 
 		  if (replace)
 				window.history.replaceState(null, null, page ? "?" + page : "?");
@@ -494,7 +507,7 @@
 
 				if (shouldShorten && items.length > 6) {
 					releasesElement.appendChild(createElement(nothingListMethod({}, items.slice(0, 6), downloadMethod)));
-					releasesElement.appendChild(createElement("<a style=\"width: 100%\" onclick=\"setPage(\'releases=" + app.package + "&config=" + config + "&sdk=" + sdk + "&arch=" + arch + "&dpi=" + dpi + "\');\"><i class=\"material-icons\">open_in_new</i>MORE RELEASES</a>"));
+					releasesElement.appendChild(createElement("<a style=\"width: 100%\" onclick=\"setPage(\'page=releases&package=" + app.package + "&config=" + config + "&sdk=" + sdk + "&arch=" + arch + "&dpi=" + dpi + "\');\"><i class=\"material-icons\">open_in_new</i>MORE RELEASES</a>"));
 				} else releasesElement.appendChild(createElement(nothingListMethod({}, items, downloadMethod)));
 			}
 

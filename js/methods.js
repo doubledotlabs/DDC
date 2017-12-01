@@ -1,18 +1,18 @@
 function largeCardsMethod(app) {
-  return "<div class=\"largecard\" onclick=\"setPage(\'app=" + app.package + "\');\" "
+  return "<div class=\"largecard\" onclick=\"setPage(\'page=app&package=" + app.package + "\');\" "
     + "style=\"background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent), url(" + app.header + "), #FFF; background-repeat: no-repeat; background-size: cover; background-position: center;\""
     + "><p class=\"info\"><b>" + app.name + "</b>&nbsp;&ndash;&nbsp;" + app.rating + "/10</p></div>";
 }
 
 function smallCardsMethod(app) {
-  return "<div class=\"smallcard\" onclick=\"setPage(\'app=" + app.package + "\');\">"
+  return "<div class=\"smallcard\" onclick=\"setPage(\'page=app&package=" + app.package + "\');\">"
     + "<img src=\"" + app.icon + "\">"
     + "<p class=\"info\"><b>" + app.name + "</b><br><small style=\"position: absolute;\">" + app.author
     + "</small><small style=\"float: right;\"><b style=\"color: " + getRatingColor(app.rating) + ";\">" + app.rating + "&nbsp;&#9733;</b></small></p></div>";
 }
 
 function tinyCardsMethod(app) {
-  return "<div class=\"tinycard\" onclick=\"setPage(\'app=" + app.package + "\');\">"
+  return "<div class=\"tinycard\" onclick=\"setPage(\'page=app&package=" + app.package + "\');\">"
     + "<img src=\"" + app.icon + "\">"
     + "<p class=\"info\"><b>" + app.name + "</b><br><small style=\"position: absolute;\">" + app.author
     + "</small><small style=\"float: right;\"><b style=\"color: " + getRatingColor(app.rating) + ";\">" + app.rating + "&nbsp;&#9733;</b></small></p></div>";
@@ -23,13 +23,13 @@ function imageCardsMethod(image) {
 }
 
 function chipsMethod(data) {
-  return "<p class=\"chip\"" + (data.id ? " onclick=\"setPage(\'category=" + data.id + "\');\"" : "") + ">" + data.name + "</p>";
+  return "<p class=\"chip\"" + (data.id ? " onclick=\"setPage(\'page=category&id=" + data.id + "\');\"" : "") + ">" + data.name + "</p>";
 }
 
 function reviewMethod(data) {
-  return "<div class=\"review\"><div class=\"reviewinfo\" onclick=\"setPage(\'user=" + data.user.id + "\')\"><img src=\"" + data.user.image + "\"><div><b>" + data.user.name + "</b><br>"
+  return "<div class=\"review\"><div class=\"reviewinfo\" onclick=\"setPage(\'page=user&id=" + data.user.id + "\')\"><img src=\"" + data.user.image + "\"><div><b>" + data.user.name + "</b><br>"
     + "<span style=\"color: " + getRatingColor(data.rating) + "; font-weight: bold;\">" + data.rating + "</span>&nbsp;/&nbsp;10</div></div>"
-    + "<p>" + (data.review ? data.review + "</p>" : data.summary + "</p><a onclick=\"setPage(\'review=" + data.id + "\')\">Read More</a>")
+    + "<p>" + (data.review ? data.review + "</p>" : data.summary + "</p><a onclick=\"setPage(\'page=review&id=" + data.id + "\')\">Read More</a>")
     + "</div>"
 }
 
@@ -88,7 +88,7 @@ function rowListMethod(category, apps, method) {
 	var html = (category.id ? "" : "<h1 class=\"indented\">" + category.name + "</h1>") + "<div class=\"" + (category.description ? "category " : "") + "row\""
 		+ (category.color && category.background ? " style=\"position: relative; color: " + category.color + "; background-color: " + category.background + ";\">" : " style=\"position: relative;\">")
     + (category.id && category.name ? "<div class=\"rowinfo\" style=\"vertical-align: top; transform: translateY(calc(4em - 20%));\"><h2>" + category.name + "</h2>" + (category.description ? "<p>" + category.description
-		+ "</p>" : "") + "<button class=\"outline\" onclick=\"setPage(\'category=" + category.id + "\')\">MORE</button></div>" : "");
+		+ "</p>" : "") + "<button class=\"outline\" onclick=\"setPage(\'page=category&id=" + category.id + "\')\">MORE</button></div>" : "");
 
 	for (var i = 0; i < apps.length; i++) {
 		html += method(apps[i]);
