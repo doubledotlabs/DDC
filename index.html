@@ -218,14 +218,14 @@
 
 								var includesSdk = false;
 								for (var i3 = 0; i < sdks.length; i++) {
-									if (sdks[i3][0] <= sdk[1]) {
-										if (sdk[0] > sdks[i3][0])
+									if (sdks[i3][0] < sdk[1]) {
+										if (sdk[0] < sdks[i3][0])
 											sdks[i3][0] = sdk[0];
 
 										includesSdk = true;
 										break;
-									} else if (sdks[i3][1] >= sdk[0]) {
-										if (sdk[1] > sdks[i3][1])
+									} else if (sdks[i3][1] > sdk[0] || sdks[i3][1] == -1) {
+										if (sdk[1] > sdks[i3][1] || sdk[1] == -1)
 											sdks[i3][1] = sdk[1];
 
 										includesSdk = true;
@@ -247,6 +247,7 @@
 									dpi = [download.minDpi, -1];
 								else if (download.maxDpi)
 									dpi = [0, download.maxDpi];
+								//else dpi = [0, -1];
 
 								if (dpi) {
 									var includesDpi = false;
@@ -257,8 +258,8 @@
 
 											includesDpi = true;
 											break;
-										} else if (dpis[i3][1] >= dpi[0]) {
-											if (dpi[1] > dpis[i3][1])
+										} else if (dpis[i3][1] >= dpi[0] || dpis[i3][1] == -1) {
+											if (dpi[1] > dpis[i3][1] || dpi[1] == -1)
 												dpis[i3][1] = dpi[1];
 
 											includesDpi = true;
@@ -308,9 +309,9 @@
 							if (dpis[i][0] && dpis[i][1])
 								text = dpis[i][0] + "dpi - " + dpis[i][1] + "dpi";
 							else if (dpis[i][0])
-								text = "&ge; " + dpis[i][0];
+								text = "&ge; " + dpis[i][0] + "dpi";
 							else if (dpis[i][1])
-								text = "&le; " + dpis[i][1];
+								text = "&le; " + dpis[i][1] + "dpi";
 
 							dpisHtml += "<option value=\"" + dpis[i][0] + "/" + dpis[i][1] + "\">" + text + "</option>";
 						}
