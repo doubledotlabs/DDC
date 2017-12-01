@@ -457,7 +457,8 @@ a.indented {
 }
 
 .row {
-	overflow: hidden;
+	overflow-y: hidden;
+	overflow-x: auto;
 	white-space: nowrap;
 }
 
@@ -697,6 +698,7 @@ a.indented {
 
 	.row {
 		padding: 0 1em;
+		overflow: hidden;
 	}
 
 	.grid {
@@ -741,7 +743,7 @@ a.indented {
 	}
 }
 
-@media (min-width: 800px) {
+@media (min-width: 1000px) {
 	a.indented {
 		margin: 0 4em;
 	}

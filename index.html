@@ -353,9 +353,9 @@
 						configurations.push(config);
 
 					var sdk = null;
-					if (download.min && download.max) {
+					if (download.max) {
 						sdk = [download.min, download.max];
-					} else if (download.min) {
+					} else {
 						sdk = [download.min, -1];
 					}
 
@@ -384,13 +384,13 @@
 						architectures.push(arch);
 
 					var dpi = null;
-					if (download.minDpi && download.maxDpi)
+					if (download.minDpi && download.maxDpi) {
 						dpi = [download.minDpi, download.maxDpi];
-					else if (download.minDpi)
+					} else if (download.minDpi) {
 						dpi = [download.minDpi, -1];
-					else if (download.maxDpi)
+					} else if (download.maxDpi) {
 						dpi = [0, download.maxDpi];
-					//else dpi = [0, -1];
+					} //else dpi = [0, -1];
 
 					if (dpi) {
 						var includesDpi = false;
@@ -530,8 +530,8 @@
 					}
 				}
 
-				if (shouldShorten && items.length > 6) {
-					releasesElement.appendChild(createElement(nothingListMethod({}, items.slice(0, 6), downloadMethod)));
+				if (shouldShorten && items.length > 4) {
+					releasesElement.appendChild(createElement(nothingListMethod({}, items.slice(0, 4), downloadMethod)));
 					releasesElement.appendChild(createElement("<a style=\"width: 100%\" onclick=\"setPage(\'page=releases&package=" + app.package + "&config=" + config + "&sdk=" + sdk + "&arch=" + arch + "&dpi=" + dpi + "\');\"><i class=\"material-icons\">open_in_new</i>MORE RELEASES</a>"));
 				} else releasesElement.appendChild(createElement(nothingListMethod({}, items, downloadMethod)));
 
