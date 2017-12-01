@@ -187,7 +187,7 @@
 			} else if (page.startsWith("app=")) {
 				clearElement(main);
 
-				getApp(page.replace("&writereview", "").substring(4), function(app) {
+				getApp(page.substring(4), function(app) {
 					document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
 					main.style.background = "#FFF";
 					main.appendChild(createElement("<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"));
@@ -429,7 +429,6 @@
 				});
 			} else if (page.startsWith("reviews=")) {
 				if (page.includes("&write")) {
-					var id = page.replace("&writereview", "").substring(8);
 					main.appendChild(createElement("<div class=\"dialog\"><div>"
 						+ "<h2>Write a Review</h2>"
 						+ "<div class=\"input\" contentEditable=\"true\"></div>"
