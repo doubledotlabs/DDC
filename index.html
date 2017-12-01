@@ -295,7 +295,7 @@
 					document.body.style.background = category.background ? category.background : "inherit";
 					main.appendChild(createElement(overflowListMethod(category, apps, tinyCardsMethod)));
 				});
-			} else if (args.page = "signin") {
+			} else if (args.page == "signin") {
 				clearElement(main);
 				main.appendChild(createElement("<div style=\"padding: calc(5vw + 1em);\">"
 					+ "<h2>Open-Source Only</h2>"
