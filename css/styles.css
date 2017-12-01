@@ -214,6 +214,7 @@ p > a {
 a > i.material-icons {
 	margin-right: 0.5em;
 	color: inherit;
+	transform: translateY(0.25em);
 }
 
 main > a {
@@ -276,7 +277,7 @@ a.indented {
 
 .dialog > div > .input {
 	border-bottom: 1px solid #2962FF;
-	padding-bottom: 0.2em;
+	padding-bottom: 0.35em;
 }
 
 .stat {

@@ -240,7 +240,7 @@
 
 					main.appendChild(createElement("<div class=\"row grid inner-shadow\"><div style=\"text-align: center;\"><h1 style=\"color: " + getRatingColor(app.rating) + ";\">" + app.rating + "</h1><h4>Average Rating</h4></div><div style=\"text-align: center;\"><h1 style=\"color: " + downloadsColor + ";\">" + app.downloads + "</h1><h4>Downloads</h4></div></div>"));
 					main.appendChild(createElement(gridListMethod({"name": "Reviews"}, app.reviews, reviewMethod)));
-					main.appendChild(createElement("<a class=\"indented\" onclick=\"setPage(\'reviews=" + app.package + "\')\"><i class=\"material-icons\" style=\"transform: translateY(25%);\">open_in_new</i>All Reviews</a><a class=\"indented\" onclick=\"setPage(\'reviews=" + app.package + "&write\');\"><i class=\"material-icons\" style=\"transform: translateY(25%);\">rate_review</i>Write a Review</a>"));
+					main.appendChild(createElement("<a class=\"indented\" onclick=\"setPage(\'reviews=" + app.package + "\')\"><i class=\"material-icons\">open_in_new</i>All Reviews</a><a class=\"indented\" onclick=\"setPage(\'reviews=" + app.package + "&write\');\"><i class=\"material-icons\">rate_review</i>Write a Review</a>"));
 					main.appendChild(createElement("<div class=\"inner-shadow\">" + rowListMethod({
 						"name": "Related<br>Apps",
 						"id": "similar/" + app.package,
@@ -264,7 +264,7 @@
 
 					getReviews(page.substring(8), function(reviews) {
 						main.appendChild(createElement("<div class=\"single\">" + gridListMethod({"name": "Reviews"}, reviews, reviewMethod) + "</div>"));
-						main.appendChild(createElement("<hr><a style=\"display: block; text-align: center; padding: 0.5em 0;\" onclick=\"setPage(\'reviews=" + page.substring(8) + "&write\');\"><i class=\"material-icons\" style=\"transform: translateY(25%);\">rate_review</i>Write a Review</a><br>"));
+						main.appendChild(createElement("<hr><a style=\"display: block; text-align: center; padding: 0.5em 0;\" onclick=\"setPage(\'reviews=" + page.substring(8) + "&write\');\"><i class=\"material-icons\">rate_review</i>Write a Review</a><br>"));
 					});
 				}
 			} else if (page.startsWith("releases=")) {
