@@ -327,7 +327,7 @@
 			console.log(page);
 
 		  if (replace)
-				window.history.replaceState("", null, page ? "?" + page : "?");
+				window.history.replaceState(null, null, page ? "?" + page : "?");
 			else {
 				window.history.pushState("", "", page ? "?" + page : "?");
 				if (shouldScrollTop)
@@ -541,7 +541,7 @@
 					args.arch = arch;
 					args.dpi = dpi;
 
-					window.history.replaceState("", "", "?" + argumentsToString(args));
+					window.history.replaceState(null, null, "?" + argumentsToString(args));
 				}
 			}
 
