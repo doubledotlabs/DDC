@@ -54,6 +54,7 @@ function downloadMethod(data) {
     + "<div id=\"downloadContent" + data.download.url + "\" class=\"downloadinfo content\">"
 		+ "<i class=\"expand material-icons\" onclick=\"document.getElementById(\'downloadContent" + data.download.url + "\').classList.remove(\'active\');\">expand_more</i><hr>"
     + "<span><b>Target SDK:</b> Android " + sdkToVersion(data.download.target) + "</span>"
+    + (data.download.config ? "<span><b>Configuration:</b> " + data.download.config + "</span>" : "")
 		+ (data.download.arch ? "<span><b>Architecture:</b> " + data.download.arch + "</span>" : "")
 		+ (dpi ? "<span><b>Screen Scale:</b> " + dpi + "</span>" : "")
     + "<span><b>Download Size:</b> " + data.download.size + "</span>"
