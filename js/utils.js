@@ -55,6 +55,25 @@ function createElement(html) {
     return fragment;
 }
 
+function clearElement(element) {
+	while (element.firstChild) {
+		element.removeChild(element.firstChild);
+	}
+}
+
+function argumentsToObject(args) {
+	var array = args.split("&");
+	var args = {};
+	for (var i = 0; i < array.length; i++) {
+		if (array[i].includes("=")) {
+			var argArray = array[i].split("=");
+			args[argArray[0]] = argArray[1];
+		} else args[array[i]] = true;
+	}
+
+	return args;
+}
+
 function getRatingColor(rating) {
   if (rating < 5.5)
     return "#E24E0D";

@@ -71,6 +71,51 @@ var apps = [
             "maxDpi": 480,
             "size": "2.4 MB",
             "url": "/status2.apk"
+          },
+					{
+            "target": 25,
+            "min": 18,
+            "max": 25,
+            "minDpi": 0,
+            "maxDpi": 480,
+            "size": "2.4 MB",
+            "url": "/status2.apk"
+          },
+					{
+            "target": 25,
+            "min": 18,
+            "max": 25,
+            "minDpi": 0,
+            "maxDpi": 480,
+            "size": "2.4 MB",
+            "url": "/status2.apk"
+          },
+					{
+            "target": 25,
+            "min": 18,
+            "max": 25,
+            "minDpi": 0,
+            "maxDpi": 480,
+            "size": "2.4 MB",
+            "url": "/status2.apk"
+          },
+					{
+            "target": 25,
+            "min": 18,
+            "max": 25,
+            "minDpi": 0,
+            "maxDpi": 480,
+            "size": "2.4 MB",
+            "url": "/status2.apk"
+          },
+					{
+            "target": 25,
+            "min": 18,
+            "max": 25,
+            "minDpi": 0,
+            "maxDpi": 480,
+            "size": "2.4 MB",
+            "url": "/status2.apk"
           }
         ]
       },
