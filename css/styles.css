@@ -688,7 +688,7 @@ a.indented {
 
 .row>.rowinfo {
 	color: inherit !important;
-	max-width: 300px;
+	max-width: calc(100vw - 2em);
 	margin-right: 1em;
 }
 
