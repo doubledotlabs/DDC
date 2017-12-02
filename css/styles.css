@@ -795,6 +795,13 @@ a.indented {
 		background-color: #FFF;
 		margin: 1em;
 	}
+
+	.single > .review > p {
+		margin-top: 1em;
+		margin-left: auto;
+		margin-right: auto;
+		width: 60%;
+	}
 }
 
 @media (min-width: 1000px) {

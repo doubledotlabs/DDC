@@ -204,7 +204,7 @@
 					main.appendChild(createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\" onclick=\"setPage(\'page=reviews&package=" + app.package + "&write\')\">RATE / REVIEW</button></div>"
 						+ "<div class=\"appnameinfo\"><h1 class=\"appname\">" + app.name + "</h1><p>" + app.summary + "</p></div></div>"));
 
-					appendAppDownloadSection(app, true, args);
+					appendAppDownloadSection(app, true, main, args);
 
 					main.appendChild(createElement(carouselListMethod({
 						slidesToShow: 4,
@@ -308,8 +308,10 @@
 			} else if (args.page == "releases") {
 				clearElement(main);
 
+				main.appendChild(createElement("<div id=\"singleReleases\" class=\"single\"></div>"))
+
 				getApp(args.package, function(app) {
-					appendAppDownloadSection(app, false, args);
+					appendAppDownloadSection(app, false, document.getElementById("singleReleases"), args);
 				});
 			} else if (args.page == "review") {
 				clearElement(main);
@@ -365,7 +367,7 @@
 			$(".carousel").slick();
 		}
 
-		function appendAppDownloadSection(app, shouldShorten, args) {
+		function appendAppDownloadSection(app, shouldShorten, element, args) {
 			var configurations = [];
 			var sdks = [];
 			var architectures = [];
@@ -487,7 +489,7 @@
 				dpisHtml += "<option value=\"" + dpis[i][0] + "/" + dpis[i][1] + "\">" + text + "</option>";
 			}
 
-			main.appendChild(createElement("<div class=\"row grid\" style=\"margin-right: 1em; margin-left: 1em;\">"
+			element.appendChild(createElement("<div class=\"row grid\" style=\"margin-right: 1em; margin-left: 1em;\">"
 				+ "<div><i class=\"material-icons\">devices_other</i><div class=\"dropdown\"><span>Configuration</span>"
 				+ "<select id=\"configSelect\"" + (configurations.length > 1 ? "" : " class=\"disabled\"") + ">" + configurationsHtml + "</select></div></div>"
 				+ "<div><i class=\"material-icons\">android</i><div class=\"dropdown\"><span>Android Version</span>"
@@ -498,7 +500,7 @@
 				+ "<select id=\"dpiSelect\"" + (dpis.length > 1 ? "" : " class=\"disabled\"") + ">" + dpisHtml + "</select></div></div>"
 				+ "</div>"));
 
-			main.appendChild(createElement("<div id=\"releases\" class=\"row grid\"></div>"))
+			element.appendChild(createElement("<div id=\"releases\" class=\"row grid\"></div>"))
 
 			if (args) {
 				var configSelect = document.getElementById("configSelect");
