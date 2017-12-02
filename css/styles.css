@@ -819,16 +819,6 @@ a.indented {
 		width: calc(33.33% - 4em);
 	}
 
-	div.header {
-		-moz-filter: blur(1vw);
-		-o-filter: blur(1vw);
-		-webkit-filter: blur(1vw);
-		filter: blur(1vw);
-		margin: 0 -2vw;
-		margin-top: calc(-6em - 1vw);
-		width: 104vw;
-	}
-
 	.appiconinfo {
 		display: inline-block;
 		padding-left: 4em;
@@ -866,6 +856,16 @@ a.indented {
 }
 
 @media (min-width: 1400px) {
+	div.header {
+		-moz-filter: blur(1vw);
+		-o-filter: blur(1vw);
+		-webkit-filter: blur(1vw);
+		filter: blur(1vw);
+		margin: 0 -2vw;
+		margin-top: calc(-6em - 1vw);
+		width: 104vw;
+	}
+
 	.dialog > div {
 		width: 50vw;
 	}
