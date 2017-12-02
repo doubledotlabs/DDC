@@ -287,6 +287,45 @@ a.indented {
 	padding-bottom: 0.35em;
 }
 
+.rating {
+	display: inline-block;
+	cursor: pointer;
+	user-select: none;
+	font-size: 2em;
+	margin-bottom: 0.5em;
+	direction: rtl;
+}
+
+.rating > span,
+.rating > span:before {
+	-moz-transition: color .25s;
+	-o-transition: color .25s;
+	-webkit-transition: color .25s;
+	transition: color .25s;
+}
+
+.rating > span:hover:before,
+.rating > span:hover ~ span:before,
+.rating:not(:hover) > span.selected:before,
+.rating:not(:hover) > span.selected ~ span:before {
+  content: "\2605";
+  position: absolute;
+}
+
+.rating > span:hover:before,
+.rating > span:hover,
+.rating > span:hover ~ span:before,
+.rating > span:hover ~ span {
+	color: #A3BCFF;
+}
+
+.rating:not(:hover) > span.selected:before,
+.rating:not(:hover) > span.selected,
+.rating:not(:hover) > span.selected ~ span:before,
+.rating:not(:hover) > span.selected ~ span {
+	color: #2962FF;
+}
+
 .stat {
 	display: table;
 }

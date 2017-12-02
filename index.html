@@ -263,15 +263,40 @@
 				if (args.write) {
 					main.appendChild(createElement("<div class=\"dialog\"><div>"
 						+ "<h2 style=\"margin: 0; margin-bottom: 0.5em;\">Rate / Review</h2>"
+						+ "<div style=\"text-align: center;\">"
+						+ "<div id=\"ratingSelect\" class=\"rating\"><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span></div>"
+						+ "</div>"
 						+ "<div class=\"input\" contentEditable=\"true\" placeholder=\"Write a review...\"></div>"
 						+ "<small>Reviews should be between 50 and 500 characters.</small>"
 						+ "<div>"
-						+ "<a style=\"float: right;\" onclick=\"window.history.back();\">SUBMIT</a>"
+						+ "<a id=\"reviewSubmit\" style=\"float: right;\" onclick=\"window.history.back();\">SUBMIT</a>"
 						+ "<a style=\"float: right; margin-right: 1em;\" onclick=\"window.history.back();\">CANCEL</a>"
 						+ "</div>"
 						+ "</div></div>"));
 
-						shouldScrollTop = false;
+					var onRatingSelect = function(e) {
+						if (e.target.className && e.target.className.includes("selected")) {
+							e.target.className = null;
+						} else {
+							var ratingElement = document.getElementById("ratingSelect");
+							for (var i = 0; i < ratingElement.childNodes.length; i++) {
+								ratingElement.childNodes[i].className = null;
+							}
+
+							e.target.className = "selected";
+						}
+					};
+
+					var ratingElement = document.getElementById("ratingSelect");
+					for (var i = 0; i < ratingElement.childNodes.length; i++) {
+						ratingElement.childNodes[i].addEventListener("click", onRatingSelect);
+					}
+
+					var onSubmit = function() {
+
+					}
+
+					shouldScrollTop = false;
 				} else {
 					clearElement(main);
 
