@@ -855,7 +855,7 @@ a.indented {
 	}
 }
 
-@media (min-width: 1400px) {
+@media(min-width: 1024px) {
 	div.header {
 		-moz-filter: blur(1vw);
 		-o-filter: blur(1vw);
@@ -865,7 +865,9 @@ a.indented {
 		margin-top: calc(-6em - 1vw);
 		width: 104vw;
 	}
+}
 
+@media (min-width: 1400px) {
 	.dialog > div {
 		width: 50vw;
 	}
