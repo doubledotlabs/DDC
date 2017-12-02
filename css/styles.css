@@ -52,6 +52,7 @@ header {
 	position: relative;
 	padding: 0.4em 2em;
 	height: 5em;
+	z-index: 200;
 	background-color: rgba(255, 255, 255, 0.5);
 }
 
@@ -123,6 +124,9 @@ div.header {
 img.appicon {
 	width: 8em;
 	margin: 1em auto;
+	-moz-filter: drop-shadow(0 0.2em 0.7em rgba(0, 0, 0, 0.35));
+	-o-filter: drop-shadow(0 0.2em 0.7em rgba(0, 0, 0, 0.35));
+	-webkit-filter: drop-shadow(0 0.2em 0.7em rgba(0, 0, 0, 0.35));
 	filter: drop-shadow(0 0.2em 0.7em rgba(0, 0, 0, 0.35));
 	opacity: 0;
 	transform: scale(0.5);
@@ -813,6 +817,16 @@ a.indented {
 
 	.grid > .download {
 		width: calc(33.33% - 4em);
+	}
+
+	div.header {
+		-moz-filter: blur(1vw);
+		-o-filter: blur(1vw);
+		-webkit-filter: blur(1vw);
+		filter: blur(1vw);
+		margin: 0 -2vw;
+		margin-top: calc(-6em - 1vw);
+		width: 104vw;
 	}
 
 	.appiconinfo {
