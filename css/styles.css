@@ -728,6 +728,10 @@ a.indented {
 		background-color: rgba(0, 0, 0, 0.1);
 	}
 
+	.dialog > div {
+		width: 70vw;
+	}
+
 	h1.indented {
 		display: block;
 		margin: 0 1em;
@@ -790,6 +794,10 @@ a.indented {
 }
 
 @media (min-width: 1000px) {
+	.dialog > div {
+		width: 60vw;
+	}
+
 	a.indented {
 		margin: 0 4em;
 	}
@@ -844,6 +852,10 @@ a.indented {
 }
 
 @media (min-width: 1400px) {
+	.dialog > div {
+		width: 50vw;
+	}
+
 	.grid > * {
 		width: calc(25% - 2em);
 	}
