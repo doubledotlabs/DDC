@@ -9,7 +9,10 @@ var categories = [
     "description": "A bunch of stuff.",
     "color": "#000",
     "background": "transparent",
-    "permission": "developer"
+    "permission": "developer",
+    "apps": [
+      //...
+    ]
   },
   {
 		"id": "actiongames",
@@ -17,7 +20,10 @@ var categories = [
     "description": "These fast-paced games are sure to do something.",
     "color": "#7CF38B",
     "background": "#222",
-    "permission": "developer"
+    "permission": "developer",
+    "apps": [
+      //...
+    ]
   },
   {
 		"id": "graphics",
@@ -25,7 +31,10 @@ var categories = [
     "description": "These games show off some beautiful graphics without impacting performance.",
     "color": "#177323",
     "background": "#7CF38B",
-    "permission": "moderator"
+    "permission": "moderator",
+    "apps": [
+      //...
+    ]
   },
   {
 		"id": "morestuff",
@@ -33,7 +42,10 @@ var categories = [
     "description": "A bunch of more stuff with a long description.",
     "color": "#82B1FF",
     "background": "#0D47A1",
-    "permission": "developer"
+    "permission": "developer",
+    "apps": [
+      //...
+    ]
   }
 ];
 
@@ -381,6 +393,60 @@ var apps = [
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
     "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Metronome-Android/master/app/src/main/res/mipmap/ic_launcher_web.png"
+  },
+  {
+    "name": "Metronome",
+    "author": "James Fenn",
+    "rating": 9.2,
+    "package": "james.metronome",
+    "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
+    "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
+    "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Metronome-Android/master/app/src/main/res/mipmap/ic_launcher_web.png"
+  },
+  {
+    "name": "Metronome",
+    "author": "James Fenn",
+    "rating": 9.2,
+    "package": "james.metronome",
+    "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
+    "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
+    "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Metronome-Android/master/app/src/main/res/mipmap/ic_launcher_web.png"
+  },
+  {
+    "name": "Metronome",
+    "author": "James Fenn",
+    "rating": 9.2,
+    "package": "james.metronome",
+    "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
+    "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
+    "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Metronome-Android/master/app/src/main/res/mipmap/ic_launcher_web.png"
+  },
+  {
+    "name": "Metronome",
+    "author": "James Fenn",
+    "rating": 9.2,
+    "package": "james.metronome",
+    "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
+    "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
+    "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Metronome-Android/master/app/src/main/res/mipmap/ic_launcher_web.png"
+  },
+  {
+    "name": "Metronome",
+    "author": "James Fenn",
+    "rating": 9.2,
+    "package": "james.metronome",
+    "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
+    "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
+    "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Metronome-Android/master/app/src/main/res/mipmap/ic_launcher_web.png"
+  },
+  {
+    "name": "Metronome",
+    "author": "James Fenn",
+    "rating": 9.2,
+    "package": "james.metronome",
+    "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
+    "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
+    "icon": "https://raw.githubusercontent.com/TheAndroidMaster/Metronome-Android/master/app/src/main/res/mipmap/ic_launcher_web.png"
   }
 ];
 
@@ -465,5 +531,23 @@ var reviews = [
     },
     "rating": 7,
     "review": "I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff."
+  }
+];
+
+//users can be requested as part of a list or other queries (returned without 'links', 'apps', and 'reviews' attrs), or individually by their id
+var users = [
+  {
+    "id": "aora4nf844tt",
+    "name": "Jim Person",
+    "image": "https://avatars3.githubusercontent.com/u/13000407",
+    "links": [
+
+    ],
+    "apps": [
+      //...
+    ],
+    "reviews": [
+      //...
+    ]
   }
 ];

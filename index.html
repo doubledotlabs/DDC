@@ -341,12 +341,34 @@
 					+ "from making their way onto our store. We keep documentation of all dependencies our apps use and what license they are published under to "
 					+ "ensure that no issues occur.</p>"
 					+ "<br><h2>But At What Cost?</h2>"
-					+ "<p>As I'm sure you can tell, we have put a lot of work into making this project a success. From the backend magic to our beautiful website "
+					+ "<p>As I'm sure you can tell, we have put a lot of work into making this project a success (pro tip: promising success before it's achieved is a "
+					+ "horrible method of motivation). From the backend magic to our beautiful website "
 					+ "to our Android app, this project has taken months of planning and development to complete. And it's still not over. However, because all the "
 					+ "applications on here are free, we don't think it's right for their users to pay to use them or for their developers to pay to publish them. "
 					+ "That's why we intend to make all our money through donations, advertisements, and paid promotions. As the project expands, we may implement our "
 					+ "own method of donating to the developers of apps we host that we take a percentage of, but that will come later. Much, much later.</p>"
 					+ "</div>"));
+			} else if (args.page == "user") {
+				clearElement(main);
+
+				getUser(args.id, function(user) {
+					main.appendChild(createElement("<div class=\"userinfo\">"
+						+ "<img src=\"" + user.image + "\">"
+						+ "<span>" + user.name + "</span>"
+						+ "</div>"));
+
+					if (user.apps) {
+						main.appendChild(createElement("<h1 class=\"indented\">" + user.name + "'s Apps</h1>"));
+						main.appendChild(createElement(overflowListMethod({}, apps, tinyCardsMethod)));
+					}
+
+					if (user.reviews) {
+						getReviews("", function(reviews) {
+							main.appendChild(createElement("<h1 class=\"indented\">" + user.name + "'s Reviews</h1>"));
+							main.appendChild(createElement(gridListMethod({}, reviews, reviewMethod)));
+						});
+					}
+				});
 			} else {
 				page = "page=404";
 				clearElement(main);

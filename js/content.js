@@ -41,6 +41,17 @@ function getApp(id, fun) {
 	setPage("404", true);
 }
 
+function getUser(id, fun) {
+	for (var i = 0; i < users.length; i++) {
+		if (users[i].id == id) {
+			fun(users[i]);
+			return;
+		}
+	}
+
+	setPage("404", true);
+}
+
 function getReviews(id, fun) {
 	var newReviews = [];
 	for (var i = 0; i < reviews.length; i++) {
