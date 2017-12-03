@@ -53,7 +53,11 @@ var categories = [
 var apps = [
   {
     "name": "Status",
-    "author": "James Fenn",
+    "author": {
+      "id": "aora4nf844tt",
+      "name": "James Fenn",
+      "image": "https://avatars3.githubusercontent.com/u/13000407"
+    },
     "rating": 3.9,
     "ratings": 8273,
     "downloads": 120562,
@@ -210,7 +214,11 @@ var apps = [
   },
   {
     "name": "Metronome",
-    "author": "James Fenn",
+    "author": {
+      "id": "aora4nf844tt",
+      "name": "James Fenn",
+      "image": "https://avatars3.githubusercontent.com/u/13000407"
+    },
     "rating": 4.8,
     "ratings": 4985,
     "downloads": 5982,
@@ -324,7 +332,11 @@ var apps = [
   },
 	{
     "name": "Status",
-    "author": "James Fenn",
+    "author": {
+      "id": "aora4nf844tt",
+      "name": "James Fenn",
+      "image": "https://avatars3.githubusercontent.com/u/13000407"
+    },
     "rating": 3.9,
     "package": "com.james.status",
     "description": "Status is a thing that does stuff with things and uses those things to do stuff.",
@@ -333,7 +345,11 @@ var apps = [
   },
   {
     "name": "Metronome",
-    "author": "James Fenn",
+    "author": {
+      "id": "aora4nf844tt",
+      "name": "James Fenn",
+      "image": "https://avatars3.githubusercontent.com/u/13000407"
+    },
     "rating": 4.8,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
@@ -342,7 +358,11 @@ var apps = [
   },
 	{
     "name": "Status",
-    "author": "James Fenn",
+    "author": {
+      "id": "aora4nf844tt",
+      "name": "James Fenn",
+      "image": "https://avatars3.githubusercontent.com/u/13000407"
+    },
     "rating": 3.9,
     "package": "com.james.status",
     "description": "Status is a thing that does stuff with things and uses those things to do stuff.",
@@ -351,7 +371,11 @@ var apps = [
   },
   {
     "name": "Metronome",
-    "author": "James Fenn",
+    "author": {
+      "id": "aora4nf844tt",
+      "name": "James Fenn",
+      "image": "https://avatars3.githubusercontent.com/u/13000407"
+    },
     "rating": 4.8,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
@@ -360,7 +384,11 @@ var apps = [
   },
 	{
     "name": "Status",
-    "author": "James Fenn",
+    "author": {
+      "id": "aora4nf844tt",
+      "name": "James Fenn",
+      "image": "https://avatars3.githubusercontent.com/u/13000407"
+    },
     "rating": 3.9,
     "package": "com.james.status",
     "description": "Status is a thing that does stuff with things and uses those things to do stuff.",
@@ -369,7 +397,11 @@ var apps = [
   },
   {
     "name": "Metronome",
-    "author": "James Fenn",
+    "author": {
+      "id": "aora4nf844tt",
+      "name": "James Fenn",
+      "image": "https://avatars3.githubusercontent.com/u/13000407"
+    },
     "rating": 4.8,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
@@ -378,7 +410,11 @@ var apps = [
   },
   {
     "name": "Status",
-    "author": "James Fenn",
+    "author": {
+      "id": "aora4nf844tt",
+      "name": "James Fenn",
+      "image": "https://avatars3.githubusercontent.com/u/13000407"
+    },
     "rating": 3.9,
     "package": "com.james.status",
     "description": "Status is a thing that does stuff with things and uses those things to do stuff.",
@@ -387,7 +423,11 @@ var apps = [
   },
   {
     "name": "Metronome",
-    "author": "James Fenn",
+    "author": {
+      "id": "aora4nf844tt",
+      "name": "James Fenn",
+      "image": "https://avatars3.githubusercontent.com/u/13000407"
+    },
     "rating": 4.8,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
@@ -396,7 +436,11 @@ var apps = [
   },
   {
     "name": "Metronome",
-    "author": "James Fenn",
+    "author": {
+      "id": "aora4nf844tt",
+      "name": "James Fenn",
+      "image": "https://avatars3.githubusercontent.com/u/13000407"
+    },
     "rating": 4.8,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
@@ -405,7 +449,11 @@ var apps = [
   },
   {
     "name": "Metronome",
-    "author": "James Fenn",
+    "author": {
+      "id": "aora4nf844tt",
+      "name": "James Fenn",
+      "image": "https://avatars3.githubusercontent.com/u/13000407"
+    },
     "rating": 4.8,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
@@ -414,7 +462,11 @@ var apps = [
   },
   {
     "name": "Metronome",
-    "author": "James Fenn",
+    "author": {
+      "id": "aora4nf844tt",
+      "name": "James Fenn",
+      "image": "https://avatars3.githubusercontent.com/u/13000407"
+    },
     "rating": 4.8,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
@@ -423,7 +475,11 @@ var apps = [
   },
   {
     "name": "Metronome",
-    "author": "James Fenn",
+    "author": {
+      "id": "aora4nf844tt",
+      "name": "James Fenn",
+      "image": "https://avatars3.githubusercontent.com/u/13000407"
+    },
     "rating": 4.8,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
@@ -432,7 +488,11 @@ var apps = [
   },
   {
     "name": "Metronome",
-    "author": "James Fenn",
+    "author": {
+      "id": "aora4nf844tt",
+      "name": "James Fenn",
+      "image": "https://avatars3.githubusercontent.com/u/13000407"
+    },
     "rating": 4.8,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
@@ -441,7 +501,11 @@ var apps = [
   },
   {
     "name": "Metronome",
-    "author": "James Fenn",
+    "author": {
+      "id": "aora4nf844tt",
+      "name": "James Fenn",
+      "image": "https://avatars3.githubusercontent.com/u/13000407"
+    },
     "rating": 4.8,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",

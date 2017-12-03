@@ -164,9 +164,13 @@ hr {
 	padding: 2em;
 }
 
-h1.appname {
+.appnameinfo > h1 {
 	margin: 0;
-	margin-bottom: 0.5em;
+	margin-top: 0.5em;
+}
+
+.appnameinfo > h3 {
+	margin: 0;
 }
 
 .appdesc {
@@ -242,6 +246,10 @@ h1.indented {
 	margin: 0 1em;
 	margin-top: 1.25em;
 	margin-bottom: 0.5em;
+}
+
+h2.indented {
+	margin: 1em;
 }
 
 div.indented {
@@ -874,7 +882,7 @@ a.indented {
 
 	.appinfo {
 		display: flex;
-		margin-bottom: -3em;
+		margin-bottom: 0;
 	}
 
 	.grid > * {
@@ -903,6 +911,11 @@ a.indented {
 	.appinfo ~ h1.indented {
 		margin-left: 2em;
 		margin-right: 2em;
+	}
+
+	.appinfo ~ h2.indented {
+		margin-left: 3em;
+		margin-right: 3em;
 	}
 
 	.appinfo ~ .row:not(.grid),
