@@ -265,7 +265,7 @@ a.indented {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	z-index: 101;
+	z-index: 201;
 	opacity: 0;
 
 	animation-name: fadeIn;
