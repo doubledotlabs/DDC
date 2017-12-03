@@ -15,7 +15,7 @@ function getCategory(id, fun) {
 		getApp(id.split("/")[1], function(app) {
 			fun({
 				"id": id,
-				"name": "Similar to " + getApp(id.split("/")[1]).name
+				"name": "Similar to " + app.name
 			});
 		});
 	} else {
