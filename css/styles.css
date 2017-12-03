@@ -543,6 +543,14 @@ a.indented {
 	margin: 0.5em 0;
 }
 
+.userinfo > .overflow {
+	justify-content: center;
+}
+
+.userinfo > .overflow > a.link {
+	margin: 0 1em;
+}
+
 .dropdown {
 	display: inline-block;
 	margin-left: 1em;

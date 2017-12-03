@@ -628,7 +628,18 @@ var users = [
     "name": "Jim Person",
     "image": "https://avatars3.githubusercontent.com/u/13000407",
     "links": [
-
+      {
+        "name": "GitHub",
+        "url": "https://github.com/TheAndroidMaster"
+      },
+      {
+        "name": "Website",
+        "url": "https://theandroidmaster.github.io/"
+      },
+      {
+        "name": "Google Play",
+        "url": ""
+      }
     ],
     "apps": [
       //...

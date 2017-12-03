@@ -356,6 +356,7 @@
 					main.appendChild(createElement("<div class=\"userinfo\">"
 						+ "<img class=\"userimage\" src=\"" + user.image + "\">"
 						+ "<span>" + user.name + "</span>"
+						+ overflowListMethod({}, user.links, linksMethod)
 						+ "</div>"));
 
 					if (user.apps) {
