@@ -1,7 +1,7 @@
 function largeCardsMethod(app) {
   return "<div class=\"largecard\" onclick=\"setPage(\'page=app&package=" + app.package + "\');\" "
     + "style=\"background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent), url(" + app.header + "), #FFF; background-repeat: no-repeat; background-size: cover; background-position: center;\""
-    + "><p class=\"info\"><b>" + app.name + "</b>&nbsp;&ndash;&nbsp;" + app.rating + "/10</p></div>";
+    + "><p class=\"info\"><b>" + app.name + "</b>&nbsp;&ndash;&nbsp;" + app.rating + "/5</p></div>";
 }
 
 function smallCardsMethod(app) {
@@ -28,9 +28,19 @@ function chipsMethod(data) {
 
 function reviewMethod(data) {
   return "<div class=\"review\"><div class=\"reviewinfo\" onclick=\"setPage(\'page=user&id=" + data.user.id + "\')\"><img src=\"" + data.user.image + "\"><div><b>" + data.user.name + "</b><br>"
-    + "<span style=\"color: " + getRatingColor(data.rating) + "; font-weight: bold;\">" + data.rating + "</span>&nbsp;/&nbsp;10</div></div>"
+    + ratingMethod(data.rating) + "</div></div>"
     + "<p>" + (data.review ? data.review + "</p>" : data.summary + "</p><a onclick=\"setPage(\'page=review&id=" + data.id + "\')\">Read More</a>")
     + "</div>"
+}
+
+function ratingMethod(rating, color) {
+  var html = "<span class=\"rating\" style=\"color: " + (color ? color : getRatingColor(rating)) + "\">"
+  for (var i = 5; i > 0; i--) {
+    if (Math.round(rating) == i)
+      html += "<span class=\"selected\">☆</span>";
+    else html += "<span>☆</span>";
+  }
+  return html + "</span>";
 }
 
 function downloadMethod(data) {

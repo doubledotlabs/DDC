@@ -295,11 +295,17 @@ a.indented {
 
 .rating {
 	display: inline-block;
-	cursor: pointer;
+	cursor: inherit;
 	user-select: none;
+	direction: rtl;
+	color: #000;
+}
+
+.rating.active {
 	font-size: 2em;
 	margin-bottom: 0.5em;
-	direction: rtl;
+	cursor: pointer;
+	color: #2962FF;
 }
 
 .rating > span,
@@ -310,26 +316,32 @@ a.indented {
 	transition: color .25s;
 }
 
-.rating > span:hover:before,
-.rating > span:hover ~ span:before,
+.rating.active > span:hover:before,
+.rating.active > span:hover ~ span:before,
 .rating:not(:hover) > span.selected:before,
-.rating:not(:hover) > span.selected ~ span:before {
+.rating:not(:hover) > span.selected ~ span:before,
+.rating:not(.active) > span.selected:before,
+.rating:not(.active) > span.selected ~ span:before {
   content: "\2605";
   position: absolute;
 }
 
-.rating > span:hover:before,
-.rating > span:hover,
-.rating > span:hover ~ span:before,
-.rating > span:hover ~ span {
+.rating.active > span:hover:before,
+.rating.active > span:hover,
+.rating.active > span:hover ~ span:before,
+.rating.active > span:hover ~ span {
 	color: #A3BCFF;
 }
 
 .rating:not(:hover) > span.selected:before,
 .rating:not(:hover) > span.selected,
 .rating:not(:hover) > span.selected ~ span:before,
-.rating:not(:hover) > span.selected ~ span {
-	color: #2962FF;
+.rating:not(:hover) > span.selected ~ span,
+.rating:not(.active) > span.selected:before,
+.rating:not(.active) > span.selected,
+.rating:not(.active) > span.selected ~ span:before,
+.rating:not(.active) > span.selected ~ span {
+	color: inherit;
 }
 
 .stat {

@@ -84,11 +84,11 @@ function argumentsToString(args) {
 }
 
 function getRatingColor(rating) {
-  if (rating < 5.5)
+  if (rating < 2)
     return "#E24E0D";
-  else if (rating < 7)
+  else if (rating < 3)
     return "#E29D0D";
-  else if (rating < 8.5)
+  else if (rating < 4)
     return "#E2BB0D";
   else return "#15AF5E";
 }

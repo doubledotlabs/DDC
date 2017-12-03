@@ -54,7 +54,7 @@ var apps = [
   {
     "name": "Status",
     "author": "James Fenn",
-    "rating": 8.9,
+    "rating": 3.9,
     "ratings": 8273,
     "downloads": 120562,
     "package": "com.james.status",
@@ -173,7 +173,7 @@ var apps = [
           "name": "Jim Person",
           "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
-        "rating": 10,
+        "rating": 3,
         "summary": "I really liked this app a lot. The idea that something could do something that does things..."
       },
       {
@@ -183,7 +183,7 @@ var apps = [
           "name": "Jim Person",
           "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
-        "rating": 9,
+        "rating": 2,
         "summary": "I really liked this app a lot. The idea that something could do something that does things..."
       },
       {
@@ -193,7 +193,7 @@ var apps = [
           "name": "Jim Person",
           "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
-        "rating": 5,
+        "rating": 4,
         "summary": "I really liked this app a lot. The idea that something could do something that does things..."
       },
       {
@@ -203,7 +203,7 @@ var apps = [
           "name": "Jim Person",
           "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
-        "rating": 7,
+        "rating": 5,
         "summary": "I really liked this app a lot. The idea that something could do something that does things..."
       }
     ]
@@ -211,7 +211,7 @@ var apps = [
   {
     "name": "Metronome",
     "author": "James Fenn",
-    "rating": 9.2,
+    "rating": 4.8,
     "ratings": 4985,
     "downloads": 5982,
     "package": "james.metronome",
@@ -287,7 +287,7 @@ var apps = [
           "name": "Jim Person",
           "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
-        "rating": 10,
+        "rating": 2,
         "summary": "I really liked this app a lot. The idea that something could do something that does things..."
       },
       {
@@ -297,7 +297,7 @@ var apps = [
           "name": "Jim Person",
           "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
-        "rating": 9,
+        "rating": 3,
         "summary": "I really liked this app a lot. The idea that something could do something that does things..."
       },
       {
@@ -317,7 +317,7 @@ var apps = [
           "name": "Jim Person",
           "image": "https://avatars3.githubusercontent.com/u/13000407"
         },
-        "rating": 7,
+        "rating": 4,
         "summary": "I really liked this app a lot. The idea that something could do something that does things..."
       }
     ]
@@ -325,7 +325,7 @@ var apps = [
 	{
     "name": "Status",
     "author": "James Fenn",
-    "rating": 8.9,
+    "rating": 3.9,
     "package": "com.james.status",
     "description": "Status is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/headers/status_bg.png",
@@ -334,7 +334,7 @@ var apps = [
   {
     "name": "Metronome",
     "author": "James Fenn",
-    "rating": 9.2,
+    "rating": 4.8,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
@@ -343,7 +343,7 @@ var apps = [
 	{
     "name": "Status",
     "author": "James Fenn",
-    "rating": 8.9,
+    "rating": 3.9,
     "package": "com.james.status",
     "description": "Status is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/headers/status_bg.png",
@@ -352,7 +352,7 @@ var apps = [
   {
     "name": "Metronome",
     "author": "James Fenn",
-    "rating": 9.2,
+    "rating": 4.8,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
@@ -361,7 +361,7 @@ var apps = [
 	{
     "name": "Status",
     "author": "James Fenn",
-    "rating": 8.9,
+    "rating": 3.9,
     "package": "com.james.status",
     "description": "Status is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/headers/status_bg.png",
@@ -370,7 +370,7 @@ var apps = [
   {
     "name": "Metronome",
     "author": "James Fenn",
-    "rating": 9.2,
+    "rating": 4.8,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
@@ -379,7 +379,7 @@ var apps = [
   {
     "name": "Status",
     "author": "James Fenn",
-    "rating": 8.9,
+    "rating": 3.9,
     "package": "com.james.status",
     "description": "Status is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/headers/status_bg.png",
@@ -388,7 +388,7 @@ var apps = [
   {
     "name": "Metronome",
     "author": "James Fenn",
-    "rating": 9.2,
+    "rating": 4.8,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
@@ -397,7 +397,7 @@ var apps = [
   {
     "name": "Metronome",
     "author": "James Fenn",
-    "rating": 9.2,
+    "rating": 4.8,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
@@ -406,7 +406,7 @@ var apps = [
   {
     "name": "Metronome",
     "author": "James Fenn",
-    "rating": 9.2,
+    "rating": 4.8,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
@@ -415,7 +415,7 @@ var apps = [
   {
     "name": "Metronome",
     "author": "James Fenn",
-    "rating": 9.2,
+    "rating": 4.8,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
@@ -424,7 +424,7 @@ var apps = [
   {
     "name": "Metronome",
     "author": "James Fenn",
-    "rating": 9.2,
+    "rating": 4.8,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
@@ -433,7 +433,7 @@ var apps = [
   {
     "name": "Metronome",
     "author": "James Fenn",
-    "rating": 9.2,
+    "rating": 4.8,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
@@ -442,7 +442,7 @@ var apps = [
   {
     "name": "Metronome",
     "author": "James Fenn",
-    "rating": 9.2,
+    "rating": 4.8,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
@@ -459,7 +459,7 @@ var reviews = [
       "name": "Jim Person",
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
-    "rating": 10,
+    "rating": 5,
     "review": "I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff."
   },
   {
@@ -469,7 +469,7 @@ var reviews = [
       "name": "Jim Person",
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
-    "rating": 9,
+    "rating": 2,
     "review": "I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff."
   },
   {
@@ -479,7 +479,7 @@ var reviews = [
       "name": "Jim Person",
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
-    "rating": 5,
+    "rating": 1,
     "review": "I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff."
   },
   {
@@ -489,7 +489,7 @@ var reviews = [
       "name": "Jim Person",
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
-    "rating": 7,
+    "rating": 4,
     "review": "I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff."
   },
   {
@@ -499,7 +499,7 @@ var reviews = [
       "name": "Jim Person",
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
-    "rating": 10,
+    "rating": 3,
     "review": "I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff."
   },
   {
@@ -509,7 +509,7 @@ var reviews = [
       "name": "Jim Person",
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
-    "rating": 9,
+    "rating": 2,
     "review": "I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff."
   },
   {
@@ -529,7 +529,7 @@ var reviews = [
       "name": "Jim Person",
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
-    "rating": 7,
+    "rating": 4,
     "review": "I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff. I really liked this app a lot. The idea that something could do something that does things is a brilliant thing that does stuff."
   }
 ];
