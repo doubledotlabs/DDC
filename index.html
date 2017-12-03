@@ -358,14 +358,16 @@
 						+ "</div>"));
 
 					if (user.apps) {
-						main.appendChild(createElement("<h1 class=\"indented\">" + user.name + "'s Apps</h1>"));
-						main.appendChild(createElement(overflowListMethod({}, apps, tinyCardsMethod)));
+						main.appendChild(createElement("<hr>"
+							+ "<h1 class=\"indented\">Apps</h1>"
+						  + overflowListMethod({}, apps, tinyCardsMethod)));
 					}
 
 					if (user.reviews) {
 						getReviews("", function(reviews) {
-							main.appendChild(createElement("<h1 class=\"indented\">" + user.name + "'s Reviews</h1>"));
-							main.appendChild(createElement(gridListMethod({}, reviews, reviewMethod)));
+							main.appendChild(createElement("<hr>"
+								+ "<h1 class=\"indented\">Reviews</h1>"
+							  + gridListMethod({}, reviews, reviewMethod)));
 						});
 					}
 				});
