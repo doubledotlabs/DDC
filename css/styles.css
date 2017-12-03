@@ -310,6 +310,8 @@ a.indented {
 
 .rating > span,
 .rating > span:before {
+	color: rgba(0, 0, 0, 0.5);
+
 	-moz-transition: color .25s;
 	-o-transition: color .25s;
 	-webkit-transition: color .25s;
