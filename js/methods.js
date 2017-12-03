@@ -80,7 +80,7 @@ function downloadMethod(data) {
     + "<span><b>Download Size:</b> " + data.download.size + "</span>"
     + "</div>"
     + "<div class=\"expand\" onclick=\"document.getElementById(\'downloadContent" + data.download.url + "\').classList.add(\'active\');\">"
-    + "<hr><div class=\"stat\"><i class=\"material-icons\">info</i><span>DOWNLOAD INFO</span></div>"
+    + "<hr><div class=\"stat\"><i class=\"material-icons\">info</i><span>APK INFO</span></div>"
     + "</div>"
     + "</div>";
 }
