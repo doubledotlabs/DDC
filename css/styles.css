@@ -610,37 +610,37 @@ a.indented {
 }
 
 .row > *:nth-child(2) {
-	animation-delay: 0.1s;
+	animation-delay: 0.15s;
 }
 .row > *:nth-child(3) {
-	animation-delay: 0.2s;
+	animation-delay: 0.24s;
 }
 .row > *:nth-child(4) {
 	animation-delay: 0.3s;
 }
 .row > *:nth-child(5) {
-	animation-delay: 0.4s;
+	animation-delay: 0.35s;
 }
 .row > *:nth-child(6) {
-	animation-delay: 0.45s;
+	animation-delay: 0.39s;
 }
 .row > *:nth-child(7) {
-	animation-delay: 0.5s;
+	animation-delay: 0.425s;
 }
 .row > *:nth-child(8) {
-	animation-delay: 0.55s;
+	animation-delay: 0.45s;
 }
 .row > *:nth-child(9) {
-	animation-delay: 0.6s;
+	animation-delay: 0.475s;
 }
 .row > *:nth-child(10) {
-	animation-delay: 0.65s;
+	animation-delay: 0.5s;
 }
 .row > *:nth-child(11) {
-	animation-delay: 0.7s;
+	animation-delay: 0.52s;
 }
 .row > *:nth-child(n+12) {
-	animation-delay: 0.75s;
+	animation-delay: 0.54s;
 }
 
 .chip {
