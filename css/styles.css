@@ -498,7 +498,6 @@ a.indented {
 .userinfo {
 	text-align: center;
 	padding: 2em 0;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .userinfo > img {
@@ -530,7 +529,13 @@ a.indented {
 .row {
 	overflow-y: hidden;
 	overflow-x: auto;
+	overflow-x: -moz-scrollbars-none;
+	-ms-overflow-style: none;
 	white-space: nowrap;
+}
+
+.row::-webkit-scrollbar {
+	display: none;
 }
 
 .grid {
@@ -562,42 +567,65 @@ a.indented {
 	margin: 0 -2em;
 }
 
-.row>* {
+.row > * {
 	display: inline-block;
 	position: relative;
 }
 
-.row>*:nth-child(2) {
+.row > *,
+.slick-track > * {
+	opacity: 0;
+
+	animation-name: fadeIn;
+	animation-duration: .3s;
+	animation-timing-function: ease-out;
+	animation-fill-mode: forwards;
+}
+
+.row > .fadeoverlay {
+	display: none;
+	animation: none;
+	opacity: 1;
+	position: absolute;
+	pointer-events: none;
+	width: calc(50vw - 300px);
+	top: 0.5em;
+	bottom: 0.5em;
+	right: 0;
+	z-index: 100;
+}
+
+.row > *:nth-child(2) {
 	animation-delay: 0.1s;
 }
-.row>*:nth-child(3) {
+.row > *:nth-child(3) {
 	animation-delay: 0.2s;
 }
-.row>*:nth-child(4) {
+.row > *:nth-child(4) {
 	animation-delay: 0.3s;
 }
-.row>*:nth-child(5) {
+.row > *:nth-child(5) {
 	animation-delay: 0.4s;
 }
-.row>*:nth-child(6) {
+.row > *:nth-child(6) {
 	animation-delay: 0.45s;
 }
-.row>*:nth-child(7) {
+.row > *:nth-child(7) {
 	animation-delay: 0.5s;
 }
-.row>*:nth-child(8) {
+.row > *:nth-child(8) {
 	animation-delay: 0.55s;
 }
-.row>*:nth-child(9) {
+.row > *:nth-child(9) {
 	animation-delay: 0.6s;
 }
-.row>*:nth-child(10) {
+.row > *:nth-child(10) {
 	animation-delay: 0.65s;
 }
-.row>*:nth-child(11) {
+.row > *:nth-child(11) {
 	animation-delay: 0.7s;
 }
-.row>*:nth-child(n+12) {
+.row > *:nth-child(n+12) {
 	animation-delay: 0.75s;
 }
 
@@ -621,7 +649,6 @@ a.indented {
 }
 
 .largecard, .smallcard, .tinycard {
-	opacity: 0;
 	background-color: #FFF;
 	cursor: pointer;
 
@@ -629,11 +656,6 @@ a.indented {
 	-o-transition: box-shadow .25s;
 	-webkit-transition: box-shadow .25s;
 	transition: box-shadow .25s;
-
-	animation-name: fadeIn;
-	animation-duration: .3s;
-	animation-timing-function: ease-out;
-	animation-fill-mode: forwards;
 }
 
 .smallcard, .tinycard {
@@ -643,9 +665,9 @@ a.indented {
 .largecard {
 	width: 100%;
 	height: 250px;
+	transform: scale(0.5);
 
 	animation-name: fadeScaleIn;
-	transform: scale(0.5);
 }
 
 .smallcard {
@@ -711,17 +733,17 @@ a.indented {
 	color: black;
 }
 
-.row>.rowinfo {
+.row > .rowinfo {
 	color: inherit !important;
-	max-width: calc(100vw - 2em);
+	max-width: calc(100vw - 6em);
 	margin-right: 1em;
 }
 
-.category>.rowinfo {
+.category > .rowinfo {
 	width: 300px;
 }
 
-.row>.rowinfo * {
+.row > .rowinfo * {
 	color: inherit !important;
 	margin: 0;
 	margin-top: 0.2em;
@@ -729,7 +751,7 @@ a.indented {
 	white-space: pre-wrap;
 }
 
-.row>.rowinfo button {
+.row > .rowinfo button {
 	margin-top: 1em;
 }
 
@@ -767,7 +789,6 @@ a.indented {
 
 	.row {
 		padding: 0 1em;
-		overflow: hidden;
 	}
 
 	.grid {
@@ -821,6 +842,14 @@ a.indented {
 }
 
 @media (min-width: 1000px) {
+	.row {
+		overflow: hidden;
+	}
+
+	.row > .fadeoverlay {
+		display: block;
+	}
+
 	.dialog > div {
 		width: 60vw;
 	}

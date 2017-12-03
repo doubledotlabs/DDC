@@ -94,7 +94,7 @@ function rowListMethod(category, apps, method) {
 		html += method(apps[i]);
 	}
 
-	return html + "<div style=\"position: absolute; pointer-events: none; width: calc(50vw - 300px); top: 0.5em; bottom: 0.5em; right: 0; z-index: 100; background: linear-gradient(to right, transparent, "
+	return html + "<div class=\"fadeoverlay\" style=\"background: linear-gradient(to right, transparent, "
     + (category.shade ? category.shade : (category.background && category.background != "transparent" ? category.background : "#FFF")) + ");\"></div></div>";
 }
 
