@@ -26,6 +26,14 @@ function chipsMethod(data) {
   return "<p class=\"chip\"" + (data.id ? " onclick=\"setPage(\'page=category&id=" + data.id + "\');\"" : "") + ">" + data.name + "</p>";
 }
 
+function linksMethod(link) {
+  var icon = "link";
+  if (link.type == "source")
+    icon = "code";
+
+  return "<a class=\"link\" href=\"" + link.url + "\"><i class=\"material-icons\">" + icon + "</i>" + link.name.toUpperCase() + "</a>";
+}
+
 function reviewMethod(data) {
   return "<div class=\"review\"><div class=\"reviewinfo\" onclick=\"setPage(\'page=user&id=" + data.user.id + "\')\"><img src=\"" + data.user.image + "\"><div><b>" + data.user.name + "</b><br>"
     + ratingMethod(data.rating) + "</div></div>"

@@ -58,6 +58,22 @@ var apps = [
       "name": "James Fenn",
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
+    "links": [
+      {
+        "name": "GitHub",
+        "type": "source",
+        "url": "https://github.com/TheAndroidMaster/Status"
+      },
+      {
+        "name": "Google Play",
+        "url": ""
+      },
+      {
+        "name": "Website",
+        "type": "website",
+        "url": "https://theandroidmaster.github.io/apps/status/"
+      }
+    ],
     "rating": 3.9,
     "ratings": 8273,
     "downloads": 120562,
@@ -219,6 +235,13 @@ var apps = [
       "name": "James Fenn",
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
+    "links": [
+      {
+        "name": "GitHub",
+        "type": "source",
+        "url": "https://github.com/TheAndroidMaster/Metronome-Android"
+      }
+    ],
     "rating": 4.8,
     "ratings": 4985,
     "downloads": 5982,

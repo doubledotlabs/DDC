@@ -138,6 +138,10 @@ img.appicon {
 	animation-delay: .2s;
 }
 
+.appnameinfo > .row {
+	padding: 0 !important;
+}
+
 img.card {
 	height: 400px;
 	width: auto;
@@ -220,6 +224,10 @@ a {
 	color: #2962FF;
 	text-decoration: none;
 	cursor: pointer;
+}
+
+a.link {
+	margin-right: 2em;
 }
 
 p > a {
@@ -894,7 +902,7 @@ a.indented {
 
 	.appinfo {
 		display: flex;
-		margin-bottom: 0;
+		margin-bottom: 1em;
 	}
 
 	.grid > * {
