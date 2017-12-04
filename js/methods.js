@@ -30,6 +30,22 @@ function linksMethod(link) {
   var icon = "link";
   if (link.type == "source")
     icon = "code";
+  else if (link.type == "website")
+    icon = "public";
+  else if (link.type == "donation")
+    icon = "attach_money";
+  else if (link.type == "email")
+    icon = "email";
+  else if (link.type == "phone")
+    icon = "phone";
+  else if (link.type == "message")
+    icon = "message";
+  else if (link.type == "forum")
+    icon = "group_work";
+  else if (link.type == "privacy_policy")
+    icon = "visibility";
+  else if (link.type == "tos")
+    icon = "gavel";
 
   return "<a class=\"link\" href=\"" + link.url + "\"><i class=\"material-icons\">" + icon + "</i>" + link.name.toUpperCase() + "</a>";
 }

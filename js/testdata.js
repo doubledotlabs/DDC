@@ -72,6 +72,11 @@ var apps = [
         "name": "Website",
         "type": "website",
         "url": "https://theandroidmaster.github.io/apps/status/"
+      },
+      {
+        "name": "Privacy Policy",
+        "type": "privacy_policy",
+        "url": "https://theandroidmaster.github.io/policies/?status"
       }
     ],
     "rating": 3.9,
@@ -244,6 +249,15 @@ var apps = [
         "name": "GitHub",
         "type": "source",
         "url": "https://github.com/TheAndroidMaster/Metronome-Android"
+      },
+      {
+        "name": "Google Play",
+        "url": ""
+      },
+      {
+        "name": "Website",
+        "type": "website",
+        "url": "https://theandroidmaster.github.io/apps/status/"
       }
     ],
     "rating": 4.8,
@@ -682,11 +696,22 @@ var users = [
       },
       {
         "name": "Website",
+        "type": "website",
         "url": "https://theandroidmaster.github.io/"
       },
       {
         "name": "Google Play",
         "url": ""
+      },
+      {
+        "name": "Donate",
+        "type": "donation",
+        "url": "https://play.google.com/store/apps/details?id=james.donate"
+      },
+      {
+        "name": "Twitter DM",
+        "type": "message",
+        "url": "https://twitter.com/IDontLikePHP"
       }
     ],
     "apps": [
