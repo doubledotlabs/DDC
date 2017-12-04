@@ -326,12 +326,20 @@ a.indented {
 
 .rating > span,
 .rating > span:before {
-	color: rgba(0, 0, 0, 0.5);
-
 	-moz-transition: color .25s;
 	-o-transition: color .25s;
 	-webkit-transition: color .25s;
 	transition: color .25s;
+}
+
+.rating > span {
+	color: rgba(0, 0, 0, 0.2);
+}
+
+.rating > span:before {
+	content: "\2605";
+  position: absolute;
+	color: transparent;
 }
 
 .rating.active > span:hover:before,
@@ -340,8 +348,7 @@ a.indented {
 .rating:not(:hover) > span.selected ~ span:before,
 .rating:not(.active) > span.selected:before,
 .rating:not(.active) > span.selected ~ span:before {
-  content: "\2605";
-  position: absolute;
+	color: inherit;
 }
 
 .rating.active > span:hover:before,

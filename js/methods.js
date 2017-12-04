@@ -62,8 +62,8 @@ function ratingMethod(rating, color) {
   var html = "<span class=\"rating\" style=\"color: " + (color ? color : getRatingColor(rating)) + "\">"
   for (var i = 5; i > 0; i--) {
     if (Math.round(rating) == i)
-      html += "<span class=\"selected\">&#9734;</span>";
-    else html += "<span>&#9734;</span>";
+      html += "<span class=\"selected\">&#9733;</span>";
+    else html += "<span>&#9733;</span>";
   }
   return html + "</span>";
 }
