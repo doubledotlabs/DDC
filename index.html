@@ -79,6 +79,7 @@
 		}
 
 		#signin, #profile {
+			display: block;
 			position: absolute;
 			padding: 0.4em 0.8em;
 			top: 50%;
@@ -90,6 +91,27 @@
 			-o-transition: background-color .25s;
 			-webkit-transition: background-color .25s;
 			transition: background-color .25s;
+		}
+
+		#profile {
+			display: flex;
+			align-items: center;
+		}
+
+		#profilePicture {
+			width: 3em;
+			height: 3em;
+			border-radius: 1.5em;
+			border: 1px solid #000;
+		}
+
+		#profileName {
+			margin-right: 1em;
+			font-size: 1.2em;
+		}
+
+		#profileEmail {
+			font-size: 0.9em;
 		}
 
 		#search {
@@ -125,7 +147,10 @@
 			SIGN IN
 		</button>
 		<span id="profile" style="display: none;">
-			<span id="profileName"></span>
+			<div style="margin-right: 1em;">
+				<span id="profileName"></span><br>
+				<span id="profileEmail"></span>
+			</div>
 			<img id="profilePicture">
 		</span>
 	</header>
@@ -147,6 +172,7 @@
 		var signInElement = document.getElementById("signin");
 		var profileElement = document.getElementById("profile");
 		var profileNameElement = document.getElementById("profileName");
+		var profileEmailElement = document.getElementById("profileEmail");
 		var profilePictureElement = document.getElementById("profilePicture");
 
 		function getPage() {
@@ -660,13 +686,14 @@
 			firebase.auth().onAuthStateChanged(function(user) {
 				if (user) {
 					signInElement.style.display = "none";
-					profileElement.style.display = "block";
+					profileElement.style.display = null;
 
 					profileNameElement.innerHTML = user.displayName;
+					profileEmailElement.innerHTML = user.email;
 					profilePictureElement.src = user.photoURL;
 				} else {
 					profileElement.style.display = "none";
-					signInElement.style.display = "block";
+					signInElement.style.display = null;
 				}
 			}, function(error) {
 				console.log(error);
