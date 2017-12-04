@@ -405,7 +405,7 @@
 					var download = release.downloads[i2];
 
 					var config = download.config ? download.config : "phone";
-					if (!configurations.indexOf(config) >= 0)
+					if (configurations.indexOf(config) == -1)
 						configurations.push(config);
 
 					var sdk = null;
@@ -436,7 +436,7 @@
 						sdks.push(sdk);
 
 					var arch = download.arch ? download.arch : "all";
-					if (!architectures.indexOf(arch) >= 0)
+					if (architectures.indexOf(arch) == -1)
 						architectures.push(arch);
 
 					var dpi = null;
