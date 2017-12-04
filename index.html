@@ -30,6 +30,22 @@
   <meta name="apple-mobile-web-app-title" content="DDStore">
   <!-- <link rel="apple-touch-icon-precomposed" href="/images/favicon-152.png"> -->
 
+	<!-- firebase stuff -->
+	<script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+	<script>
+  	var config = {
+    	apiKey: "AIzaSyD4i89pKORT3k0z60zgMB5O7VIDG12BwzE",
+    	authDomain: "ddstore-87442.firebaseapp.com",
+    	databaseURL: "https://ddstore-87442.firebaseio.com",
+    	projectId: "ddstore-87442",
+    	storageBucket: "ddstore-87442.appspot.com",
+    	messagingSenderId: "292878095265"
+  	};
+  	firebase.initializeApp(config);
+	</script>
+	<script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" rel="stylesheet">
@@ -115,8 +131,11 @@
 	</header>
 	<main id="main"></main>
 
+	<!-- jquery -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+	<!-- slick -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
 	<script type="text/javascript" src="js/testdata.js"></script>
@@ -329,6 +348,7 @@
 			} else if (args.page == "signin") {
 				clearElement(main);
 				main.appendChild(createElement("<div style=\"padding: calc(5vw + 1em);\">"
+					+ "<div id=\"auth-container\"></div>"
 					+ "<h2>Open-Source Only</h2>"
 					+ "<p>To encourage openness and prevent the spread of malware and adware through devices, our app store only contains open source projects. "
 					+ "All apps are reviewed by real humans after submission, and their content is verified. Benefits to developers: free resource usage analysis "
@@ -349,6 +369,24 @@
 					+ "That's why we intend to make all our money through donations, advertisements, and paid promotions. As the project expands, we may implement our "
 					+ "own method of donating to the developers of apps we host that we take a percentage of, but that will come later. Much, much later.</p>"
 					+ "</div>"));
+
+      	// Initialize the FirebaseUI Widget using Firebase.
+      	var ui = new firebaseui.auth.AuthUI(firebase.auth());
+      	// The start method will wait until the DOM is loaded.
+      	ui.start('#auth-container', {
+        	signInSuccessUrl: location.href,
+        	signInOptions: [
+          	// Leave the lines as is for the providers you want to offer your users.
+          	firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+          	firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+          	firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+          	firebase.auth.GithubAuthProvider.PROVIDER_ID,
+          	firebase.auth.EmailAuthProvider.PROVIDER_ID,
+          	firebase.auth.PhoneAuthProvider.PROVIDER_ID
+        	],
+        	// Terms of service url.
+        	tosUrl: 'https://doubledotlabs.github.io/tos/?ddstore'
+      	});
 			} else if (args.page == "user") {
 				clearElement(main);
 
