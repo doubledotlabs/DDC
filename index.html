@@ -276,7 +276,7 @@
 						+ "</div></div>"));
 
 					var onRatingSelect = function(e) {
-						if (e.target.className && e.target.className.includes("selected")) {
+						if (e.target.className && e.target.className.indexOf("selected") >= 0) {
 							e.target.className = null;
 						} else {
 							var ratingElement = document.getElementById("ratingSelect");
@@ -405,7 +405,7 @@
 					var download = release.downloads[i2];
 
 					var config = download.config ? download.config : "phone";
-					if (!configurations.includes(config))
+					if (!configurations.indexOf(config) >= 0)
 						configurations.push(config);
 
 					var sdk = null;
@@ -436,7 +436,7 @@
 						sdks.push(sdk);
 
 					var arch = download.arch ? download.arch : "all";
-					if (!architectures.includes(arch))
+					if (!architectures.indexOf(arch) >= 0)
 						architectures.push(arch);
 
 					var dpi = null;
