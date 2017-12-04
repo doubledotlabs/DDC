@@ -144,6 +144,10 @@
 	<script type="text/javascript" src="js/content.js"></script>
 	<script>
 		var main = document.getElementById("main");
+		var signInElement = document.getElementById("siginin");
+		var profileElement = document.getElementById("profile");
+		var profileNameElement = document.getElementById("profileName");
+		var profilePictureElement = document.getElementById("profilePicture");
 
 		function getPage() {
     	if (window.location.search)
@@ -651,6 +655,23 @@
 			setPage(getPage(), true);
 			console.log("h");
 		}
+
+		window.addEventListener("load", function() {
+			firebase.auth().onAuthStateChanged(function(user) {
+				if (user) {
+					signInElement.style.display = "none";
+					profileElement.style.display = "block";
+
+					profileNameElement.innerHTML = user.displayName;
+					profilePictureElement.src = user.photoURL;
+				} else {
+					profileElement.style.display = "none";
+					signInElement.style.display = "block";
+				}
+			}, function(error) {
+				console.log(error);
+			});
+		});
 	</script>
 </body>
 </html>
