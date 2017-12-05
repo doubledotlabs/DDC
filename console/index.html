@@ -223,6 +223,7 @@
 		</div>
 	</main>
 
+	<script type="text/javascript" src="../js/utils.js"></script>
 	<script>
 		var main = document.getElementById("main");
 		var signInElement = document.getElementById("signin");
@@ -234,15 +235,54 @@
 		var currentUser;
 		var isCurrentUserLoading = true;
 
-		function setPage(page) {
+		function getPage() {
+    	if (window.location.search)
+      	return window.location.search.replace("?", "");
+    	else return "page=home";
+  	}
+
+		function setPage(page, replace) {
 			if (!currentUser)
 				return;
 
+			document.body.style.background = null;
+			main.style.background = null;
+			var shouldScrollTop = true;
+
+			var args = page;
+			if (typeof page == "string") {
+				args = stringToArguments(page);
+			} else page = argumentsToString(args);
+
+			if (!args.page) {
+				args.page = "home";
+				page = "?";
+			}
+
+			if (args.page == "home") {
+				clearElement(main);
+			}
+
+			if (replace)
+				window.history.replaceState({}, "", page ? "?" + page : "?");
+			else {
+				window.history.pushState({}, "", page ? "?" + page : "?");
+				if (shouldScrollTop)
+					window.scrollTo(0, 0);
+			}
+		}
+
+		setPage(getPage(), true);
+
+		window.onpopstate = function() {
+			setPage(getPage(), true);
+			console.log("h");
 		}
 
 		window.addEventListener("load", function() {
 			firebase.auth().onAuthStateChanged(function(user) {
 				currentUser = user;
+				isCurrentUserLoading = false;
 
 				if (user) {
 					signInElement.style.display = "none";
@@ -251,11 +291,15 @@
 					profileNameElement.innerHTML = user.displayName;
 					profileEmailElement.innerHTML = user.email;
 					profilePictureElement.src = user.photoURL;
+
+					if (getPage() == "page=home")
+						setPage("page=home", true);
 				} else {
 					profileElement.style.display = "none";
 					signInElement.style.display = null;
 				}
 			}, function(error) {
+				isCurrentUserLoading = false;
 				console.error("Sign In Error", error);
 				//TODO: 404 page
 			});
