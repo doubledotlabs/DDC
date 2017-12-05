@@ -175,7 +175,7 @@
 </head>
 <body>
 	<header>
-		<div id="logo" onclick="setPage('page=home');"><img src="https://doubledotlabs.github.io/images/logo.svg"><h1>Store</h1></div>
+		<div id="logo" onclick="setPage('page=home');"><img src="https://doubledotlabs.github.io/images/logo.svg"><h1>Console</h1></div>
 		<input id="search" type="text" placeholder="Search for Apps...">
 		<button id="signin" class="outline" onclick="location.href='/?page=signin';">
 			SIGN IN
@@ -235,24 +235,18 @@
 		var currentUser;
 		var isCurrentUserLoading = true;
 
-		function getPage() {
-    	if (window.location.search)
-      	return window.location.search.replace("?", "");
-    	else return "page=home";
-  	}
-
 		function setPage(page, replace) {
-			if (!currentUser)
-				return;
-
 			document.body.style.background = null;
 			main.style.background = null;
 			var shouldScrollTop = true;
 
+			if (!currentUser)
+				return;
+
 			var args = page;
 			if (typeof page == "string") {
-				args = stringToArguments(page);
-			} else page = argumentsToString(args);
+				args = UrlUtils.stringToArguments(page);
+			} else page = UrlUtils.argumentsToString(args);
 
 			if (!args.page) {
 				args.page = "home";
@@ -260,7 +254,7 @@
 			}
 
 			if (args.page == "home") {
-				clearElement(main);
+				ElementUtils.clearElement(main);
 			}
 
 			if (replace)
@@ -272,10 +266,10 @@
 			}
 		}
 
-		setPage(getPage(), true);
+		setPage(UrlUtils.getCurrentArguments(), true);
 
 		window.onpopstate = function() {
-			setPage(getPage(), true);
+			setPage(UrlUtils.getCurrentArguments(), true);
 			console.log("h");
 		}
 
@@ -292,8 +286,7 @@
 					profileEmailElement.innerHTML = user.email;
 					profilePictureElement.src = user.photoURL;
 
-					if (getPage() == "page=home")
-						setPage("page=home", true);
+					setPage(UrlUtils.getCurrentArguments(), true);
 				} else {
 					profileElement.style.display = "none";
 					signInElement.style.display = null;

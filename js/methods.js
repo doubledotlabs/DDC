@@ -8,14 +8,14 @@ function smallCardsMethod(app) {
   return "<div class=\"smallcard\" onclick=\"setPage(\'page=app&package=" + app.package + "\');\">"
     + "<img src=\"" + app.icon + "\">"
     + "<p class=\"info\"><b>" + app.name + "</b><br><small style=\"position: absolute;\">" + app.author.name
-    + "</small><small style=\"float: right;\"><b style=\"color: " + getRatingColor(app.rating) + ";\">" + app.rating + "&nbsp;&#9733;</b></small></p></div>";
+    + "</small><small style=\"float: right;\"><b style=\"color: " + SiteUtils.getRatingColor(app.rating) + ";\">" + app.rating + "&nbsp;&#9733;</b></small></p></div>";
 }
 
 function tinyCardsMethod(app) {
   return "<div class=\"tinycard\" onclick=\"setPage(\'page=app&package=" + app.package + "\');\">"
     + "<img src=\"" + app.icon + "\">"
     + "<p class=\"info\"><b>" + app.name + "</b><br><small style=\"position: absolute;\">" + app.author.name
-    + "</small><small style=\"float: right;\"><b style=\"color: " + getRatingColor(app.rating) + ";\">" + app.rating + "&nbsp;&#9733;</b></small></p></div>";
+    + "</small><small style=\"float: right;\"><b style=\"color: " + SiteUtils.getRatingColor(app.rating) + ";\">" + app.rating + "&nbsp;&#9733;</b></small></p></div>";
 }
 
 function imageCardsMethod(image) {
@@ -59,7 +59,7 @@ function reviewMethod(data) {
 }
 
 function ratingMethod(rating, color) {
-  var html = "<span class=\"rating\" style=\"color: " + (color ? color : getRatingColor(rating)) + "\">"
+  var html = "<span class=\"rating\" style=\"color: " + (color ? color : SiteUtils.getRatingColor(rating)) + "\">"
   for (var i = 5; i > 0; i--) {
     if (Math.round(rating) == i)
       html += "<span class=\"selected\">&#9733;</span>";
@@ -88,8 +88,8 @@ function downloadMethod(data) {
     + "</div>"
     + "<div id=\"downloadContent" + data.download.url + "\" class=\"downloadinfo content\">"
 		+ "<i class=\"expand material-icons\" onclick=\"document.getElementById(\'downloadContent" + data.download.url + "\').classList.remove(\'active\');\">expand_more</i><hr>"
-    + "<span><b>Target SDK:</b> Android " + sdkToVersion(data.download.target) + "</span>"
-    + "<span><b>Required SDK:</b> Android " + sdkToVersion(data.download.min) + (data.download.max ? " - " + sdkToVersion(data.download.max) : "+") + "</span>"
+    + "<span><b>Target SDK:</b> Android " + AndroidUtils.sdkToVersion(data.download.target) + "</span>"
+    + "<span><b>Required SDK:</b> Android " + AndroidUtils.sdkToVersion(data.download.min) + (data.download.max ? " - " + AndroidUtils.sdkToVersion(data.download.max) : "+") + "</span>"
     + (data.download.config ? "<span><b>Configuration:</b> " + data.download.config + "</span>" : "")
 		+ (data.download.arch ? "<span><b>Architecture:</b> " + data.download.arch + "</span>" : "")
 		+ (dpi ? "<span><b>Screen Scale:</b> " + dpi + "</span>" : "")
