@@ -210,6 +210,7 @@
 		var profilePictureElement = document.getElementById("profilePicture");
 
 		var currentUser;
+		var firebaseUI;
 
 		function getPage() {
     	if (window.location.search)
@@ -218,6 +219,11 @@
   	}
 
 		function setPage(page, replace) {
+			if (firebaseUI) {
+				firebaseUI.delete();
+				firebaseUI = null;
+			}
+
 			document.body.style.background = null;
 			main.style.background = null;
 			var shouldScrollTop = true;
@@ -441,7 +447,8 @@
 					+ "own method of donating to the developers of apps we host that we take a percentage of, but that will come later. Much, much later.</p>"
 					+ "</div>"));
 
-      	new firebaseui.auth.AuthUI(firebase.auth()).start('#auth-container', {
+				firebaseUI = new firebaseui.auth.AuthUI(firebase.auth());
+      	firebaseUI.start('#auth-container', {
         	signInSuccessUrl: "javascript:setPage(\'page=home\');",
         	signInOptions: [
           	firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -497,9 +504,6 @@
 				clearElement(main);
 				main.appendChild(createElement("<div class=\"indented\"><h1>Error 404</h1><p>Sorry, we couldn\'t find what you\'re looking for.</p><button class=\"outline\" onclick=\"window.history.back();\">GO BACK</button></div>"));
 			}
-
-			console.log(args);
-			console.log(page);
 
 		  if (replace)
 				window.history.replaceState({}, "", page ? "?" + page : "?");
