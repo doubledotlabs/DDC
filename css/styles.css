@@ -561,8 +561,11 @@ a.indented {
 
 .userinfo > span {
 	display: block;
-	font-size: 2em;
 	margin: 0.5em 0;
+}
+
+.userinfo > span:nth-of-type(1) {
+	font-size: 2em;
 }
 
 .userinfo > .overflow {
