@@ -219,11 +219,6 @@
   	}
 
 		function setPage(page, replace) {
-			if (firebaseUI) {
-				firebaseUI.delete();
-				firebaseUI = null;
-			}
-
 			document.body.style.background = null;
 			main.style.background = null;
 			var shouldScrollTop = true;
@@ -447,7 +442,12 @@
 					+ "own method of donating to the developers of apps we host that we take a percentage of, but that will come later. Much, much later.</p>"
 					+ "</div>"));
 
-				firebaseUI = new firebaseui.auth.AuthUI(firebase.auth());
+				if (firebaseUI) {
+					firebaseUI.reset();
+				} else {
+					firebaseUI = new firebaseui.auth.AuthUI(firebase.auth());
+				}
+
       	firebaseUI.start('#auth-container', {
         	signInSuccessUrl: "javascript:setPage(\'page=home\');",
         	signInOptions: [
