@@ -287,7 +287,7 @@
 					main.style.background = "#FFF";
 					main.appendChild(createElement("<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"));
 					main.appendChild(createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\" onclick=\"setPage(\'page=reviews&package=" + app.package + "&write\')\">RATE / REVIEW</button></div>"
-						+ "<div class=\"appnameinfo\"><h1>" + app.name + "</h1><h3><a onclick=\"setPage(\'page=user&id=" + app.author.id + "\');\">" + app.author.name + "</a></h3><p>" + app.summary + "</p>"
+						+ "<div class=\"appnameinfo\"><h1>" + app.name + "</h1><h3><a href=\"javascript:setPage(\'page=user&id=" + app.author.id + "\');\">" + app.author.name + "</a></h3><p>" + app.summary + "</p>"
 						+ overflowListMethod({}, app.links, linksMethod) + "</div></div>"));
 
 					appendAppDownloadSection(app, true, main, args);
@@ -336,7 +336,7 @@
 
 					main.appendChild(createElement("<div class=\"row grid inner-shadow\"><div style=\"text-align: center;\"><h1 style=\"color: " + getRatingColor(app.rating) + ";\">" + app.rating + "</h1><h4>Average Rating</h4></div><div style=\"text-align: center;\"><h1 style=\"color: " + downloadsColor + ";\">" + app.downloads + "</h1><h4>Downloads</h4></div></div>"));
 					main.appendChild(createElement(gridListMethod({"name": "Reviews"}, app.reviews, reviewMethod)));
-					main.appendChild(createElement("<a class=\"indented\" onclick=\"setPage(\'page=reviews&package=" + app.package + "\')\"><i class=\"material-icons\">open_in_new</i>All Reviews</a><a class=\"indented\" onclick=\"setPage(\'page=reviews&package=" + app.package + "&write\');\"><i class=\"material-icons\">rate_review</i>Write a Review</a>"));
+					main.appendChild(createElement("<a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "\');\"><i class=\"material-icons\">open_in_new</i>All Reviews</a><a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "&write\');\"><i class=\"material-icons\">rate_review</i>Write a Review</a>"));
 					main.appendChild(createElement("<div class=\"inner-shadow\">" + rowListMethod({
 						"name": "Related<br>Apps",
 						"id": "similar/" + app.package,
@@ -347,6 +347,11 @@
 				});
 			} else if (args.page == "reviews") {
 				if (args.write) {
+					if (!currentUser) {
+						setPage("page=signin");
+						return;
+					}
+
 					main.appendChild(createElement("<div class=\"dialog\"><div>"
 						+ "<h2 style=\"margin: 0; margin-bottom: 0.5em;\">Rate / Review</h2>"
 						+ "<div style=\"text-align: center;\">"
@@ -355,8 +360,8 @@
 						+ "<div class=\"input\" contentEditable=\"true\" placeholder=\"Write a review...\"></div>"
 						+ "<small>Reviews should be between 50 and 500 characters.</small>"
 						+ "<div>"
-						+ "<a id=\"reviewSubmit\" style=\"float: right;\" onclick=\"window.history.back();\">SUBMIT</a>"
-						+ "<a style=\"float: right; margin-right: 1em;\" onclick=\"window.history.back();\">CANCEL</a>"
+						+ "<a id=\"reviewSubmit\" style=\"float: right;\" href=\"javascript:window.history.back();\">SUBMIT</a>"
+						+ "<a style=\"float: right; margin-right: 1em;\" href=\"javascript:window.history.back();\">CANCEL</a>"
 						+ "</div>"
 						+ "</div></div>"));
 
@@ -388,7 +393,7 @@
 
 					getReviews(args.package, function(reviews) {
 						main.appendChild(createElement("<div class=\"single\">" + gridListMethod({"name": "Reviews"}, reviews, reviewMethod) + "</div>"));
-						main.appendChild(createElement("<hr><a style=\"display: block; text-align: center; padding: 0.5em 0;\" onclick=\"setPage(\'page=reviews&package=" + args.package + "&write\');\"><i class=\"material-icons\">rate_review</i>Write a Review</a><br>"));
+						main.appendChild(createElement("<hr><a style=\"display: block; text-align: center; padding: 0.5em 0;\" href=\"javascript:setPage(\'page=reviews&package=" + args.package + "&write\');\"><i class=\"material-icons\">rate_review</i>Write a Review</a><br>"));
 					});
 				}
 			} else if (args.page == "releases") {
@@ -702,7 +707,7 @@
 
 				if (shouldShorten && items.length > 4) {
 					releasesElement.appendChild(createElement(nothingListMethod({}, items.slice(0, 4), downloadMethod)));
-					releasesElement.appendChild(createElement("<a style=\"width: 100%\" onclick=\"setPage(\'page=releases&package=" + app.package + "&config=" + config + "&sdk=" + sdk + "&arch=" + arch + "&dpi=" + dpi + "\');\"><i class=\"material-icons\">open_in_new</i>MORE RELEASES</a>"));
+					releasesElement.appendChild(createElement("<a style=\"width: 100%\" href=\"javascript:setPage(\'page=releases&package=" + app.package + "&config=" + config + "&sdk=" + sdk + "&arch=" + arch + "&dpi=" + dpi + "\');\"><i class=\"material-icons\">open_in_new</i>MORE RELEASES</a>"));
 				} else releasesElement.appendChild(createElement(nothingListMethod({}, items, downloadMethod)));
 
 				if (args) {

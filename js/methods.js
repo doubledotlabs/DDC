@@ -53,8 +53,8 @@ function linksMethod(link) {
 function reviewMethod(data) {
   return "<div class=\"review\"><div class=\"reviewinfo\" onclick=\"setPage(\'page=user&id=" + data.user.id + "\')\"><img src=\"" + data.user.image + "\"><div><b>" + data.user.name + "</b><br>"
     + ratingMethod(data.rating) + "</div></div>"
-    + "<p><small>Reviewed " + (data.app ? "<a onclick=\"setPage(\'page=app&package=" + data.app.package + "\');\">" + data.app.name + "</a> " : "") + "on " + data.date + "</small></p>"
-    + "<p>" + (data.review ? data.review + "</p>" : data.summary + "</p><a onclick=\"setPage(\'page=review&id=" + data.id + "\')\">Read More</a>")
+    + "<p><small>Reviewed " + (data.app ? "<a href=\"javascript:setPage(\'page=app&package=" + data.app.package + "\');\">" + data.app.name + "</a> " : "") + "on " + data.date + "</small></p>"
+    + "<p>" + (data.review ? data.review + "</p>" : data.summary + "</p><a href=\"javascript:setPage(\'page=review&id=" + data.id + "\')\">Read More</a>")
     + "</div>"
 }
 
