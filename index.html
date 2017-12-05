@@ -180,7 +180,7 @@
 		<button id="signin" class="outline" onclick="setPage('page=signin');">
 			SIGN IN
 		</button>
-		<span id="profile" style="display: none;">
+		<span id="profile" style="display: none;" onclick="setPage('page=user');">
 			<div id="profileNames">
 				<span id="profileName"></span><br>
 				<span id="profileEmail"></span>
@@ -208,6 +208,8 @@
 		var profileNameElement = document.getElementById("profileName");
 		var profileEmailElement = document.getElementById("profileEmail");
 		var profilePictureElement = document.getElementById("profilePicture");
+
+		var currentUser;
 
 		function getPage() {
     	if (window.location.search)
@@ -434,23 +436,27 @@
 					+ "own method of donating to the developers of apps we host that we take a percentage of, but that will come later. Much, much later.</p>"
 					+ "</div>"));
 
-      	// Initialize the FirebaseUI Widget using Firebase.
-      	var ui = new firebaseui.auth.AuthUI(firebase.auth());
-      	// The start method will wait until the DOM is loaded.
-      	ui.start('#auth-container', {
+      	new firebaseui.auth.AuthUI(firebase.auth()).start('#auth-container', {
         	signInSuccessUrl: "javascript:setPage(\'page=home\');",
         	signInOptions: [
-          	// Leave the lines as is for the providers you want to offer your users.
           	firebase.auth.GoogleAuthProvider.PROVIDER_ID,
           	firebase.auth.TwitterAuthProvider.PROVIDER_ID,
           	firebase.auth.GithubAuthProvider.PROVIDER_ID,
           	firebase.auth.EmailAuthProvider.PROVIDER_ID
         	],
-        	// Terms of service url.
         	tosUrl: 'https://doubledotlabs.github.io/tos/?ddstore'
       	});
 			} else if (args.page == "user") {
 				clearElement(main);
+
+				if (!args.id) {
+					if (currentUser)
+						args.id = currentUser.email;
+					else {
+						setPage("page=404", true);
+						return;
+					}
+				}
 
 				getUser(args.id, function(user) {
 					main.appendChild(createElement("<div class=\"userinfo\">"
@@ -718,6 +724,8 @@
 
 		window.addEventListener("load", function() {
 			firebase.auth().onAuthStateChanged(function(user) {
+				currentUser = user;
+
 				if (user) {
 					signInElement.style.display = "none";
 					profileElement.style.display = null;
