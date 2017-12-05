@@ -107,6 +107,25 @@ div.header {
 	animation-fill-mode: forwards;
 }
 
+.firebaseui-page-provider-sign-in {
+	max-width: 100%;
+}
+
+.firebaseui-page-provider-sign-in .firebaseui-card-content {
+	margin: 0 auto;
+}
+
+.firebaseui-page-provider-sign-in .firebaseui-idp-list {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.firebaseui-page-provider-sign-in .firebaseui-idp-list > .firebaseui-list-item {
+	margin: 1em;
+}
+
 .appinfo {
 	transform: translateY(-6em);
 	margin-bottom: -6em;
