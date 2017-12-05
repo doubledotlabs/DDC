@@ -445,18 +445,16 @@
 							+ (user.links && user.links.length > 0 ? ListMethods.overflow({}, user.links, linksMethod) : "")
 							+ "</div>"));
 
-						if (user.apps) {
+						if (user.apps && user.apps.length > 0) {
 							main.appendChild(ElementUtils.createElement("<hr>"
 								+ "<h1 class=\"indented\">Apps</h1>"
 							  + ListMethods.overflow({}, apps, AppMethods.tinyCard)));
 						}
 
-						if (user.reviews) {
-							getReviews("", function(reviews) {
-								main.appendChild(ElementUtils.createElement("<hr>"
-									+ "<h1 class=\"indented\">Reviews</h1>"
-								  + ListMethods.grid({}, reviews, ReviewMethods.normal)));
-							});
+						if (user.reviews && user.reviews.length > 0) {
+							main.appendChild(ElementUtils.createElement("<hr>"
+								+ "<h1 class=\"indented\">Reviews</h1>"
+								+ ListMethods.grid({}, user.reviews, ReviewMethods.normal)));
 						}
 					});
 				} else {
@@ -470,6 +468,32 @@
 							+ "<a class=\"link\" href=\"javascript:signOut();\"><i class=\"material-icons\">exit_to_app</i>SIGN OUT</a>"
 							+ "</div>"
 							+ "</div>"));
+
+						console.log("getting user: 472");
+						getUser(currentUser.uid, function(user) {
+							console.log("found user");
+
+							var html = "";
+							if (user.links && user.links.length > 0) {
+								html += "<hr><div class=\"userinfo\">"
+									+ ListMethods.overflow({}, user.links, linksMethod)
+									+ "</div>";
+							}
+
+							if (user.apps && user.apps.length > 0) {
+								html += "<hr>"
+									+ "<h1 class=\"indented\">Apps</h1>"
+								  + ListMethods.overflow({}, user.apps, AppMethods.tinyCard);
+							}
+
+							if (user.reviews && user.reviews.length > 0) {
+								html += "<hr>"
+									+ "<h1 class=\"indented\">Reviews</h1>"
+									+ ListMethods.grid({}, user.reviews, ReviewMethods.normal);
+							}
+
+							main.appendChild(ElementUtils.createElement(html));
+						}, true);
 					} else {
 						setPage("page=404");
 						return;
