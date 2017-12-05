@@ -449,36 +449,44 @@
 			} else if (args.page == "user") {
 				clearElement(main);
 
-				if (!args.id) {
-					if (currentUser)
-						args.id = currentUser.email;
-					else {
+				if (args.id) {
+					getUser(args.id, function(user) {
+						main.appendChild(createElement("<div class=\"userinfo\">"
+							+ "<img class=\"userimage\" src=\"" + user.image + "\">"
+							+ "<span>" + user.name + "</span>"
+							+ (user.links && user.links.length > 0 ? overflowListMethod({}, user.links, linksMethod) : "")
+							+ "</div>"));
+
+						if (user.apps) {
+							main.appendChild(createElement("<hr>"
+								+ "<h1 class=\"indented\">Apps</h1>"
+							  + overflowListMethod({}, apps, tinyCardsMethod)));
+						}
+
+						if (user.reviews) {
+							getReviews("", function(reviews) {
+								main.appendChild(createElement("<hr>"
+									+ "<h1 class=\"indented\">Reviews</h1>"
+								  + gridListMethod({}, reviews, reviewMethod)));
+							});
+						}
+					});
+				} else {
+					if (currentUser) {
+						main.appendChild(createElement("<div class=\"userinfo\">"
+							+ "<img class=\"userimage\" src=\"" + currentUser.photoURL + "\">"
+							+ "<span>" + currentUser.displayName + "</span>"
+							+ "<span>" + currentUser.email + "</span>"
+							+ "<div class=\"row overflow\">"
+							+ "<a class=\"link\" href=\"javascript:setPage(\'page=user&edit\');\"><i class=\"material-icons\">edit</i>EDIT</a>"
+							+ "<a class=\"link\" href=\"javascript:signOut();\"><i class=\"material-icons\">exit_to_app</i>SIGN OUT</a>"
+							+ "</div>"
+							+ "</div>"));
+					} else {
 						setPage("page=404", true);
 						return;
 					}
 				}
-
-				getUser(args.id, function(user) {
-					main.appendChild(createElement("<div class=\"userinfo\">"
-						+ "<img class=\"userimage\" src=\"" + user.image + "\">"
-						+ "<span>" + user.name + "</span>"
-						+ (user.links && user.links.length > 0 ? overflowListMethod({}, user.links, linksMethod) : "")
-						+ "</div>"));
-
-					if (user.apps) {
-						main.appendChild(createElement("<hr>"
-							+ "<h1 class=\"indented\">Apps</h1>"
-						  + overflowListMethod({}, apps, tinyCardsMethod)));
-					}
-
-					if (user.reviews) {
-						getReviews("", function(reviews) {
-							main.appendChild(createElement("<hr>"
-								+ "<h1 class=\"indented\">Reviews</h1>"
-							  + gridListMethod({}, reviews, reviewMethod)));
-						});
-					}
-				});
 			} else {
 				page = "page=404";
 				clearElement(main);
@@ -738,9 +746,19 @@
 					signInElement.style.display = null;
 				}
 			}, function(error) {
-				console.log(error);
+				console.error("Sign In Error", error);
+				setPage("page=404");
 			});
 		});
+
+		function signOut() {
+			firebase.auth().signOut().then(function() {
+				setPage("page=home");
+			}, function(error) {
+  			console.error('Sign Out Error', error);
+				setPage("page=404");
+			});
+		}
 	</script>
 </body>
 </html>
