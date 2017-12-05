@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+  <meta name="description" content="An app store for open source apps, developed and maintained by Double Dot Labs.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="generator" content="DDStore" />
+	<title>DDStore</title>
+
+	<meta name="theme-color" content="#FFFFFF">
+  <meta name="mobile-web-app-capable" content="yes">
+  <!-- <link rel="manifest" href="manifest.json"> -->
+
+  <meta name="application-name" content="DDStore">
+  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <meta name="msapplication-tooltip" content="DDStore">
+  <!-- <meta name="msapplication-config" content="/ieconfig.xml"> -->
+
+	<!-- <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="icon" sizes="16x16" href="/favicon.ico">
+  <link rel="icon" sizes="24x24" href="/images/favicon-24.ico">
+  <link rel="icon" sizes="32x32" href="/images/favicon-32.ico">
+  <link rel="icon" sizes="48x48" href="/images/favicon-48.ico">
+  <link rel="icon" sizes="64x64" href="/images/favicon-48.ico"> -->
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="white">
+  <meta name="apple-mobile-web-app-title" content="DDStore">
+  <!-- <link rel="apple-touch-icon-precomposed" href="/images/favicon-152.png"> -->
+
+	<!-- firebase stuff -->
+	<script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+	<script>
+  	var config = {
+    	apiKey: "AIzaSyD4i89pKORT3k0z60zgMB5O7VIDG12BwzE",
+    	authDomain: "ddstore-87442.firebaseapp.com",
+    	databaseURL: "https://ddstore-87442.firebaseio.com",
+    	projectId: "ddstore-87442",
+    	storageBucket: "ddstore-87442.appspot.com",
+    	messagingSenderId: "292878095265"
+  	};
+  	firebase.initializeApp(config);
+	</script>
+	<script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" rel="stylesheet">
+  <link href="../css/styles.css" rel="stylesheet">
+
+	<style>
+		#logo {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			white-space: nowrap;
+			cursor: pointer;
+			user-select: none;
+		}
+
+		#logo>* {
+			font-weight: bolder;
+			font-size: 1.75em;
+			margin: 0;
+			display: inline-block;
+			margin-right: 0.5em;
+		}
+
+		#logo>img {
+			height: 1.5em;
+		}
+
+		#logo>h1 {
+			position: absolute;
+		}
+
+		#signin, #profile {
+			display: block;
+			position: absolute;
+			padding: 0.4em 0.8em;
+			top: 50%;
+			right: 1.5em;
+			cursor: pointer;
+			transform: translateY(-50%);
+
+			-moz-transition: background-color .25s;
+			-o-transition: background-color .25s;
+			-webkit-transition: background-color .25s;
+			transition: background-color .25s;
+		}
+
+		#profile {
+			display: flex;
+			align-items: center;
+			max-width: calc(50% - 4em);
+		}
+
+		#profilePicture {
+			width: 3em;
+			height: 3em;
+			border-radius: 1.5em;
+			border: 1px solid #000;
+		}
+
+		#profileNames {
+			display: none;
+			margin-right: 1em;
+			max-width: calc(100% - 4em);
+			text-align: right;
+		}
+
+		#profileName {
+			font-size: 1em;
+		}
+
+		#profileEmail {
+			display: none;
+			font-size: 0.8em;
+		}
+
+		#search {
+			display: none;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 50%;
+			border: none;
+			background-color: rgba(0, 0, 0, 0.075);
+			padding: 1em 1.4em;
+			border-radius: 0.4em;
+		}
+
+		#search::placeholder {
+			color: rgba(0, 0, 0, 0.5);
+			font-weight: bold;
+		}
+
+		@media(min-width: 400px) {
+			#profileNames {
+				display: block;
+			}
+		}
+
+		@media(min-width: 700px) {
+			#profileEmail {
+				display: inline;
+			}
+		}
+
+		@media(min-width: 900px) {
+			#search {
+				display: block;
+			}
+
+			#profile {
+				max-width: calc(25% - 6em);
+			}
+
+			#profileEmail {
+				display: none;
+			}
+		}
+
+		@media(min-width: 1200px) {
+			#profileEmail {
+				display: inline;
+			}
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<div id="logo" onclick="setPage('page=home');"><img src="https://doubledotlabs.github.io/images/logo.svg"><h1>Store</h1></div>
+		<input id="search" type="text" placeholder="Search for Apps...">
+		<button id="signin" class="outline" onclick="location.href='/?page=signin';">
+			SIGN IN
+		</button>
+		<span id="profile" style="display: none;" onclick="location.href='/?page=user';">
+			<div id="profileNames">
+				<span id="profileName"></span><br>
+				<span id="profileEmail"></span>
+			</div>
+			<img id="profilePicture">
+		</span>
+	</header>
+	<main id="main"></main>
+
+	<script>
+		var main = document.getElementById("main");
+		var signInElement = document.getElementById("signin");
+		var profileElement = document.getElementById("profile");
+		var profileNameElement = document.getElementById("profileName");
+		var profileEmailElement = document.getElementById("profileEmail");
+		var profilePictureElement = document.getElementById("profilePicture");
+
+		var currentUser;
+
+		window.addEventListener("load", function() {
+			firebase.auth().onAuthStateChanged(function(user) {
+				currentUser = user;
+
+				if (user) {
+					signInElement.style.display = "none";
+					profileElement.style.display = null;
+
+					profileNameElement.innerHTML = user.displayName;
+					profileEmailElement.innerHTML = user.email;
+					profilePictureElement.src = user.photoURL;
+				} else {
+					profileElement.style.display = "none";
+					signInElement.style.display = null;
+				}
+			}, function(error) {
+				console.error("Sign In Error", error);
+				//TODO: 404 page
+			});
+		});
+	</script>
+</body>
+</html>
