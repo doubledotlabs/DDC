@@ -210,6 +210,7 @@
 		var profilePictureElement = document.getElementById("profilePicture");
 
 		var currentUser;
+		var isCurrentUserLoading = true;
 		var firebaseUI;
 
 		function getPage() {
@@ -495,7 +496,7 @@
 							+ "</div>"
 							+ "</div>"));
 					} else {
-						setPage("page=404", true);
+						setPage("page=404");
 						return;
 					}
 				}
@@ -742,6 +743,7 @@
 		window.addEventListener("load", function() {
 			firebase.auth().onAuthStateChanged(function(user) {
 				currentUser = user;
+				isCurrentUserLoading = false;
 
 				if (user) {
 					signInElement.style.display = "none";
@@ -750,11 +752,15 @@
 					profileNameElement.innerHTML = user.displayName;
 					profileEmailElement.innerHTML = user.email;
 					profilePictureElement.src = user.photoURL;
+
+					if (getPage().indexOf("page=404") >= 0)
+						setPage("page=user", true);
 				} else {
 					profileElement.style.display = "none";
 					signInElement.style.display = null;
 				}
 			}, function(error) {
+				isCurrentUserLoading = false;
 				console.error("Sign In Error", error);
 				setPage("page=404");
 			});
