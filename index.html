@@ -96,6 +96,7 @@
 		#profile {
 			display: flex;
 			align-items: center;
+			max-width: calc(50% - 4em);
 		}
 
 		#profilePicture {
@@ -105,13 +106,19 @@
 			border: 1px solid #000;
 		}
 
+		#profileNames {
+			margin-right: 1em;
+			max-width: calc(100% - 4em);
+		}
+
 		#profileName {
 			margin-right: 1em;
-			font-size: 1.2em;
+			font-size: 1em;
 		}
 
 		#profileEmail {
-			font-size: 0.9em;
+			display: none;
+			font-size: 0.8em;
 		}
 
 		#search {
@@ -132,9 +139,35 @@
 			font-weight: bold;
 		}
 
+		@media(min-width: 400px) {
+			#profileNames {
+				display: block;
+			}
+		}
+
+		@media(min-width: 700px) {
+			#profileEmail {
+				display: inline;
+			}
+		}
+
 		@media(min-width: 900px) {
 			#search {
 				display: block;
+			}
+
+			#profile {
+				max-width: calc(25% - 4em);
+			}
+
+			#profileEmail {
+				display: none;
+			}
+		}
+
+		@media(min-width: 1200px) {
+			#profileEmail {
+				display: inline;
 			}
 		}
 	</style>
@@ -147,7 +180,7 @@
 			SIGN IN
 		</button>
 		<span id="profile" style="display: none;">
-			<div style="margin-right: 1em;">
+			<div id="profileNames">
 				<span id="profileName"></span><br>
 				<span id="profileEmail"></span>
 			</div>
