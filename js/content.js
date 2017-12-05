@@ -1,4 +1,4 @@
-function getCategories(fun) {
+function getCategories(fun, ignore) {
 	for (var i = 0; i < categories.length; i++) {
 		categories[i].apps = apps;
 	}
@@ -6,7 +6,7 @@ function getCategories(fun) {
 	fun(categories);
 }
 
-function getCategory(id, fun) {
+function getCategory(id, fun, ignore) {
 	if (id == "featured") {
 		fun({
 			"apps": apps
@@ -17,7 +17,7 @@ function getCategory(id, fun) {
 				"id": id,
 				"name": "Similar to " + app.name
 			});
-		});
+		}, ignore);
 	} else {
 		for (var i = 0; i < categories.length; i++) {
 			if (categories[i].id == id) {
@@ -26,11 +26,12 @@ function getCategory(id, fun) {
 			}
 		}
 
-		setPage("404", true);
+		if (!ignore)
+			setPage("page=404", true);
 	}
 }
 
-function getApp(id, fun) {
+function getApp(id, fun, ignore) {
 	for (var i = 0; i < categories.length; i++) {
 		if (apps[i].package == id) {
 			fun(apps[i]);
@@ -38,21 +39,18 @@ function getApp(id, fun) {
 		}
 	}
 
-	setPage("404", true);
+	if (!ignore)
+		setPage("page=404", true);
 }
 
-function getUser(id, fun) {
-	for (var i = 0; i < users.length; i++) {
-		if (users[i].id == id) {
-			fun(users[i]);
-			return;
-		}
-	}
-
-	setPage("404", true);
+function getUser(id, fun, ignore) {
+	var user = users[0];
+	user.apps = apps;
+	user.reviews = reviews;
+	fun(user);
 }
 
-function getReviews(id, fun) {
+function getReviews(id, fun, ignore) {
 	var newReviews = [];
 	for (var i = 0; i < reviews.length; i++) {
 		var review = Object.assign({}, reviews[i]);
@@ -64,7 +62,7 @@ function getReviews(id, fun) {
 	fun(newReviews);
 }
 
-function getReview(id, fun) {
+function getReview(id, fun, ignore) {
 	for (var i = 0; i < reviews.length; i++) {
 		if (reviews[i].id == id) {
 			fun(reviews[i]);
@@ -72,5 +70,6 @@ function getReview(id, fun) {
 		}
 	}
 
-	setPage("404", true);
+	if (!ignore)
+		setPage("page=404", true);
 }
