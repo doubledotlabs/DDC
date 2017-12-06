@@ -44,10 +44,12 @@ function getApp(id, fun, ignore) {
 }
 
 function getUser(id, fun, ignore) {
-	var user = users[0];
-	user.apps = apps;
-	user.reviews = reviews;
-	fun(user);
+	getReviews(null, function(reviews) {
+		var user = users[0];
+		user.apps = apps;
+		user.reviews = reviews;
+		fun(user);
+	});
 }
 
 function getReviews(id, fun, ignore) {
