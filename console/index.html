@@ -55,7 +55,13 @@
 	<style>
 		* {
 			--normal-color: #FFF;
+			--normal-color-half: rgba(255, 255, 255, 0.5);
+			--normal-color-fifth: rgba(255, 255, 255, 0.2);
+			--normal-color-tenth: rgba(255, 255, 255, 0.1);
 			--normal-background: rgb(41, 58, 74);
+			--normal-background-half: rgba(41, 58, 74, 0.5);
+			--normal-background-tenth: rgba(41, 58, 74, 0.1);
+			--accent-color: #82B1FF;
 		}
 
 		body {
@@ -155,10 +161,6 @@
 		#search::placeholder {
 			color: rgba(255, 255, 255, 0.5);
 			font-weight: bold;
-		}
-
-		#main > * {
-			color: #FFF;
 		}
 
 		#info {
@@ -320,7 +322,7 @@
 						+ "<div class=\"appnameinfo\"><h1>" + app.name + "</h1><p>" + app.summary + "</p>"
 						+ ListMethods.overflow({}, app.links, linksMethod) + "</div></div>"));
 
-					main.appendChild(ElementUtils.createElement("<div class=\"appdesc\"><p>" + app.description + "</p><a>EDIT DESCRIPTION</a></div>"));
+					main.appendChild(ElementUtils.createElement("<div class=\"appdesc\"><p>" + app.description + "</p><a><i class=\"material-icons\">edit</i>EDIT DESCRIPTION</a></div>"));
 
 					main.appendChild(ElementUtils.createElement(ListMethods.grid({"name": "Reviews"}, app.reviews, ReviewMethods.normal)));
 					main.appendChild(ElementUtils.createElement("<a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "\');\"><i class=\"material-icons\">open_in_new</i>All Reviews</a><br><br><br>"));

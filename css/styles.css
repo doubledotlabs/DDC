@@ -1,6 +1,12 @@
 * {
 	--normal-color: #000;
+	--normal-color-half: rgba(0, 0, 0, 0.5);
+	--normal-color-fifth: rgba(0, 0, 0, 0.2);
+	--normal-color-tenth: rgba(0, 0, 0, 0.1);
 	--normal-background: #FFF;
+	--normal-background-half: rgba(255, 255, 255, 0.5);
+	--normal-background-tenth: rgba(255, 255, 255, 0.1);
+	--accent-color: #2962FF;
 
 	font-family: 'Open Sans', sans-serif;
 	color: var(--normal-color);
@@ -56,7 +62,7 @@ header {
 	padding: 0.4em 2em;
 	height: 5em;
 	z-index: 200;
-	background-color: rgba(255, 255, 255, 0.5);
+	background-color: var(--normal-background-half);
 }
 
 nav>span {
@@ -93,7 +99,7 @@ input, .input, textarea {
 [contentEditable=true]:empty:before{
   content: attr(placeholder);
   display: block;
-	color: rgba(0, 0, 0, 0.5);
+	color: var(--normal-color-half);
 	font-weight: bold;
 }
 
@@ -183,7 +189,7 @@ hr {
 	display: block;
 	height: 1px;
 	border: none;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	border-bottom: 1px solid var(--normal-color-tenth);
 }
 
 .appnameinfo {
@@ -250,14 +256,14 @@ select::-ms-expand {
 }
 
 select.disabled {
-	background-color: rgba(0, 0, 0, 0.1);
+	background-color: var(--normal-color-tenth);
 	box-shadow: none;
-	color: rgba(0, 0, 0, 0.5);
+	color: var(--normal-color-half);
 	pointer-events: none;
 }
 
 a {
-	color: #2962FF;
+	color: var(--accent-color);
 	text-decoration: none;
 	cursor: pointer;
 }
@@ -342,7 +348,7 @@ a.indented {
 }
 
 .dialog > div > .input {
-	border-bottom: 1px solid #2962FF;
+	border-bottom: 1px solid var(--accent-color);
 	padding-bottom: 0.35em;
 }
 
@@ -358,7 +364,7 @@ a.indented {
 	font-size: 2em;
 	margin-bottom: 0.5em;
 	cursor: pointer;
-	color: #2962FF;
+	color: var(--accent-color);
 }
 
 .rating > span,
@@ -370,7 +376,7 @@ a.indented {
 }
 
 .rating > span {
-	color: rgba(0, 0, 0, 0.2);
+	color: var(--normal-color-fifth);
 }
 
 .rating > span:before {
@@ -450,7 +456,7 @@ a.indented {
 .download > .downloadheader > span {
 	font-size: 0.8em;
 	font-weight: bold;
-	color: rgba(0, 0, 0, 0.7);
+	color: var(--normal-color-half);
 }
 
 .download > .downloadheader > .downloadicon {
@@ -486,7 +492,7 @@ a.indented {
 
 .download > .content > .expand {
 	padding-top: 0.4em;
-	border-top: 1px solid rgba(0, 0, 0, 0.1);
+	border-top: 1px solid var(--normal-color-tenth);
 }
 
 .download > .content {
@@ -605,7 +611,7 @@ a.indented {
 
 .dropdown > span {
 	display: block;
-	color: rgba(0, 0, 0, 0.5);
+	color: var(--normal-color-half);
 	font-weight: bold;
 	font-size: 0.8em;
 	margin-bottom: 0.4em;
@@ -732,9 +738,9 @@ a.indented {
 	line-height: 2.5em;
 	border-radius: 1.25em;
 	display: inline-block;
-	background-color: rgba(0, 0, 0, 0.1);
+	background-color: var(--normal-color-tenth);
 	font-weight: bold;
-	color: rgba(0, 0, 0, 0.5);
+	color: var(--normal-color-half);
 	margin: 0.5em 0;
 	margin-right: 1em;
 	cursor: pointer;
@@ -784,7 +790,7 @@ a.indented {
 }
 
 .tinycard:not(:last-child) {
-	border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+	border-bottom: 1px solid var(--normal-color-tenth);
 }
 
 .tinycard>img {
@@ -868,11 +874,11 @@ a.indented {
 	}
 
 	button:hover {
-		background-color: rgba(0, 0, 0, 0.1);
+		background-color: var(--normal-color-tenth);
 	}
 
 	.dropdown > .content > *:hover {
-		background-color: rgba(0, 0, 0, 0.1);
+		background-color: var(--normal-color-tenth);
 	}
 
 	.dialog > div {
@@ -883,12 +889,8 @@ a.indented {
 		background-color: transparent;
 	}
 
-	.category {
-		padding: 0.5em 2em;
-	}
-
 	.chip:hover {
-		background-color: rgba(0, 0, 0, 0.2);
+		background-color: var(--normal-color-fifth);
 	}
 
 	.largecard {
@@ -938,6 +940,10 @@ a.indented {
 	.appinfo ~ .grid,
 	.userinfo ~ .grid {
 		padding: 1em;
+	}
+
+	.category {
+		padding: 0.5em 2em;
 	}
 }
 
