@@ -334,9 +334,10 @@
 							document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
 							main.style.background = "rgb(20, 29, 38)";
 							main.appendChild(ElementUtils.createElement("<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"));
-							main.appendChild(ElementUtils.createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\" onclick=\"setPage(\'page=app&package=" + app.package + "&edit=page\');\">EDIT PAGE</button></div>"
-								+ "<div class=\"appnameinfo\"><h1>" + app.name + "</h1><p>" + app.summary + "</p>"
-								+ ListMethods.overflow({}, app.links, linksMethod) + "</div></div>"));
+							main.appendChild(ElementUtils.createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"></div>"
+								+ "<div class=\"appnameinfo\"><h1><div class=\"input long\" contentEditable=\"true\" placeholder=\"App Name\">" + app.name + "</div></h1>"
+								+ "<div class=\"input long\" contentEditable=\"true\" placeholder=\"Summary\">" + app.summary + "</div>"
+								+ ListMethods.overflow({}, app.links, linksMethod) + "<br><button class=\"outline indented\" style=\"float: right;\">SUBMIT</button></div></div><br>"));
 						});
 					} else if (args.edit == "description") {
 						getApp(args.package, function(app) {
