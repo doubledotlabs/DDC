@@ -53,6 +53,18 @@
   <link href="../css/styles.css" rel="stylesheet">
 
 	<style>
+		body {
+			background-color: rgb(20, 29, 38);
+		}
+
+		header {
+			background-color: rgba(20, 29, 38, 0.5);
+		}
+
+		header * {
+			color: #FFF;
+		}
+
 		#logo {
 			position: absolute;
 			top: 50%;
@@ -130,14 +142,38 @@
 			transform: translate(-50%, -50%);
 			width: 50%;
 			border: none;
-			background-color: rgba(0, 0, 0, 0.075);
+			background-color: rgba(255, 255, 255, 0.075);
 			padding: 1em 1.4em;
 			border-radius: 0.4em;
 		}
 
 		#search::placeholder {
-			color: rgba(0, 0, 0, 0.5);
+			color: rgba(255, 255, 255, 0.5);
 			font-weight: bold;
+		}
+
+		#main > * {
+			color: #FFF;
+		}
+
+		#info {
+			padding: calc(5vw + 1em);
+		}
+
+		#info * {
+			color: #FFF;
+		}
+
+		@media(max-width: 599px) {
+
+			.tinycard:not(:last-child) {
+				border-color: rgba(255, 255, 255, 0.1) !important;
+			}
+
+			.tinycard * {
+				color: #FFF;
+			}
+
 		}
 
 		@media(min-width: 400px) {
@@ -189,7 +225,7 @@
 		</span>
 	</header>
 	<main id="main">
-		<div style="padding: calc(5vw + 1em);">
+		<div id="info">
 			<h2>Open-Source Only</h2>
 			<p>
 				To encourage openness and prevent the spread of malware and adware through devices, our app store only contains open source projects.
@@ -223,7 +259,10 @@
 		</div>
 	</main>
 
+	<script type="text/javascript" src="../js/testdata.js"></script>
 	<script type="text/javascript" src="../js/utils.js"></script>
+	<script type="text/javascript" src="../js/methods.js"></script>
+	<script type="text/javascript" src="../js/content.js"></script>
 	<script>
 		var main = document.getElementById("main");
 		var signInElement = document.getElementById("signin");
@@ -255,6 +294,12 @@
 
 			if (args.page == "home") {
 				ElementUtils.clearElement(main);
+
+				getUser(currentUser.uid, function(user) {
+					main.appendChild(ElementUtils.createElement("<div style=\"padding: 1em\">"
+						+ ListMethods.grid({}, user.apps, AppMethods.consoleTinyCard)
+						+ "</div>"));
+				});
 			}
 
 			if (replace)

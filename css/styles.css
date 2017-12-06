@@ -876,27 +876,6 @@ a.indented {
 		width: 70vw;
 	}
 
-	.grid > * {
-		width: calc(50% - 2em);
-	}
-
-	.grid > .download {
-		width: calc(50% - 4em);
-	}
-
-	.row {
-		padding: 0 1em;
-	}
-
-	.grid {
-		padding: 0;
-	}
-
-	.appinfo ~ .grid,
-	.userinfo ~ .grid {
-		padding: 1em;
-	}
-
 	.overflow {
 		background-color: transparent;
 	}
@@ -935,6 +914,27 @@ a.indented {
 		margin-left: auto;
 		margin-right: auto;
 		width: 60%;
+	}
+
+	.grid > * {
+		width: calc(50% - 2em);
+	}
+
+	.grid > .download {
+		width: calc(50% - 4em);
+	}
+
+	.row {
+		padding: 0 1em;
+	}
+
+	.grid {
+		padding: 0;
+	}
+
+	.appinfo ~ .grid,
+	.userinfo ~ .grid {
+		padding: 1em;
 	}
 }
 
