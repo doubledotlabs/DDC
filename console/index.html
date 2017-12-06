@@ -356,7 +356,8 @@
 							+ "<div class=\"appnameinfo\"><h1>" + app.name + "</h1><p>" + app.summary + "</p>"
 							+ ListMethods.overflow({}, app.links, linksMethod) + "</div></div>"));
 
-						main.appendChild(ElementUtils.createElement(ListMethods.grid({"name": "Version " + app.releases[0].version + ", " + app.releases[0].date}, app.releases[0].downloads, DownloadMethods.console)
+						main.appendChild(ElementUtils.createElement("<h1 class=\"indented\">Current Version: " + app.releases[0].version + "</h1><h3 class=\"indented\">Last updated " + app.releases[0].date + "</h3>"
+						 	+ ListMethods.grid({}, app.releases[0].downloads, DownloadMethods.console)
 							+ "<a class=\"indented\"><i class=\"material-icons\">edit</i>EDIT RELEASES</a>"
 							+ "<a class=\"indented\"><i class=\"material-icons\">add</i>NEW RELEASE</a><br><br><hr>"));
 
