@@ -342,7 +342,7 @@
 					} else if (args.edit == "description") {
 						getApp(args.package, function(app) {
 							main.appendChild(ElementUtils.createElement("<div class=\"inset\"><h1>Edit Description</h1><div class=\"input long\" contentEditable=\"true\" placeholder=\"Enter a description...\">"
-								+ app.description + "</div><button class=\"outline\">SUBMIT</button></div>"));
+								+ app.description + "</div><button class=\"outline\" style=\"float: right;\">SUBMIT</button></div>"));
 						});
 					}
 				} else {
