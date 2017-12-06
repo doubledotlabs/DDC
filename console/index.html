@@ -343,9 +343,12 @@
 						//TODO: edit releases
 					} else if (args.edit == "description") {
 						getApp(args.package, function(app) {
-							main.appendChild(ElementUtils.createElement("<div class=\"inset\"><h1>Edit Description</h1><div class=\"input long\" contentEditable=\"true\" placeholder=\"Enter a description...\">"
+							main.appendChild(ElementUtils.createElement("<div style=\"margin: 2em;\"><h1>Edit Description</h1><div class=\"input long\" contentEditable=\"true\" placeholder=\"Enter a description...\">"
 								+ app.description + "</div><button class=\"outline\" style=\"float: right;\">SUBMIT</button></div>"));
 						});
+					} else {
+						setPage("page=404");
+						return;
 					}
 				} else {
 					getApp(args.package, function(app) {
@@ -356,10 +359,12 @@
 							+ "<div class=\"appnameinfo\"><h1>" + app.name + "</h1><p>" + app.summary + "</p>"
 							+ ListMethods.overflow({}, app.links, linksMethod) + "</div></div>"));
 
-						main.appendChild(ElementUtils.createElement("<h1 class=\"indented\">Current Version: " + app.releases[0].version + "</h1><h3 class=\"indented\">Last updated " + app.releases[0].date + "</h3>"
+						main.appendChild(ElementUtils.createElement("<hr><h1 class=\"indented\">Current Release: " + app.releases[0].version + "</h1><h3 class=\"indented\">Last updated " + app.releases[0].date + "</h3>"
 						 	+ ListMethods.grid({}, app.releases[0].downloads, DownloadMethods.console)
-							+ "<a class=\"indented\"><i class=\"material-icons\">edit</i>EDIT RELEASES</a>"
-							+ "<a class=\"indented\"><i class=\"material-icons\">add</i>NEW RELEASE</a><br><br><hr>"));
+							+ "<a class=\"indented\"><i class=\"material-icons\">open_in_new</i>ALL RELEASES</a>"
+							+ "<a class=\"indented\"><i class=\"material-icons\">add</i>NEW RELEASE</a><br><br><br>"
+							+ "<h3 class=\"indented\">Changelog<a style=\"font-size: 0.855em; font-weight: normal; float: right;\" href=\"javascript:setPage(\'page=release&package=" + args.package + "&version=" + app.releases[0].version + "&edit=changelog\');\"><i class=\"material-icons\">edit</i>EDIT</a></h3>"
+							+ "<div class=\"appdesc\">" + app.releases[0].notes.split("\n").join("<br>") + "</div><hr>"));
 
 						main.appendChild(ElementUtils.createElement("<div class=\"appdesc\"><p>" + app.description + "</p><a class=\"link\" href=\"javascript:setPage(\'page=app&package=" + app.package + "&edit=description\')\"><i class=\"material-icons\">edit</i>EDIT DESCRIPTION</a></div>"));
 
