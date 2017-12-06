@@ -1,6 +1,9 @@
 * {
+	--normal-color: #000;
+	--normal-background: #FFF;
+
 	font-family: 'Open Sans', sans-serif;
-	color: black;
+	color: var(--normal-color);
 }
 
 @keyframes fadeIn {
@@ -38,7 +41,7 @@ body {
 	overflow-x: hidden;
 	margin: 0;
 	padding: 0;
-	background-color: #FFF;
+	background-color: var(--normal-background);
 	opacity: 0;
 
 	animation-name: fadeIn;
@@ -227,7 +230,7 @@ select {
 	padding: 0.4em 0.8em;
 	padding-right: 30px;
 	min-width: 100%;
-	background-color: #FFF;
+	background-color: var(--normal-background);
 	border: none;
 	border-radius: 0.25em;
 	box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.37);
@@ -236,7 +239,7 @@ select {
   -moz-appearance: none;
   appearance: none;
 
-	background: linear-gradient(45deg, transparent 50%, #000 50%), linear-gradient(135deg, #000 50%, transparent 50%);
+	background: linear-gradient(45deg, transparent 50%, var(--normal-color) 50%), linear-gradient(135deg, var(--normal-color) 50%, transparent 50%);
   background-position: calc(100% - 17px) 1em, calc(100% - 12px) 1em;
   background-size: 5px 5px, 5px 5px;
   background-repeat: no-repeat;
@@ -328,7 +331,7 @@ a.indented {
 	width: 80vw;
 	max-height: 80vh;
 	padding: 1.5em;
-	background-color: #FFF;
+	background-color: var(--normal-background);
 	border-radius: 0.25em;
 	box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.37);
 	position: fixed;
@@ -348,7 +351,7 @@ a.indented {
 	cursor: inherit;
 	user-select: none;
 	direction: rtl;
-	color: #000;
+	color: var(--normal-color);
 }
 
 .rating.active {
@@ -423,7 +426,7 @@ a.indented {
 
 .download {
 	position: relative;
-	background-color: #FFF;
+	background-color: var(--normal-background);
 	border-radius: 0.25em;
 	box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.37);
 	padding: 1em;
@@ -495,7 +498,7 @@ a.indented {
 	padding-bottom: 1em;
 	border-bottom-left-radius: 0.25em;
 	border-bottom-right-radius: 0.25em;
-	box-shadow: 0 -2em 2em -1em #FFF;
+	box-shadow: 0 -2em 2em -1em var(--normal-background);
 
 	-moz-transition: height .25s, transform .25s, opacity .25s, background-color .25s;
 	-o-transition: height .25s, transform .25s, opacity .25s, background-color .25s;
@@ -517,7 +520,7 @@ a.indented {
 	transform: translateY(0);
 	opacity: 1;
 	pointer-events: all;
-	background-color: #FFF;
+	background-color: var(--normal-background);
 }
 
 .review {
@@ -536,7 +539,7 @@ a.indented {
 	width: 3em;
 	height: 3em;
 	border-radius: 1.5em;
-	border: 1px solid #000;
+	border: 1px solid var(--normal-color);
 }
 
 .review > .reviewinfo > div {
@@ -574,7 +577,7 @@ a.indented {
 .userinfo > img {
 	width: 10em;
 	height: 10em;
-	border: 1px solid #000;
+	border: 1px solid var(--normal-color);
 	border-radius: 5em;
 }
 
@@ -654,7 +657,7 @@ a.indented {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	background-color: #FFF;
+	background-color: var(--normal-background);
 }
 
 .category > .overflow {
@@ -743,7 +746,7 @@ a.indented {
 }
 
 .largecard, .smallcard, .tinycard {
-	background-color: #FFF;
+	background-color: var(--normal-background);
 	cursor: pointer;
 
 	-moz-transition: box-shadow .25s;
@@ -818,7 +821,7 @@ a.indented {
 }
 
 .smallcard>.info {
-	background-color: #FFF;
+	background-color: var(--normal-background);
 }
 
 .tinycard>.info {
@@ -905,7 +908,7 @@ a.indented {
 		border: none;
 		border-radius: 0.25em;
 		box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.37);
-		background-color: #FFF;
+		background-color: var(--normal-background);
 		margin: 1em;
 	}
 
