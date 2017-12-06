@@ -100,7 +100,7 @@ SiteUtils.getRatingColor = function(rating) {
 		return "#E29D0D";
 	else if (rating < 4)
 		return "#E2BB0D";
-  else if (rating < 5)
+  else if (rating == 4)
     return "#89CE46";
 	else return "#15AF5E";
 }
