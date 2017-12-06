@@ -18,6 +18,13 @@ class AppMethods {
       + "<p class=\"info\"><b>" + app.name + "</b><br><small style=\"position: absolute;\">" + app.author.name
       + "</small><small style=\"float: right;\"><b style=\"color: " + SiteUtils.getRatingColor(app.rating) + ";\">" + app.rating + "&nbsp;&#9733;</b></small></p></div>";
   }
+
+  static consoleTinyCard(app) {
+    return "<div class=\"tinycard\" onclick=\"setPage(\'page=app&package=" + app.package + "\');\">"
+      + "<img src=\"" + app.icon + "\">"
+      + "<p class=\"info\"><b>" + app.name + "</b><br><small style=\"position: absolute;\">" + app.downloads + " downloads"
+      + "</small><small style=\"float: right;\"><b style=\"color: " + SiteUtils.getRatingColor(app.rating) + ";\">" + app.rating + "&nbsp;&#9733;</b></small></p></div>";
+  }
 }
 
 class ImageMethods {

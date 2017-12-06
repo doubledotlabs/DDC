@@ -49,7 +49,7 @@ var categories = [
   }
 ];
 
-//can be queried individually (using the package as an identifier) to get full info, or returned in lists (for categories/search) containing only app name/author, rating, package, summary, header, and icon info
+//can be queried individually (using the package as an identifier) to get full info (first two items), or returned in lists (for categories/search) containing only app name/author, rating, downloads, package name, summary, header, and icon info
 var apps = [
   {
     "name": "Status",
@@ -383,6 +383,7 @@ var apps = [
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
     "rating": 3.9,
+    "downloads": 120562,
     "package": "com.james.status",
     "description": "Status is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/headers/status_bg.png",
@@ -396,6 +397,7 @@ var apps = [
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
     "rating": 4.8,
+    "downloads": 5982,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
@@ -409,6 +411,7 @@ var apps = [
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
     "rating": 3.9,
+    "downloads": 120562,
     "package": "com.james.status",
     "description": "Status is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/headers/status_bg.png",
@@ -422,6 +425,7 @@ var apps = [
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
     "rating": 4.8,
+    "downloads": 5982,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
@@ -435,6 +439,7 @@ var apps = [
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
     "rating": 3.9,
+    "downloads": 120562,
     "package": "com.james.status",
     "description": "Status is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/headers/status_bg.png",
@@ -448,6 +453,7 @@ var apps = [
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
     "rating": 4.8,
+    "downloads": 5982,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
@@ -461,6 +467,7 @@ var apps = [
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
     "rating": 3.9,
+    "downloads": 120562,
     "package": "com.james.status",
     "description": "Status is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://raw.githubusercontent.com/TheAndroidMaster/TheAndroidMaster.github.io/master/images/headers/status_bg.png",
@@ -474,6 +481,7 @@ var apps = [
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
     "rating": 4.8,
+    "downloads": 5982,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
@@ -487,6 +495,7 @@ var apps = [
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
     "rating": 4.8,
+    "downloads": 5982,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
@@ -500,6 +509,7 @@ var apps = [
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
     "rating": 4.8,
+    "downloads": 5982,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
@@ -513,6 +523,7 @@ var apps = [
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
     "rating": 4.8,
+    "downloads": 5982,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
@@ -526,6 +537,7 @@ var apps = [
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
     "rating": 4.8,
+    "downloads": 5982,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
@@ -539,6 +551,7 @@ var apps = [
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
     "rating": 4.8,
+    "downloads": 5982,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
@@ -552,6 +565,7 @@ var apps = [
       "image": "https://avatars3.githubusercontent.com/u/13000407"
     },
     "rating": 4.8,
+    "downloads": 5982,
     "package": "james.metronome",
     "description": "Metronome is a thing that does stuff with things and uses those things to do stuff.",
     "header": "https://theandroidmaster.github.io/images/headers/metronomePremium.png",
