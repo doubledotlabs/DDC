@@ -61,19 +61,21 @@
 			--normal-background: rgb(41, 58, 74);
 			--normal-background-half: rgba(41, 58, 74, 0.5);
 			--normal-background-tenth: rgba(41, 58, 74, 0.1);
+			--dark-background: rgb(20, 29, 38);
+			--dark-background-half: rgba(20, 29, 38, 0.5);
 			--accent-color: #82B1FF;
 		}
 
 		body {
-			background-color: rgb(20, 29, 38);
+			background-color: var(--dark-background);
 		}
 
 		header {
-			background-color: rgba(20, 29, 38, 0.5);
+			background-color: var(--dark-background-half);
 		}
 
 		header * {
-			color: #FFF;
+			color: var(--normal-color);
 		}
 
 		#logo {
@@ -126,7 +128,8 @@
 			width: 3em;
 			height: 3em;
 			border-radius: 1.5em;
-			border: 1px solid #FFF;
+			border: 1px solid #000;
+			border: 1px solid var(--normal-color);
 		}
 
 		#profileNames {
@@ -153,13 +156,15 @@
 			transform: translate(-50%, -50%);
 			width: 50%;
 			border: none;
-			background-color: rgba(255, 255, 255, 0.075);
+			background-color: rgba(0, 0, 0, 0.1);
+			background-color: var(--normal-color-tenth);
 			padding: 1em 1.4em;
 			border-radius: 0.4em;
 		}
 
 		#search::placeholder {
-			color: rgba(255, 255, 255, 0.5);
+			color: rgba(0, 0, 0, 0.5);
+			color: var(--normal-color-half);
 			font-weight: bold;
 		}
 
