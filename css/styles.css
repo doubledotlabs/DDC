@@ -503,7 +503,7 @@ a.indented {
 	transform: translateX(-50%);
 }
 
-.download > .content > span {
+.downloadinfo > span {
 	display: block;
 	font-size: 0.85em;
 }

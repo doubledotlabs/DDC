@@ -339,6 +339,8 @@
 								+ "<div class=\"input long\" contentEditable=\"true\" placeholder=\"Summary\">" + app.summary + "</div>"
 								+ ListMethods.overflow({}, app.links, linksMethod) + "<br><button class=\"outline indented\" style=\"float: right;\">SUBMIT</button></div></div><br>"));
 						});
+					} else if (args.edit == "releases") {
+						//TODO: edit releases
 					} else if (args.edit == "description") {
 						getApp(args.package, function(app) {
 							main.appendChild(ElementUtils.createElement("<div class=\"inset\"><h1>Edit Description</h1><div class=\"input long\" contentEditable=\"true\" placeholder=\"Enter a description...\">"
@@ -353,6 +355,10 @@
 						main.appendChild(ElementUtils.createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\" onclick=\"setPage(\'page=app&package=" + app.package + "&edit=page\');\">EDIT PAGE</button></div>"
 							+ "<div class=\"appnameinfo\"><h1>" + app.name + "</h1><p>" + app.summary + "</p>"
 							+ ListMethods.overflow({}, app.links, linksMethod) + "</div></div>"));
+
+						main.appendChild(ElementUtils.createElement(ListMethods.grid({"name": "Version " + app.releases[0].version + ", " + app.releases[0].date}, app.releases[0].downloads, DownloadMethods.console)
+							+ "<a class=\"indented\"><i class=\"material-icons\">edit</i>EDIT RELEASES</a>"
+							+ "<a class=\"indented\"><i class=\"material-icons\">add</i>NEW RELEASE</a><br><br><hr>"));
 
 						main.appendChild(ElementUtils.createElement("<div class=\"appdesc\"><p>" + app.description + "</p><a class=\"link\" href=\"javascript:setPage(\'page=app&package=" + app.package + "&edit=description\')\"><i class=\"material-icons\">edit</i>EDIT DESCRIPTION</a></div>"));
 
