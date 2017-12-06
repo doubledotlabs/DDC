@@ -1036,6 +1036,7 @@ a.indented {
 		display: inline-block;
 		padding: 0 2em;
 		transform: translateY(7em);
+		max-width: calc(100% - 16em);
 	}
 
 	.appinfo ~ h1.indented {
