@@ -328,19 +328,37 @@
 			} else if (args.page == "app") {
 				ElementUtils.clearElement(main);
 
-				getApp(args.package, function(app) {
-					document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
-					main.style.background = "rgb(20, 29, 38)";
-					main.appendChild(ElementUtils.createElement("<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"));
-					main.appendChild(ElementUtils.createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\" onclick=\"setPage(\'page=app&package=" + app.package + "&edit=page\');\">EDIT PAGE</button></div>"
-						+ "<div class=\"appnameinfo\"><h1>" + app.name + "</h1><p>" + app.summary + "</p>"
-						+ ListMethods.overflow({}, app.links, linksMethod) + "</div></div>"));
+				if (args.edit) {
+					if (args.edit == "page") {
+						getApp(args.package, function(app) {
+							document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
+							main.style.background = "rgb(20, 29, 38)";
+							main.appendChild(ElementUtils.createElement("<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"));
+							main.appendChild(ElementUtils.createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\" onclick=\"setPage(\'page=app&package=" + app.package + "&edit=page\');\">EDIT PAGE</button></div>"
+								+ "<div class=\"appnameinfo\"><h1>" + app.name + "</h1><p>" + app.summary + "</p>"
+								+ ListMethods.overflow({}, app.links, linksMethod) + "</div></div>"));
+						});
+					} else if (args.edit == "description") {
+						getApp(args.package, function(app) {
+							main.appendChild(ElementUtils.createElement("<div class=\"inset\"><h1>Edit Description</h1><div class=\"input long\" contentEditable=\"true\" placeholder=\"Enter a description...\">"
+								+ app.description + "</div><button class=\"outline\">SUBMIT</button></div>"));
+						});
+					}
+				} else {
+					getApp(args.package, function(app) {
+						document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
+						main.style.background = "rgb(20, 29, 38)";
+						main.appendChild(ElementUtils.createElement("<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"));
+						main.appendChild(ElementUtils.createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\" onclick=\"setPage(\'page=app&package=" + app.package + "&edit=page\');\">EDIT PAGE</button></div>"
+							+ "<div class=\"appnameinfo\"><h1>" + app.name + "</h1><p>" + app.summary + "</p>"
+							+ ListMethods.overflow({}, app.links, linksMethod) + "</div></div>"));
 
-					main.appendChild(ElementUtils.createElement("<div class=\"appdesc\"><p>" + app.description + "</p><a class=\"link\" href=\"javascript:setPage(\'page=app&package=" + app.package + "&edit=description\')\"><i class=\"material-icons\">edit</i>EDIT DESCRIPTION</a></div>"));
+						main.appendChild(ElementUtils.createElement("<div class=\"appdesc\"><p>" + app.description + "</p><a class=\"link\" href=\"javascript:setPage(\'page=app&package=" + app.package + "&edit=description\')\"><i class=\"material-icons\">edit</i>EDIT DESCRIPTION</a></div>"));
 
-					main.appendChild(ElementUtils.createElement(ListMethods.grid({"name": "Reviews"}, app.reviews, ReviewMethods.console)));
-					main.appendChild(ElementUtils.createElement("<a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "\');\"><i class=\"material-icons\">open_in_new</i>All Reviews</a><br><br><br>"));
-				});
+						main.appendChild(ElementUtils.createElement(ListMethods.grid({"name": "Reviews"}, app.reviews, ReviewMethods.console)));
+						main.appendChild(ElementUtils.createElement("<a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "\');\"><i class=\"material-icons\">open_in_new</i>All Reviews</a><br><br><br>"));
+					});
+				}
 			} else if (args.page == "reviews") {
 				ElementUtils.clearElement(main);
 

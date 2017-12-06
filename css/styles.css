@@ -362,6 +362,7 @@ a.indented {
 	border-bottom: 1px solid #2962FF;
 	border-bottom: 1px solid var(--accent-color);
 	padding-bottom: 0.35em;
+	margin-bottom: 1em;
 }
 
 .rating {
