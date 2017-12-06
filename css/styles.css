@@ -663,7 +663,6 @@ a.indented {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	background-color: var(--normal-background);
 }
 
 .category > .overflow {
