@@ -53,6 +53,15 @@ class ReviewMethods {
       + "</div>"
   }
 
+  static console(data) {
+    return "<div class=\"review\"><div class=\"reviewinfo\"><img src=\"" + data.user.image + "\"><div><b>" + data.user.name + "</b><br>"
+      + ratingMethod(data.rating) + "</div></div>"
+      + "<p><small>" + data.date + "</small></p>"
+      + "<p>" + (data.review ? data.review + "</p><div class=\"input long\" contentEditable=\"true\" placeholder=\"Reply to review...\"></div><button class=\"outline\">REPLY</button>" : data.summary 
+      + "</p><a href=\"javascript:setPage(\'page=review&id=" + data.id + "\')\">Read More / Reply</a>")
+      + "</div>"
+  }
+
 }
 
 class DownloadMethods {

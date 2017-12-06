@@ -347,7 +347,7 @@ a.indented {
 	overflow-y: auto;
 }
 
-.dialog > div > .input {
+.input.long {
 	border-bottom: 1px solid var(--accent-color);
 	padding-bottom: 0.35em;
 }
@@ -918,6 +918,20 @@ a.indented {
 		margin-left: auto;
 		margin-right: auto;
 		width: 60%;
+	}
+
+	.single > .review > p ~ .input {
+		margin-top: 4em;
+		margin-left: auto;
+		margin-right: auto;
+		width: 60%;
+	}
+
+	.single > .review > p ~ button {
+		margin-top: 1em;
+		margin-left: 20%;
+		margin-right: 20%;
+		float: right;
 	}
 
 	.grid > * {

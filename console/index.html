@@ -322,10 +322,16 @@
 						+ "<div class=\"appnameinfo\"><h1>" + app.name + "</h1><p>" + app.summary + "</p>"
 						+ ListMethods.overflow({}, app.links, linksMethod) + "</div></div>"));
 
-					main.appendChild(ElementUtils.createElement("<div class=\"appdesc\"><p>" + app.description + "</p><a><i class=\"material-icons\">edit</i>EDIT DESCRIPTION</a></div>"));
+					main.appendChild(ElementUtils.createElement("<div class=\"appdesc\"><p>" + app.description + "</p><a class=\"link\"><i class=\"material-icons\">edit</i>EDIT DESCRIPTION</a></div>"));
 
-					main.appendChild(ElementUtils.createElement(ListMethods.grid({"name": "Reviews"}, app.reviews, ReviewMethods.normal)));
+					main.appendChild(ElementUtils.createElement(ListMethods.grid({"name": "Reviews"}, app.reviews, ReviewMethods.console)));
 					main.appendChild(ElementUtils.createElement("<a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "\');\"><i class=\"material-icons\">open_in_new</i>All Reviews</a><br><br><br>"));
+				});
+			} else if (args.page == "review") {
+				ElementUtils.clearElement(main);
+
+				getReview(args.id, function(review) {
+					main.appendChild(ElementUtils.createElement("<div class=\"single\">" + ReviewMethods.console(review) + "</div>"));
 				});
 			}
 
