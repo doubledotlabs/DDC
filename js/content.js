@@ -3,7 +3,9 @@ function getCategories(fun, ignore) {
 		categories[i].apps = apps;
 	}
 
-	fun(categories);
+	setTimeout(function() {
+		fun(categories);
+	}, 500);
 }
 
 function getCategory(id, fun, ignore) {
@@ -21,7 +23,9 @@ function getCategory(id, fun, ignore) {
 	} else {
 		for (var i = 0; i < categories.length; i++) {
 			if (categories[i].id == id) {
-				fun(categories[i]);
+				setTimeout(function() {
+					fun(categories[i]);
+				}, 200);
 				return;
 			}
 		}
@@ -34,7 +38,9 @@ function getCategory(id, fun, ignore) {
 function getApp(id, fun, ignore) {
 	for (var i = 0; i < categories.length; i++) {
 		if (apps[i].package == id) {
-			fun(apps[i]);
+			setTimeout(function() {
+				fun(apps[i]);
+			}, 350);
 			return;
 		}
 	}
@@ -48,7 +54,9 @@ function getUser(id, fun, ignore) {
 		var user = users[0];
 		user.apps = apps;
 		user.reviews = reviews;
-		fun(user);
+		setTimeout(function() {
+			fun(user);
+		}, 250);
 	});
 }
 
@@ -61,13 +69,17 @@ function getReviews(id, fun, ignore) {
 		newReviews[i] = review;
 	}
 
-	fun(newReviews);
+	setTimeout(function() {
+		fun(newReviews);
+	}, 400);
 }
 
 function getReview(id, fun, ignore) {
 	for (var i = 0; i < reviews.length; i++) {
 		if (reviews[i].id == id) {
-			fun(reviews[i]);
+			setTimeout(function() {
+				fun(reviews[i]);
+			}, 300);
 			return;
 		}
 	}
