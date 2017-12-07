@@ -322,7 +322,8 @@
 
 				getUser(currentUser.uid, function(user) {
 					main.appendChild(ElementUtils.createElement("<div class=\"inset\">"
-						+ ListMethods.grid({}, user.apps, AppMethods.consoleTinyCard)
+						+ "<div class=\"row grid\">"+ ListMethods.none({}, user.apps, AppMethods.consoleTinyCard)
+						+ "<a><i class=\"material-icons\">add</i>NEW APPLICATION</a></div>"
 						+ "</div>"));
 				});
 			} else if (args.page == "app") {
