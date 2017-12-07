@@ -54,6 +54,17 @@ ReviewMethods.console = function(data) {
 		+ "</div>";
 };
 
+var ReleaseMethods = {};
+ReleaseMethods.console = function(release) {
+  return "<hr><div style=\"margin: 1em;\">"
+    + "<h1 class=\"indented\">Release: " + release.version + "<a style=\"font-size: 0.5em; font-weight: normal; float: right;\" href=\"javascript:setPage(\'page=releases&package=com.james.status&version=" + release.version + "&edit=changelog\');\"><i class=\"material-icons\">edit</i>EDIT</a></h1>"
+    + "<h3 class=\"indented\">Published on " + release.date + "</h3>"
+    + ListMethods.grid({}, release.downloads, DownloadMethods.console)
+    + "<h3 class=\"indented\">Changelog</h3>"
+    + "<p class=\"indented\">" + release.notes.split("\n").join("<br>") + "</p>"
+    + "</div>";
+};
+
 var DownloadMethods = {};
 DownloadMethods.normal = function(data) {
 	var dpi = null;

@@ -337,6 +337,10 @@ a.indented {
 	margin: 0 2em;
 }
 
+p.indented {
+	padding: 1em 2em;
+}
+
 .inner-shadow {
 	box-shadow: inset 0 0.1em 0.3em rgba(0, 0, 0, 0.37);
 	background-color: #F5F5F5;
@@ -1024,6 +1028,11 @@ a.indented {
 
 	a.indented {
 		margin: 0 4em;
+	}
+
+	p.indented {
+		margin-left: 2em;
+		margin-right: 2em;
 	}
 
 	.appinfo {
