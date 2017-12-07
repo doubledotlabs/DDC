@@ -40,17 +40,19 @@ var ReviewMethods = {};
 ReviewMethods.normal = function(data) {
 	return "<div class=\"review\"><div class=\"reviewinfo\" onclick=\"setPage(\'page=user&id=" + data.user.id + "\')\"><img src=\"" + data.user.image + "\"><div><b>" + data.user.name + "</b><br>"
 		+ ratingMethod(data.rating) + "</div></div>"
-		+ "<p><small>Reviewed " + (data.app ? "<a href=\"javascript:setPage(\'page=app&package=" + data.app.package + "\');\">" + data.app.name + "</a> " : "") + "on " + data.date + "</small></p>"
-		+ "<p>" + (data.review ? data.review + "</p>" : data.summary + "</p><a href=\"javascript:setPage(\'page=reviews&id=" + data.id + "\')\">READ MORE</a>")
+		+ "<p>" + (data.review ? data.review : data.summary) + "</p>"
+		+ "<p><small>Review " + (data.app ? "of <a href=\"javascript:setPage(\'page=app&package=" + data.app.package + "\');\">" + data.app.name + "</a>, " : "") + "published on " + data.date + "</small></p>"
+		+ (data.review ? "" : "<a href=\"javascript:setPage(\'page=reviews&id=" + data.id + "\')\">READ MORE</a>")
 		+ "</div>";
 };
 
 ReviewMethods.console = function(data) {
 	return "<div class=\"review\"><div class=\"reviewinfo\"><img src=\"" + data.user.image + "\"><div><b>" + data.user.name + "</b><br>"
 		+ ratingMethod(data.rating) + "</div></div>"
-		+ "<p><small>" + data.date + "</small></p>"
-		+ "<p>" + (data.review ? data.review + "</p><div class=\"input long\" contentEditable=\"true\" placeholder=\"Reply to review...\"></div><button class=\"outline\">REPLY</button>" : data.summary
-		+ "</p><a href=\"javascript:setPage(\'page=reviews&id=" + data.id + "\')\">READ MORE / REPLY</a>")
+		+ "<p>" + (data.review ? data.review : data.summary) + "</p>"
+		+ "<p><small>Published on " + data.date + "</small></p>"
+		+ (data.review ? "<div class=\"input long\" contentEditable=\"true\" placeholder=\"Reply to review...\"></div>"
+		+ "<button class=\"outline\">REPLY</button>" : "<a href=\"javascript:setPage(\'page=reviews&id=" + data.id + "\')\">READ MORE / REPLY</a>")
 		+ "</div>";
 };
 
