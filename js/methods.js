@@ -124,6 +124,31 @@ DownloadMethods.console = function(download) {
 		+ "</div>";
 };
 
+DownloadMethods.consoleEdit = function(download) {
+	var dpi = null;
+	if (download.minDpi && download.maxDpi)
+		dpi = download.minDpi + " - " + download.maxDpi + "dpi";
+	else if (download.minDpi)
+		dpi = download.minDpi + "dpi+";
+	else if (download.maxDpi)
+		dpi = "0 - " + download.maxDpi + "dpi";
+
+	return "<div class=\"download\">"
+		+ "<div class=\"downloadheader\">"
+		+ "<span>APK</span>"
+		+ "<i class=\"material-icons downloadicon\" style=\"color: #D93636;\">delete</i>"
+		+ "</div><hr>"
+		+ "<div class=\"downloadinfo\">"
+		+ "<span><b>Target SDK:</b> Android " + AndroidUtils.sdkToVersion(download.target) + "</span>"
+		+ "<span><b>Required SDK:</b> Android " + AndroidUtils.sdkToVersion(download.min) + (download.max ? " - " + AndroidUtils.sdkToVersion(download.max) : "+") + "</span>"
+		+ (download.config ? "<span><b>Configuration:</b> " + download.config + "</span>" : "")
+		+ (download.arch ? "<span><b>Architecture:</b> " + download.arch + "</span>" : "")
+		+ (dpi ? "<span><b>Screen Scale:</b> " + dpi + "</span>" : "")
+		+ "<span><b>Download Size:</b> " + download.size + "</span>"
+		+ "</div>"
+		+ "</div>";
+};
+
 function linksMethod(link) {
   var icon = "link";
   if (link.type == "source")

@@ -399,10 +399,13 @@
 
 							main.appendChild(ElementUtils.createElement("<div style=\"margin: 1em;\">"
 								+ "<h1 class=\"indented\">Release: " + app.releases[i].version + "</h1><h3 class=\"indented\">Published on " + app.releases[i].date + "</h3>"
-								+ ListMethods.grid({}, app.releases[i].downloads, DownloadMethods.console)
+								+ "<div class=\"row grid\" style=\"padding: 0 1em;\">"
+								+ ListMethods.none({}, app.releases[i].downloads, DownloadMethods.consoleEdit)
+								+ "<a><i class=\"material-icons\">file_upload</i>UPLOAD APK</a>"
+								+ "</div>"
 								+ "<h3 class=\"indented\">Changelog</h3>"
 								+ "<div style=\"padding: 1em 2em;\"><div class=\"input long\" contentEditable=\"true\" placeholder=\"Changelog\">" + app.releases[i].notes.split("\n").join("<br>") + "</div>"
-								+ "<button class=\"outline\" style=\"float: right;\">SUBMIT</button></div>"
+								+ "<button class=\"outline\" style=\"float: right;\">SUBMIT</button><br></div>"
 								+ "</div>"));
 						});
 					} else {
