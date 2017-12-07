@@ -401,7 +401,8 @@
 								+ "<h1 class=\"indented\">Release: " + app.releases[i].version + "</h1><h3 class=\"indented\">Published on " + app.releases[i].date + "</h3>"
 								+ ListMethods.grid({}, app.releases[i].downloads, DownloadMethods.console)
 								+ "<h3 class=\"indented\">Changelog</h3>"
-								+ "<div style=\"padding: 1em 2em;\"><div class=\"input long\" contentEditable=\"true\" placeholder=\"Changelog\">" + app.releases[i].notes.split("\n").join("<br>") + "</div></div>"
+								+ "<div style=\"padding: 1em 2em;\"><div class=\"input long\" contentEditable=\"true\" placeholder=\"Changelog\">" + app.releases[i].notes.split("\n").join("<br>") + "</div>"
+								+ "<button class=\"outline\" style=\"float: right;\">SUBMIT</button></div>"
 								+ "</div>"));
 						});
 					} else {
