@@ -370,7 +370,7 @@ p.indented {
 	width: 80vw;
 	max-height: 80vh;
 	padding: 1.5em;
-	background-color: #FFF:
+	background-color: #FFF;
 	background-color: var(--normal-background);
 	border-radius: 0.25em;
 	box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.37);
