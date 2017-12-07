@@ -109,6 +109,10 @@ DownloadMethods.console = function(download) {
 		dpi = "0 - " + download.maxDpi + "dpi";
 
 	return "<div class=\"download\">"
+		+ "<div class=\"downloadheader\">"
+		+ "<span>APK</span>"
+		+ "<i class=\"material-icons downloadicon\" onclick=\"location.href=\'download:" + download.url + "\';\">file_download</i>"
+		+ "</div><hr>"
 		+ "<div class=\"downloadinfo\">"
 		+ "<span><b>Target SDK:</b> Android " + AndroidUtils.sdkToVersion(download.target) + "</span>"
 		+ "<span><b>Required SDK:</b> Android " + AndroidUtils.sdkToVersion(download.min) + (download.max ? " - " + AndroidUtils.sdkToVersion(download.max) : "+") + "</span>"
