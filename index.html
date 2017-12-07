@@ -332,7 +332,7 @@
 
 					main.appendChild(ElementUtils.createElement("<div class=\"row grid inner-shadow\"><div style=\"text-align: center;\"><h1 style=\"color: " + SiteUtils.getRatingColor(app.rating) + ";\">" + app.rating + "</h1><h4>Average Rating</h4></div><div style=\"text-align: center;\"><h1 style=\"color: " + downloadsColor + ";\">" + app.downloads + "</h1><h4>Downloads</h4></div></div>"));
 					main.appendChild(ElementUtils.createElement(ListMethods.grid({"name": "Reviews"}, app.reviews, ReviewMethods.normal)));
-					main.appendChild(ElementUtils.createElement("<a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "\');\"><i class=\"material-icons\">open_in_new</i>All Reviews</a><a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "&write\');\"><i class=\"material-icons\">rate_review</i>Write a Review</a>"));
+					main.appendChild(ElementUtils.createElement("<a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "\');\"><i class=\"material-icons\">open_in_new</i>ALL REVIEWS</a><a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "&write\');\"><i class=\"material-icons\">rate_review</i>WRITE A REVIEW</a>"));
 					main.appendChild(ElementUtils.createElement("<div class=\"inner-shadow\">" + ListMethods.row({
 						"name": "Related<br>Apps",
 						"id": "similar/" + app.package,

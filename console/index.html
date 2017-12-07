@@ -368,7 +368,7 @@
 						main.appendChild(ElementUtils.createElement("<div class=\"appdesc\"><p>" + app.description + "</p><a class=\"link\" href=\"javascript:setPage(\'page=app&package=" + app.package + "&edit=description\')\"><i class=\"material-icons\">edit</i>EDIT DESCRIPTION</a></div>"));
 
 						main.appendChild(ElementUtils.createElement(ListMethods.grid({"name": "Reviews"}, app.reviews, ReviewMethods.console)));
-						main.appendChild(ElementUtils.createElement("<a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "\');\"><i class=\"material-icons\">open_in_new</i>All Reviews</a><br><br><br>"));
+						main.appendChild(ElementUtils.createElement("<a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "\');\"><i class=\"material-icons\">open_in_new</i>ALL REVIEWS</a><br><br><br>"));
 					});
 				}
 			} else if (args.page == "reviews") {

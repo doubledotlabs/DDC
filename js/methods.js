@@ -41,7 +41,7 @@ ReviewMethods.normal = function(data) {
 	return "<div class=\"review\"><div class=\"reviewinfo\" onclick=\"setPage(\'page=user&id=" + data.user.id + "\')\"><img src=\"" + data.user.image + "\"><div><b>" + data.user.name + "</b><br>"
 		+ ratingMethod(data.rating) + "</div></div>"
 		+ "<p><small>Reviewed " + (data.app ? "<a href=\"javascript:setPage(\'page=app&package=" + data.app.package + "\');\">" + data.app.name + "</a> " : "") + "on " + data.date + "</small></p>"
-		+ "<p>" + (data.review ? data.review + "</p>" : data.summary + "</p><a href=\"javascript:setPage(\'page=reviews&id=" + data.id + "\')\">Read More</a>")
+		+ "<p>" + (data.review ? data.review + "</p>" : data.summary + "</p><a href=\"javascript:setPage(\'page=reviews&id=" + data.id + "\')\">READ MORE</a>")
 		+ "</div>";
 };
 
@@ -50,14 +50,14 @@ ReviewMethods.console = function(data) {
 		+ ratingMethod(data.rating) + "</div></div>"
 		+ "<p><small>" + data.date + "</small></p>"
 		+ "<p>" + (data.review ? data.review + "</p><div class=\"input long\" contentEditable=\"true\" placeholder=\"Reply to review...\"></div><button class=\"outline\">REPLY</button>" : data.summary
-		+ "</p><a href=\"javascript:setPage(\'page=reviews&id=" + data.id + "\')\">Read More / Reply</a>")
+		+ "</p><a href=\"javascript:setPage(\'page=reviews&id=" + data.id + "\')\">READ MORE / REPLY</a>")
 		+ "</div>";
 };
 
 var ReleaseMethods = {};
 ReleaseMethods.console = function(release) {
   return "<hr><div style=\"margin: 1em;\">"
-    + "<h1 class=\"indented\">Release: " + release.version + "<a style=\"font-size: 0.5em; font-weight: normal; float: right;\" href=\"javascript:setPage(\'page=releases&package=com.james.status&version=" + release.version + "&edit=changelog\');\"><i class=\"material-icons\">edit</i>EDIT</a></h1>"
+    + "<h1 class=\"indented\">Release: " + release.version + "<a style=\"font-size: 0.5em; float: right;\" href=\"javascript:setPage(\'page=releases&package=com.james.status&version=" + release.version + "&edit=changelog\');\"><i class=\"material-icons\">edit</i>EDIT</a></h1>"
     + "<h3 class=\"indented\">Published on " + release.date + "</h3>"
     + ListMethods.grid({}, release.downloads, DownloadMethods.console)
     + "<h3 class=\"indented\">Changelog</h3>"

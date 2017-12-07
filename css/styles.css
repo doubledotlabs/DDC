@@ -220,6 +220,7 @@ button {
 	border-radius: 0.25em;
 	padding: 0.4em 0.8em;
 	font-size: 0.9em;
+	text-transform: uppercase;
 	cursor: pointer;
 	user-select: none;
 	outline: none;
@@ -275,6 +276,8 @@ a {
 	color: #2962FF;
 	color: var(--accent-color);
 	text-decoration: none;
+	text-transform: uppercase;
+	font-weight: bold;
 	cursor: pointer;
 }
 
