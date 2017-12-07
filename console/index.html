@@ -375,15 +375,15 @@
 			} else if (args.page == "reviews") {
 				ElementUtils.clearElement(main);
 
-				getReviews(args.package, function(reviews) {
-					main.appendChild(ElementUtils.createElement("<div class=\"single\">" + ListMethods.grid({"name": "Reviews"}, reviews, ReviewMethods.console) + "</div>"));
-				});
-			} else if (args.page == "review") {
-				ElementUtils.clearElement(main);
-
-				getReview(args.id, function(review) {
-					main.appendChild(ElementUtils.createElement("<div class=\"single\">" + ReviewMethods.console(review) + "</div>"));
-				});
+				if (args.id) {
+					getReview(args.id, function(review) {
+						main.appendChild(ElementUtils.createElement("<div class=\"single\">" + ReviewMethods.console(review) + "</div>"));
+					});
+				} else {
+					getReviews(args.package, function(reviews) {
+						main.appendChild(ElementUtils.createElement("<div class=\"single\">" + ListMethods.grid({"name": "Reviews"}, reviews, ReviewMethods.console) + "</div>"));
+					});
+				}
 			} else if (args.page == "releases") {
 				ElementUtils.clearElement(main);
 

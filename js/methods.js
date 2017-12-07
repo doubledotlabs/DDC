@@ -41,7 +41,7 @@ ReviewMethods.normal = function(data) {
 	return "<div class=\"review\"><div class=\"reviewinfo\" onclick=\"setPage(\'page=user&id=" + data.user.id + "\')\"><img src=\"" + data.user.image + "\"><div><b>" + data.user.name + "</b><br>"
 		+ ratingMethod(data.rating) + "</div></div>"
 		+ "<p><small>Reviewed " + (data.app ? "<a href=\"javascript:setPage(\'page=app&package=" + data.app.package + "\');\">" + data.app.name + "</a> " : "") + "on " + data.date + "</small></p>"
-		+ "<p>" + (data.review ? data.review + "</p>" : data.summary + "</p><a href=\"javascript:setPage(\'page=review&id=" + data.id + "\')\">Read More</a>")
+		+ "<p>" + (data.review ? data.review + "</p>" : data.summary + "</p><a href=\"javascript:setPage(\'page=reviews&id=" + data.id + "\')\">Read More</a>")
 		+ "</div>";
 };
 
@@ -50,7 +50,7 @@ ReviewMethods.console = function(data) {
 		+ ratingMethod(data.rating) + "</div></div>"
 		+ "<p><small>" + data.date + "</small></p>"
 		+ "<p>" + (data.review ? data.review + "</p><div class=\"input long\" contentEditable=\"true\" placeholder=\"Reply to review...\"></div><button class=\"outline\">REPLY</button>" : data.summary
-		+ "</p><a href=\"javascript:setPage(\'page=review&id=" + data.id + "\')\">Read More / Reply</a>")
+		+ "</p><a href=\"javascript:setPage(\'page=reviews&id=" + data.id + "\')\">Read More / Reply</a>")
 		+ "</div>";
 };
 

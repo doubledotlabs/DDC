@@ -342,7 +342,13 @@
 					}, apps, AppMethods.smallCard) + "</div>"));
 				});
 			} else if (args.page == "reviews") {
-				if (args.write) {
+				if (args.id) {
+					ElementUtils.clearElement(main);
+
+					getReview(args.id, function(review) {
+						main.appendChild(ElementUtils.createElement("<div class=\"single\">" + ReviewMethods.normal(review) + "</div>"));
+					});
+				} else if (args.write) {
 					if (!currentUser) {
 						setPage("page=signin");
 						return;
@@ -399,12 +405,6 @@
 
 				getApp(args.package, function(app) {
 					appendAppDownloadSection(app, false, document.getElementById("singleReleases"), args);
-				});
-			} else if (args.page == "review") {
-				ElementUtils.clearElement(main);
-
-				getReview(args.id, function(review) {
-					main.appendChild(ElementUtils.createElement("<div class=\"single\">" + ReviewMethods.normal(review) + "</div>"));
 				});
 			} else if (args.page == "category") {
 				ElementUtils.clearElement(main);
