@@ -388,7 +388,42 @@
 				ElementUtils.clearElement(main);
 
 				if (args.version) {
-					//TODO: edit release
+					if (args.edit) {
+						getApp(args.package, function(app) {
+							var release = null;
+							for (var i = 0; i < app.releases.length; i++) {
+								if (args.version == app.releases[i].version) {
+									release = app.releases[i];
+									break;
+								}
+							}
+
+							//TODO: edit release
+							main.appendChild(ElementUtils.createElement("<div style=\"margin: 1em;\">"
+								+ "<h1 class=\"indented\">Release: " + app.releases[i].version + "</h1><h3 class=\"indented\">Published on " + app.releases[i].date + "</h3>"
+								+ ListMethods.grid({}, app.releases[i].downloads, DownloadMethods.console)
+								+ "<h3 class=\"indented\">Changelog</h3>"
+								+ "<div style=\"padding: 1em 2em;\"><div class=\"input long\" contentEditable=\"true\" placeholder=\"Changelog\">" + app.releases[i].notes.split("\n").join("<br>") + "</div></div>"
+								+ "</div>"));
+						});
+					} else {
+						getApp(args.package, function(app) {
+							var release = null;
+							for (var i = 0; i < app.releases.length; i++) {
+								if (args.version == app.releases[i].version) {
+									release = app.releases[i];
+									break;
+								}
+							}
+
+							main.appendChild(ElementUtils.createElement("<div style=\"margin: 1em;\">"
+								+ "<h1 class=\"indented\">Release: " + app.releases[i].version + "</h1><h3 class=\"indented\">Published on " + app.releases[i].date + "</h3>"
+								+ ListMethods.grid({}, app.releases[i].downloads, DownloadMethods.console)
+								+ "<h3 class=\"indented\">Changelog<a style=\"font-size: 0.855em; font-weight: normal; float: right;\" href=\"javascript:setPage(\'page=releases&package=" + args.package + "&version=" + app.releases[i].version + "&edit=changelog\');\"><i class=\"material-icons\">edit</i>EDIT</a></h3>"
+								+ "<div style=\"padding: 1em 2em;\">" + app.releases[i].notes.split("\n").join("<br>") + "</div>"
+								+ "</div>"));
+						});
+					}
 				} else if (args.edit == "new") {
 					//TODO: new release
 				} else {
@@ -401,7 +436,7 @@
 								+ "<div style=\"padding: 1em 2em;\">" + app.releases[i].notes.split("\n").join("<br>") + "</div>";
 						}
 
-						main.appendChild(ElementUtils.createElement("<div style=\"margin: 2em;\">" + html.substring(4) + "</div>"));
+						main.appendChild(ElementUtils.createElement("<div style=\"margin: 1em;\">" + html.substring(4) + "</div>"));
 					});
 				}
 			}
