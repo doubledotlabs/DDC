@@ -68,6 +68,17 @@ header {
 	background-color: var(--normal-background-half);
 }
 
+footer {
+	background-color: #FFF;
+	background-color: var(--normal-background);
+	padding: 2em;
+	text-align: center;
+}
+
+footer > * {
+	padding: 0 2em;
+}
+
 nav>span {
 	display: inline-block;
 	padding: 0 0.6em;
