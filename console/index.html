@@ -329,10 +329,10 @@
 				getUser(currentUser.uid, function(user) {
 					ElementUtils.clearElement(main);
 
-					main.appendChild(ElementUtils.createElement("<div class=\"inset\">"
+					ElementUtils.append(main, "<div class=\"inset\">"
 						+ "<div class=\"row grid\">"+ ListMethods.none({}, user.apps, AppMethods.consoleTinyCard)
 						+ "<a><i class=\"material-icons\">add</i>NEW APPLICATION</a></div>"
-						+ "</div>"));
+						+ "</div>");
 				});
 			} else if (args.page == "app") {
 				ElementUtils.clearElement(main);
@@ -344,11 +344,11 @@
 
 							document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
 							main.style.background = "rgb(20, 29, 38)";
-							main.appendChild(ElementUtils.createElement("<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"));
-							main.appendChild(ElementUtils.createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"></div>"
+							ElementUtils.append(main, "<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"
+								+ "<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"></div>"
 								+ "<div class=\"appnameinfo\"><h1><div class=\"input long\" contentEditable=\"true\" placeholder=\"App Name\">" + app.name + "</div></h1>"
 								+ "<div class=\"input long\" contentEditable=\"true\" placeholder=\"Summary\">" + app.summary + "</div>"
-								+ ListMethods.overflow({}, app.links, linksMethod) + "<br><button class=\"outline indented\" style=\"float: right;\">SUBMIT</button></div></div><br>"));
+								+ ListMethods.overflow({}, app.links, linksMethod) + "<br><button class=\"outline indented\" style=\"float: right;\">SUBMIT</button></div></div><br>");
 						});
 					} else if (args.edit == "releases") {
 						//TODO: edit releases
@@ -356,8 +356,8 @@
 						getApp(args.package, function(app) {
 							ElementUtils.clearElement(main);
 
-							main.appendChild(ElementUtils.createElement("<div style=\"margin: 2em;\"><h1>Edit Description</h1><div class=\"input long\" contentEditable=\"true\" placeholder=\"Enter a description...\">"
-								+ app.description + "</div><button class=\"outline\" style=\"float: right;\">SUBMIT</button></div>"));
+							ElementUtils.append(main, "<div style=\"margin: 2em;\"><h1>Edit Description</h1><div class=\"input long\" contentEditable=\"true\" placeholder=\"Enter a description...\">"
+								+ app.description + "</div><button class=\"outline\" style=\"float: right;\">SUBMIT</button></div>");
 						});
 					} else {
 						setPage("page=404");
@@ -369,21 +369,20 @@
 
 						document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
 						main.style.background = "rgb(20, 29, 38)";
-						main.appendChild(ElementUtils.createElement("<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"));
-						main.appendChild(ElementUtils.createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\" onclick=\"setPage(\'page=app&package=" + app.package + "&edit=page\');\">EDIT PAGE</button></div>"
-							+ "<div class=\"appnameinfo\"><h1>" + app.name + "</h1><p>" + app.summary + "</p>"
-							+ ListMethods.overflow({}, app.links, linksMethod) + "</div></div>"));
 
-						var release = ReleaseMethods.console(app.releases[0]);
-						main.appendChild(ElementUtils.createElement("<hr>" + release.substring(30, release.length - 6)
+						var releaseHtml = ReleaseMethods.console(app.releases[0]);
+
+						ElementUtils.append(main, "<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"
+							+ "<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\" onclick=\"setPage(\'page=app&package=" + app.package + "&edit=page\');\">EDIT PAGE</button></div>"
+							+ "<div class=\"appnameinfo\"><h1>" + app.name + "</h1><p>" + app.summary + "</p>"
+							+ ListMethods.overflow({}, app.links, linksMethod) + "</div></div>"
+							+ "<hr>" + releaseHtml.substring(30, releaseHtml.length - 6)
 							+ "<a class=\"indented\" href=\"javascript:setPage(\'page=releases&package=" + args.package + "\');\"><i class=\"material-icons\">open_in_new</i>ALL RELEASES</a>"
 							+ "<a class=\"indented\" href=\"javascript:setPage(\'page=releases&package=" + args.package + "&edit=new\');\"><i class=\"material-icons\">add</i>NEW RELEASE</a><br><br><br>"
-							+ "<hr>"));
-
-						main.appendChild(ElementUtils.createElement("<div class=\"appdesc\"><p>" + app.description + "</p><a class=\"link\" href=\"javascript:setPage(\'page=app&package=" + app.package + "&edit=description\')\"><i class=\"material-icons\">edit</i>EDIT DESCRIPTION</a></div>"));
-
-						main.appendChild(ElementUtils.createElement(ListMethods.grid({"name": "Reviews"}, app.reviews, ReviewMethods.console)));
-						main.appendChild(ElementUtils.createElement("<a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "\');\"><i class=\"material-icons\">open_in_new</i>ALL REVIEWS</a><br><br><br>"));
+							+ "<hr>"
+							+ "<div class=\"appdesc\"><p>" + app.description + "</p><a class=\"link\" href=\"javascript:setPage(\'page=app&package=" + app.package + "&edit=description\')\"><i class=\"material-icons\">edit</i>EDIT DESCRIPTION</a></div>"
+							+ ListMethods.grid({"name": "Reviews"}, app.reviews, ReviewMethods.console)
+						 	+ "<a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "\');\"><i class=\"material-icons\">open_in_new</i>ALL REVIEWS</a><br><br><br>");
 					});
 				}
 			} else if (args.page == "reviews") {
@@ -392,12 +391,12 @@
 				if (args.id) {
 					getReview(args.id, function(review) {
 						ElementUtils.clearElement(main);
-						main.appendChild(ElementUtils.createElement("<div class=\"single\">" + ReviewMethods.console(review) + "</div>"));
+						ElementUtils.append(main, "<div class=\"single\">" + ReviewMethods.console(review) + "</div>");
 					});
 				} else {
 					getReviews(args.package, function(reviews) {
 						ElementUtils.clearElement(main);
-						main.appendChild(ElementUtils.createElement("<div class=\"single\">" + ListMethods.grid({"name": "Reviews"}, reviews, ReviewMethods.console) + "</div>"));
+						ElementUtils.append(main, "<div class=\"single\">" + ListMethods.grid({"name": "Reviews"}, reviews, ReviewMethods.console) + "</div>");
 					});
 				}
 			} else if (args.page == "releases") {
@@ -416,7 +415,7 @@
 								}
 							}
 
-							main.appendChild(ElementUtils.createElement("<div style=\"margin: 1em;\">"
+							ElementUtils.append(main, "<div style=\"margin: 1em;\">"
 								+ "<h1 class=\"indented\">Release: " + app.releases[i].version + "</h1><h3 class=\"indented\">Published on " + app.releases[i].date + "</h3>"
 								+ "<div class=\"row grid\" style=\"padding: 0 1em;\">"
 								+ ListMethods.none({}, app.releases[i].downloads, DownloadMethods.consoleEdit)
@@ -425,7 +424,7 @@
 								+ "<h3 class=\"indented\">Changelog</h3>"
 								+ "<div style=\"padding: 1em 2em;\"><div class=\"input long\" contentEditable=\"true\" placeholder=\"Changelog\">" + app.releases[i].notes.split("\n").join("<br>") + "</div>"
 								+ "<button class=\"outline\" style=\"float: right;\">SUBMIT</button><br></div>"
-								+ "</div>"));
+								+ "</div>");
 						});
 					} else {
 						getApp(args.package, function(app) {
@@ -439,7 +438,7 @@
 								}
 							}
 
-							main.appendChild(ElementUtils.createElement(ReleaseMethods.console(release).substring(4)));
+							ElementUtils.append(main, ReleaseMethods.console(release).substring(4));
 						});
 					}
 				} else if (args.edit == "new") {
@@ -447,7 +446,7 @@
 				} else {
 					getApp(args.package, function(app) {
 						ElementUtils.clearElement(main);
-						main.appendChild(ElementUtils.createElement("<div style=\"margin: 1em;\">" + ListMethods.none({}, app.releases, ReleaseMethods.console) + "</div>"));
+						ElementUtils.append(main, "<div style=\"margin: 1em;\">" + ListMethods.none({}, app.releases, ReleaseMethods.console) + "</div>");
 					});
 				}
 			}

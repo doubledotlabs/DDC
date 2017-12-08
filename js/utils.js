@@ -63,6 +63,12 @@ ElementUtils.clearElement = function(element) {
 	}
 };
 
+ElementUtils.append = function(element, html) {
+	element.appendChild(ElementUtils.createElement(html));
+	if (onSizeChange)
+		onSizeChange();
+};
+
 var UrlUtils = {};
 UrlUtils.stringToArguments = function(args) {
 	var array = args.split("&");

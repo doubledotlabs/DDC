@@ -241,7 +241,7 @@
 				getCategory("featured", function(category) {
 					ElementUtils.clearElement(main);
 
-					main.appendChild(ElementUtils.createElement(ListMethods.carousel({
+					ElementUtils.append(main, ListMethods.carousel({
 						autoplay: true,
 	  				centerMode: true,
 	  				centerPadding: '80px',
@@ -275,7 +275,7 @@
 	      				}
 	    				}
 	  				]
-					}, category.apps.slice(0, 6), AppMethods.largeCard)));
+					}, category.apps.slice(0, 6), AppMethods.largeCard));
 					$(".carousel").slick();
 
 					getCategories(function(categories) {
@@ -283,7 +283,7 @@
 							return;
 
 						for (var i = 0; i < categories.length; i++) {
-							main.appendChild(ElementUtils.createElement(ListMethods.row(categories[i], categories[i].apps, AppMethods.smallCard)));
+							ElementUtils.append(main, ListMethods.row(categories[i], categories[i].apps, AppMethods.smallCard));
 						}
 					});
 				});
@@ -295,14 +295,14 @@
 
 					document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
 					main.style.background = "#FFF";
-					main.appendChild(ElementUtils.createElement("<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"));
-					main.appendChild(ElementUtils.createElement("<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\" onclick=\"setPage(\'page=reviews&package=" + app.package + "&write\')\">RATE / REVIEW</button></div>"
+					ElementUtils.append(main, "<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"
+						+ "<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\" onclick=\"setPage(\'page=reviews&package=" + app.package + "&write\')\">RATE / REVIEW</button></div>"
 						+ "<div class=\"appnameinfo\"><h1>" + app.name + "</h1><h3><a href=\"javascript:setPage(\'page=user&id=" + app.author.id + "\');\">" + app.author.name + "</a></h3><p>" + app.summary + "</p>"
-						+ ListMethods.overflow({}, app.links, linksMethod) + "</div></div>"));
+						+ ListMethods.overflow({}, app.links, linksMethod) + "</div></div>");
 
 					appendAppDownloadSection(app, true, main, args);
 
-					main.appendChild(ElementUtils.createElement(ListMethods.carousel({
+					ElementUtils.append(main, ListMethods.carousel({
 						slidesToShow: 4,
 						dots: app.screenshots.length > 4,
 						arrows: false,
@@ -331,11 +331,11 @@
 								}
 							}
 						]
-					}, app.screenshots, ImageMethods.card)));
-					$(".carousel").slick();
+					}, app.screenshots, ImageMethods.card)
+						+ "<div class=\"appdesc\"><p>" + app.description + "</p><a>READ MORE</a></div>"
+						+ ListMethods.overflow({}, app.categories, CategoryMethods.chip));
 
-					main.appendChild(ElementUtils.createElement("<div class=\"appdesc\"><p>" + app.description + "</p><a>READ MORE</a></div>"));
-					main.appendChild(ElementUtils.createElement(ListMethods.overflow({}, app.categories, CategoryMethods.chip)));
+					$(".carousel").slick();
 
 					var downloadsColor = "#000";
 					if (app.downloads > 50000)
@@ -345,16 +345,17 @@
 					else if (app.downloads > 1000)
 						downloadsColor = "#2962FF";
 
-					main.appendChild(ElementUtils.createElement("<div class=\"row grid inner-shadow\"><div style=\"text-align: center;\"><h1 style=\"color: " + SiteUtils.getRatingColor(app.rating) + ";\">" + app.rating + "</h1><h4>Average Rating</h4></div><div style=\"text-align: center;\"><h1 style=\"color: " + downloadsColor + ";\">" + app.downloads + "</h1><h4>Downloads</h4></div></div>"));
-					main.appendChild(ElementUtils.createElement(ListMethods.grid({"name": "Reviews"}, app.reviews, ReviewMethods.normal)));
-					main.appendChild(ElementUtils.createElement("<a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "\');\"><i class=\"material-icons\">open_in_new</i>ALL REVIEWS</a><a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "&write\');\"><i class=\"material-icons\">rate_review</i>WRITE A REVIEW</a>"));
-					main.appendChild(ElementUtils.createElement("<div class=\"inner-shadow\">" + ListMethods.row({
-						"name": "Related<br>Apps",
-						"id": "similar/" + app.package,
-						"color": "#000",
-						"background": "transparent",
-						"shade": "#F5F5F5"
-					}, apps, AppMethods.smallCard) + "</div>"));
+					ElementUtils.append(main, "<div class=\"row grid inner-shadow\"><div style=\"text-align: center;\"><h1 style=\"color: " + SiteUtils.getRatingColor(app.rating) + ";\">" + app.rating + "</h1><h4>Average Rating</h4></div>"
+						+ "<div style=\"text-align: center;\"><h1 style=\"color: " + downloadsColor + ";\">" + app.downloads + "</h1><h4>Downloads</h4></div></div>"
+						+ ListMethods.grid({"name": "Reviews"}, app.reviews, ReviewMethods.normal)
+						+ "<a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "\');\"><i class=\"material-icons\">open_in_new</i>ALL REVIEWS</a><a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "&write\');\"><i class=\"material-icons\">rate_review</i>WRITE A REVIEW</a>"
+						+ "<div class=\"inner-shadow\">" + ListMethods.row({
+							"name": "Related<br>Apps",
+							"id": "similar/" + app.package,
+							"color": "#000",
+							"background": "transparent",
+							"shade": "#F5F5F5"
+						}, apps, AppMethods.smallCard) + "</div>");
 				});
 			} else if (args.page == "reviews") {
 				if (args.id) {
@@ -362,7 +363,7 @@
 
 					getReview(args.id, function(review) {
 						ElementUtils.clearElement(main);
-						main.appendChild(ElementUtils.createElement("<div class=\"single\">" + ReviewMethods.normal(review) + "</div>"));
+						ElementUtils.append(main, "<div class=\"single\">" + ReviewMethods.normal(review) + "</div>");
 					});
 				} else if (args.write) {
 					if (!currentUser) {
@@ -370,7 +371,7 @@
 						return;
 					}
 
-					main.appendChild(ElementUtils.createElement("<div class=\"dialog\"><div>"
+					ElementUtils.append(main, "<div class=\"dialog\"><div>"
 						+ "<h2 style=\"margin: 0; margin-bottom: 0.5em;\">Rate / Review</h2>"
 						+ "<div style=\"text-align: center;\">"
 						+ "<div id=\"ratingSelect\" class=\"rating active\"><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span></div>"
@@ -381,7 +382,7 @@
 						+ "<a id=\"reviewSubmit\" style=\"float: right;\" href=\"javascript:window.history.back();\">SUBMIT</a>"
 						+ "<a style=\"float: right; margin-right: 1em;\" href=\"javascript:window.history.back();\">CANCEL</a>"
 						+ "</div>"
-						+ "</div></div>"));
+						+ "</div></div>");
 
 					var onRatingSelect = function(e) {
 						if (e.target.className && e.target.className.indexOf("selected") >= 0) {
@@ -412,8 +413,8 @@
 					getReviews(args.package, function(reviews) {
 						ElementUtils.clearElement(main);
 
-						main.appendChild(ElementUtils.createElement("<div class=\"single\">" + ListMethods.grid({"name": "Reviews"}, reviews, ReviewMethods.normal) + "</div>"));
-						main.appendChild(ElementUtils.createElement("<hr><a style=\"display: block; text-align: center; padding: 0.5em 0;\" href=\"javascript:setPage(\'page=reviews&package=" + args.package + "&write\');\"><i class=\"material-icons\">rate_review</i>Write a Review</a><br>"));
+						ElementUtils.append(main, "<div class=\"single\">" + ListMethods.grid({"name": "Reviews"}, reviews, ReviewMethods.normal) + "</div>"
+							+ "<hr><a style=\"display: block; text-align: center; padding: 0.5em 0;\" href=\"javascript:setPage(\'page=reviews&package=" + args.package + "&write\');\"><i class=\"material-icons\">rate_review</i>Write a Review</a><br>");
 					});
 				}
 			} else if (args.page == "releases") {
@@ -422,7 +423,7 @@
 				getApp(args.package, function(app) {
 					ElementUtils.clearElement(main);
 
-					main.appendChild(ElementUtils.createElement("<div id=\"singleReleases\" class=\"single\"></div>"))
+					ElementUtils.append(main, "<div id=\"singleReleases\" class=\"single\"></div>");
 					appendAppDownloadSection(app, false, document.getElementById("singleReleases"), args);
 				});
 			} else if (args.page == "category") {
@@ -431,13 +432,13 @@
 					ElementUtils.clearElement(main);
 
 					document.body.style.background = category.background ? category.background : "inherit";
-					main.appendChild(ElementUtils.createElement(ListMethods.overflow(category, apps, AppMethods.tinyCard)));
+					ElementUtils.append(main, ListMethods.overflow(category, apps, AppMethods.tinyCard));
 				});
 			} else if (args.page == "signin") {
 				ElementUtils.clearElement(main);
-				main.appendChild(ElementUtils.createElement("<div style=\"padding: calc(5vw + 1em);\">"
+				ElementUtils.append(main, "<div style=\"padding: calc(5vw + 1em);\">"
 					+ "<div id=\"auth-container\" style=\"margin-bottom: calc(5vw + 1em);\"></div>"
-					+ "</div>"));
+					+ "</div>");
 
 				if (firebaseUI) {
 					firebaseUI.reset();
@@ -462,27 +463,29 @@
 					getUser(args.id, function(user) {
 						ElementUtils.clearElement(main);
 
-						main.appendChild(ElementUtils.createElement("<div class=\"userinfo\">"
+						var html = "<div class=\"userinfo\">"
 							+ "<img class=\"userimage\" src=\"" + user.image + "\">"
 							+ "<span>" + user.name + "</span>"
 							+ (user.links && user.links.length > 0 ? ListMethods.overflow({}, user.links, linksMethod) : "")
-							+ "</div>"));
+							+ "</div>";
 
 						if (user.apps && user.apps.length > 0) {
-							main.appendChild(ElementUtils.createElement("<hr>"
+							html += "<hr>"
 								+ "<h1 class=\"indented\">Apps</h1>"
-							  + ListMethods.overflow({}, apps, AppMethods.tinyCard)));
+							  + ListMethods.overflow({}, apps, AppMethods.tinyCard);
 						}
 
 						if (user.reviews && user.reviews.length > 0) {
-							main.appendChild(ElementUtils.createElement("<hr>"
+							html += "<hr>"
 								+ "<h1 class=\"indented\">Reviews</h1>"
-								+ ListMethods.grid({}, user.reviews, ReviewMethods.normal)));
+								+ ListMethods.grid({}, user.reviews, ReviewMethods.normal);
 						}
+
+						ElementUtils.append(main, html);
 					});
 				} else {
 					if (currentUser) {
-						main.appendChild(ElementUtils.createElement("<div class=\"userinfo\">"
+						ElementUtils.append(main, "<div class=\"userinfo\">"
 							+ "<img class=\"userimage\" src=\"" + currentUser.photoURL + "\">"
 							+ "<span>" + currentUser.displayName + "</span>"
 							+ "<span>" + currentUser.email + "</span>"
@@ -490,7 +493,7 @@
 							+ "<a class=\"link\" href=\"javascript:setPage(\'page=user&edit\');\"><i class=\"material-icons\">edit</i>EDIT</a>"
 							+ "<a class=\"link\" href=\"javascript:signOut();\"><i class=\"material-icons\">exit_to_app</i>SIGN OUT</a>"
 							+ "</div>"
-							+ "</div>"));
+							+ "</div>");
 
 						getUser(currentUser.uid, function(user) {
 							if (main.childNodes.length != 1)
@@ -515,7 +518,7 @@
 									+ ListMethods.grid({}, user.reviews, ReviewMethods.normal);
 							}
 
-							main.appendChild(ElementUtils.createElement(html));
+							ElementUtils.append(main, html);
 						}, true);
 					} else {
 						setPage("page=404");
@@ -525,7 +528,7 @@
 			} else {
 				page = "page=404";
 				ElementUtils.clearElement(main);
-				main.appendChild(ElementUtils.createElement("<div class=\"indented\"><h1>Error 404</h1><p>Sorry, we couldn\'t find what you\'re looking for.</p><button class=\"outline\" onclick=\"window.history.back();\">GO BACK</button></div>"));
+				ElementUtils.append(main, "<div class=\"indented\"><h1>Error 404</h1><p>Sorry, we couldn\'t find what you\'re looking for.</p><button class=\"outline\" onclick=\"window.history.back();\">GO BACK</button></div>");
 			}
 
 		  if (replace)
@@ -661,7 +664,7 @@
 				dpisHtml += "<option value=\"" + dpis[i][0] + "/" + dpis[i][1] + "\">" + text + "</option>";
 			}
 
-			element.appendChild(ElementUtils.createElement("<div class=\"row grid\">"
+			ElementUtils.append(element, "<div class=\"row grid\">"
 				+ "<div><i class=\"material-icons\">devices_other</i><div class=\"dropdown\"><span>Configuration</span>"
 				+ "<select id=\"configSelect\"" + (configurations.length > 1 ? "" : " class=\"disabled\"") + ">" + configurationsHtml + "</select></div></div>"
 				+ "<div><i class=\"material-icons\">android</i><div class=\"dropdown\"><span>Android Version</span>"
@@ -670,9 +673,9 @@
 				+ "<select id=\"archSelect\"" + (architectures.length > 1 ? "" : " class=\"disabled\"") + ">" + architecturesHtml + "</select></div></div>"
 				+ "<div><i class=\"material-icons\">devices</i><div class=\"dropdown\"><span>Screen Density</span>"
 				+ "<select id=\"dpiSelect\"" + (dpis.length > 1 ? "" : " class=\"disabled\"") + ">" + dpisHtml + "</select></div></div>"
-				+ "</div>"));
+				+ "</div>");
 
-			element.appendChild(ElementUtils.createElement("<div id=\"releases\" class=\"row grid\"></div>"))
+			ElementUtils.append(element, "<div id=\"releases\" class=\"row grid\"></div>");
 
 			if (args) {
 				var configSelect = document.getElementById("configSelect");
@@ -733,9 +736,10 @@
 				}
 
 				if (shouldShorten && items.length > 4) {
-					releasesElement.appendChild(ElementUtils.createElement(ListMethods.none({}, items.slice(0, 4), DownloadMethods.normal)));
-					releasesElement.appendChild(ElementUtils.createElement("<a style=\"width: 100%\" href=\"javascript:setPage(\'page=releases&package=" + app.package + "&config=" + config + "&sdk=" + sdk + "&arch=" + arch + "&dpi=" + dpi + "\');\"><i class=\"material-icons\">open_in_new</i>MORE RELEASES</a>"));
-				} else releasesElement.appendChild(ElementUtils.createElement(ListMethods.none({}, items, DownloadMethods.normal)));
+					ElementUtils.append(releasesElement, ListMethods.none({}, items.slice(0, 4), DownloadMethods.normal)
+						+ "<a style=\"width: 100%\" href=\"javascript:setPage(\'page=releases&package=" + app.package + "&config=" + config + "&sdk=" + sdk + "&arch=" + arch + "&dpi=" + dpi + "\');\">"
+						+ "<i class=\"material-icons\">open_in_new</i>MORE RELEASES</a>");
+				} else ElementUtils.append(releasesElement, ListMethods.none({}, items, DownloadMethods.normal));
 
 				if (args) {
 					args.config = config;
