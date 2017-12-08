@@ -233,6 +233,8 @@
 				ElementUtils.clearElement(main);
 
 				getCategory("featured", function(category) {
+					ElementUtils.clearElement(main);
+
 					main.appendChild(ElementUtils.createElement(ListMethods.carousel({
 						autoplay: true,
 	  				centerMode: true,
@@ -268,17 +270,23 @@
 	    				}
 	  				]
 					}, category.apps.slice(0, 6), AppMethods.largeCard)));
-				});
+					$(".carousel").slick();
 
-				getCategories(function(categories) {
-					for (var i = 0; i < categories.length; i++) {
-						main.appendChild(ElementUtils.createElement(ListMethods.row(categories[i], categories[i].apps, AppMethods.smallCard)));
-					}
+					getCategories(function(categories) {
+						if (main.childNodes.length != 1)
+							return;
+
+						for (var i = 0; i < categories.length; i++) {
+							main.appendChild(ElementUtils.createElement(ListMethods.row(categories[i], categories[i].apps, AppMethods.smallCard)));
+						}
+					});
 				});
 			} else if (args.page == "app") {
 				ElementUtils.clearElement(main);
 
 				getApp(args.package, function(app) {
+					ElementUtils.clearElement(main);
+
 					document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
 					main.style.background = "#FFF";
 					main.appendChild(ElementUtils.createElement("<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"));
@@ -318,6 +326,7 @@
 							}
 						]
 					}, app.screenshots, ImageMethods.card)));
+					$(".carousel").slick();
 
 					main.appendChild(ElementUtils.createElement("<div class=\"appdesc\"><p>" + app.description + "</p><a>READ MORE</a></div>"));
 					main.appendChild(ElementUtils.createElement(ListMethods.overflow({}, app.categories, CategoryMethods.chip)));
@@ -346,6 +355,7 @@
 					ElementUtils.clearElement(main);
 
 					getReview(args.id, function(review) {
+						ElementUtils.clearElement(main);
 						main.appendChild(ElementUtils.createElement("<div class=\"single\">" + ReviewMethods.normal(review) + "</div>"));
 					});
 				} else if (args.write) {
@@ -387,13 +397,15 @@
 
 					var onSubmit = function() {
 
-					}
+					};
 
 					shouldScrollTop = false;
 				} else {
 					ElementUtils.clearElement(main);
 
 					getReviews(args.package, function(reviews) {
+						ElementUtils.clearElement(main);
+
 						main.appendChild(ElementUtils.createElement("<div class=\"single\">" + ListMethods.grid({"name": "Reviews"}, reviews, ReviewMethods.normal) + "</div>"));
 						main.appendChild(ElementUtils.createElement("<hr><a style=\"display: block; text-align: center; padding: 0.5em 0;\" href=\"javascript:setPage(\'page=reviews&package=" + args.package + "&write\');\"><i class=\"material-icons\">rate_review</i>Write a Review</a><br>"));
 					});
@@ -401,14 +413,17 @@
 			} else if (args.page == "releases") {
 				ElementUtils.clearElement(main);
 
-				main.appendChild(ElementUtils.createElement("<div id=\"singleReleases\" class=\"single\"></div>"))
-
 				getApp(args.package, function(app) {
+					ElementUtils.clearElement(main);
+
+					main.appendChild(ElementUtils.createElement("<div id=\"singleReleases\" class=\"single\"></div>"))
 					appendAppDownloadSection(app, false, document.getElementById("singleReleases"), args);
 				});
 			} else if (args.page == "category") {
 				ElementUtils.clearElement(main);
 				getCategory(args.id, function(category) {
+					ElementUtils.clearElement(main);
+
 					document.body.style.background = category.background ? category.background : "inherit";
 					main.appendChild(ElementUtils.createElement(ListMethods.overflow(category, apps, AppMethods.tinyCard)));
 				});
@@ -439,6 +454,8 @@
 
 				if (args.id) {
 					getUser(args.id, function(user) {
+						ElementUtils.clearElement(main);
+
 						main.appendChild(ElementUtils.createElement("<div class=\"userinfo\">"
 							+ "<img class=\"userimage\" src=\"" + user.image + "\">"
 							+ "<span>" + user.name + "</span>"
@@ -469,9 +486,9 @@
 							+ "</div>"
 							+ "</div>"));
 
-						console.log("getting user: 472");
 						getUser(currentUser.uid, function(user) {
-							console.log("found user");
+							if (main.childNodes.length != 1)
+								return;
 
 							var html = "";
 							if (user.links && user.links.length > 0) {
@@ -512,8 +529,6 @@
 				if (shouldScrollTop)
 					window.scrollTo(0, 0);
 			}
-
-			$(".carousel").slick();
 		}
 
 		function appendAppDownloadSection(app, shouldShorten, element, args) {
