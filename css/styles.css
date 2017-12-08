@@ -73,6 +73,9 @@ footer {
 	background-color: var(--normal-background);
 	padding: 2em;
 	text-align: center;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }
 
 footer > * {

@@ -189,7 +189,7 @@
 		</span>
 	</header>
 	<main id="main"></main>
-	<footer>
+	<footer id="footer">
 		<span>DDStore is developed and maintained by <a href="https://doubledotlabs.github.io/">Double Dot Labs</a></span>
 		<a href="https://doubledotlabs.github.io/tos/?ddstore">Terms of Service</a>
 		<a href="https://doubledotlabs.github.io/policies/?ddstore">Privacy Policy</a>
@@ -208,6 +208,7 @@
 	<script type="text/javascript" src="js/content.js"></script>
 	<script>
 		var main = document.getElementById("main");
+		var footer = document.getElementById("footer");
 		var signInElement = document.getElementById("signin");
 		var profileElement = document.getElementById("profile");
 		var profileNameElement = document.getElementById("profileName");
@@ -534,6 +535,8 @@
 				if (shouldScrollTop)
 					window.scrollTo(0, 0);
 			}
+
+			onSizeChange();
 		}
 
 		function appendAppDownloadSection(app, shouldShorten, element, args) {
@@ -793,6 +796,16 @@
 				setPage("page=404");
 			});
 		}
+
+		function onSizeChange() {
+			footer.style.position = null;
+			var rect = footer.getBoundingClientRect();
+			if ((rect.bottom || rect.y + rect.height) < Math.max(document.documentElement.clientHeight, window.innerHeight || 0))
+				footer.style.position = "fixed";
+			else footer.style.position = null;
+		}
+
+		window.onresize = onSizeChange;
 	</script>
 </body>
 </html>
