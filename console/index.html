@@ -321,6 +321,8 @@
 				ElementUtils.clearElement(main);
 
 				getUser(currentUser.uid, function(user) {
+					ElementUtils.clearElement(main);
+
 					main.appendChild(ElementUtils.createElement("<div class=\"inset\">"
 						+ "<div class=\"row grid\">"+ ListMethods.none({}, user.apps, AppMethods.consoleTinyCard)
 						+ "<a><i class=\"material-icons\">add</i>NEW APPLICATION</a></div>"
@@ -332,6 +334,8 @@
 				if (args.edit) {
 					if (args.edit == "page") {
 						getApp(args.package, function(app) {
+							ElementUtils.clearElement(main);
+
 							document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
 							main.style.background = "rgb(20, 29, 38)";
 							main.appendChild(ElementUtils.createElement("<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"));
@@ -344,6 +348,8 @@
 						//TODO: edit releases
 					} else if (args.edit == "description") {
 						getApp(args.package, function(app) {
+							ElementUtils.clearElement(main);
+
 							main.appendChild(ElementUtils.createElement("<div style=\"margin: 2em;\"><h1>Edit Description</h1><div class=\"input long\" contentEditable=\"true\" placeholder=\"Enter a description...\">"
 								+ app.description + "</div><button class=\"outline\" style=\"float: right;\">SUBMIT</button></div>"));
 						});
@@ -353,6 +359,8 @@
 					}
 				} else {
 					getApp(args.package, function(app) {
+						ElementUtils.clearElement(main);
+
 						document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
 						main.style.background = "rgb(20, 29, 38)";
 						main.appendChild(ElementUtils.createElement("<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"));
@@ -377,10 +385,12 @@
 
 				if (args.id) {
 					getReview(args.id, function(review) {
+						ElementUtils.clearElement(main);
 						main.appendChild(ElementUtils.createElement("<div class=\"single\">" + ReviewMethods.console(review) + "</div>"));
 					});
 				} else {
 					getReviews(args.package, function(reviews) {
+						ElementUtils.clearElement(main);
 						main.appendChild(ElementUtils.createElement("<div class=\"single\">" + ListMethods.grid({"name": "Reviews"}, reviews, ReviewMethods.console) + "</div>"));
 					});
 				}
@@ -390,6 +400,8 @@
 				if (args.version) {
 					if (args.edit) {
 						getApp(args.package, function(app) {
+							ElementUtils.clearElement(main);
+
 							var release = null;
 							for (var i = 0; i < app.releases.length; i++) {
 								if (args.version == app.releases[i].version) {
@@ -411,6 +423,8 @@
 						});
 					} else {
 						getApp(args.package, function(app) {
+							ElementUtils.clearElement(main);
+
 							var release = null;
 							for (var i = 0; i < app.releases.length; i++) {
 								if (args.version == app.releases[i].version) {
@@ -426,6 +440,7 @@
 					//TODO: new release
 				} else {
 					getApp(args.package, function(app) {
+						ElementUtils.clearElement(main);
 						main.appendChild(ElementUtils.createElement("<div style=\"margin: 1em;\">" + ListMethods.none({}, app.releases, ReleaseMethods.console) + "</div>"));
 					});
 				}
