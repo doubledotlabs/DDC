@@ -27,8 +27,8 @@ AppMethods.consoleTinyCard = function(app) {
 };
 
 var ImageMethods = {};
-ImageMethods.card = function(image) {
-	return "<img class=\"card\" src=\"" + image.url + "\" onclick=\"location.href=\'" + image.url + "\';\">";
+ImageMethods.card = function(url) {
+	return "<img class=\"card\" src=\"" + url + "\" onclick=\"location.href=\'" + url + "\';\">";
 };
 
 var CategoryMethods = {};
