@@ -1,6 +1,6 @@
 var AppMethods = {};
 AppMethods.largeCard = function(app) {
-	return "<div class=\"largecard\" onclick=\"setPage(\'page=app&package=" + app.package + "\');\" "
+	return "<div class=\"largecard loadingimage\" onclick=\"setPage(\'page=app&package=" + app.package + "\');\" "
 		+ "style=\"background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent), url(" + app.header + "), #FFF; background-repeat: no-repeat; background-size: cover; background-position: center;\""
 		+ "><p class=\"info\"><b>" + app.name + "</b>&nbsp;&ndash;&nbsp;" + app.rating + "/5</p></div>";
 };

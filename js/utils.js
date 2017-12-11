@@ -82,6 +82,16 @@ ElementUtils.addImageLoadListener = function(element) {
 				element.className += " loaded";
 			}
 		}, false);
+	} else if (element.className && element.className.indexOf("loadingimage") >= 0) {
+		var img = new Image();
+		img.addEventListener("load", function() {
+			if (!element.className) {
+				element.className = "loaded";
+			} else if (element.className.indexOf("loaded") < 0) {
+				element.className += " loaded";
+			}
+		}, false);
+		img.src = element.style["background"].match(/url\(["|']?([^"']*)["|']?\)/)[0].slice(5, -2);
 	} else if (element.childNodes.length > 0) {
 		var children = element.childNodes;
 		for (var i = 0; i < children.length; i++) {
