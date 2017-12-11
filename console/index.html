@@ -241,7 +241,7 @@
 				<span id="profileName"></span><br>
 				<span id="profileEmail"></span>
 			</div>
-			<img id="profilePicture">
+			<img id="profilePicture" class="userimage loadingimage">
 		</span>
 	</header>
 	<main id="main">
@@ -503,6 +503,7 @@
 		}
 
 		window.onresize = onSizeChange;
+		ElementUtils.addImageLoadListener(document.body);
 	</script>
 </body>
 </html>
