@@ -63,7 +63,7 @@ ReleaseMethods.console = function(release) {
     + "<h3 class=\"indented\">Published on " + release.date + "</h3>"
     + ListMethods.grid({}, release.downloads, DownloadMethods.console)
     + "<h3 class=\"indented\">Changelog</h3>"
-    + "<p class=\"indented\">" + release.notes.split("\n").join("<br>") + "</p>"
+    + "<p class=\"indented\">" + release.changelog.split("\n").join("<br>") + "</p>"
     + "</div>";
 };
 
@@ -84,7 +84,7 @@ DownloadMethods.normal = function(data) {
 		+ "</div><hr>"
 		+ "<div class=\"releasecontent\">"
 		+ "<p><b>Version " + data.release.version + "</b></p>"
-		+ data.release.notes
+		+ data.release.changelog
 		+ "</div>"
 		+ "<div id=\"downloadContent" + data.download.url + "\" class=\"downloadinfo content\">"
 		+ "<i class=\"expand material-icons\" onclick=\"document.getElementById(\'downloadContent" + data.download.url + "\').classList.remove(\'active\');\">expand_more</i><hr>"
