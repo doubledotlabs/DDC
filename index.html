@@ -302,37 +302,40 @@
 
 					appendAppDownloadSection(app, true, main, args);
 
-					ElementUtils.append(main, ListMethods.carousel({
-						slidesToShow: 4,
-						dots: app.screenshots.length > 4,
-						arrows: false,
-						variableWidth: true,
-						infinite: false,
-						responsive: [
-							{
-								breakpoint: 1600,
-								settings: {
-									dots: app.screenshots.length > 3,
-									slidesToShow: 3
+					if (app.screenshots && app.screenshots.length > 0) {
+						ElementUtils.append(main, ListMethods.carousel({
+							slidesToShow: 4,
+							dots: app.screenshots.length > 4,
+							arrows: false,
+							variableWidth: true,
+							infinite: false,
+							responsive: [
+								{
+									breakpoint: 1600,
+									settings: {
+										dots: app.screenshots.length > 3,
+										slidesToShow: 3
+									}
+								},
+								{
+									breakpoint: 900,
+									settings: {
+										dots: app.screenshots.length > 2,
+										slidesToShow: 2
+									}
+								},
+								{
+									breakpoint: 600,
+									settings: {
+										dots: app.screenshots.length > 1,
+										slidesToShow: 1
+									}
 								}
-							},
-							{
-								breakpoint: 900,
-								settings: {
-									dots: app.screenshots.length > 2,
-									slidesToShow: 2
-								}
-							},
-							{
-								breakpoint: 600,
-								settings: {
-									dots: app.screenshots.length > 1,
-									slidesToShow: 1
-								}
-							}
-						]
-					}, app.screenshots, ImageMethods.card)
-						+ "<div class=\"appdesc\"><p>" + app.description + "</p><a>READ MORE</a></div>"
+							]
+						}, app.screenshots, ImageMethods.card));
+					}
+
+					ElementUtils.append(main, "<div class=\"appdesc\"><p>" + app.description + "</p><a>READ MORE</a></div>"
 						+ ListMethods.overflow({}, app.categories, CategoryMethods.chip));
 
 					$(".carousel").slick();
@@ -410,7 +413,7 @@
 				} else {
 					ElementUtils.clearElement(main);
 
-					getReviews(args.package, function(reviews) {
+					getAppReviews(args.package, function(reviews) {
 						ElementUtils.clearElement(main);
 
 						ElementUtils.append(main, "<div class=\"single\">" + ListMethods.grid({"name": "Reviews"}, reviews, ReviewMethods.normal) + "</div>"
@@ -543,6 +546,9 @@
 		}
 
 		function appendAppDownloadSection(app, shouldShorten, element, args) {
+			if (!app.releases)
+				return;
+
 			var configurations = [];
 			var sdks = [];
 			var architectures = [];

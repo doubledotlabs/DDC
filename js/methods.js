@@ -38,7 +38,7 @@ CategoryMethods.chip = function(category) {
 
 var ReviewMethods = {};
 ReviewMethods.normal = function(data) {
-	return "<div class=\"review\"><div class=\"reviewinfo\" onclick=\"setPage(\'page=user&id=" + data.user.id + "\')\"><img src=\"" + data.user.image + "\"><div><b>" + data.user.name + "</b><br>"
+	return "<div class=\"review\"><div class=\"reviewinfo\" onclick=\"setPage(\'page=user&id=" + data.author.id + "\')\"><img src=\"" + data.author.image + "\"><div><b>" + data.author.name + "</b><br>"
 		+ ratingMethod(data.rating) + "</div></div>"
 		+ "<p>" + (data.review ? data.review : data.summary) + "</p>"
 		+ "<p><small>Review " + (data.app ? "of <a href=\"javascript:setPage(\'page=app&package=" + data.app.package + "\');\">" + data.app.name + "</a>, " : "") + "published on " + data.date + "</small></p>"
@@ -47,7 +47,7 @@ ReviewMethods.normal = function(data) {
 };
 
 ReviewMethods.console = function(data) {
-	return "<div class=\"review\"><div class=\"reviewinfo\"><img src=\"" + data.user.image + "\"><div><b>" + data.user.name + "</b><br>"
+	return "<div class=\"review\"><div class=\"reviewinfo\"><img src=\"" + data.author.image + "\"><div><b>" + data.author.name + "</b><br>"
 		+ ratingMethod(data.rating) + "</div></div>"
 		+ "<p>" + (data.review ? data.review : data.summary) + "</p>"
 		+ "<p><small>Published on " + data.date + "</small></p>"
@@ -187,6 +187,9 @@ function ratingMethod(rating, color) {
 
 var ListMethods = {};
 ListMethods.none = function(category, apps, method) {
+  if (!apps)
+    return "";
+
 	var html = "";
 	for (var i = 0; i < apps.length; i++) {
 		html += method(apps[i]);
@@ -195,6 +198,9 @@ ListMethods.none = function(category, apps, method) {
 };
 
 ListMethods.carousel = function(options, apps, method) {
+  if (!apps)
+    return "";
+
 	var html = "<div class=\"carousel\" data-slick=\'" + JSON.stringify(options) + "\'>";
 
 	for (var i = 0; i < apps.length; i++) {
@@ -205,6 +211,9 @@ ListMethods.carousel = function(options, apps, method) {
 };
 
 ListMethods.row = function(category, apps, method) {
+  if (!apps)
+    return "";
+
 	var html = (category.id ? "" : "<h1 class=\"indented\">" + category.name + "</h1>") + "<div class=\"" + (category.description ? "category " : "") + "row\""
 		+ (category.color && category.background ? " style=\"position: relative; color: " + category.color + "; background-color: " + category.background + ";\">" : " style=\"position: relative;\">")
 		+ (category.id && category.name ? "<div class=\"rowinfo\" style=\"vertical-align: top; transform: translateY(calc(4em - 20%));\"><h2>" + category.name + "</h2>" + (category.description ? "<p>" + category.description
@@ -219,6 +228,9 @@ ListMethods.row = function(category, apps, method) {
 };
 
 ListMethods.overflow = function(category, apps, method) {
+  if (!apps)
+    return "";
+
 	var html = (category.name ? "<div class=\"category\">"
 		+ "<div style=\"margin: 2em 0;\"><h1" + (category.color ? " style=\"color: " + category.color + ";\"" : "") + ">" + category.name + "</h1>"
 		+ (category.description ? "<p" + (category.color ? " style=\"color: " + category.color + ";\"" : "") + ">" + category.description + "</p>" : "") + "</div>" : "")
@@ -234,6 +246,9 @@ ListMethods.overflow = function(category, apps, method) {
 };
 
 ListMethods.grid = function(category, apps, method) {
+  if (!apps)
+    return "";
+
 	var html = (category.name ? "<h1 class=\"indented\">" + category.name + "</h1>" : "") + "<div class=\"row grid\">";
 
 	for (var i = 0; i < apps.length; i++) {

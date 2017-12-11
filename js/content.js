@@ -1,19 +1,13 @@
 function getCategories(fun, ignore) {
-	for (var i = 0; i < categories.length; i++) {
-		categories[i].apps = apps;
-	}
-
-	setTimeout(function() {
-		fun(categories);
-	}, 500);
+	callFirebaseFunction("getCategories", fun, function(error) {
+		console.error("Failed to fetch category", error);
+		if (!ignore)
+			setPage("page=404", true);
+	});
 }
 
 function getCategory(id, fun, ignore) {
-	if (id == "featured") {
-		fun({
-			"apps": apps
-		});
-	} else if (id.startsWith("similar/")) {
+	if (id.startsWith("similar/")) {
 		getApp(id.split("/")[1], function(app) {
 			fun({
 				"id": id,
@@ -21,36 +15,24 @@ function getCategory(id, fun, ignore) {
 			});
 		}, ignore);
 	} else {
-		for (var i = 0; i < categories.length; i++) {
-			if (categories[i].id == id) {
-				setTimeout(function() {
-					fun(categories[i]);
-				}, 200);
-				return;
-			}
-		}
-
-		if (!ignore)
-			setPage("page=404", true);
+		callFirebaseFunction("getCategory?categoryId=" + id, fun, function(error) {
+			console.error("Failed to fetch category", error);
+			if (!ignore)
+				setPage("page=404", true);
+		});
 	}
 }
 
 function getApp(id, fun, ignore) {
-	for (var i = 0; i < categories.length; i++) {
-		if (apps[i].package == id) {
-			setTimeout(function() {
-				fun(apps[i]);
-			}, 350);
-			return;
-		}
-	}
-
-	if (!ignore)
-		setPage("page=404", true);
+	callFirebaseFunction("getApp?appPackage=" + id, fun, function(error) {
+		console.error("Failed to fetch app", error);
+		if (!ignore)
+			setPage("page=404", true);
+	});
 }
 
 function getUser(id, fun, ignore) {
-	getReviews(null, function(reviews) {
+	getUserReviews(id, function(reviews) {
 		var user = users[0];
 		user.apps = apps;
 		user.reviews = reviews;
@@ -60,30 +42,46 @@ function getUser(id, fun, ignore) {
 	});
 }
 
-function getReviews(id, fun, ignore) {
-	var newReviews = [];
-	for (var i = 0; i < reviews.length; i++) {
-		var review = Object.assign({}, reviews[i]);
-		review.review = null;
-		review.summary = reviews[i].review.substring(0, 90) + "...";
-		newReviews[i] = review;
-	}
+function getAppReviews(id, fun, ignore) {
+	callFirebaseFunction("getReviews?appPackage=" + id, fun, function(error) {
+		console.error("Failed to fetch reviews", error);
+		if (!ignore)
+			setPage("page=404", true);
+	});
+}
 
-	setTimeout(function() {
-		fun(newReviews);
-	}, 400);
+function getUserReviews(id, fun, ignore) {
+	callFirebaseFunction("getReviews?userId=" + id, fun, function(error) {
+		console.error("Failed to fetch reviews", error);
+		if (!ignore)
+			setPage("page=404", true);
+	});
 }
 
 function getReview(id, fun, ignore) {
-	for (var i = 0; i < reviews.length; i++) {
-		if (reviews[i].id == id) {
-			setTimeout(function() {
-				fun(reviews[i]);
-			}, 300);
-			return;
+	callFirebaseFunction("getReview?reviewId=" + id, fun, function(error) {
+		console.error("Failed to fetch review", error);
+		if (!ignore)
+			setPage("page=404", true);
+	});
+}
+
+function callFirebaseFunction(name, onComplete, onError) {
+	var requestContent = new XMLHttpRequest();
+	requestContent.onreadystatechange = function() {
+		if (requestContent.readyState === 4) {
+			if (requestContent.status === 200 || requestContent.status == 0) {
+				console.log(requestContent.responseText);
+				onComplete(JSON.parse(requestContent.responseText));
+			} else {
+				onError(requestContent.status, requestContent.responseText);
+			}
 		}
 	}
+	requestContent.open("GET", "https://us-central1-ddstore-87442.cloudfunctions.net/" + name, true);
+	requestContent.send(null);
+}
 
-	if (!ignore)
-		setPage("page=404", true);
+function getFirebaseStorageUrl(path, onComplete, onError) {
+	firebase.storage().child(path).getDownloadURL().then(onComplete).catch(onError);
 }

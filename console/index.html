@@ -394,7 +394,7 @@
 						ElementUtils.append(main, "<div class=\"single\">" + ReviewMethods.console(review) + "</div>");
 					});
 				} else {
-					getReviews(args.package, function(reviews) {
+					getAppReviews(args.package, function(reviews) {
 						ElementUtils.clearElement(main);
 						ElementUtils.append(main, "<div class=\"single\">" + ListMethods.grid({"name": "Reviews"}, reviews, ReviewMethods.console) + "</div>");
 					});
