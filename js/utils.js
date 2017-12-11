@@ -64,10 +64,31 @@ ElementUtils.clearElement = function(element) {
 };
 
 ElementUtils.append = function(element, html) {
-	element.appendChild(ElementUtils.createElement(html));
+	var child = ElementUtils.createElement(html);
+	element.appendChild(child);
+
+	ElementUtils.addImageLoadListener(element);
+
 	if (onSizeChange)
 		onSizeChange();
 };
+
+ElementUtils.addImageLoadListener = function(element) {
+	if (element.nodeName == "img" || element.nodeName == "IMG") {
+		element.addEventListener("load", function() {
+			if (!element.className) {
+				element.className = "loaded";
+			} else if (element.className.indexOf("loaded") < 0) {
+				element.className += " loaded";
+			}
+		}, false);
+	} else if (element.childNodes.length > 0) {
+		var children = element.childNodes;
+		for (var i = 0; i < children.length; i++) {
+			ElementUtils.addImageLoadListener(children[i]);
+		}
+	}
+}
 
 var UrlUtils = {};
 UrlUtils.stringToArguments = function(args) {
