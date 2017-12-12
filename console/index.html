@@ -370,14 +370,14 @@
 						document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
 						main.style.background = "rgb(20, 29, 38)";
 
-						var releaseHtml = ReleaseMethods.console(app.releases[0]);
+						var releaseHtml = (app.releases && app.releases[0] ? ReleaseMethods.console(app.releases[0]) : null);
 
-						ElementUtils.append(main, "<div class=\"header\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"
+						ElementUtils.append(main, "<div class=\"header loadingimage\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"
 							+ "<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"><button class=\"outline\" onclick=\"setPage(\'page=app&package=" + app.package + "&edit=page\');\">EDIT PAGE</button></div>"
 							+ "<div class=\"appnameinfo\"><h1>" + app.name + "</h1><p>" + app.summary + "</p>"
 							+ ListMethods.overflow({}, app.links, linksMethod) + "</div></div>"
-							+ "<hr>" + releaseHtml.substring(30, releaseHtml.length - 6)
-							+ "<a class=\"indented\" href=\"javascript:setPage(\'page=releases&package=" + args.package + "\');\"><i class=\"material-icons\">open_in_new</i>ALL RELEASES</a>"
+							+ (releaseHtml ? "<hr>" + releaseHtml.substring(30, releaseHtml.length - 6)
+							+ "<a class=\"indented\" href=\"javascript:setPage(\'page=releases&package=" + args.package + "\');\"><i class=\"material-icons\">open_in_new</i>ALL RELEASES</a>" : "")
 							+ "<a class=\"indented\" href=\"javascript:setPage(\'page=releases&package=" + args.package + "&edit=new\');\"><i class=\"material-icons\">add</i>NEW RELEASE</a><br><br><br>"
 							+ "<hr>"
 							+ "<div class=\"appdesc\"><p>" + app.description + "</p><a class=\"link\" href=\"javascript:setPage(\'page=app&package=" + app.package + "&edit=description\')\"><i class=\"material-icons\">edit</i>EDIT DESCRIPTION</a></div>"
@@ -422,7 +422,7 @@
 								+ "<a><i class=\"material-icons\">file_upload</i>UPLOAD APK</a>"
 								+ "</div>"
 								+ "<h3 class=\"indented\">Changelog</h3>"
-								+ "<div style=\"padding: 1em 2em;\"><div class=\"input long\" contentEditable=\"true\" placeholder=\"Changelog\">" + app.releases[i].notes.split("\n").join("<br>") + "</div>"
+								+ "<div style=\"padding: 1em 2em;\"><div class=\"input long\" contentEditable=\"true\" placeholder=\"Changelog\">" + app.releases[i].changelog.split("\n").join("<br>") + "</div>"
 								+ "<button class=\"outline\" style=\"float: right;\">SUBMIT</button><br></div>"
 								+ "</div>");
 						});
