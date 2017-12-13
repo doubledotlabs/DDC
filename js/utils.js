@@ -72,7 +72,10 @@ ElementUtils.append = function(element, html) {
 	if (onSizeChange)
 		onSizeChange();
 
-	$(".carousel").slick();
+	try {
+		$(".carousel").slick();
+	} catch (err) {
+	}
 };
 
 ElementUtils.addImageLoadListener = function(element) {
