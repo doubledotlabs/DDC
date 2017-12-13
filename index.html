@@ -276,7 +276,6 @@
 	    				}
 	  				]
 					}, category.apps.slice(0, 6), AppMethods.largeCard));
-					$(".carousel").slick();
 
 					getCategories(function(categories) {
 						if (main.childNodes.length != 1)
@@ -337,8 +336,6 @@
 
 					ElementUtils.append(main, "<div class=\"appdesc\"><p>" + app.description + "</p><a>READ MORE</a></div>"
 						+ ListMethods.overflow({}, app.categories, CategoryMethods.chip));
-
-					$(".carousel").slick();
 
 					var downloadsColor = "#000";
 					if (app.downloads > 50000)
