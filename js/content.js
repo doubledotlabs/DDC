@@ -81,7 +81,6 @@ function callFirebaseFunction(name, onComplete, onError) {
 	requestContent.onreadystatechange = function() {
 		if (requestContent.readyState === 4) {
 			if (requestContent.status === 200 || requestContent.status == 0) {
-				console.log(requestContent.responseText);
 				onComplete(JSON.parse(requestContent.responseText));
 			} else {
 				onError(requestContent.status, requestContent.responseText);
