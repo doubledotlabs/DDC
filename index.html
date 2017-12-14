@@ -365,7 +365,8 @@
 
 					getReview(args.id, function(review) {
 						ElementUtils.clearElement(main);
-						ElementUtils.append(main, "<div class=\"single\">" + ReviewMethods.normal(review) + "</div>");
+						ElementUtils.append(main, "<div class=\"single\">" + ReviewMethods.normal(review) + "</div>"
+							+ (review.author.id == currentUser.uid ? "<hr><a style=\"display: block; text-align: center; padding: 0.5em 0;\" href=\"javascript:setPage(\'page=reviews&package=" + args.package + "&write\');\"><i class=\"material-icons\">rate_review</i>Edit</a>" : ""));
 					});
 				} else if (args.write) {
 					if (!currentUser) {
@@ -434,7 +435,7 @@
 						}
 					});
 					shouldScrollTop = false;
-				} else {
+				} else if (args.package) {
 					ElementUtils.clearElement(main);
 
 					getAppReviews(args.package, function(reviews) {
@@ -443,6 +444,9 @@
 						ElementUtils.append(main, "<div class=\"single\">" + ListMethods.grid({"name": "Reviews"}, reviews, ReviewMethods.normal) + "</div>"
 							+ "<hr><a style=\"display: block; text-align: center; padding: 0.5em 0;\" href=\"javascript:setPage(\'page=reviews&package=" + args.package + "&write\');\"><i class=\"material-icons\">rate_review</i>Write a Review</a><br>");
 					});
+				} else {
+					setPage("page=404");
+					return;
 				}
 			} else if (args.page == "releases") {
 				ElementUtils.clearElement(main);
