@@ -378,8 +378,9 @@
 						+ "<div style=\"text-align: center;\">"
 						+ "<div id=\"ratingSelect\" class=\"rating active\"><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span></div>"
 						+ "</div>"
-						+ "<div id=\"reviewContent\" class=\"input long\" contentEditable=\"true\" placeholder=\"Write a review...\"></div>"
-						+ "<small>Reviews should be between 50 and 500 characters.</small>"
+						+ "<div id=\"reviewContent\" class=\"input long\" contentEditable=\"true\" placeholder=\"Write a review...\" onkeyup=\"document.getElementById(\'reviewCharacterCount\').innerText = innerText.length;\"></div>"
+						+ "<small id=\"reviewCharacterCount\" style=\"float: right;\">0</small><br>"
+						+ "<small id=\"reviewErrorMessage\" style=\"color: red; display: none;\">Reviews should be between 50 and 1000 characters.</small>"
 						+ "<div>"
 						+ "<a id=\"reviewSubmit\" style=\"float: right;\">SUBMIT</a>"
 						+ "<a style=\"float: right; margin-right: 1em;\" href=\"javascript:window.history.back();\">CANCEL</a>"
@@ -422,12 +423,14 @@
 									window.history.back();
 								}, true);
 							} else {
-								//error msg
-								console.log("no review leg heck");
+								var errorElement = document.getElementById("reviewErrorMessage");
+								errorElement.innerText = "Reviews should be between 50 and 1000 characters.";
+								errorElement.style.display = null;
 							}
 						} else {
-							//error message
-							console.log("heck rating");
+							var errorElement = document.getElementById("reviewErrorMessage");
+							errorElement.innerText = "You must specify a rating before submitting a review!";
+							errorElement.style.display = null;
 						}
 					});
 					shouldScrollTop = false;
