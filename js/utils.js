@@ -96,7 +96,15 @@ ElementUtils.addImageLoadListener = function(element) {
 				element.className += " loaded";
 			}
 		}, false);
-		img.src = element.style["background"].match(/url\(["|']?([^"']*)["|']?\)/)[0].slice(5, -2);
+		try {
+			img.src = element.style["background"].match(/url\(["|']?([^"']*)["|']?\)/)[0].slice(5, -2);
+		} catch (e) {
+			if (!element.className) {
+				element.className = "loaded";
+			} else if (element.className.indexOf("loaded") < 0) {
+				element.className += " loaded";
+			}
+		}
 	} else if (element.childNodes.length > 0) {
 		var children = element.childNodes;
 		for (var i = 0; i < children.length; i++) {
