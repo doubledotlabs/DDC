@@ -474,7 +474,7 @@
 						if (user.apps && user.apps.length > 0) {
 							html += "<hr>"
 								+ "<h1 class=\"indented\">Apps</h1>"
-							  + ListMethods.overflow({}, apps, AppMethods.tinyCard);
+							  + ListMethods.overflow({}, user.apps, AppMethods.tinyCard);
 						}
 
 						if (user.reviews && user.reviews.length > 0) {

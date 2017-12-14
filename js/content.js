@@ -32,13 +32,10 @@ function getApp(id, fun, ignore) {
 }
 
 function getUser(id, fun, ignore) {
-	getUserReviews(id, function(reviews) {
-		var user = users[0];
-		user.apps = apps;
-		user.reviews = reviews;
-		setTimeout(function() {
-			fun(user);
-		}, 250);
+	callFirebaseFunction("getUser?userId=" + id, fun, function(error) {
+		console.error("Failed to fetch app", error);
+		if (!ignore)
+			setPage("page=404", true);
 	});
 }
 
