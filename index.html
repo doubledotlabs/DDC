@@ -378,10 +378,10 @@
 						+ "<div style=\"text-align: center;\">"
 						+ "<div id=\"ratingSelect\" class=\"rating active\"><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span></div>"
 						+ "</div>"
-						+ "<div class=\"input long\" contentEditable=\"true\" placeholder=\"Write a review...\"></div>"
+						+ "<div id=\"reviewContent\" class=\"input long\" contentEditable=\"true\" placeholder=\"Write a review...\"></div>"
 						+ "<small>Reviews should be between 50 and 500 characters.</small>"
 						+ "<div>"
-						+ "<a id=\"reviewSubmit\" style=\"float: right;\" href=\"javascript:window.history.back();\">SUBMIT</a>"
+						+ "<a id=\"reviewSubmit\" style=\"float: right;\">SUBMIT</a>"
 						+ "<a style=\"float: right; margin-right: 1em;\" href=\"javascript:window.history.back();\">CANCEL</a>"
 						+ "</div>"
 						+ "</div></div>");
@@ -404,10 +404,32 @@
 						ratingElement.childNodes[i].addEventListener("click", onRatingSelect);
 					}
 
-					var onSubmit = function() {
+					document.getElementById("reviewSubmit").addEventListener("click", function() {
+						var review = document.getElementById("reviewContent").innerText;
+						var ratingElement = document.getElementById("ratingSelect");
+						var rating = 0;
+						for (var i = 0; i < ratingElement.childNodes.length; i++) {
+							if (ratingElement.childNodes[i].className.indexOf("selected") >= 0) {
+								rating = 5 - i;
+								break;
+							}
+						}
 
-					};
-
+						if (rating > 0) {
+							if (review.length > 50 && review.length < 500) {
+								setReview(args.package, currentUser, rating, review, function() {
+									console.log("yay, stuff");
+									window.history.back();
+								}, true);
+							} else {
+								//error msg
+								console.log("no review leg heck");
+							}
+						} else {
+							//error message
+							console.log("heck rating");
+						}
+					});
 					shouldScrollTop = false;
 				} else {
 					ElementUtils.clearElement(main);

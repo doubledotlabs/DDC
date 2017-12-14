@@ -63,6 +63,19 @@ function getReview(id, fun, ignore) {
 	});
 }
 
+function setReview(pkg, user, rating, review, fun, ignore) {
+	firebase.database().ref("reviews/" + pkg.split(".").join("_") + "-" + user.uid).set({
+		"app": pkg,
+		"author": user.uid,
+		"rating": rating,
+		"review": review
+	}).then(fun, function(error) {
+		console.log("You dun goofed");
+		if (!ignore)
+			setPage("page=404", true);
+	});
+}
+
 function callFirebaseFunction(name, onComplete, onError) {
 	var requestContent = new XMLHttpRequest();
 	requestContent.onreadystatechange = function() {
