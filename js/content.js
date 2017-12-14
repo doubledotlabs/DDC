@@ -7,7 +7,7 @@ function getCategories(fun, ignore) {
 }
 
 function getCategory(id, fun, ignore) {
-	if (id.startsWith("similar/")) {
+	if (id.indexOf("similar/") == 0) {
 		getApp(id.split("/")[1], function(app) {
 			fun({
 				"id": id,
