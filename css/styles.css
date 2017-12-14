@@ -630,6 +630,10 @@ p.indented {
 	left: 4em;
 }
 
+.review > p {
+	word-break: break-word;
+}
+
 .single > .review {
 	width: calc(100% - 4em) !important;
 	margin: 2em;
