@@ -434,7 +434,7 @@
 					ElementUtils.clearElement(main);
 
 					document.body.style.background = category.background ? category.background : "inherit";
-					ElementUtils.append(main, ListMethods.overflow(category, apps, AppMethods.tinyCard));
+					ElementUtils.append(main, ListMethods.overflow(category, category.apps, AppMethods.tinyCard));
 				});
 			} else if (args.page == "signin") {
 				ElementUtils.clearElement(main);
@@ -545,7 +545,7 @@
 		}
 
 		function appendAppDownloadSection(app, shouldShorten, element, args) {
-			if (!app.releases)
+			if (!app.releases || app.releases.length < 1)
 				return;
 
 			var configurations = [];
