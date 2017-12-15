@@ -2,28 +2,28 @@ var AppMethods = {};
 AppMethods.largeCard = function(app) {
 	return "<div class=\"largecard loadingimage\" onclick=\"setPage(\'page=app&package=" + app.package + "\');\" "
 		+ "style=\"background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent), url(" + app.header + "), #FFF; background-repeat: no-repeat; background-size: cover; background-position: center;\""
-		+ "><p class=\"info\"><b>" + app.name + "</b>&nbsp;&ndash;&nbsp;" + app.rating + "/5</p></div>";
+		+ "><p class=\"info\"><b>" + app.name + "</b>" + (app.rating ? "&nbsp;&ndash;&nbsp;" + app.rating + "/5" : "") + "</p></div>";
 };
 
 AppMethods.smallCard = function(app) {
 	return "<div class=\"smallcard\" onclick=\"setPage(\'page=app&package=" + app.package + "\');\">"
 		+ "<img src=\"" + app.icon + "\">"
 		+ "<p class=\"info\"><b>" + app.name + "</b><br><small style=\"position: absolute;\">" + app.author.name
-		+ "</small><small style=\"float: right;\"><b style=\"color: " + SiteUtils.getRatingColor(app.rating) + ";\">" + app.rating + "&nbsp;&#9733;</b></small></p></div>";
+		+ "</small><small style=\"float: right;\"><b style=\"color: " + SiteUtils.getRatingColor(app.rating) + ";\">" + (app.rating ? app.rating : "-") + "&nbsp;&#9733;</b></small></p></div>";
 };
 
 AppMethods.tinyCard = function(app) {
 	return "<div class=\"tinycard\" onclick=\"setPage(\'page=app&package=" + app.package + "\');\">"
 		+ "<img src=\"" + app.icon + "\">"
 		+ "<p class=\"info\"><b>" + app.name + "</b><br><small style=\"position: absolute;\">" + app.author.name
-		+ "</small><small style=\"float: right;\"><b style=\"color: " + SiteUtils.getRatingColor(app.rating) + ";\">" + app.rating + "&nbsp;&#9733;</b></small></p></div>";
+		+ "</small><small style=\"float: right;\"><b style=\"color: " + SiteUtils.getRatingColor(app.rating) + ";\">" + (app.rating ? app.rating : "-") + "&nbsp;&#9733;</b></small></p></div>";
 };
 
 AppMethods.consoleTinyCard = function(app) {
 	return "<div class=\"tinycard\" onclick=\"setPage(\'page=app&package=" + app.package + "\');\">"
 		+ "<img src=\"" + app.icon + "\">"
 		+ "<p class=\"info\"><b>" + app.name + "</b><br><small style=\"position: absolute;\">" + app.downloads + " downloads"
-		+ "</small><small style=\"float: right;\"><b style=\"color: " + SiteUtils.getRatingColor(app.rating) + ";\">" + app.rating + "&nbsp;&#9733;</b></small></p></div>";
+		+ "</small><small style=\"float: right;\"><b style=\"color: " + SiteUtils.getRatingColor(app.rating) + ";\">" + (app.rating ? app.rating : "-") + "&nbsp;&#9733;</b></small></p></div>";
 };
 
 var ImageMethods = {};
