@@ -517,6 +517,7 @@ p.indented {
 
 .download > .releasecontent {
 	font-size: 0.85em;
+	word-wrap: break-word;
 }
 
 .download > .downloadheader {
