@@ -293,6 +293,7 @@
 	<script type="text/javascript" src="../js/utils.js"></script>
 	<script type="text/javascript" src="../js/methods.js"></script>
 	<script type="text/javascript" src="../js/content.js"></script>
+	<script type="text/javascript" src="js/content.js"></script>
 	<script>
 		var main = document.getElementById("main");
 		var footer = document.getElementById("footer");
@@ -346,9 +347,18 @@
 							main.style.background = "rgb(20, 29, 38)";
 							ElementUtils.append(main, "<div class=\"header loadingimage\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"
 								+ "<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"></div>"
-								+ "<div class=\"appnameinfo\"><h1><div class=\"input long\" contentEditable=\"true\" placeholder=\"App Name\">" + app.name + "</div></h1>"
-								+ "<div class=\"input long\" contentEditable=\"true\" placeholder=\"Summary\">" + app.summary + "</div>"
-								+ ListMethods.overflow({}, app.links, linksMethod) + "<br><button class=\"outline indented\" style=\"float: right;\">SUBMIT</button></div></div><br>");
+								+ "<div class=\"appnameinfo\"><h1><div id=\"editAppName\" class=\"input long\" contentEditable=\"true\" placeholder=\"App Name\">" + app.name + "</div></h1>"
+								+ "<div id=\"editAppSummary\" class=\"input long\" contentEditable=\"true\" placeholder=\"Summary\">" + app.summary + "</div>"
+								+ ListMethods.overflow({}, app.links, linksMethod) + "<br><button id=\"editAppSubmit\" class=\"outline indented\" style=\"float: right;\">SUBMIT</button></div></div><br>");
+
+							document.getElementById("editAppSubmit").addEventListener("click", function() {
+								var editAppNameElement = document.getElementById("editAppName");
+								var editAppSummaryElement = document.getElementById("editAppSummary");
+
+								setAppPage(args.package, editAppNameElement.innerText, editAppSummaryElement.innerText, app.links, function() {
+									window.history.back();
+								});
+							});
 						});
 					} else if (args.edit == "releases") {
 						//TODO: edit releases
@@ -356,8 +366,16 @@
 						getApp(args.package, function(app) {
 							ElementUtils.clearElement(main);
 
-							ElementUtils.append(main, "<div style=\"margin: 2em;\"><h1>Edit Description</h1><div class=\"input long\" contentEditable=\"true\" placeholder=\"Enter a description...\">"
-								+ app.description + "</div><button class=\"outline\" style=\"float: right;\">SUBMIT</button></div>");
+							ElementUtils.append(main, "<div style=\"margin: 2em;\"><h1>Edit Description</h1><div id=\"editDescription\" class=\"input long\" contentEditable=\"true\" placeholder=\"Enter a description...\">"
+								+ app.description + "</div><button id=\"editDescriptionSubmit\" class=\"outline\" style=\"float: right;\">SUBMIT</button></div>");
+
+							document.getElementById("editDescriptionSubmit").addEventListener("click", function() {
+								var editDescriptionElement = document.getElementById("editDescription");
+
+								setAppDescription(args.package, editDescriptionElement.innerText, function() {
+									window.history.back();
+								});
+							});
 						});
 					} else {
 						setPage("page=404");
