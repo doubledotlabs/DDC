@@ -924,6 +924,8 @@ p.indented {
 	right: 0;
 	padding: 1em;
 	margin: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	border-bottom-left-radius: 0.25em;
 	border-bottom-right-radius: 0.25em;
 }
