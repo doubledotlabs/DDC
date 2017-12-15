@@ -366,75 +366,83 @@
 					getReview(args.id, function(review) {
 						ElementUtils.clearElement(main);
 						ElementUtils.append(main, "<div class=\"single\">" + ReviewMethods.normal(review) + "</div>"
-							+ (review.author.id == currentUser.uid ? "<hr><a style=\"display: block; text-align: center; padding: 0.5em 0;\" href=\"javascript:setPage(\'page=reviews&package=" + args.package + "&write\');\"><i class=\"material-icons\">rate_review</i>Edit</a>" : ""));
+							+ (review.author.id == currentUser.uid ? "<hr><a style=\"display: block; text-align: center; padding: 0.5em 0;\" href=\"javascript:setPage(\'page=reviews&package=" + review.app.package + "&write\');\"><i class=\"material-icons\">rate_review</i>Edit</a>" : ""));
 					});
 				} else if (args.write) {
-					if (!currentUser) {
+					if (currentUser) {
+						getReview(args.package.split(".").join("_") + "-" + currentUser.uid, function(review) {
+							ElementUtils.append(main, "<div class=\"dialog\"><div>"
+								+ "<h2 style=\"margin: 0; margin-bottom: 0.5em;\">Rate / Review</h2>"
+								+ "<div style=\"text-align: center;\">"
+								+ "<div id=\"ratingSelect\" class=\"rating active\"><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span></div>"
+								+ "</div>"
+								+ "<div id=\"reviewContent\" class=\"input long\" contentEditable=\"true\" placeholder=\"Write a review...\" onkeyup=\"document.getElementById(\'reviewCharacterCount\').innerText = innerText.length;\">"
+								+ (review ? review.review : "") + "</div>"
+								+ "<small id=\"reviewCharacterCount\" style=\"float: right;\">" + (review ? review.review.length : "0") + "</small><br>"
+								+ "<small id=\"reviewErrorMessage\" style=\"color: red; display: none;\">Reviews should be between 50 and 1000 characters.</small>"
+								+ "<div>"
+								+ "<a id=\"reviewSubmit\" style=\"float: right;\">SUBMIT</a>"
+								+ "<a style=\"float: right; margin-right: 1em;\" href=\"javascript:window.history.back();\">CANCEL</a>"
+								+ "</div>"
+								+ "</div></div>");
+
+							var onRatingSelect = function(e) {
+								if (e.target.className && e.target.className.indexOf("selected") >= 0) {
+									e.target.className = null;
+								} else {
+									var ratingElement = document.getElementById("ratingSelect");
+									for (var i = 0; i < ratingElement.childNodes.length; i++) {
+										ratingElement.childNodes[i].className = null;
+									}
+
+									e.target.className = "selected";
+								}
+							};
+
+							var ratingElement = document.getElementById("ratingSelect");
+							for (var i = 0; i < ratingElement.childNodes.length; i++) {
+								ratingElement.childNodes[i].addEventListener("click", onRatingSelect);
+							}
+
+							if (review) {
+								ratingElement.childNodes[5 - review.rating].className = "selected";
+							}
+
+							document.getElementById("reviewSubmit").addEventListener("click", function() {
+								var review = document.getElementById("reviewContent").innerText;
+								var ratingElement = document.getElementById("ratingSelect");
+								var rating = 0;
+								for (var i = 0; i < ratingElement.childNodes.length; i++) {
+									if (ratingElement.childNodes[i].className.indexOf("selected") >= 0) {
+										rating = 5 - i;
+										break;
+									}
+								}
+
+								if (rating > 0) {
+									if (review.length > 50 && review.length < 500) {
+										setReview(args.package, currentUser, rating, review, function() {
+											console.log("yay, stuff");
+											window.history.back();
+										}, true);
+									} else {
+										var errorElement = document.getElementById("reviewErrorMessage");
+										errorElement.innerText = "Reviews should be between 50 and 1000 characters.";
+										errorElement.style.display = null;
+									}
+								} else {
+									var errorElement = document.getElementById("reviewErrorMessage");
+									errorElement.innerText = "You must specify a rating before submitting a review!";
+									errorElement.style.display = null;
+								}
+							});
+						}, true);
+
+						shouldScrollTop = false;
+					} else {
 						setPage("page=signin");
 						return;
 					}
-
-					ElementUtils.append(main, "<div class=\"dialog\"><div>"
-						+ "<h2 style=\"margin: 0; margin-bottom: 0.5em;\">Rate / Review</h2>"
-						+ "<div style=\"text-align: center;\">"
-						+ "<div id=\"ratingSelect\" class=\"rating active\"><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span></div>"
-						+ "</div>"
-						+ "<div id=\"reviewContent\" class=\"input long\" contentEditable=\"true\" placeholder=\"Write a review...\" onkeyup=\"document.getElementById(\'reviewCharacterCount\').innerText = innerText.length;\"></div>"
-						+ "<small id=\"reviewCharacterCount\" style=\"float: right;\">0</small><br>"
-						+ "<small id=\"reviewErrorMessage\" style=\"color: red; display: none;\">Reviews should be between 50 and 1000 characters.</small>"
-						+ "<div>"
-						+ "<a id=\"reviewSubmit\" style=\"float: right;\">SUBMIT</a>"
-						+ "<a style=\"float: right; margin-right: 1em;\" href=\"javascript:window.history.back();\">CANCEL</a>"
-						+ "</div>"
-						+ "</div></div>");
-
-					var onRatingSelect = function(e) {
-						if (e.target.className && e.target.className.indexOf("selected") >= 0) {
-							e.target.className = null;
-						} else {
-							var ratingElement = document.getElementById("ratingSelect");
-							for (var i = 0; i < ratingElement.childNodes.length; i++) {
-								ratingElement.childNodes[i].className = null;
-							}
-
-							e.target.className = "selected";
-						}
-					};
-
-					var ratingElement = document.getElementById("ratingSelect");
-					for (var i = 0; i < ratingElement.childNodes.length; i++) {
-						ratingElement.childNodes[i].addEventListener("click", onRatingSelect);
-					}
-
-					document.getElementById("reviewSubmit").addEventListener("click", function() {
-						var review = document.getElementById("reviewContent").innerText;
-						var ratingElement = document.getElementById("ratingSelect");
-						var rating = 0;
-						for (var i = 0; i < ratingElement.childNodes.length; i++) {
-							if (ratingElement.childNodes[i].className.indexOf("selected") >= 0) {
-								rating = 5 - i;
-								break;
-							}
-						}
-
-						if (rating > 0) {
-							if (review.length > 50 && review.length < 500) {
-								setReview(args.package, currentUser, rating, review, function() {
-									console.log("yay, stuff");
-									window.history.back();
-								}, true);
-							} else {
-								var errorElement = document.getElementById("reviewErrorMessage");
-								errorElement.innerText = "Reviews should be between 50 and 1000 characters.";
-								errorElement.style.display = null;
-							}
-						} else {
-							var errorElement = document.getElementById("reviewErrorMessage");
-							errorElement.innerText = "You must specify a rating before submitting a review!";
-							errorElement.style.display = null;
-						}
-					});
-					shouldScrollTop = false;
 				} else if (args.package) {
 					ElementUtils.clearElement(main);
 

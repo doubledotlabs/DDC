@@ -58,8 +58,9 @@ function getUserReviews(id, fun, ignore) {
 function getReview(id, fun, ignore) {
 	callFirebaseFunction("getReview?reviewId=" + id, fun, function(error) {
 		console.error("Failed to fetch review", error);
-		if (!ignore)
-			setPage("page=404", true);
+		if (ignore)
+			fun();
+		else setPage("page=404", true);
 	});
 }
 
