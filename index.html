@@ -223,6 +223,7 @@
 		function setPage(page, replace) {
 			document.body.style.background = null;
 			main.style.background = null;
+			searchElement.value = "";
 			var shouldScrollTop = true;
 
 			var args = page;
@@ -570,9 +571,12 @@
 				if (args.query && args.query.length > 0) {
 					searchElement.value = args.query;
 					searchApps(args.query, function(apps) {
-						console.log(apps);
 						ElementUtils.clearElement(main);
-						ElementUtils.append(main, ListMethods.overflow({}, apps, AppMethods.tinyCard));
+						if (apps && apps.length > 0) {
+							ElementUtils.append(main, ListMethods.overflow({}, apps, AppMethods.tinyCard));
+						} else {
+							ElementUtils.append(main, "<div class=\"indented\" style=\"text-align: center;\"><p style=\"color: rgba(0, 0, 0, 0.5); color: var(--normal-color-half);\">Unfortunately, it seems there aren\'t any results for your search query.</p></div>");
+						}
 					});
 				} else {
 					ElementUtils.append(main, "<div class=\"indented\" style=\"text-align: center;\"><p style=\"color: rgba(0, 0, 0, 0.5); color: var(--normal-color-half);\">Type something, then press \'enter\' to search...</p></div>");
