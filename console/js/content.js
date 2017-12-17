@@ -20,5 +20,5 @@ function setAppDescription(id, description, fun, ignore) {
 		} else {
 			setPage("page=404", true);
 		}
-	})
+	});
 }
