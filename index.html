@@ -210,6 +210,7 @@
 		var main = document.getElementById("main");
 		var footer = document.getElementById("footer");
 		var signInElement = document.getElementById("signin");
+		var searchElement = document.getElementById("search");
 		var profileElement = document.getElementById("profile");
 		var profileNameElement = document.getElementById("profileName");
 		var profileEmailElement = document.getElementById("profileEmail");
@@ -564,6 +565,18 @@
 						return;
 					}
 				}
+			} else if (args.page == "search") {
+				ElementUtils.clearElement(main);
+				if (args.query && args.query.length > 0) {
+					searchElement.value = args.query;
+					searchApps(args.query, function(apps) {
+						console.log(apps);
+						ElementUtils.clearElement(main);
+						ElementUtils.append(main, ListMethods.overflow({}, apps, AppMethods.tinyCard));
+					});
+				} else {
+					ElementUtils.append(main, "<div class=\"indented\" style=\"text-align: center;\"><p style=\"color: rgba(0, 0, 0, 0.5); color: var(--normal-color-half);\">Type something, then press \'enter\' to search...</p></div>");
+				}
 			} else {
 				page = "page=404";
 				ElementUtils.clearElement(main);
@@ -842,6 +855,18 @@
 				setPage("page=404");
 			});
 		}
+
+		searchElement.addEventListener("click", function() {
+			if (UrlUtils.getCurrentArguments().page != "search") {
+				setPage("page=search");
+			}
+		});
+
+		searchElement.addEventListener("keyup", function(e) {
+			if (e.keyCode == 13) {
+				setPage("page=search&query=" + searchElement.value, UrlUtils.getCurrentArguments().page == "search");
+			}
+		});
 
 		function onSizeChange() {
 			footer.style.position = null;

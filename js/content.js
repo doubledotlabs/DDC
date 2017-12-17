@@ -31,6 +31,16 @@ function getApp(id, fun, ignore) {
 	});
 }
 
+function searchApps(query, fun, ignore) {
+	callFirebaseFunction("searchApps?queryText=" + query, fun, function(error) {
+		if (ignore) {
+			fun();
+		} else {
+			setPage("page=404", true);
+		}
+	});
+}
+
 function getUser(id, fun, ignore) {
 	callFirebaseFunction("getUser?userId=" + id, fun, function(error) {
 		console.error("Failed to fetch app", error);
