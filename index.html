@@ -368,7 +368,7 @@
 					getReview(args.id, function(review) {
 						ElementUtils.clearElement(main);
 						ElementUtils.append(main, "<div class=\"single\">" + ReviewMethods.normal(review) + "</div>"
-							+ (review.author.id == currentUser.uid ? "<hr><a style=\"display: block; text-align: center; padding: 0.5em 0;\" href=\"javascript:setPage(\'page=reviews&package=" + review.app.package + "&write\');\"><i class=\"material-icons\">rate_review</i>Edit</a>" : ""));
+							+ (currentUser && review.author.id == currentUser.uid ? "<hr><a style=\"display: block; text-align: center; padding: 0.5em 0;\" href=\"javascript:setPage(\'page=reviews&package=" + review.app.package + "&write\');\"><i class=\"material-icons\">rate_review</i>Edit</a>" : ""));
 					});
 				} else if (args.write) {
 					if (currentUser) {
