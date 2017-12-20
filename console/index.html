@@ -406,8 +406,8 @@
 
 						var releaseHtml = (app.releases && app.releases[0] ? ReleaseMethods.console(app.releases[0]) : null);
 
-						ElementUtils.append(main, "<div class=\"header loadingimage editable\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"
-							+ "<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon editable\" src=\"" + app.icon + "\"><button class=\"outline\" onclick=\"setPage(\'page=app&package=" + app.package + "&edit=page\');\">EDIT PAGE</button></div>"
+						ElementUtils.append(main, "<div id=\"editHeaderImage\" class=\"header loadingimage editable\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"
+							+ "<div class=\"appinfo\"><div class=\"appiconinfo\"><img id=\"editIconImage\" class=\"appicon editable\" src=\"" + app.icon + "\"><button class=\"outline\" onclick=\"setPage(\'page=app&package=" + app.package + "&edit=page\');\">EDIT PAGE</button></div>"
 							+ "<div class=\"appnameinfo\"><h1>" + app.name + "</h1><p>" + app.summary + "</p>"
 							+ ListMethods.overflow({}, app.links, linksMethod) + "</div></div>"
 							+ (releaseHtml ? "<hr>" + releaseHtml.substring(30, releaseHtml.length - 6)
@@ -417,6 +417,45 @@
 							+ "<div class=\"appdesc\"><p>" + app.description + "</p><a class=\"link\" href=\"javascript:setPage(\'page=app&package=" + app.package + "&edit=description\')\"><i class=\"material-icons\">edit</i>EDIT DESCRIPTION</a></div>"
 							+ (app.reviews && app.reviews.length > 0 ? ListMethods.grid({"name": "Reviews"}, app.reviews, ReviewMethods.console)
 						 	+ "<a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "\');\"><i class=\"material-icons\">open_in_new</i>ALL REVIEWS</a>" : "") + "<br><br><br>");
+
+						var editHeaderImageElement = document.getElementById("editHeaderImage");
+						editHeaderImageElement.addEventListener("click", function() {
+							if (window.File && window.FileReader && window.FileList && window.Blob) {
+								var inputElement = ElementUtils.createElement("<input type=\"file\" accept=\"image/*\"></input>").childNodes[0];
+								inputElement.click();
+								inputElement.addEventListener("change", function() {
+									if (FileReader && inputElement.files && inputElement.files[0]) {
+        						var reader = new FileReader();
+        						reader.onload = function() {
+            					//editHeaderImageElement.src = reader.result;
+											//what.
+        						}
+        						reader.readAsDataURL(inputElement.files[0]);
+    							}
+								});
+							} else {
+								//error
+							}
+						});
+
+						var editIconImageElement = document.getElementById("editIconImage");
+						editIconImageElement.addEventListener("click", function() {
+							if (window.File && window.FileReader && window.FileList && window.Blob) {
+								var inputElement = ElementUtils.createElement("<input type=\"file\" accept=\"image/*\"></input>").childNodes[0];
+								inputElement.click();
+								inputElement.addEventListener("change", function() {
+										if (FileReader && inputElement.files && inputElement.files[0]) {
+	        						var reader = new FileReader();
+	        						reader.onload = function() {
+	            					editIconImageElement.src = reader.result;
+	        						}
+	        						reader.readAsDataURL(inputElement.files[0]);
+	    							}
+								});
+							} else {
+								//error
+							}
+						});
 					});
 				}
 			} else if (args.page == "reviews") {
