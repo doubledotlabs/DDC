@@ -342,12 +342,9 @@
 					if (args.edit == "page") {
 						getApp(args.package, function(app) {
 							ElementUtils.clearElement(main);
-
-							document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
-							main.style.background = "rgb(20, 29, 38)";
-							ElementUtils.append(main, "<div class=\"header loadingimage\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"
-								+ "<div class=\"appinfo\"><div class=\"appiconinfo\"><img class=\"appicon\" src=\"" + app.icon + "\"></div>"
-								+ "<div class=\"appnameinfo\"><h1><div id=\"editAppName\" class=\"input long\" contentEditable=\"true\" placeholder=\"App Name\">" + app.name + "</div></h1>"
+							ElementUtils.append(main, "<div class=\"header\" style=\"height: 5em;\"></div>"
+								+ "<div class=\"appinfo\">"
+								+ "<div class=\"appnameinfo\" style=\"width: 100%;\"><h1><div id=\"editAppName\" class=\"input long\" contentEditable=\"true\" placeholder=\"App Name\">" + app.name + "</div></h1>"
 								+ "<div id=\"editAppSummary\" class=\"input long\" contentEditable=\"true\" placeholder=\"Summary\">" + app.summary + "</div>"
 								+ ListMethods.overflow({}, app.links, linksMethod) + "<br><button id=\"editAppSubmit\" class=\"outline indented\" style=\"float: right;\">SUBMIT</button></div></div><br>");
 

@@ -1123,6 +1123,10 @@ p.indented {
 		display: inline-block;
 		padding: 0 2em;
 		transform: translateY(7em);
+		max-width: calc(100% - 4em);
+	}
+
+	.appiconinfo ~ .appnameinfo {
 		max-width: calc(100% - 16em);
 	}
 
