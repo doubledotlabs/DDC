@@ -193,12 +193,42 @@ img.appicon {
 	transform: scale(0.5);
 }
 
+img.appicon.editable {
+	border: 2px solid transparent;
+	transition: border-color .25s, background-color .25s, filter .25s;
+	filter: brightness(1);
+	cursor: pointer;
+}
+
+img.appicon.editable:hover {
+	border: 2px solid #000;
+	border: 2px solid var(--normal-color);
+	filter: brightness(1.5);
+}
+
 img.appicon.loaded {
 	animation-name: fadeScaleIn;
 	animation-duration: .5s;
 	animation-timing-function: cubic-bezier(0.18, 0.89, 0.67, 1.76);
 	animation-fill-mode: forwards;
 	animation-delay: .2s;
+}
+
+.header.editable {
+	border: 2px solid transparent;
+	filter: brightness(0.5);
+	transition: border-color .25s, filter .25s;
+	cursor: pointer;
+}
+
+.header.editable:hover {
+	border: 2px solid #000;
+	border: 2px solid var(--normal-color);
+	filter: brightness(1.5);
+}
+
+.header.editable:hover ~ .appinfo > .appiconinfo > img.appicon.editable {
+	filter: brightness(0.5);
 }
 
 .appnameinfo > .row {
