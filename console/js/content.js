@@ -22,3 +22,23 @@ function setAppDescription(id, description, fun, ignore) {
 		}
 	});
 }
+
+function setAppHeader(id, file, fun, ignore) {
+	firebase.storage().ref().child("apps/" + id.split(".").join("_") + "/images/header." + file.name.split('.').pop()).put(file).then(fun, function() {
+		if (ignore) {
+			fun(file);
+		} else {
+			setPage("page=404", true);
+		}
+	});
+}
+
+function setAppIcon(id, file, fun, ignore) {
+	firebase.storage().ref().child("apps/" + id.split(".").join("_") + "/images/icon." + file.name.split('.').pop()).put(file).then(fun, function() {
+		if (ignore) {
+			fun(file);
+		} else {
+			setPage("page=404", true);
+		}
+	});
+}

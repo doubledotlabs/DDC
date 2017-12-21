@@ -425,12 +425,13 @@
 								inputElement.click();
 								inputElement.addEventListener("change", function() {
 									if (FileReader && inputElement.files && inputElement.files[0]) {
-        						var reader = new FileReader();
-        						reader.onload = function() {
-            					//editHeaderImageElement.src = reader.result;
-											//what.
-        						}
-        						reader.readAsDataURL(inputElement.files[0]);
+										setAppHeader(app.package, inputElement.files[0], function() {
+											var reader = new FileReader();
+	        						reader.onload = function() {
+	            					editHeaderImageElement.style.background = "url(\'" + reader.result + "\') center / cover no-repeat";
+	        						}
+	        						reader.readAsDataURL(inputElement.files[0]);
+										});
     							}
 								});
 							} else {
@@ -444,6 +445,7 @@
 								var inputElement = ElementUtils.createElement("<input type=\"file\" accept=\"image/*\"></input>").childNodes[0];
 								inputElement.click();
 								inputElement.addEventListener("change", function() {
+									setAppIcon(app.package, inputElement.files[0], function() {
 										if (FileReader && inputElement.files && inputElement.files[0]) {
 	        						var reader = new FileReader();
 	        						reader.onload = function() {
@@ -451,6 +453,7 @@
 	        						}
 	        						reader.readAsDataURL(inputElement.files[0]);
 	    							}
+									});
 								});
 							} else {
 								//error
