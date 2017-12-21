@@ -369,24 +369,6 @@
   							})
 								+ "</div><button id=\"editDescriptionSubmit\" class=\"outline\" style=\"float: right;\">SUBMIT</button></div>");
 
-							var editDescriptionElement = document.getElementById("editDescription");
-							editDescriptionElement.addEventListener("keyup", function() {
-								if (window.getSelection) {
-									var selection = window.getSelection();
-									var start = selection.anchorOffset;
-									var end = selection.focusOffset;
-
-									editDescriptionElement.innerHTML = editDescriptionElement.innerText;
-
-									var range = document.createRange();
-									var sel = window.getSelection();
-									range.setStart(editDescriptionElement.childNodes[0], start);
-									range.setEnd(editDescriptionElement.childNodes[0], end);
-									sel.removeAllRanges();
-									sel.addRange(range);
-								}
-							});
-
 							document.getElementById("editDescriptionSubmit").addEventListener("click", function() {
 								setAppDescription(args.package, editDescriptionElement.innerHTML, function() {
 									window.history.back();
@@ -579,7 +561,7 @@
 		}
 
 		window.onresize = onSizeChange;
-		ElementUtils.addImageLoadListener(document.body);
+		ElementUtils.addElementListenerStuff(document.body);
 	</script>
 </body>
 </html>

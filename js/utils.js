@@ -67,7 +67,7 @@ ElementUtils.append = function(element, html) {
 	var child = ElementUtils.createElement(html);
 	element.appendChild(child);
 
-	ElementUtils.addImageLoadListener(element);
+	ElementUtils.addElementListenerStuff(element);
 
 	if (onSizeChange)
 		onSizeChange();
@@ -78,7 +78,7 @@ ElementUtils.append = function(element, html) {
 	}
 };
 
-ElementUtils.addImageLoadListener = function(element) {
+ElementUtils.addElementListenerStuff = function(element) {
 	if (element.nodeName == "img" || element.nodeName == "IMG") {
 		element.addEventListener("load", function() {
 			if (!element.className) {
@@ -108,8 +108,28 @@ ElementUtils.addImageLoadListener = function(element) {
 	} else if (element.childNodes.length > 0) {
 		var children = element.childNodes;
 		for (var i = 0; i < children.length; i++) {
-			ElementUtils.addImageLoadListener(children[i]);
+			ElementUtils.addElementListenerStuff(children[i]);
 		}
+	}
+
+	if (element.getAttribute && element.getAttribute("contentEditable")) {
+		element.innerHTML = element.innerText;
+		element.addEventListener("keyup", function() {
+			if (window.getSelection) {
+				var selection = window.getSelection();
+				var start = selection.anchorOffset;
+				var end = selection.focusOffset;
+
+				element.innerHTML = element.innerText;
+
+				var range = document.createRange();
+				var sel = window.getSelection();
+				range.setStart(element.childNodes[0], start);
+				range.setEnd(element.childNodes[0], end);
+				sel.removeAllRanges();
+				sel.addRange(range);
+			}
+		});
 	}
 }
 
