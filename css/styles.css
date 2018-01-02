@@ -348,7 +348,7 @@ a.link {
 }
 
 .link.editable {
-	padding: 1.2em;
+	padding: 1em 1.2em;
 	margin: 0.3em;
 	min-width: 200px;
 	max-width: calc(100% - 0.6em);

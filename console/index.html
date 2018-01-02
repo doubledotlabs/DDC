@@ -346,7 +346,7 @@
 								+ "<div class=\"appinfo\">"
 								+ "<div class=\"appnameinfo\" style=\"width: 100%;\"><h1><div id=\"editAppName\" class=\"input long\" contentEditable=\"true\" placeholder=\"App Name\">" + app.name + "</div></h1>"
 								+ "<div id=\"editAppSummary\" class=\"input long\" contentEditable=\"true\" placeholder=\"Summary\">" + app.summary + "</div>"
-								+ ListMethods.overflow({}, app.links, LinkMethods.editable) + "<br><button id=\"editAppSubmit\" class=\"outline indented\" style=\"float: right;\">SUBMIT</button></div></div><br>");
+								+ "<div class=\"row overflow\" style=\"text-align: center; justify-content: center;\">" + ListMethods.none({}, app.links, LinkMethods.editable) + "</div><br><button id=\"editAppSubmit\" class=\"outline indented\" style=\"float: right;\">SUBMIT</button></div></div><br>");
 
 							document.getElementById("editAppSubmit").addEventListener("click", function() {
 								var editAppNameElement = document.getElementById("editAppName");
