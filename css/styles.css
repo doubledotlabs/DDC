@@ -704,8 +704,13 @@ p.indented {
 	margin: 0.5em 0;
 }
 
-.userinfo > span:nth-of-type(1) {
+.userinfo:not(.editable) > span:nth-of-type(1) {
 	font-size: 2em;
+}
+
+.userinfo.editable > .input:nth-of-type(1) {
+	font-size: 2em;
+	margin-top: 1em;
 }
 
 .userinfo > .overflow {

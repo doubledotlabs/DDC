@@ -501,7 +501,7 @@
 			} else if (args.page == "user") {
 				ElementUtils.clearElement(main);
 
-				if (args.id) {
+				if (args.id && !(currentUser && args.id == currentUser.uid)) {
 					getUser(args.id, function(user) {
 						ElementUtils.clearElement(main);
 
@@ -527,41 +527,66 @@
 					});
 				} else {
 					if (currentUser) {
-						ElementUtils.append(main, "<div class=\"userinfo\">"
-							+ "<img class=\"userimage\" src=\"" + currentUser.photoURL + "\">"
-							+ "<span>" + currentUser.displayName + "</span>"
-							+ "<span>" + currentUser.email + "</span>"
-							+ "<div class=\"row overflow\">"
-							+ "<a class=\"link\" href=\"javascript:setPage(\'page=user&edit\');\"><i class=\"material-icons\">edit</i>EDIT</a>"
-							+ "<a class=\"link\" href=\"javascript:signOut();\"><i class=\"material-icons\">exit_to_app</i>SIGN OUT</a>"
-							+ "</div>"
-							+ "</div>");
+						if (args.edit) {
+							ElementUtils.append(main, "<div class=\"userinfo editable\">"
+								+ "<img class=\"userimage\" src=\"" + currentUser.photoURL + "\">"
+								+ "<div class=\"input long\" contentEditable=\"true\">" + currentUser.displayName + "</div>"
+								+ "<span>" + currentUser.email + "</span>"
+								+ "<div class=\"row overflow\">"
+								+ "<a class=\"link\" href=\"javascript:signOut();\"><i class=\"material-icons\">exit_to_app</i>SIGN OUT</a>"
+								+ "</div>"
+								+ "</div>");
 
-						getUser(currentUser.uid, function(user) {
-							if (main.childNodes.length != 1)
-								return;
+								getUser(currentUser.uid, function(user) {
+									if (main.childNodes.length != 1)
+										return;
 
-							var html = "";
-							if (user.links && user.links.length > 0) {
-								html += "<hr><div class=\"userinfo\">"
-									+ ListMethods.overflow({}, user.links, linksMethod)
-									+ "</div>";
-							}
+									var html = "";
+									if (user.links && user.links.length > 0) { //TODO: edit links
+										html += "<hr><div class=\"userinfo\">"
+											+ ListMethods.overflow({}, user.links, linksMethod)
+											+ "</div>";
+									}
 
-							if (user.apps && user.apps.length > 0) {
-								html += "<hr>"
-									+ "<h1 class=\"indented\">Apps</h1>"
-								  + ListMethods.overflow({}, user.apps, AppMethods.tinyCard);
-							}
+									ElementUtils.append(main, html);
+								}, true);
+						} else {
+							ElementUtils.append(main, "<div class=\"userinfo\">"
+								+ "<img class=\"userimage\" src=\"" + currentUser.photoURL + "\">"
+								+ "<span>" + currentUser.displayName + "</span>"
+								+ "<span>" + currentUser.email + "</span>"
+								+ "<div class=\"row overflow\">"
+								+ "<a class=\"link\" href=\"javascript:setPage(\'page=user&edit\');\"><i class=\"material-icons\">edit</i>EDIT</a>"
+								+ "<a class=\"link\" href=\"javascript:signOut();\"><i class=\"material-icons\">exit_to_app</i>SIGN OUT</a>"
+								+ "</div>"
+								+ "</div>");
 
-							if (user.reviews && user.reviews.length > 0) {
-								html += "<hr>"
-									+ "<h1 class=\"indented\">Reviews</h1>"
-									+ ListMethods.grid({}, user.reviews, ReviewMethods.normal);
-							}
+							getUser(currentUser.uid, function(user) {
+								if (main.childNodes.length != 1)
+									return;
 
-							ElementUtils.append(main, html);
-						}, true);
+								var html = "";
+								if (user.links && user.links.length > 0) {
+									html += "<hr><div class=\"userinfo\">"
+										+ ListMethods.overflow({}, user.links, linksMethod)
+										+ "</div>";
+								}
+
+								if (user.apps && user.apps.length > 0) {
+									html += "<hr>"
+										+ "<h1 class=\"indented\">Apps</h1>"
+									  + ListMethods.overflow({}, user.apps, AppMethods.tinyCard);
+								}
+
+								if (user.reviews && user.reviews.length > 0) {
+									html += "<hr>"
+										+ "<h1 class=\"indented\">Reviews</h1>"
+										+ ListMethods.grid({}, user.reviews, ReviewMethods.normal);
+								}
+
+								ElementUtils.append(main, html);
+							}, true);
+						}
 					} else {
 						setPage("page=404");
 						return;
