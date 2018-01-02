@@ -353,6 +353,11 @@ a.link {
 	border: 0.1em solid var(--accent-color);
 	margin: 0.3em;
 	min-width: 200px;
+	max-width: calc(100% - 0.6em);
+}
+
+.link.editable > * {
+	max-width: 100%;
 }
 
 p > a {
@@ -455,6 +460,7 @@ p.indented {
 	border-bottom: 1px solid var(--accent-color);
 	padding-bottom: 0.35em;
 	margin-bottom: 1em;
+	white-space: pre-wrap;
 }
 
 .rating {

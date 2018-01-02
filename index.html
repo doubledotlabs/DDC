@@ -531,10 +531,6 @@
 							ElementUtils.append(main, "<div class=\"userinfo editable\">"
 								+ "<img class=\"userimage\" src=\"" + currentUser.photoURL + "\">"
 								+ "<div class=\"input long\" contentEditable=\"true\">" + currentUser.displayName + "</div>"
-								+ "<span>" + currentUser.email + "</span>"
-								+ "<div class=\"row overflow\">"
-								+ "<a class=\"link\" href=\"javascript:signOut();\"><i class=\"material-icons\">exit_to_app</i>SIGN OUT</a>"
-								+ "</div>"
 								+ "</div>");
 
 								getUser(currentUser.uid, function(user) {
@@ -543,7 +539,7 @@
 
 									var html = "";
 									if (user.links && user.links.length > 0) { //TODO: edit links
-										html += "<hr><div class=\"userinfo\">"
+										html += "<div class=\"userinfo\">"
 											+ ListMethods.overflow({}, user.links, LinkMethods.editable)
 											+ "</div>";
 									}
