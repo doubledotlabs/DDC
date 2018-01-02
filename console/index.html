@@ -346,7 +346,7 @@
 								+ "<div class=\"appinfo\">"
 								+ "<div class=\"appnameinfo\" style=\"width: 100%;\"><h1><div id=\"editAppName\" class=\"input long\" contentEditable=\"true\" placeholder=\"App Name\">" + app.name + "</div></h1>"
 								+ "<div id=\"editAppSummary\" class=\"input long\" contentEditable=\"true\" placeholder=\"Summary\">" + app.summary + "</div>"
-								+ ListMethods.overflow({}, app.links, linksMethod) + "<br><button id=\"editAppSubmit\" class=\"outline indented\" style=\"float: right;\">SUBMIT</button></div></div><br>");
+								+ ListMethods.overflow({}, app.links, LinkMethods.editable) + "<br><button id=\"editAppSubmit\" class=\"outline indented\" style=\"float: right;\">SUBMIT</button></div></div><br>");
 
 							document.getElementById("editAppSubmit").addEventListener("click", function() {
 								var editAppNameElement = document.getElementById("editAppName");
@@ -391,7 +391,7 @@
 						ElementUtils.append(main, "<div id=\"editHeaderImage\" class=\"header loadingimage editable\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"
 							+ "<div class=\"appinfo\"><div class=\"appiconinfo\"><img id=\"editIconImage\" class=\"appicon editable\" src=\"" + app.icon + "\"><button class=\"outline\" onclick=\"setPage(\'page=app&package=" + app.package + "&edit=page\');\">EDIT PAGE</button></div>"
 							+ "<div class=\"appnameinfo\"><h1>" + app.name + "</h1><p>" + app.summary + "</p>"
-							+ ListMethods.overflow({}, app.links, linksMethod) + "</div></div>"
+							+ ListMethods.overflow({}, app.links, LinkMethods.normal) + "</div></div>"
 							+ (releaseHtml ? "<hr>" + releaseHtml.substring(30, releaseHtml.length - 6)
 							+ "<a class=\"indented\" href=\"javascript:setPage(\'page=releases&package=" + args.package + "\');\"><i class=\"material-icons\">open_in_new</i>ALL RELEASES</a>" : "")
 							+ "<a class=\"indented\" href=\"javascript:setPage(\'page=releases&package=" + args.package + "&edit=new\');\"><i class=\"material-icons\">add</i>NEW RELEASE</a><br><br><br>"

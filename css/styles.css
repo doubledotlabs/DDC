@@ -347,6 +347,14 @@ a.link {
 	padding: 0.5em 0;
 }
 
+.link.editable {
+	padding: 1.2em;
+	border: 0.1em solid #2962FF;
+	border: 0.1em solid var(--accent-color);
+	margin: 0.3em;
+	min-width: 200px;
+}
+
 p > a {
 	text-decoration: underline;
 }

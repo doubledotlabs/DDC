@@ -151,7 +151,8 @@ DownloadMethods.consoleEdit = function(download) {
 		+ "</div>";
 };
 
-function linksMethod(link) {
+var LinkMethods = {};
+LinkMethods.normal = function(link) {
   var icon = "link";
   if (link.type == "source")
     icon = "code";
@@ -173,6 +174,10 @@ function linksMethod(link) {
     icon = "gavel";
 
   return "<a class=\"link\" href=\"" + link.url + "\"><i class=\"material-icons\">" + icon + "</i>" + link.name.toUpperCase() + "</a>";
+};
+
+LinkMethods.editable = function(link) {
+	return "<div class=\"link editable\"><div class=\"input long\" contentEditable=\"true\" placeholder=\"Link Title\">" + link.name + "</div><div class=\"input long\" contentEditable=\"true\" placeholder=\"Link URL\">" + link.url + "</div></div>";
 }
 
 function ratingMethod(rating, color) {
