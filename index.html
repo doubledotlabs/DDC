@@ -537,14 +537,27 @@
 									if (main.childNodes.length != 1)
 										return;
 
-									var html = "";
 									if (user.links && user.links.length > 0) { //TODO: edit links
-										html += "<div class=\"userinfo\">"
-											+ ListMethods.overflow({}, user.links, LinkMethods.editable)
-											+ "</div>";
-									}
+										ElementUtils.append(main, "<div class=\"userinfo\">"
+											+ "<div id=\"editLinks\" class=\"row overflow\" style=\"text-align: center; justify-content: center;\">"
+											+ ListMethods.none({}, user.links, LinkMethods.editable)
+											+ "<div style=\"width: 100%;\"><a id=\"editAddLink\"><i class=\"material-icons\">add</i></a><a id=\"editRemoveLink\"><i class=\"material-icons\">remove</i></a></div>"
+											+ "</div></div>");
 
-									ElementUtils.append(main, html);
+										var editLinksElement = document.getElementById("editLinks");
+										var editAddLinkElement = document.getElementById("editAddLink");
+										var editRemoveLinkElement = document.getElementById("editRemoveLink");
+
+										editAddLinkElement.addEventListener("click", function() {
+											if (editLinksElement.childNodes.length < 10)
+												editLinksElement.insertBefore(ElementUtils.createElement(LinkMethods.editable()), editLinksElement.lastChild);
+										});
+
+										editRemoveLinkElement.addEventListener("click", function() {
+											if (editLinksElement.childNodes.length >= 2)
+												editLinksElement.removeChild(editLinksElement.childNodes[editLinksElement.childNodes.length - 2]);
+										});
+									}
 								}, true);
 						} else {
 							ElementUtils.append(main, "<div class=\"userinfo\">"
