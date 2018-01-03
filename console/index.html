@@ -346,13 +346,38 @@
 								+ "<div class=\"appinfo\">"
 								+ "<div class=\"appnameinfo\" style=\"width: 100%;\"><h1><div id=\"editAppName\" class=\"input long\" contentEditable=\"true\" placeholder=\"App Name\">" + app.name + "</div></h1>"
 								+ "<div id=\"editAppSummary\" class=\"input long\" contentEditable=\"true\" placeholder=\"Summary\">" + app.summary + "</div>"
-								+ "<div class=\"row overflow\" style=\"text-align: center; justify-content: center;\">" + ListMethods.none({}, app.links, LinkMethods.editable) + "</div><br><button id=\"editAppSubmit\" class=\"outline indented\" style=\"float: right;\">SUBMIT</button></div></div><br>");
+								+ "<div id=\"editLinks\" class=\"row overflow\" style=\"text-align: center; justify-content: center;\">" + ListMethods.none({}, app.links, LinkMethods.editable) + "</div><br><button id=\"editAppSubmit\" class=\"outline indented\" style=\"float: right;\">SUBMIT</button></div></div><br>");
 
 							document.getElementById("editAppSubmit").addEventListener("click", function() {
 								var editAppNameElement = document.getElementById("editAppName");
 								var editAppSummaryElement = document.getElementById("editAppSummary");
+								var editLinksElement = document.getElementById("editLinks");
 
-								setAppPage(args.package, editAppNameElement.innerText, editAppSummaryElement.innerText, app.links, function() {
+								var links = [];
+								for (var i = 0; i < editLinksElement.childNodes.length; i++) {
+									var linkName, linkUrl;
+									var child = editLinksElement.childNodes[i];
+									if (child.tagName.toLowerCase() == "div") {
+										if (child.childNodes[0] && child.childNodes[0].tagName.toLowerCase() == "div") {
+											linkName = child.childNodes[0].innerText;
+										}
+
+										if (child.childNodes[1] && child.childNodes[1].tagName.toLowerCase() == "div") {
+											linkUrl = child.childNodes[1].innerText;
+										}
+
+										if (linkName && linkUrl) {
+											links.push({
+												"name": linkName,
+												"url": linkUrl
+											});
+										}
+									}
+								}
+
+								console.log(links);
+
+								setAppPage(args.package, editAppNameElement.innerText, editAppSummaryElement.innerText, links, function() {
 									window.history.back();
 								});
 							});
