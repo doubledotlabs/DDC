@@ -177,7 +177,7 @@ LinkMethods.normal = function(link) {
 };
 
 LinkMethods.editable = function(link) {
-	return "<div class=\"link editable\"><div class=\"input long\" contentEditable=\"true\" placeholder=\"Link Title\">" + link.name + "</div><div class=\"input long\" contentEditable=\"true\" placeholder=\"Link URL\">" + link.url + "</div></div>";
+	return "<div class=\"link editable\"><div class=\"input long\" contentEditable=\"true\" placeholder=\"Link Title\">" + (link && link.name ? link.name : "") + "</div><div class=\"input long\" contentEditable=\"true\" placeholder=\"Link URL\">" + (link && link.url ? link.url : "") + "</div></div>";
 }
 
 function ratingMethod(rating, color) {
