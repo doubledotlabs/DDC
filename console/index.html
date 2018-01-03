@@ -347,7 +347,7 @@
 								+ "<div class=\"appnameinfo\" style=\"width: 100%;\"><h1><div id=\"editAppName\" class=\"input long\" contentEditable=\"true\" placeholder=\"App Name\">" + app.name + "</div></h1>"
 								+ "<div id=\"editAppSummary\" class=\"input long\" contentEditable=\"true\" placeholder=\"Summary\">" + app.summary + "</div>"
 								+ "<div id=\"editLinks\" class=\"row overflow\" style=\"text-align: center; justify-content: center;\">"
-								+ ListMethods.none({}, app.links, LinkMethods.editable)
+								+ (app.links && app.links.length > 0 ? ListMethods.none({}, app.links, LinkMethods.editable) : LinkMethods.editable())
 								+ "<div style=\"width: 100%;\"><a id=\"editAddLink\"><i class=\"material-icons\">add</i></a><a id=\"editRemoveLink\"><i class=\"material-icons\">remove</i></a></div>"
 								+ "</div><br><button id=\"editAppSubmit\" class=\"outline indented\" style=\"float: right;\">SUBMIT</button></div></div><br>");
 
