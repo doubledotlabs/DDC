@@ -528,21 +528,19 @@
 				} else {
 					if (currentUser) {
 						if (args.edit) {
-							ElementUtils.append(main, "<div class=\"userinfo editable\">"
-								+ "<img class=\"userimage\" src=\"" + currentUser.photoURL + "\">"
-								+ "<div class=\"input long\" contentEditable=\"true\">" + currentUser.displayName + "</div>"
-								+ "</div>");
-
 								getUser(currentUser.uid, function(user) {
-									if (main.childNodes.length != 1)
-										return;
+									ElementUtils.clearElement(main);
 
 									if (user.links && user.links.length > 0) { //TODO: edit links
-										ElementUtils.append(main, "<div class=\"userinfo\">"
+										ElementUtils.append(main, "<div class=\"userinfo editable\">"
+											+ "<img class=\"userimage\" src=\"" + currentUser.photoURL + "\">"
+											+ "<div id=\"editUserName\" class=\"input long\" contentEditable=\"true\">" + user.name + "</div>"
+											+ "</div>"
+											+ "<div class=\"userinfo\">"
 											+ "<div id=\"editLinks\" class=\"row overflow\" style=\"text-align: center; justify-content: center;\">"
 											+ (user.links && user.links.length > 0 ? ListMethods.none({}, user.links, LinkMethods.editable) : LinkMethods.editable())
 											+ "<div style=\"width: 100%;\"><a id=\"editAddLink\"><i class=\"material-icons\">add</i></a><a id=\"editRemoveLink\"><i class=\"material-icons\">remove</i></a></div>"
-											+ "</div></div>");
+											+ "</div><br><button id=\"editUserSubmit\" class=\"outline indented\" style=\"float: right; margin: 2em;\">SUBMIT</button><br><br></div>");
 
 										var editLinksElement = document.getElementById("editLinks");
 										var editAddLinkElement = document.getElementById("editAddLink");
@@ -557,12 +555,42 @@
 											if (editLinksElement.childNodes.length >= 2)
 												editLinksElement.removeChild(editLinksElement.childNodes[editLinksElement.childNodes.length - 2]);
 										});
+
+										document.getElementById("editUserSubmit").addEventListener("click", function() {
+											var editUserNameElement = document.getElementById("editUserName");
+
+											var links = [];
+											for (var i = 0; i < editLinksElement.childNodes.length; i++) {
+												var linkName = null, linkUrl = null;
+												var child = editLinksElement.childNodes[i];
+												if (child.tagName.toLowerCase() == "div") {
+													if (child.childNodes[0] && child.childNodes[0].tagName.toLowerCase() == "div") {
+														linkName = child.childNodes[0].innerText;
+													}
+
+													if (child.childNodes[1] && child.childNodes[1].tagName.toLowerCase() == "div") {
+														linkUrl = child.childNodes[1].innerText;
+													}
+
+													if (linkName && linkUrl) {
+														links.push({
+															"name": linkName,
+															"url": linkUrl
+														});
+													}
+												}
+											}
+
+											setUser(currentUser.uid, editUserNameElement.innerText, links, function() {
+												window.history.back();
+											});
+										});
 									}
 								}, true);
 						} else {
 							ElementUtils.append(main, "<div class=\"userinfo\">"
 								+ "<img class=\"userimage\" src=\"" + currentUser.photoURL + "\">"
-								+ "<span>" + currentUser.displayName + "</span>"
+								+ "<span id=\"userDisplayName\">" + currentUser.displayName + "</span>"
 								+ "<span>" + currentUser.email + "</span>"
 								+ "<div class=\"row overflow\">"
 								+ "<a class=\"link\" href=\"javascript:setPage(\'page=user&edit\');\"><i class=\"material-icons\">edit</i>EDIT</a>"
@@ -573,6 +601,10 @@
 							getUser(currentUser.uid, function(user) {
 								if (main.childNodes.length != 1)
 									return;
+
+								if (currentUser.displayName != user.name) {
+									document.getElementById("userDisplayName").innerText = user.name;
+								}
 
 								var html = "";
 								if (user.links && user.links.length > 0) {

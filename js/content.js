@@ -51,6 +51,19 @@ function getUser(id, fun, ignore) {
 	});
 }
 
+function setUser(id, name, links, fun, ignore) {
+	firebase.database().ref("users/" + id).update({
+		"name": name,
+		"links": links
+	}).then(fun, function(error) {
+		if (ignore) {
+			fun();
+		} else {
+			setPage("page=404", true);
+		}
+	});
+}
+
 function getAppReviews(id, fun, ignore) {
 	callFirebaseFunction("getReviews?appPackage=" + id, fun, function(error) {
 		console.error("Failed to fetch reviews", error);
