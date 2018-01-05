@@ -95,8 +95,13 @@
 
 		#profile {
 			display: flex;
-			align-items: center;
 			max-width: calc(50% - 4em);
+			padding: 0.4em 0;
+		}
+
+		.profile {
+			display: flex;
+			align-items: center;
 		}
 
 		#profilePicture {
@@ -140,6 +145,54 @@
 			font-weight: bold;
 		}
 
+		#profileNotifications {
+			display: none;
+			margin: 1em 0;
+			margin-left: 1em;
+		}
+
+		#notifications {
+			display: none;
+			position: fixed;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			z-index: 105;
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+
+		#notifications.active {
+			display: block;
+			animation-name: fadeIn;
+			animation-duration: .25s;
+		}
+
+		#notificationsPanel {
+			display: inline-block;
+			position: fixed;
+			top: 7em;
+			right: 2em;
+			background-color: white;
+			min-width: 350px;
+			max-width: 80%;
+			min-height: 400px;
+			max-height: 80%;
+			text-align: center;
+			border-radius: 0.25em;
+			box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.37);
+			overflow-x: hidden;
+			overflow-y: auto;
+		}
+
+		#notificationsPanel>.title {
+			display: block;
+			border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+			border-bottom: 1px solid var(--normal-color-tenth);
+			margin: 0;
+			padding: 1em 0;
+		}
+
 		@media(min-width: 400px) {
 			#profileNames {
 				display: block;
@@ -150,6 +203,10 @@
 			#profileEmail {
 				display: inline;
 			}
+
+			#profileNotifications {
+				display: inline-block;
+			}
 		}
 
 		@media(min-width: 900px) {
@@ -158,7 +215,7 @@
 			}
 
 			#profile {
-				max-width: calc(25% - 6em);
+				max-width: calc(25% - 4em);
 			}
 
 			#profileEmail {
@@ -166,7 +223,7 @@
 			}
 		}
 
-		@media(min-width: 1200px) {
+		@media(min-width: 1400px) {
 			#profileEmail {
 				display: inline;
 			}
@@ -180,14 +237,22 @@
 		<button id="signin" class="outline" onclick="setPage('page=signin');">
 			SIGN IN
 		</button>
-		<span id="profile" style="display: none;" onclick="setPage('page=user');">
-			<div id="profileNames">
-				<span id="profileName"></span><br>
-				<span id="profileEmail"></span>
+		<span id="profile" style="display: none;">
+			<div class="profile" onclick="setPage('page=user');">
+			  <div id="profileNames">
+				  <span id="profileName"></span><br>
+				  <span id="profileEmail"></span>
+				</div>
+			  <img id="profilePicture" class="userimage loadingimage">
 			</div>
-			<img id="profilePicture" class="userimage loadingimage">
+			<a id="profileNotifications" onclick="document.getElementById('notifications').className='active';"><i class="material-icons">notifications</i></a>
 		</span>
 	</header>
+	<div id="notifications" onclick="this.className=null;">
+		<div id="notificationsPanel">
+			<h4 class="title">Notifications</h4>
+		</div>
+	</div>
 	<main id="main"></main>
 	<footer id="footer">
 		<span>DDStore is developed and maintained by <a href="https://doubledotlabs.github.io/">Double Dot Labs</a></span>
