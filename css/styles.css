@@ -71,6 +71,7 @@ header {
 footer {
 	background-color: #FFF;
 	background-color: var(--normal-background);
+	clear: both;
 	padding: 2em;
 	text-align: center;
 	bottom: 0;
