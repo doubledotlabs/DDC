@@ -61,10 +61,24 @@
       margin: 0;
       padding: 1em 0;
       text-align: center;
+			user-select: none;
     }
+
+		.title > #clearAll {
+			float: right;
+			padding: 0 1em;
+			margin-left: -2em;
+			color: rgba(0, 0, 0, 0.5);
+			color: var(--normal-color-half);
+		}
+
+		.title > #clearAll > i {
+			transform: none;
+			margin: 0;
+		}
   </style>
 </head>
 <body>
-  <h4 class="title">Notifications</h4>
+  <h4 class="title">Notifications<a id="clearAll"><i class="material-icons">clear_all</i></a></h4>
 </body>
 </html>
