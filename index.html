@@ -145,21 +145,28 @@
 			font-weight: bold;
 		}
 
-		#profileNotifications {
+		#profileNotifications,
+		#profileNotifications2 {
 			display: none;
 			align-items: center;
 			margin-left: 1em;
 		}
 
-		#profileNotifications > i {
+		#profileNotifications > i,
+		#profileNotifications2 > i {
 			transform: none;
 			color: rgba(0, 0, 0, 0.5);
 			color: var(--normal-color-half);
 		}
 
-		#profileNotifications.active > i {
+		#profileNotifications.active > i,
+		#profileNotifications2.active > i {
 			color: #2962FF;
 			color: var(--accent-color);
+		}
+
+		#profileNotifications2 {
+			display: flex;
 		}
 
 		#notifications {
@@ -194,29 +201,26 @@
 			box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.37);
 			overflow-x: hidden;
 			overflow-y: auto;
+			border: none;
 		}
 
-		#notificationsPanel>.title {
-			display: block;
-			border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-			border-bottom: 1px solid var(--normal-color-tenth);
-			margin: 0;
-			padding: 1em 0;
-		}
-
-		@media(min-width: 400px) {
+		@media(min-width: 600px) {
 			#profileNames {
 				display: block;
+			}
+
+			#profileNotifications {
+				display: flex;
+			}
+
+			#profileNotifications2 {
+				display: none;
 			}
 		}
 
 		@media(min-width: 700px) {
 			#profileEmail {
 				display: inline;
-			}
-
-			#profileNotifications {
-				display: flex;
 			}
 		}
 
@@ -249,6 +253,7 @@
 			SIGN IN
 		</button>
 		<span id="profile" style="display: none;">
+			<a id="profileNotifications2" href="./notifications/"><i class="material-icons">notifications</i></a>
 			<div class="profile" onclick="setPage('page=user');">
 			  <div id="profileNames">
 				  <span id="profileName"></span><br>
@@ -260,9 +265,7 @@
 		</span>
 	</header>
 	<div id="notifications" onclick="this.className=null;">
-		<div id="notificationsPanel">
-			<h4 class="title">Notifications</h4>
-		</div>
+		<iframe id="notificationsPanel" src="./notifications/index.html"></iframe>
 	</div>
 	<main id="main"></main>
 	<footer id="footer">
