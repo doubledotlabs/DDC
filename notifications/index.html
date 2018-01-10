@@ -53,7 +53,6 @@
   <link href="../css/styles.css" rel="stylesheet">
 
   <style>
-
     .title {
       display: block;
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -76,9 +75,53 @@
 			transform: none;
 			margin: 0;
 		}
+
+		.notification {
+			padding: 0.8em 1em;
+			border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+			border-bottom: 1px solid var(--normal-color-tenth);
+			cursor: pointer;
+
+			-moz-transition: background-color .25s;
+			-o-transition: background-color .25s;
+			-webkit-transition: background-color .25s;
+			transition: background-color .25s;
+		}
+
+		.notification:hover {
+			background-color: rgba(0, 0, 0, 0.1);
+			background-color: var(--normal-color-tenth);
+		}
+
+		.notification > h4 {
+			padding: 0;
+			margin: 0;
+		}
   </style>
 </head>
 <body>
   <h4 class="title">Notifications<a id="clearAll"><i class="material-icons">clear_all</i></a></h4>
+	<div id="notifications">
+		<div class="notification">
+			<h4>New 5-star review for <a>Media Notification</a>.</h4>
+			<small>January 12, 2018, 3:54 PM</small>
+		</div>
+		<div class="notification">
+			<h4>New 3-star review for <a>Media Notification</a>.</h4>
+			<small>January 12, 2018, 3:54 PM</small>
+		</div>
+		<div class="notification">
+			<h4>Your update for <a>Media Notification</a> (<a>v3.7</a>) has been approved.</h4>
+			<small>January 12, 2018, 3:54 PM</small>
+		</div>
+		<div class="notification">
+			<h4><a>Joe Person</a> replied to your review for <a>Lucky Patcher</a>.</h4>
+			<small>January 12, 2018, 3:54 PM</small>
+		</div>
+		<div class="notification">
+			<h4>New 3-star review for <a>Media Notification</a>.</h4>
+			<small>January 12, 2018, 3:54 PM</small>
+		</div>
+	</div>
 </body>
 </html>
