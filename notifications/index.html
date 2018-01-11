@@ -53,6 +53,10 @@
   <link href="../css/styles.css" rel="stylesheet">
 
   <style>
+		body {
+			overflow: hidden;
+		}
+
     .title {
       display: block;
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -76,16 +80,34 @@
 			margin: 0;
 		}
 
+		.footer {
+			border-bottom: none;
+			border-top: 1px solid rgba(0, 0, 0, 0.1);
+      border-top: 1px solid var(--normal-color-tenth);
+		}
+
+		#notifications {
+			height: calc(100% - 7.5em);
+			overflow-y: auto;
+		}
+
+		#notifications.full {
+			height: calc(100% - 3.375em);
+		}
+
 		.notification {
 			padding: 0.8em 1em;
-			border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-			border-bottom: 1px solid var(--normal-color-tenth);
 			cursor: pointer;
 
 			-moz-transition: background-color .25s;
 			-o-transition: background-color .25s;
 			-webkit-transition: background-color .25s;
 			transition: background-color .25s;
+		}
+
+		.notification:not(:last-child) {
+			border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+			border-bottom: 1px solid var(--normal-color-tenth);
 		}
 
 		.notification:hover {
@@ -100,7 +122,7 @@
   </style>
 </head>
 <body>
-  <h4 class="title">Notifications<a id="clearAll"><i class="material-icons">clear_all</i></a></h4>
+  <h4 class="title">Notifications<a id="clearAll" href="javascript:clearNotifications()"><i class="material-icons">clear_all</i></a></h4>
 	<div id="notifications">
 		<div class="notification">
 			<h4>New 5-star review for <a>Media Notification</a>.</h4>
@@ -123,5 +145,22 @@
 			<small>January 12, 2018, 3:54 PM</small>
 		</div>
 	</div>
+	<h4 id="historyButton" class="title footer"><a href="./?history"><i class="material-icons">history</i>History</a></h4>
+
+	<script type="text/javascript" src="../js/utils.js"></script>
+	<script>
+		var notificationsElement = document.getElementById("notifications");
+		var clearAllButtonElement = document.getElementById("clearAll");
+		var historyButtonElement = document.getElementById("historyButton");
+
+		if (UrlUtils.getCurrentArguments().history) {
+			historyButtonElement.style.display = "none";
+			notificationsElement.className = "full";
+		}
+
+		function clearNotifications() {
+			ElementUtils.clearElement(notificationsElement);
+		}
+	</script>
 </body>
 </html>
