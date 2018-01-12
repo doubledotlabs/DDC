@@ -78,6 +78,30 @@
 			position: absolute;
 		}
 
+		#loading {
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			color: rgba(0, 0, 0, 0.5);
+			color: var(--normal-color-half);
+
+			animation-name: loadIn;
+			animation-duration: 1.5s;
+			animation-timing-function: ease-out;
+			animation-fill-mode: forwards;
+		}
+
+		@keyframes loadIn {
+			from {
+				opacity: 0;
+			}
+
+			to {
+				opacity: 1;
+			}
+		}
+
 		#signin, #profile {
 			display: block;
 			position: absolute;
@@ -317,58 +341,57 @@
 
 			if (args.page == "home") {
 				page = null;
-				ElementUtils.clearElement(main);
+				setLoading();
 
-				getCategory("featured", function(category) {
-					ElementUtils.clearElement(main);
-
-					ElementUtils.append(main, ListMethods.carousel({
-						autoplay: true,
-	  				centerMode: true,
-	  				centerPadding: '80px',
-	  				slidesToShow: 4,
-						dots: true,
-						arrows: false,
-	  				infinite: true,
-	  				responsive: [
-							{
-	      				breakpoint: 1600,
-	      				settings: {
-	        				centerMode: true,
-	        				centerPadding: '60px',
-	        				slidesToShow: 3
-	      				}
-	    				},
-	    				{
-	      				breakpoint: 900,
-	      				settings: {
-	        				centerMode: true,
-	        				centerPadding: '40px',
-	        				slidesToShow: 2
-	      				}
-	    				},
-	    				{
-	      				breakpoint: 600,
-	      				settings: {
-	        				centerMode: true,
-	        				centerPadding: '0px',
-	        				slidesToShow: 1
-	      				}
-	    				}
-	  				]
-					}, category.apps.slice(0, 6), AppMethods.largeCard));
-
+				getCategory("featured", function(featured) {
 					getCategories(function(categories) {
-						if (main.childNodes.length != 1)
-							return;
+						ElementUtils.clearElement(main);
+
+						var html = ListMethods.carousel({
+							autoplay: true,
+		  				centerMode: true,
+		  				centerPadding: '80px',
+		  				slidesToShow: 4,
+							dots: true,
+							arrows: false,
+		  				infinite: true,
+		  				responsive: [
+								{
+		      				breakpoint: 1600,
+		      				settings: {
+		        				centerMode: true,
+		        				centerPadding: '60px',
+		        				slidesToShow: 3
+		      				}
+		    				},
+		    				{
+		      				breakpoint: 900,
+		      				settings: {
+		        				centerMode: true,
+		        				centerPadding: '40px',
+		        				slidesToShow: 2
+		      				}
+		    				},
+		    				{
+		      				breakpoint: 600,
+		      				settings: {
+		        				centerMode: true,
+		        				centerPadding: '0px',
+		        				slidesToShow: 1
+		      				}
+		    				}
+		  				]
+						}, featured.apps.slice(0, 6), AppMethods.largeCard);
 
 						for (var i = 0; i < categories.length; i++) {
-							ElementUtils.append(main, ListMethods.row(categories[i], categories[i].apps, AppMethods.smallCard));
+							html += ListMethods.row(categories[i], categories[i].apps, AppMethods.smallCard);
 						}
+
+						ElementUtils.append(main, html);
 					});
 				});
 			} else if (args.page == "app") {
-				ElementUtils.clearElement(main);
+				setLoading();
 
 				getApp(args.package, function(app) {
 					ElementUtils.clearElement(main);
@@ -443,7 +466,7 @@
 				});
 			} else if (args.page == "reviews") {
 				if (args.id) {
-					ElementUtils.clearElement(main);
+					setLoading();
 
 					getReview(args.id, function(review) {
 						ElementUtils.clearElement(main);
@@ -526,7 +549,7 @@
 						return;
 					}
 				} else if (args.package) {
-					ElementUtils.clearElement(main);
+					setLoading();
 
 					getAppReviews(args.package, function(reviews) {
 						ElementUtils.clearElement(main);
@@ -539,7 +562,7 @@
 					return;
 				}
 			} else if (args.page == "releases") {
-				ElementUtils.clearElement(main);
+				setLoading();
 
 				getApp(args.package, function(app) {
 					ElementUtils.clearElement(main);
@@ -548,7 +571,8 @@
 					appendAppDownloadSection(app, false, document.getElementById("singleReleases"), args);
 				});
 			} else if (args.page == "category") {
-				ElementUtils.clearElement(main);
+				setLoading();
+
 				getCategory(args.id, function(category) {
 					ElementUtils.clearElement(main);
 
@@ -578,9 +602,9 @@
         	tosUrl: 'https://doubledotlabs.github.io/tos/?ddstore'
       	});
 			} else if (args.page == "user") {
-				ElementUtils.clearElement(main);
-
 				if (args.id && !(currentUser && args.id == currentUser.uid)) {
+					setLoading();
+
 					getUser(args.id, function(user) {
 						ElementUtils.clearElement(main);
 
@@ -606,6 +630,8 @@
 					});
 				} else {
 					if (currentUser) {
+						setLoading();
+
 						if (args.edit) {
 								getUser(currentUser.uid, function(user) {
 									ElementUtils.clearElement(main);
@@ -679,6 +705,8 @@
 									}
 								}, true);
 						} else {
+							ElementUtils.clearElement(main);
+
 							ElementUtils.append(main, "<div class=\"userinfo\">"
 								+ "<img class=\"userimage\" src=\"" + currentUser.photoURL + "\">"
 								+ "<span id=\"userDisplayName\">" + currentUser.displayName + "</span>"
@@ -725,8 +753,9 @@
 					}
 				}
 			} else if (args.page == "search") {
-				ElementUtils.clearElement(main);
 				if (args.query && args.query.length > 0) {
+					setLoading();
+
 					searchElement.value = args.query;
 					searchApps(args.query, function(apps) {
 						ElementUtils.clearElement(main);
@@ -737,6 +766,7 @@
 						}
 					});
 				} else {
+					ElementUtils.clearElement(main);
 					ElementUtils.append(main, "<div class=\"indented\" style=\"text-align: center;\"><p style=\"color: rgba(0, 0, 0, 0.5); color: var(--normal-color-half);\">Type something, then press \'enter\' to search...</p></div>");
 				}
 			} else {
@@ -1029,6 +1059,11 @@
 				setPage("page=search&query=" + searchElement.value, UrlUtils.getCurrentArguments().page == "search");
 			}
 		});
+
+		function setLoading() {
+			ElementUtils.clearElement(main);
+			ElementUtils.append(main, "<h2 id=\"loading\">Loading...</h2>");
+		}
 
 		function onSizeChange() {
 			footer.style.position = null;
