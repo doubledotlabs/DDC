@@ -67,21 +67,35 @@
 			user-select: none;
     }
 
-		.title > #clearAll {
-			float: right;
+		.title > a {
 			padding: 0 1em;
-			margin-left: -2em;
 			color: rgba(0, 0, 0, 0.5);
 			color: var(--normal-color-half);
 		}
 
-		.title > #clearAll > i {
+		.title > a.start {
+			float: left;
+			margin-right: -2em;
+		}
+
+		.title > a.end {
+			float: right;
+			margin-left: -2em;
+		}
+
+		.title > a > i {
 			transform: none;
 			margin: 0;
 		}
 
 		.footer {
-			border-bottom: none;
+			display: block;
+      margin: 0;
+      text-align: center;
+			padding: 0.8em;
+			user-select: none;
+			color: rgba(0, 0, 0, 0.5);
+			color: var(--normal-color-half);
 			border-top: 1px solid rgba(0, 0, 0, 0.1);
       border-top: 1px solid var(--normal-color-tenth);
 		}
@@ -122,7 +136,11 @@
   </style>
 </head>
 <body>
-  <h4 class="title">Notifications<a id="clearAll" href="javascript:clearNotifications()"><i class="material-icons">clear_all</i></a></h4>
+  <h4 class="title">
+		<a id="back" class="start" href="javascript:window.history.back()"><i class="material-icons">arrow_back</i></a>
+		Notifications
+		<a id="clearAll" class="end" href="javascript:clearNotifications()"><i class="material-icons">clear_all</i></a>
+	</h4>
 	<div id="notifications">
 		<div class="notification">
 			<h4>New 5-star review for <a>Media Notification</a>.</h4>
@@ -145,19 +163,20 @@
 			<small>January 12, 2018, 3:54 PM</small>
 		</div>
 	</div>
-	<h4 id="historyButton" class="title footer"><a href="./?history"><i class="material-icons">history</i>History</a></h4>
+	<h4 id="historyButton" class="footer"><a href="./?history"><i class="material-icons">history</i>History</a></h4>
 
 	<script type="text/javascript" src="../js/utils.js"></script>
 	<script>
 		var notificationsElement = document.getElementById("notifications");
 		var clearAllButtonElement = document.getElementById("clearAll");
 		var historyButtonElement = document.getElementById("historyButton");
+		var backButtonElement = document.getElementById("back");
 
 		if (UrlUtils.getCurrentArguments().history) {
 			historyButtonElement.style.display = "none";
-			clearAllButtonElement.style.display = "none";
+			clearAllButtonElement.style.visibility = "hidden";
 			notificationsElement.className = "full";
-		}
+		} else backButtonElement.style.visibility = "hidden";
 
 		function clearNotifications() {
 			ElementUtils.clearElement(notificationsElement);
