@@ -141,28 +141,7 @@
 		Notifications
 		<a id="clearAll" class="end" href="javascript:clearNotifications()"><i class="material-icons">clear_all</i></a>
 	</h4>
-	<div id="notifications">
-		<div class="notification">
-			<h4>New 5-star review for <a>Media Notification</a>.</h4>
-			<small>January 12, 2018, 3:54 PM</small>
-		</div>
-		<div class="notification">
-			<h4>New 3-star review for <a>Media Notification</a>.</h4>
-			<small>January 12, 2018, 3:54 PM</small>
-		</div>
-		<div class="notification">
-			<h4>Your update for <a>Media Notification</a> (<a>v3.7</a>) has been approved.</h4>
-			<small>January 12, 2018, 3:54 PM</small>
-		</div>
-		<div class="notification">
-			<h4><a>Joe Person</a> replied to your review for <a>Lucky Patcher</a>.</h4>
-			<small>January 12, 2018, 3:54 PM</small>
-		</div>
-		<div class="notification">
-			<h4>New 3-star review for <a>Media Notification</a>.</h4>
-			<small>January 12, 2018, 3:54 PM</small>
-		</div>
-	</div>
+	<div id="notifications"></div>
 	<h4 id="historyButton" class="footer"><a href="./?history"><i class="material-icons">history</i>History</a></h4>
 
 	<script type="text/javascript" src="../js/utils.js"></script>
@@ -172,7 +151,12 @@
 		var historyButtonElement = document.getElementById("historyButton");
 		var backButtonElement = document.getElementById("back");
 
-		if (UrlUtils.getCurrentArguments().history) {
+		var currentUser;
+		var isCurrentUserLoading = true;
+		var isOld = UrlUtils.getCurrentArguments().history;
+		var notifications;
+
+		if (isOld) {
 			historyButtonElement.style.display = "none";
 			clearAllButtonElement.style.visibility = "hidden";
 			notificationsElement.className = "full";
@@ -181,6 +165,29 @@
 		function clearNotifications() {
 			ElementUtils.clearElement(notificationsElement);
 		}
+
+		window.addEventListener("load", function() {
+			firebase.auth().onAuthStateChanged(function(user) {
+				currentUser = user;
+				isCurrentUserLoading = false;
+
+				firebase.database().ref("notifications/" + currentUser.uid + "/" + (isOld ? "old" : "new")).once("value").then(function(snapshot) {
+
+					notifications = snapshot.val();
+					var html = "";
+					for (var key in notifications) {
+						html += "<div class=\"notification\"><h4>" + notifications[key].title + "</h4><small>" + notifications[key].date + "</small></div>";
+					}
+
+					ElementUtils.append(notificationsElement, html);
+				}, function(error) {
+					console.e(error);
+				});
+			}, function(error) {
+				isCurrentUserLoading = false;
+				console.error("Sign In Error", error);
+			});
+		});
 	</script>
 </body>
 </html>
