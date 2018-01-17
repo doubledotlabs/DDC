@@ -113,10 +113,10 @@
 			padding: 0.8em 1em;
 			cursor: pointer;
 
-			-moz-transition: background-color .25s;
-			-o-transition: background-color .25s;
-			-webkit-transition: background-color .25s;
-			transition: background-color .25s;
+			-moz-transition: background-color .25s, opacity .25s;
+			-o-transition: background-color .25s, opacity .25s;
+			-webkit-transition: background-color .25s, opacity .25s;
+			transition: background-color .25s, opacity .25s;
 		}
 
 		.notification:not(:last-child) {
@@ -132,6 +132,10 @@
 		.notification > h4 {
 			padding: 0;
 			margin: 0;
+		}
+
+		.notification.dismissed {
+			opacity: 0.35;
 		}
   </style>
 </head>
@@ -163,7 +167,20 @@
 		} else backButtonElement.style.visibility = "hidden";
 
 		function clearNotifications() {
-			ElementUtils.clearElement(notificationsElement);
+			for (var i = 0; i < notificationsElement.childNodes.length; i++) {
+				notificationsElement.childNodes[i].className += " dismissed";
+			}
+
+			var edits = {};
+			for (var key in notifications) {
+				edits[key] = { "read": true };
+			}
+
+			firebase.database().ref("notifications/" + currentUser.uid + "/new").update(edits).then(function() {
+				document.location.reload();
+			}, function(error) {
+				console.error("Couldn't dismiss notifications: " + error);
+			})
 		}
 
 		window.addEventListener("load", function() {
@@ -176,7 +193,8 @@
 					notifications = snapshot.val();
 					var html = "";
 					for (var key in notifications) {
-						html += "<div class=\"notification\"><h4>" + notifications[key].title + "</h4><small>" + notifications[key].date + "</small></div>";
+						if (!notifications[key].read || isOld)
+							html += "<div class=\"notification\"><h4>" + notifications[key].title + "</h4><small>" + notifications[key].date + "</small></div>";
 					}
 
 					ElementUtils.append(notificationsElement, html);
