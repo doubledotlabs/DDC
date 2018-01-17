@@ -155,6 +155,22 @@ exports.writeAppCategory = functions.database.ref("/apps/{appId}/categories/{cat
         }
     });
 
+exports.writeNotificationRead = functions.database.ref("/notifications/{userId}/new/{notificationId}/read")
+    .onWrite(event => {
+        if (!event.data.exists()) {
+            return null;
+        }
+
+        var newReference = admin.database().ref("/notifications/" + event.params.userId + "/new/" + event.params.notificationId);
+        return newReference.once("value").then(function(snapshot) {
+            return admin.database().ref("/notifications/" + event.params.userId + "/old/" + event.params.notificationId).set(snapshot.val()).then(function() {
+                return newReference.set(null);
+            }, function(error) {
+                //uhh whoops
+            });
+        });
+    });
+
 exports.setStoragePath = functions.storage.object()
     .onChange(event => {
         const filePath = event.data.name.split("/");
