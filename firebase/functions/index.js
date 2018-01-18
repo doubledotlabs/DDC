@@ -195,7 +195,8 @@ exports.notifyPublisherOfReview = functions.database.ref("/apps/{appPackage}/rev
                             "packageName": event.params.appPackage,
                             "review": event.params.reviewId,
                             "user": userId
-                        }
+                        },
+                        "type": "review"
                     });
                 });
             });
