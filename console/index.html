@@ -565,16 +565,20 @@
 								}
 							}
 
-							ElementUtils.append(main, "<div style=\"margin: 1em;\">"
-								+ "<h1 class=\"indented\">Release: " + app.releases[i].version + "</h1><h3 class=\"indented\">Published on " + app.releases[i].date + "</h3>"
-								+ "<div class=\"row grid\" style=\"padding: 0 1em;\">"
-								+ ListMethods.none({}, app.releases[i].downloads, DownloadMethods.consoleEdit)
-								+ "<a><i class=\"material-icons\">file_upload</i>UPLOAD APK</a>"
-								+ "</div>"
-								+ "<h3 class=\"indented\">Changelog</h3>"
-								+ "<div style=\"padding: 1em 2em;\"><div class=\"input long\" contentEditable=\"true\" placeholder=\"Changelog\">" + app.releases[i].changelog.split("\n").join("<br>") + "</div>"
-								+ "<button class=\"outline\" style=\"float: right;\">SUBMIT</button><br></div>"
-								+ "</div>");
+							if (release != null) {
+								ElementUtils.append(main, "<div style=\"margin: 1em;\">"
+									+ "<h1 class=\"indented\">Release: " + release.version + "</h1><h3 class=\"indented\">Published on " + release.date + "</h3>"
+									+ "<div class=\"row grid\" style=\"padding: 0 1em;\">"
+									+ ListMethods.none({}, release.downloads, DownloadMethods.consoleEdit)
+									+ "<a><i class=\"material-icons\">file_upload</i>UPLOAD APK</a>"
+									+ "</div>"
+									+ "<h3 class=\"indented\">Changelog</h3>"
+									+ "<div style=\"padding: 1em 2em;\"><div class=\"input long\" contentEditable=\"true\" placeholder=\"Changelog\">" + release.changelog.split("\n").join("<br>") + "</div>"
+									+ "<button class=\"outline\" style=\"float: right;\">SUBMIT</button><br></div>"
+									+ "</div>");
+							} else {
+								setPage("page=404", true);
+							}
 						});
 					} else {
 						getApp(args.package, function(app) {
