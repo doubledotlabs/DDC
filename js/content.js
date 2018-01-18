@@ -102,12 +102,21 @@ function setReview(pkg, user, rating, review, fun, ignore) {
 	});
 }
 
-function callFirebaseFunction(name, onComplete, onError) {
+function getDownloadURL(path, fun, ignore) {
+	callFirebaseFunction("getDownloadUrl?path=" + path, fun, function() {
+		console.log("apk download url has messed up big time");
+		if (ignore)
+			fun();
+		else setPage("page=404", true);
+	}, true);
+}
+
+function callFirebaseFunction(name, onComplete, onError, noJSON) {
 	var requestContent = new XMLHttpRequest();
 	requestContent.onreadystatechange = function() {
 		if (requestContent.readyState === 4) {
 			if (requestContent.status === 200 || requestContent.status == 0) {
-				onComplete(JSON.parse(requestContent.responseText));
+				onComplete(noJSON ? requestContent.responseText : JSON.parse(requestContent.responseText));
 			} else {
 				onError(requestContent.status, requestContent.responseText);
 			}

@@ -632,3 +632,28 @@ exports.searchApps = functions.https.onRequest((req, res) => {
         }
     });
 });
+
+exports.getDownloadURL = functions.https.onRequest((req, res) => {
+    cors()(req, res, () => {
+        if (req.query.path && req.query.path.startsWith("apps/")) {
+            var pathArray = req.query.path.split("/");
+            var packageName = pathArray[1];
+            var releaseName = pathArray[3];
+            var fileName = path.basename(req.query.path);
+
+            admin.database().ref("apps/" + packageName + "/releases/" + releaseName + "/downloads/" + fileName.split(".")[0] + "/downloads").transaction((value) => {
+                return ++value;
+            }).then(function() {
+                getSignedFileUrlPromise(req.query.path).then(function(url) {
+                    res.status(200).send(url);
+                }, function(error) {
+                    res.status(404).send(error);
+                });
+            }, function(error) {
+                res.status(404).send(error);
+            });
+        } else {
+          res.status(404).send();
+        }
+    });
+});
