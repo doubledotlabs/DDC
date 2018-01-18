@@ -63,7 +63,7 @@ ReleaseMethods.console = function(release) {
     + "<h3 class=\"indented\">Published on " + release.date + "</h3>"
     + ListMethods.grid({}, release.downloads, DownloadMethods.console)
     + "<h3 class=\"indented\">Changelog</h3>"
-    + "<p class=\"indented\">" + release.changelog.split("\n").join("<br>") + "</p>"
+    + "<p class=\"indented\">" + (release.changelog ? release.changelog.split("\n").join("<br>") : "") + "</p>"
     + "</div>";
 };
 
@@ -80,7 +80,7 @@ DownloadMethods.normal = function(data) {
 	return "<div class=\"download\">"
 		+ "<div class=\"downloadheader\">"
 		+ "<span>" + data.release.date + "</span>"
-		+ "<i class=\"material-icons downloadicon\" onclick=\"location.href=\'download:" + data.download.url + "\';\">file_download</i>"
+		+ "<i class=\"material-icons downloadicon\" onclick=\"getDownloadURL(\'" + data.download.url + "\', function(url){location.href=url;});\">file_download</i>"
 		+ "</div><hr>"
 		+ "<div class=\"releasecontent\">"
 		+ "<p><b>Version " + data.release.version + "</b></p>"
@@ -113,7 +113,7 @@ DownloadMethods.console = function(download) {
 	return "<div class=\"download\">"
 		+ "<div class=\"downloadheader\">"
 		+ "<span>APK</span>"
-		+ "<i class=\"material-icons downloadicon\" onclick=\"location.href=\'download:" + download.url + "\';\">file_download</i>"
+		+ "<i class=\"material-icons downloadicon\" onclick=\"getDownloadURL(\'" + download.url + "\', function(url){location.href=url;});\">file_download</i>"
 		+ "</div><hr>"
 		+ "<div class=\"downloadinfo\">"
 		+ "<span><b>Target SDK:</b> Android " + AndroidUtils.sdkToVersion(download.target) + "</span>"
