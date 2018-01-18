@@ -230,9 +230,9 @@ exports.setStoragePath = functions.storage.object()
                                 //set apk info
                                 var obj = {};
                                 obj["apps/" + appPackage + "/releases/" + releaseName + "/downloads/" + fileName.split(".")[0]] = {
-                                    "minSdkVersion": manifest.usesSdk.minSdkVersion,
-                                    "targetSdkVersion": manifest.usesSdk.targetSdkVersion,
-                                    "maxSdkVersion": (manifest.usesSdk.maxSdkVersion ? manifest.usesSdk.maxSdkVersion : null),
+                                    "min": manifest.usesSdk.minSdkVersion,
+                                    "target": manifest.usesSdk.targetSdkVersion,
+                                    "max": (manifest.usesSdk.maxSdkVersion ? manifest.usesSdk.maxSdkVersion : null),
                                     "permissions": manifest.usesPermissions,
                                     "features": manifest.usesFeatures,
                                     "screens": manifest.supportsScreens,
