@@ -194,7 +194,7 @@
 					var html = "";
 					for (var key in notifications) {
 						if (!notifications[key].read || isOld)
-							html += "<div class=\"notification\"><h4>" + notifications[key].title + "</h4><small>" + notifications[key].date + "</small></div>";
+							html = "<div class=\"notification\"><h4>" + notifications[key].title + "</h4><small>" + notifications[key].date + "</small></div>" + html;
 					}
 
 					ElementUtils.append(notificationsElement, html);
