@@ -175,6 +175,33 @@ exports.writeNotificationRead = functions.database.ref("/notifications/{userId}/
         });
     });
 
+exports.notifyPublisherOfReview = functions.database.ref("/apps/{appPackage}/reviews/{reviewId}")
+    .onWrite(event => {
+        if (!event.data.exists()) {
+            return null;
+        }
+
+        const userId = event.params.reviewId.split("-")[1];
+        return admin.database().ref("/users/" + userId + "/name").once("value").then(function(snapshot) {
+            const userName = snapshot.val();
+            return admin.database().ref("/apps/" + event.params.appPackage + "/name").once("value").then(function(snapshot) {
+                const appName = snapshot.val();
+                return admin.database().ref("/apps/" + event.params.appPackage + "/author").once("value").then(function(snapshot) {
+                    const authorId = snapshot.val();
+                    return admin.database().ref("/notifications/" + authorId + "/new/review-" + event.params.appPackage + "-" + userId).set({
+                        "title": userName + " has reviewed your app " + appName,
+                        "date": new Date().toDateString(),
+                        "location": {
+                            "packageName": event.params.appPackage,
+                            "review": event.params.reviewId,
+                            "user": userId
+                        }
+                    });
+                });
+            });
+        });
+    });
+
 exports.setStoragePath = functions.storage.object()
     .onChange(event => {
         const filePath = event.data.name.split("/");
