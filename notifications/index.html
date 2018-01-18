@@ -193,8 +193,14 @@
 					notifications = snapshot.val();
 					var html = "";
 					for (var key in notifications) {
-						if (!notifications[key].read || isOld)
-							html = "<div class=\"notification\"><h4>" + notifications[key].title + "</h4><small>" + notifications[key].date + "</small></div>" + html;
+						if (!notifications[key].read || isOld) {
+							var url = "../?";
+							if (notifications[key].type == "review") {
+								url += "page=reviews&id=" + notifications[key].location.review;
+							}
+
+							html = "<div class=\"notification\" onclick=\"window.open(\'" + url + "\', \'_blank\')\"><h4>" + notifications[key].title + "</h4><small>" + notifications[key].date + "</small></div>" + html;
+						}
 					}
 
 					ElementUtils.append(notificationsElement, html);
