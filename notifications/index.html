@@ -173,7 +173,7 @@
 
 			var edits = {};
 			for (var key in notifications) {
-				edits[key] = { "read": true };
+				edits[key + "/read"] = true;
 			}
 
 			firebase.database().ref("notifications/" + currentUser.uid + "/new").update(edits).then(function() {

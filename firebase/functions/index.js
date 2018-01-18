@@ -163,11 +163,15 @@ exports.writeNotificationRead = functions.database.ref("/notifications/{userId}/
 
         var newReference = admin.database().ref("/notifications/" + event.params.userId + "/new/" + event.params.notificationId);
         return newReference.once("value").then(function(snapshot) {
-            return admin.database().ref("/notifications/" + event.params.userId + "/old/" + event.params.notificationId).set(snapshot.val()).then(function() {
-                return newReference.set(null);
-            }, function(error) {
-                //uhh whoops
-            });
+            var notification = snapshot.val();
+            notification.read = null;
+            if (notification.title) {
+                return admin.database().ref("/notifications/" + event.params.userId + "/old/" + event.params.notificationId).set(notification).then(function() {
+                    return newReference.set(null);
+                }, function(error) {
+                    //uhh whoops
+                });
+            }
         });
     });
 
