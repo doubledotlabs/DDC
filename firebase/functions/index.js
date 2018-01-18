@@ -479,6 +479,13 @@ exports.getApp = functions.https.onRequest((req, res) => {
                 var releases = [];
                 for (var key in app.releases) {
                   var release = app.releases[key];
+
+                  var downloads = [];
+                  for (var key2 in release.downloads) {
+                    downloads.push(release.downloads[key2]);
+                  }
+
+                  release.downloads = downloads;
                   release.version = key.split("_").join(".");
                   releases.push(release);
                 }
