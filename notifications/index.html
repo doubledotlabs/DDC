@@ -249,10 +249,12 @@
 				});
 			} else {
 				firebase.auth().onAuthStateChanged(function(user) {
-					currentUser = user;
-					isCurrentUserLoading = false;
+					if (user) {
+						currentUser = user;
+						isCurrentUserLoading = false;
 
-					reload();
+						reload();
+					}
 				}, function(error) {
 					isCurrentUserLoading = false;
 					console.error("Sign In Error", error);
