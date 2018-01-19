@@ -69,7 +69,7 @@ ElementUtils.append = function(element, html) {
 
 	ElementUtils.addElementListenerStuff(element);
 
-	if (onSizeChange)
+	if (typeof onSizeChange === "function")
 		onSizeChange();
 
 	try {
