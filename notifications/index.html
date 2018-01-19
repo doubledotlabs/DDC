@@ -137,13 +137,31 @@
 		.notification.dismissed {
 			opacity: 0.35;
 		}
+
+		@keyframes spin {
+			from {transform: rotate(0deg);}
+			to {transform: rotate(360deg);}
+		}
+
+		#refresh1 > i,
+		#refresh2 > i {
+			animation-name: spin;
+			animation-duration: .5s;
+			animation-timing-function: linear;
+		}
+
+		.spinning > i {
+			animation-iteration-count: infinite;
+		}
   </style>
 </head>
 <body>
   <h4 class="title">
 		<a id="back" class="start" href="javascript:window.history.back()"><i class="material-icons">arrow_back</i></a>
+		<a id="refresh1" class="start" href="javascript:reload()"><i class="material-icons">refresh</i></a>
 		Notifications
 		<a id="clearAll" class="end" href="javascript:clearNotifications()"><i class="material-icons">clear_all</i></a>
+		<a id="refresh2" class="end" href="javascript:reload()"><i class="material-icons">refresh</i></a>
 	</h4>
 	<div id="notifications"></div>
 	<h4 id="historyButton" class="footer"><a href="./?history"><i class="material-icons">history</i>History</a></h4>
@@ -154,6 +172,8 @@
 		var clearAllButtonElement = document.getElementById("clearAll");
 		var historyButtonElement = document.getElementById("historyButton");
 		var backButtonElement = document.getElementById("back");
+		var refresh1ButtonElement = document.getElementById("refresh1");
+		var refresh2ButtonElement = document.getElementById("refresh2");
 
 		var currentUser;
 		var isCurrentUserLoading = true;
@@ -162,9 +182,13 @@
 
 		if (isOld) {
 			historyButtonElement.style.display = "none";
-			clearAllButtonElement.style.visibility = "hidden";
 			notificationsElement.className = "full";
-		} else backButtonElement.style.visibility = "hidden";
+			clearAllButtonElement.style.display = "none";
+			refresh1ButtonElement.style.display = "none";
+		} else {
+			backButtonElement.style.display = "none";
+			refresh2ButtonElement.style.display = "none";
+		}
 
 		function clearNotifications() {
 			for (var i = 0; i < notificationsElement.childNodes.length; i++) {
@@ -176,42 +200,55 @@
 				edits[key + "/read"] = true;
 			}
 
-			firebase.database().ref("notifications/" + currentUser.uid + "/new").update(edits).then(function() {
-				document.location.reload();
-			}, function(error) {
+			firebase.database().ref("notifications/" + currentUser.uid + "/new").update(edits).then(reload, function(error) {
 				console.error("Couldn't dismiss notifications: " + error);
 			})
 		}
 
-		window.addEventListener("load", function() {
-			firebase.auth().onAuthStateChanged(function(user) {
-				currentUser = user;
-				isCurrentUserLoading = false;
+		function reload() {
+			refresh1ButtonElement.className += " spinning";
+			refresh2ButtonElement.className += " spinning";
 
+			if (currentUser) {
 				firebase.database().ref("notifications/" + currentUser.uid + "/" + (isOld ? "old" : "new")).once("value").then(function(snapshot) {
+					refresh1ButtonElement.className = refresh1ButtonElement.className.split(" spinning").join("");
+					refresh2ButtonElement.className = refresh2ButtonElement.className.split(" spinning").join("");
 
 					notifications = snapshot.val();
 					var html = "";
 					for (var key in notifications) {
 						if (!notifications[key].read || isOld) {
-							var url = "../?";
+							var url = null;
 							if (notifications[key].type == "review") {
-								url += "page=reviews&id=" + notifications[key].location.review;
+								url = "../?page=reviews&id=" + notifications[key].location.review;
 							}
 
-							html = "<div class=\"notification\" onclick=\"window.open(\'" + url + "\', \'_blank\')\"><h4>" + notifications[key].title + "</h4><small>" + notifications[key].date + "</small></div>" + html;
+							html = "<div class=\"notification\" " + (url ? "onclick=\"window.open(\'" + url + "\', \'_blank\')\"" : "") + "><h4>" + notifications[key].title + "</h4><small>" + notifications[key].date + "</small></div>" + html;
 						}
 					}
 
+					ElementUtils.clearElement(notificationsElement);
 					ElementUtils.append(notificationsElement, html);
+					if (!isOld)
+					  clearAllButtonElement.style.visibility = html.length > 0 ? null : "hidden";
 				}, function(error) {
 					console.e(error);
 				});
-			}, function(error) {
-				isCurrentUserLoading = false;
-				console.error("Sign In Error", error);
-			});
-		});
+			} else {
+				firebase.auth().onAuthStateChanged(function(user) {
+					currentUser = user;
+					isCurrentUserLoading = false;
+
+					reload();
+				}, function(error) {
+					isCurrentUserLoading = false;
+					console.error("Sign In Error", error);
+				});
+			}
+		}
+
+		window.addEventListener("load", reload);
+		setInterval(reload, 30000);
 	</script>
 </body>
 </html>
