@@ -190,6 +190,24 @@
 			refresh2ButtonElement.style.display = "none";
 		}
 
+		function clearAndOpenNotification(key) {
+			var url = null;
+			if (notifications[key].type == "review") {
+				url = "../?page=reviews&id=" + notifications[key].location.review;
+			}
+
+			if (!isOld) {
+				firebase.database().ref("notifications/" + currentUser.uid + "/new/" + key + "/read").set(true).then(function() {
+					window.open(url, "_blank");
+					reload();
+				}, function(error) {
+					console.error("Couldn't dismiss notification: " + error);
+				});
+			} else {
+				window.open(url, "_blank");
+			}
+		}
+
 		function clearNotifications() {
 			for (var i = 0; i < notificationsElement.childNodes.length; i++) {
 				notificationsElement.childNodes[i].className += " dismissed";
@@ -218,12 +236,7 @@
 					var html = "";
 					for (var key in notifications) {
 						if (!notifications[key].read || isOld) {
-							var url = null;
-							if (notifications[key].type == "review") {
-								url = "../?page=reviews&id=" + notifications[key].location.review;
-							}
-
-							html = "<div class=\"notification\" " + (url ? "onclick=\"window.open(\'" + url + "\', \'_blank\')\"" : "") + "><h4>" + notifications[key].title + "</h4><small>" + notifications[key].date + "</small></div>" + html;
+							html = "<div class=\"notification\" onclick=\"clearAndOpenNotification(\'" + key + "\')\"><h4>" + notifications[key].title + "</h4><small>" + notifications[key].date + "</small></div>" + html;
 						}
 					}
 
