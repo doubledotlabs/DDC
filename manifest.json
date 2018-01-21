@@ -1,0 +1,6 @@
+{
+  "short_name": "DDStore",
+  "name": "Double Dot Store",
+  "start_url": "index.html?page=home",
+  "gcm_sender_id": "103953800507"
+}
