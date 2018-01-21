@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+  <meta name="description" content="An app store for open source apps, developed and maintained by Double Dot Labs.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="generator" content="DDStore" />
+	<title>DDStore Notifications</title>
+
+	<meta name="theme-color" content="#FFFFFF">
+  <meta name="mobile-web-app-capable" content="yes">
+  <!-- <link rel="manifest" href="manifest.json"> -->
+
+  <meta name="application-name" content="DDStore">
+  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <meta name="msapplication-tooltip" content="DDStore">
+  <!-- <meta name="msapplication-config" content="/ieconfig.xml"> -->
+
+	<!-- <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="icon" sizes="16x16" href="/favicon.ico">
+  <link rel="icon" sizes="24x24" href="/images/favicon-24.ico">
+  <link rel="icon" sizes="32x32" href="/images/favicon-32.ico">
+  <link rel="icon" sizes="48x48" href="/images/favicon-48.ico">
+  <link rel="icon" sizes="64x64" href="/images/favicon-48.ico"> -->
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="white">
+  <meta name="apple-mobile-web-app-title" content="DDStore">
+  <!-- <link rel="apple-touch-icon-precomposed" href="/images/favicon-152.png"> -->
+
+	<!-- firebase stuff -->
+	<script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+	<script>
+  	var config = {
+    	apiKey: "AIzaSyD4i89pKORT3k0z60zgMB5O7VIDG12BwzE",
+    	authDomain: "ddstore-87442.firebaseapp.com",
+    	databaseURL: "https://ddstore-87442.firebaseio.com",
+    	projectId: "ddstore-87442",
+    	storageBucket: "ddstore-87442.appspot.com",
+    	messagingSenderId: "292878095265"
+  	};
+  	firebase.initializeApp(config);
+	</script>
+	<script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" rel="stylesheet">
+  <link href="../css/styles.css" rel="stylesheet">
+
+  <style>
+		#info {
+			padding: 2em 0;
+		}
+
+		#info > div {
+			padding: 2em calc(5vw + 1em);
+		}
+  </style>
+</head>
+<body>
+	<div id="info">
+		<div>
+			<h2>Open-Source Only</h2>
+			<p>
+				To encourage openness and prevent the spread of malware and adware through devices, our app store only contains open source projects.
+				All apps are reviewed by real humans after submission, and their content is verified. Benefits to developers: free resource usage analysis
+				and an extra layer of error checking! Benefits to users: less worrying about the integrity of a product and more fun using it!
+			</p>
+		</div>
+		<div>
+			<h2>Do No Evil</h2>
+			<p>
+				Misleading apps are a bad thing, but shutting down a project because of a misunderstanding is unnecessary and stupid.
+				When an app submission results in an issue, we don't just tell the developer to go away. Instead, we strive to help fix the issues we find
+				in order to help projects achieve success.
+			</p>
+		</div>
+		<div>
+			<h2>Plagiarisms Beware</h2>
+			<p>
+				While it isn't possible to check the entirety of the internet for duplicate code, we do our best to prevent copied or unattributed apps
+				from making their way onto our store. We keep documentation of all dependencies our apps use and what license they are published under to
+				ensure that no issues occur.
+			</p>
+		</div>
+		<div>
+			<h2>But At What Cost?</h2>
+			<p>
+				As I'm sure you can tell, we have put a lot of work into making this project a success (pro tip: promising success before it's achieved is a
+				horrible method of motivation). From the backend magic to our beautiful website
+				and our Android app, this project has taken months of planning and development to complete,
+			  <!-- delete upon completeion --> which seems a little weird to say right now, as it hasn't been finished yet.
+				And it's still not over. However, because all the
+				applications on here are free, we don't think it's right for their users to pay to use them or for their developers to pay to publish them.
+				That's why we intend to make all our money through donations, advertisements, and paid promotions. As the project expands, we may implement our
+				own method of donating to the developers of apps we host that we take a percentage of, but that will come later. Much, much later.
+			</p>
+		</div>
+	</div>
+</body>
+</html>
