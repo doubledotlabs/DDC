@@ -155,26 +155,6 @@ exports.writeAppCategory = functions.database.ref("/apps/{appId}/categories/{cat
         }
     });
 
-exports.writeNotificationRead = functions.database.ref("/notifications/{userId}/new/{notificationId}/read")
-    .onWrite(event => {
-        if (!event.data.exists()) {
-            return null;
-        }
-
-        var newReference = admin.database().ref("/notifications/" + event.params.userId + "/new/" + event.params.notificationId);
-        return newReference.once("value").then(function(snapshot) {
-            var notification = snapshot.val();
-            notification.read = null;
-            if (notification.title) {
-                return admin.database().ref("/notifications/" + event.params.userId + "/old/" + event.params.notificationId).set(notification).then(function() {
-                    return newReference.set(null);
-                }, function(error) {
-                    //uhh whoops
-                });
-            }
-        });
-    });
-
 exports.notifyPublisherOfReview = functions.database.ref("/apps/{appPackage}/reviews/{reviewId}")
     .onWrite(event => {
         if (!event.data.exists()) {
@@ -189,14 +169,19 @@ exports.notifyPublisherOfReview = functions.database.ref("/apps/{appPackage}/rev
                 return admin.database().ref("/apps/" + event.params.appPackage + "/author").once("value").then(function(snapshot) {
                     const authorId = snapshot.val();
                     return admin.database().ref("/notifications/" + authorId + "/new/review-" + event.params.appPackage + "-" + userId).set({
-                        "title": userName + " has reviewed your app " + appName,
-                        "date": new Date().toDateString(),
-                        "location": {
-                            "packageName": event.params.appPackage,
-                            "review": event.params.reviewId,
-                            "user": userId
+                        "notification": {
+                            "title": "New review for " + appName,
+                            "body": userName + " has left a review for your app, " + appName + "."
                         },
-                        "type": "review"
+                        "data": {
+                            "date": new Date().toDateString(),
+                            "location": {
+                                "packageName": event.params.appPackage,
+                                "review": event.params.reviewId,
+                                "user": userId
+                            },
+                            "type": "review"
+                        }
                     });
                 });
             });

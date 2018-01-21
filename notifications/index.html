@@ -129,7 +129,8 @@
 			background-color: var(--normal-color-tenth);
 		}
 
-		.notification > h4 {
+		.notification > h4,
+		.notification > p {
 			padding: 0;
 			margin: 0;
 		}
@@ -193,8 +194,8 @@
 
 		function clearAndOpenNotification(key) {
 			var url = null;
-			if (notifications[key].type == "review") {
-				url = "../?page=reviews&id=" + notifications[key].location.review;
+			if (notifications[key].data.type == "review") {
+				url = "../?page=reviews&id=" + notifications[key].data.location.review;
 			}
 
 			if (!isOld) {
@@ -229,15 +230,15 @@
 			refresh2ButtonElement.className += " spinning";
 
 			if (currentUser) {
-				firebase.database().ref("notifications/" + currentUser.uid + "/" + (isOld ? "old" : "new")).once("value").then(function(snapshot) {
+				firebase.database().ref("notifications/" + currentUser.uid + "/new").once("value").then(function(snapshot) {
 					refresh1ButtonElement.className = refresh1ButtonElement.className.split(" spinning").join("");
 					refresh2ButtonElement.className = refresh2ButtonElement.className.split(" spinning").join("");
 
 					notifications = snapshot.val();
 					var html = "";
 					for (var key in notifications) {
-						if (!notifications[key].read || isOld) {
-							html = "<div class=\"notification\" onclick=\"clearAndOpenNotification(\'" + key + "\')\"><h4>" + notifications[key].title + "</h4><small>" + notifications[key].date + "</small></div>" + html;
+						if (notifications[key].read == isOld) {
+							html = "<div class=\"notification\" onclick=\"clearAndOpenNotification(\'" + key + "\')\"><h4>" + notifications[key].notification.title + "</h4><p>" + notifications[key].notification.body + "</p><small>" + notifications[key].data.date + "</small></div>" + html;
 						}
 					}
 
@@ -289,7 +290,7 @@
 		}
 
 		window.addEventListener("load", reload);
-		setInterval(reload, 30000);
+		//setInterval(reload, 30000);
 	</script>
 </body>
 </html>
