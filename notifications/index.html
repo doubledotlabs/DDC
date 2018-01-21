@@ -248,21 +248,6 @@
 				}, function(error) {
 					console.e(error);
 				});
-
-				messaging.requestPermission().then(function() {
-					messaging.getToken().then(function(token) {
-						if (currentUser) {
-							firebase.database().ref("users/" + currentUser.uid + "/notificationTokens").child("browser:" + token).set(true).then(function() {
-								//TODO: show a confirmation message or something idk
-								console.log("yay");
-							}, function(error) {
-								console.error("Unable to store notification token: " + error);
-							});
-						} else console.error("Unable to store notification token: no currentUser");
-					});
-				}).catch(function(error) {
-					console.error("Unable to get notifications permission: " + error);
-				});
 			} else {
 				firebase.auth().onAuthStateChanged(function(user) {
 					if (user) {
@@ -270,12 +255,37 @@
 						isCurrentUserLoading = false;
 
 						reload();
+						getMessagingToken();
 					}
 				}, function(error) {
 					isCurrentUserLoading = false;
 					console.error("Sign In Error", error);
 				});
 			}
+		}
+
+		function getMessagingToken(shouldRequest) {
+			messaging.getToken().then(function(token) {
+				if (currentUser) {
+					if (token) {
+						firebase.database().ref("users/" + currentUser.uid + "/notificationTokens").child("browser:" + token).set(true).then(function() {
+							//TODO: show a confirmation message or something idk
+							console.log("yay");
+						}, function(error) {
+							console.error("Unable to store notification token: " + error);
+						});
+					} else {
+						if (shouldRequest) {
+							messaging.requestPermission().then(getMessagingToken, function(error) {
+								console.error("Unable to get notifications permission: " + error);
+							});
+						} else {
+							//TODO: show request UI
+							getMessagingToken(true);
+						}
+					}
+				} else console.error("Unable to store notification token: no currentUser");
+			});
 		}
 
 		window.addEventListener("load", reload);
