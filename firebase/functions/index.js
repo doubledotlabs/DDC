@@ -168,6 +168,7 @@ exports.notifyPublisherOfReview = functions.database.ref("/apps/{appPackage}/rev
                 const appName = snapshot.val();
                 return admin.database().ref("/apps/" + event.params.appPackage + "/author").once("value").then(function(snapshot) {
                     const authorId = snapshot.val();
+                    const notificationId = "review-" + event.params.appPackage + "-" + userId;
                     const notification = {
                         "notification": {
                             "title": "New review for " + appName,
@@ -179,19 +180,21 @@ exports.notifyPublisherOfReview = functions.database.ref("/apps/{appPackage}/rev
                             "location-id": event.params.reviewId,
                             "location-package": event.params.appPackage,
                             "location-user": userId,
+                            "meta-id": notificationId,
                             "type": "review"
                         }
                     };
 
-                    return admin.database().ref("/notifications/" + authorId + "/new/review-" + event.params.appPackage + "-" + userId).set(notification).then(function() {
+                    return admin.database().ref("/notifications/" + authorId + "/new/" + notificationId).set(notification).then(function() {
                         return admin.database().ref("/users/" + authorId + "/notificationTokens").once("value").then(function(snapshot) {
                             var value = snapshot.val();
                             if (value) {
                                 var tokens = [];
                                 for (var key in value) {
-                                    tokens.push(key.indexOf(":") >= 0 ? key.split(":")[1] : key);
+                                    tokens.push(key.indexOf(":") >= 0 ? key.split(":").splice(1).join(":") : key);
                                 }
 
+                                console.log("sending notifications: " + tokens);
                                 return admin.messaging().sendToDevice(tokens, notification);
                             }
                         });

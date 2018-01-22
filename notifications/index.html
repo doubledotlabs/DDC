@@ -228,47 +228,52 @@
 			})
 		}
 
-		function reload() {
-			refresh1ButtonElement.className += " spinning";
-			refresh2ButtonElement.className += " spinning";
+		function reload(newNotifications) {
+			if (newNotifications) {
+				refresh1ButtonElement.className = refresh1ButtonElement.className.split(" spinning").join("");
+				refresh2ButtonElement.className = refresh2ButtonElement.className.split(" spinning").join("");
 
-			if (currentUser) {
-				firebase.database().ref("notifications/" + currentUser.uid + "/new").once("value").then(function(snapshot) {
-					refresh1ButtonElement.className = refresh1ButtonElement.className.split(" spinning").join("");
-					refresh2ButtonElement.className = refresh2ButtonElement.className.split(" spinning").join("");
-
-					notifications = snapshot.val();
-					var html = "";
-					for (var key in notifications) {
-						if (notifications[key].read == isOld) {
-							html = "<div class=\"notification\" onclick=\"clearAndOpenNotification(\'" + key + "\')\"><h4>" + notifications[key].notification.title + "</h4><p>" + notifications[key].notification.body + "</p><small>" + notifications[key].data.date + "</small></div>" + html;
-						}
+				notifications = newNotifications;
+				var html = "";
+				for (var key in notifications) {
+					if (notifications[key].read == isOld) {
+						html = "<div class=\"notification\" onclick=\"clearAndOpenNotification(\'" + key + "\')\"><h4>" + notifications[key].notification.title + "</h4><p>" + notifications[key].notification.body + "</p><small>" + notifications[key].data.date + "</small></div>" + html;
 					}
+				}
 
-					ElementUtils.clearElement(notificationsElement);
-					ElementUtils.append(notificationsElement, html);
-					if (!isOld)
-					  clearAllButtonElement.style.visibility = html.length > 0 ? null : "hidden";
-				}, function(error) {
-					console.e(error);
-				});
+				ElementUtils.clearElement(notificationsElement);
+				ElementUtils.append(notificationsElement, html);
+				if (!isOld)
+					clearAllButtonElement.style.visibility = html.length > 0 ? null : "hidden";
 			} else {
-				firebase.auth().onAuthStateChanged(function(user) {
-					if (user) {
-						currentUser = user;
-						isCurrentUserLoading = false;
+				refresh1ButtonElement.className += " spinning";
+				refresh2ButtonElement.className += " spinning";
 
-						reload();
-						getMessagingToken();
-					}
-				}, function(error) {
-					isCurrentUserLoading = false;
-					console.error("Sign In Error", error);
-				});
+				if (currentUser) {
+					firebase.database().ref("notifications/" + currentUser.uid + "/new").once("value").then(function(snapshot) {
+						reload(snapshot.val());
+					}, function(error) {
+						console.e(error);
+					});
+				} else {
+					firebase.auth().onAuthStateChanged(function(user) {
+						if (user) {
+							currentUser = user;
+							isCurrentUserLoading = false;
+
+							reload();
+							getMessagingToken();
+						}
+					}, function(error) {
+						isCurrentUserLoading = false;
+						console.error("Sign In Error", error);
+					});
+				}
 			}
 		}
 
 		function getMessagingToken(shouldRequest) {
+			//TODO: STOP GENERATING A NEW TOKEN ON EACH PAGE LOAD
 			messaging.getToken().then(function(token) {
 				if (currentUser) {
 					if (token) {
@@ -292,8 +297,22 @@
 			});
 		}
 
-		window.addEventListener("load", reload);
-		//setInterval(reload, 30000);
+		window.addEventListener("load", function() {
+			reload();
+			if ('serviceWorker' in navigator) {
+				navigator.serviceWorker.register("/firebase-messaging-sw.js").then(function(registration) {
+					//do something
+				}, function(error) {
+					console.error("Unable to register service worker: " + error);
+				});
+
+				messaging.onMessage(function(payload) {
+				  console.log("Message received. ", payload);
+					notifications[payload.data["meta-id"]] = payload;
+					reload(notifications);
+				});
+			}
+		});
 	</script>
 </body>
 </html>
