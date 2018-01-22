@@ -973,7 +973,7 @@
 
 						if ((download.config == config || (config == "phone" && !download.config))
 								&& ((download.min < sdkArray[1] || sdkArray[1] == -1) && (!download.max || download.max > sdkArray[0])) && (download.arch == arch || arch == "all")
-								&& (((download.minDpi ? download.minDpi : 0) < dpiArray[1] || dpiArray[1] == -1) && (!download.maxDpi || download.maxDpi > dpiArray[0]))) {
+								&& ((!download.minDpi || (download.minDpi ? download.minDpi : 0) < dpiArray[1] || dpiArray[1] == -1) && (!download.maxDpi || download.maxDpi > dpiArray[0]))) {
 							items.push({
 								"release": release,
 								"download": download
