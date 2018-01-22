@@ -168,20 +168,33 @@ exports.notifyPublisherOfReview = functions.database.ref("/apps/{appPackage}/rev
                 const appName = snapshot.val();
                 return admin.database().ref("/apps/" + event.params.appPackage + "/author").once("value").then(function(snapshot) {
                     const authorId = snapshot.val();
-                    return admin.database().ref("/notifications/" + authorId + "/new/review-" + event.params.appPackage + "-" + userId).set({
+                    const notification = {
                         "notification": {
                             "title": "New review for " + appName,
                             "body": userName + " has left a review for your app, " + appName + "."
                         },
                         "data": {
                             "date": new Date().toDateString(),
-                            "location": {
-                                "packageName": event.params.appPackage,
-                                "review": event.params.reviewId,
-                                "user": userId
-                            },
+                            "location-page": "reviews",
+                            "location-id": event.params.reviewId,
+                            "location-package": event.params.appPackage,
+                            "location-user": userId,
                             "type": "review"
                         }
+                    };
+
+                    return admin.database().ref("/notifications/" + authorId + "/new/review-" + event.params.appPackage + "-" + userId).set(notification).then(function() {
+                        return admin.database().ref("/users/" + authorId + "/notificationTokens").once("value").then(function(snapshot) {
+                            var value = snapshot.val();
+                            if (value) {
+                                var tokens = [];
+                                for (var key in value) {
+                                    tokens.push(key.indexOf(":") >= 0 ? key.split(":")[1] : key);
+                                }
+
+                                return admin.messaging().sendToDevice(tokens, notification);
+                            }
+                        });
                     });
                 });
             });

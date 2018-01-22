@@ -193,10 +193,13 @@
 		}
 
 		function clearAndOpenNotification(key) {
-			var url = null;
-			if (notifications[key].data.type == "review") {
-				url = "../?page=reviews&id=" + notifications[key].data.location.review;
+			var args = {};
+			for (var dataKey in notifications[key].data) {
+				if (dataKey.indexOf("location-") == 0)
+					args[dataKey.substring(9)] = notifications[key].data[dataKey];
 			}
+
+			var url = "../?" + UrlUtils.argumentsToString(args);
 
 			if (!isOld) {
 				firebase.database().ref("notifications/" + currentUser.uid + "/new/" + key + "/read").set(true).then(function() {
