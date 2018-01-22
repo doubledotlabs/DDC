@@ -293,6 +293,14 @@
 							getMessagingToken(true); //don't do this
 						}
 					}
+
+					messaging.onMessage(function(payload) {
+						console.log("Message received. ", payload);
+						notifications[payload.data["meta-id"]] = payload;
+						reload(notifications);
+					});
+
+					messaging.onTokenRefresh(getMessagingToken);
 				} else console.error("Unable to store notification token: no currentUser");
 			});
 		}
@@ -304,12 +312,6 @@
 					//do something
 				}, function(error) {
 					console.error("Unable to register service worker: " + error);
-				});
-
-				messaging.onMessage(function(payload) {
-				  console.log("Message received. ", payload);
-					notifications[payload.data["meta-id"]] = payload;
-					reload(notifications);
 				});
 			}
 		});
