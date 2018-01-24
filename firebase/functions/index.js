@@ -274,6 +274,9 @@ exports.setStoragePath = functions.storage.object()
     });
 
 function getSignedFileUrlPromise(path) {
+    if (!path)
+       return Promise.resolve(null);
+
     if (path.startsWith("http"))
         return Promise.resolve(path);
 
