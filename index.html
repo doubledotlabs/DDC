@@ -804,67 +804,19 @@
 					if (configurations.indexOf(config) == -1)
 						configurations.push(config);
 
-					var sdk = null;
-					if (download.max) {
-						sdk = [download.min, download.max];
-					} else {
-						sdk = [download.min, -1];
-					}
-
-					var includesSdk = false;
-					for (var i3 = 0; i < sdks.length; i++) {
-						if (sdks[i3][0] < sdk[1]) {
-							if (sdk[0] < sdks[i3][0])
-								sdks[i3][0] = sdk[0];
-
-							includesSdk = true;
-							break;
-						} else if (sdks[i3][1] > sdk[0] || sdks[i3][1] == -1) {
-							if (sdk[1] > sdks[i3][1] || sdk[1] == -1)
-								sdks[i3][1] = sdk[1];
-
-							includesSdk = true;
-							break;
-						}
-					}
-
-					if (!includesSdk)
-						sdks.push(sdk);
+					if (sdks.indexOf(download.min) == -1)
+						sdks.push(download.min);
+					if (download.max && sdks.indexOf(download.max) == -1)
+						sdks.push(download.max);
 
 					var arch = download.arch ? download.arch : "all";
 					if (architectures.indexOf(arch) == -1)
 						architectures.push(arch);
 
-					var dpi = null;
-					if (download.minDpi && download.maxDpi) {
-						dpi = [download.minDpi, download.maxDpi];
-					} else if (download.minDpi) {
-						dpi = [download.minDpi, -1];
-					} else if (download.maxDpi) {
-						dpi = [0, download.maxDpi];
-					} //else dpi = [0, -1];
-
-					if (dpi) {
-						var includesDpi = false;
-						for (var i3 = 0; i < dpis.length; i++) {
-							if (dpis[i3][0] <= dpi[1]) {
-								if (dpi[0] > dpis[i3][0])
-									dpis[i3][0] = dpi[0];
-
-								includesDpi = true;
-								break;
-							} else if (dpis[i3][1] >= dpi[0] || dpis[i3][1] == -1) {
-								if (dpi[1] > dpis[i3][1] || dpi[1] == -1)
-									dpis[i3][1] = dpi[1];
-
-								includesDpi = true;
-								break;
-							}
-						}
-
-						if (!includesDpi)
-							dpis.push(dpi);
-					}
+					if (download.minDpi && dpis.indexOf(download.minDpi) == -1)
+						dpis.push(download.minDpi);
+					if (download.maxDpi && dpis.indexOf(download.maxDpi) == -1)
+						dpis.push(download.maxDpi);
 				}
 			}
 
@@ -883,14 +835,28 @@
 				configurationsHtml += "<option value=\"" + configurations[i] + "\">" + text + "</option>"
 			}
 
-			var sdksHtml = "";
-			for (var i = 0; i < sdks.length; i++) {
-				var text = null;
-				if (sdks[i][1] >= 0)
-					text = "Android " + AndroidUtils.sdkToVersion(sdks[i][0]) + " - " + AndroidUtils.sdkToVersion(sdks[i][1]);
-				else text = "Android " + AndroidUtils.sdkToVersion(sdks[i][0]) + "+";
+			sdks.sort(function(a, b) {
+				return a - b;
+			});
 
-				sdksHtml += "<option value=\"" + sdks[i][0] + "/" + sdks[i][1] + "\">" + text + "</option>";
+			var sdksHtml = "<option value=\"0/-1\">All Android Versions</option>";
+
+			if (sdks.length > 0) {
+				sdksHtml = "<option value=\"0/" + sdks[0] + "\">Below Android " + AndroidUtils.sdkToVersion(sdks[0]) + "</option>";
+
+				for (var i = 0; i < sdks.length; i++) {
+					var text = null;
+					var id = null;
+					if (i + 1 < sdks.length) {
+						text = "Android " + AndroidUtils.sdkToVersion(sdks[i]) + " - " + AndroidUtils.sdkToVersion(sdks[i + 1]);
+						id = sdks[i] + "/" + sdks[i + 1];
+					} else {
+						text = "Android " + AndroidUtils.sdkToVersion(sdks[i]) + "+";
+						id = sdks[i] + "/-1";
+					}
+
+					sdksHtml += "<option value=\"" + id + "\">" + text + "</option>";
+				}
 			}
 
 			var architecturesHtml = "";
@@ -898,17 +864,28 @@
 				architecturesHtml += "<option value=\"" + architectures[i] + "\">" + architectures[i] + "</option>"
 			}
 
-			var dpisHtml = dpis.length > 0 ? "" : "<option>nodpi</option>";
-			for (var i = 0; i < dpis.length; i++) {
-				var text = null;
-				if (dpis[i][0] && dpis[i][1])
-					text = dpis[i][0] + "dpi - " + dpis[i][1] + "dpi";
-				else if (dpis[i][0])
-					text = "&ge; " + dpis[i][0] + "dpi";
-				else if (dpis[i][1])
-					text = "&le; " + dpis[i][1] + "dpi";
+			dpis.sort(function(a, b) {
+				return a - b;
+			});
 
-				dpisHtml += "<option value=\"" + dpis[i][0] + "/" + dpis[i][1] + "\">" + text + "</option>";
+			var dpisHtml = "<option>nodpi</option>";
+
+			if (dpis.length > 0) {
+				dpisHtml = "<option value=\"0/" + dpis[0] + "\">&le; " + dpis[0] + " dpi</option>"
+
+				for (var i = 0; i < dpis.length; i++) {
+					var text = null;
+					var id = null;
+					if (i + 1 < dpis.length) {
+						text = dpis[i] + " - " + dpis[i + 1] + " dpi";
+						id = dpis[i] + "/" + dpis[i + 1];
+					} else {
+						text = "&ge; " + dpis[i] + " dpi";
+						id = dpis[i] + "/-1";
+					}
+
+					dpisHtml += "<option value=\"" + id + "\">" + text + "</option>";
+				}
 			}
 
 			ElementUtils.append(element, "<div class=\"row grid\">"
@@ -982,11 +959,15 @@
 					}
 				}
 
-				if (shouldShorten && items.length > 4) {
-					ElementUtils.append(releasesElement, ListMethods.none({}, items.slice(0, 4), DownloadMethods.normal)
-						+ "<a style=\"width: 100%\" href=\"javascript:setPage(\'page=releases&package=" + app.package + "&config=" + config + "&sdk=" + sdk + "&arch=" + arch + "&dpi=" + dpi + "\');\">"
-						+ "<i class=\"material-icons\">open_in_new</i>MORE RELEASES</a>");
-				} else ElementUtils.append(releasesElement, ListMethods.none({}, items, DownloadMethods.normal));
+				if (items.length > 0) {
+					if (shouldShorten && items.length > 4) {
+						ElementUtils.append(releasesElement, ListMethods.none({}, items.slice(0, 4), DownloadMethods.normal)
+							+ "<a style=\"width: 100%\" href=\"javascript:setPage(\'page=releases&package=" + app.package + "&config=" + config + "&sdk=" + sdk + "&arch=" + arch + "&dpi=" + dpi + "\');\">"
+							+ "<i class=\"material-icons\">open_in_new</i>MORE RELEASES</a>");
+					} else ElementUtils.append(releasesElement, ListMethods.none({}, items, DownloadMethods.normal));
+				} else {
+					ElementUtils.append(releasesElement, "<h3 style=\"text-align: center; margin: 0; width: 100%;\">There are no downloads available for the selected configuration.</h3>")
+				}
 
 				if (args) {
 					args.config = config;
