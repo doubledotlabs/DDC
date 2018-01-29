@@ -305,7 +305,6 @@
 	<!-- slick -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
-	<script type="text/javascript" src="js/testdata.js"></script>
 	<script type="text/javascript" src="js/utils.js"></script>
 	<script type="text/javascript" src="js/methods.js"></script>
 	<script type="text/javascript" src="js/content.js"></script>
@@ -455,14 +454,8 @@
 						+ "</div>" : "")
 						+ (app.reviews && app.reviews.length > 0 ? ListMethods.grid({"name": "Reviews"}, app.reviews, ReviewMethods.normal)
 						+ "<a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "\');\"><i class=\"material-icons\">open_in_new</i>ALL REVIEWS</a>" : "")
-						+ "<a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "&write\');\"><i class=\"material-icons\">rate_review</i>WRITE A REVIEW</a>"
-						+ "<div class=\"inner-shadow\">" + ListMethods.row({
-							"name": "Related<br>Apps",
-							"id": "similar/" + app.package,
-							"color": "#000",
-							"background": "transparent",
-							"shade": "#F5F5F5"
-						}, apps, AppMethods.smallCard) + "</div>");
+						+ "<a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "&write\');\"><i class=\"material-icons\">rate_review</i>WRITE A REVIEW</a><br><br>"
+					);
 				});
 			} else if (args.page == "reviews") {
 				if (args.id) {

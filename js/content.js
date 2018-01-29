@@ -7,20 +7,11 @@ function getCategories(fun, ignore) {
 }
 
 function getCategory(id, fun, ignore) {
-	if (id.indexOf("similar/") == 0) {
-		getApp(id.split("/")[1], function(app) {
-			fun({
-				"id": id,
-				"name": "Similar to " + app.name
-			});
-		}, ignore);
-	} else {
-		callFirebaseFunction("getCategory?categoryId=" + id, fun, function(error) {
-			console.error("Failed to fetch category", error);
-			if (!ignore)
-				setPage("page=404", true);
-		});
-	}
+	callFirebaseFunction("getCategory?categoryId=" + id, fun, function(error) {
+		console.error("Failed to fetch category", error);
+		if (!ignore)
+			setPage("page=404", true);
+	});
 }
 
 function getApp(id, fun, ignore) {
