@@ -300,7 +300,7 @@
 	<main id="main">
 		<div style="text-align: center; padding: 4em;">
 			<h3>Ready to get started?</h3>
-			<button class="outline">Publish an App</button>
+			<button class="outline" onclick="setPage('page=app&new');">Publish an App</button>
 		</div>
 	</main>
 	<footer id="footer">
@@ -309,7 +309,6 @@
 		<a href="https://doubledotlabs.github.io/policies/?ddstore">Privacy Policy</a>
 	</footer>
 
-	<script type="text/javascript" src="../js/testdata.js"></script>
 	<script type="text/javascript" src="../js/utils.js"></script>
 	<script type="text/javascript" src="../js/methods.js"></script>
 	<script type="text/javascript" src="../js/content.js"></script>
@@ -353,14 +352,14 @@
 
 						ElementUtils.append(main, "<div class=\"inset\">"
 							+ "<div class=\"row grid\">"+ ListMethods.none({}, user.apps, AppMethods.consoleTinyCard)
-							+ "<a><i class=\"material-icons\">add</i>NEW APPLICATION</a></div>"
+							+ "<a href=\"javascript:setPage(\'page=app&new\');\"><i class=\"material-icons\">add</i>NEW APPLICATION</a></div>"
 							+ "</div>");
 					}
 				});
 			} else if (args.page == "app") {
 				ElementUtils.clearElement(main);
 
-				if (args.edit) {
+				if (args.edit && args.package) {
 					if (args.edit == "page") {
 						getApp(args.package, function(app) {
 							ElementUtils.clearElement(main);
@@ -440,7 +439,22 @@
 						setPage("page=404");
 						return;
 					}
-				} else {
+				} else if (args.new) {
+					if (currentUser) {
+						if (args.source == "manual") {
+
+						} else if (args.source == "github") {
+
+						} else {
+							ElementUtils.append(main, "<div style=\"margin: 2em; text-align: center;\">"
+									+ "<button class=\"outline\" style=\"max-width: 20em;\" onclick=\"setPage(\'page=app&new&source=manual\');\"><br><i class=\"material-icons\">keyboard</i><h4 style=\"margin-top: 0;\">Manual</h4><p>Enter all the necessary information yourself, without using any third party services.</p></button><br><br>"
+									+ "<button class=\"outline\" style=\"max-width: 20em;\" onclick=\"setPage(\'page=app&new&source=github\');\"><br><i class=\"material-icons\">import_export</i><h4 style=\"margin-top: 0;\">Import from GitHub</h4><p>Simply select a repository and the site will attempt to collect all the necessary information to publish your app.</p></button>"
+									+ "</div>");
+						}
+					} else {
+						location.href = "../?page=signin";
+					}
+				} else if (args.package) {
 					getApp(args.package, function(app) {
 						ElementUtils.clearElement(main);
 
@@ -503,6 +517,9 @@
 							}
 						});
 					});
+				} else {
+					setPage("page=404");
+					return;
 				}
 			} else if (args.page == "reviews") {
 				ElementUtils.clearElement(main);
