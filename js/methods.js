@@ -178,7 +178,14 @@ LinkMethods.normal = function(link) {
 
 LinkMethods.editable = function(link) {
 	return "<div class=\"link editable\"><div class=\"input long\" contentEditable=\"true\" placeholder=\"Link Title\">" + (link && link.name ? link.name : "") + "</div><div class=\"input long\" contentEditable=\"true\" placeholder=\"Link URL\">" + (link && link.url ? link.url : "") + "</div></div>";
-}
+};
+
+LinkMethods.largeButton = function(link) {
+	return "<button class=\"outline\" style=\"max-width: 20em;\"" + (link && link.onclick ? " onclick=\"" + link.onclick + "\"" : "") + ">"
+	    + (link && link.icon ? "<br><i class=\"material-icons\">" + link.icon + "</i><h4 style=\"margin-top: 0;\"" : "<h4")
+			+ ">" + (link && link.name ? link.name : "") + "</h4>"
+			+ (link && link.description ? "<p>" + link.description + "</p>" : "") + "</button>";
+};
 
 function ratingMethod(rating, color) {
   var html = "<span class=\"rating\" style=\"color: " + (color ? color : SiteUtils.getRatingColor(rating)) + "\">"

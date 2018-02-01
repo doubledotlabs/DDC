@@ -312,6 +312,7 @@
 	<script type="text/javascript" src="../js/utils.js"></script>
 	<script type="text/javascript" src="../js/methods.js"></script>
 	<script type="text/javascript" src="../js/content.js"></script>
+	<script type="text/javascript" src="../js/github.js"></script>
 	<script type="text/javascript" src="../js/console.js"></script>
 	<script>
 		var main = document.getElementById("main");
@@ -424,9 +425,6 @@
 							ElementUtils.clearElement(main);
 
 							ElementUtils.append(main, "<div style=\"margin: 2em;\"><h1>Edit Description</h1><div id=\"editDescription\" class=\"input long\" contentEditable=\"true\" placeholder=\"Enter a description...\">"
-								+ app.description.replace(/[<>\"\']/g, function(c) {
-    							return '&#' + c.charCodeAt(0) + ';';
-  							})
 								+ "</div><button id=\"editDescriptionSubmit\" class=\"outline\" style=\"float: right;\">SUBMIT</button></div>");
 
 							document.getElementById("editDescriptionSubmit").addEventListener("click", function() {
@@ -444,11 +442,40 @@
 						if (args.source == "manual") {
 
 						} else if (args.source == "github") {
+							if (GitHub.githubAccessToken) {
+								GitHub.getRepositories(args.index, function(result) {
+									console.log(result);
+									ElementUtils.clearElement(main);
 
+									var items = [];
+									for (var i = 0; i < result.data.viewer.repositories.edges.length; i++) {
+										items.push({
+											"name": result.data.viewer.repositories.edges[i].node.name,
+											"description": result.data.viewer.repositories.edges[i].node.description,
+											"onclick": "" //TODO: yeah do the thing
+										});
+									}
+
+									ElementUtils.append(main, "<h2>Select a Repository</h2>" + ListMethods.grid({}, items, LinkMethods.largeButton));
+								}, function(error) {
+
+								});
+							} else GitHub.signInToGithub();
 						} else {
 							ElementUtils.append(main, "<div style=\"margin: 2em; text-align: center;\">"
-									+ "<button class=\"outline\" style=\"max-width: 20em;\" onclick=\"setPage(\'page=app&new&source=manual\');\"><br><i class=\"material-icons\">keyboard</i><h4 style=\"margin-top: 0;\">Manual</h4><p>Enter all the necessary information yourself, without using any third party services.</p></button><br><br>"
-									+ "<button class=\"outline\" style=\"max-width: 20em;\" onclick=\"setPage(\'page=app&new&source=github\');\"><br><i class=\"material-icons\">import_export</i><h4 style=\"margin-top: 0;\">Import from GitHub</h4><p>Simply select a repository and the site will attempt to collect all the necessary information to publish your app.</p></button>"
+									+ LinkMethods.largeButton({
+										"icon": "keyboard",
+										"name": "Manual",
+										"description": "Enter all the necessary information yourself, without using any third party services.",
+										"onclick": "setPage(\'page=app&new&source=manual\');"
+									})
+									+ "<br><br>"
+									+ LinkMethods.largeButton({
+										"icon": "import_export",
+										"name": "Import from GitHub",
+										"description": "Simply select a repository and the site will attempt to collect all the necessary information to publish your app.",
+										"onclick": "setPage(\'page=app&new&source=github\');"
+									})
 									+ "</div>");
 						}
 					} else {
