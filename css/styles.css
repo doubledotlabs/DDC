@@ -306,7 +306,7 @@ select {
 	padding-right: 30px;
 	min-width: 100%;
 	background-color: #FFF;
-	background-color: var(--normal-background);
+	color: #000;
 	border: none;
 	border-radius: 0.25em;
 	box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.37);
@@ -315,8 +315,7 @@ select {
   -moz-appearance: none;
   appearance: none;
 
-	background: linear-gradient(45deg, transparent 50%, #000 50%), linear-gradient(135deg, #000 50%, transparent 50%);
-	background: linear-gradient(45deg, transparent 50%, var(--normal-color) 50%), linear-gradient(135deg, var(--normal-color) 50%, transparent 50%);
+	background: linear-gradient(45deg, transparent 50%, #000 50%), linear-gradient(135deg, #000 50%, transparent 50%), #FFF;
   background-position: calc(100% - 17px) 1em, calc(100% - 12px) 1em;
   background-size: 5px 5px, 5px 5px;
   background-repeat: no-repeat;
@@ -328,11 +327,13 @@ select::-ms-expand {
 
 select.disabled {
 	background-color: rgba(0, 0, 0, 0.1);
-	background-color: var(--normal-color-tenth);
 	box-shadow: none;
 	color: rgba(0, 0, 0, 0.5);
-	color: var(--normal-color-half);
 	pointer-events: none;
+}
+
+select option {
+	color: #000;
 }
 
 a {

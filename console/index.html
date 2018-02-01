@@ -443,20 +443,34 @@
 
 						} else if (args.source == "github") {
 							if (GitHub.githubAccessToken) {
-								GitHub.getRepositories(args.index, function(result) {
-									console.log(result);
+								GitHub.getRepositories(null, function(result) {
 									ElementUtils.clearElement(main);
 
-									var items = [];
-									for (var i = 0; i < result.data.viewer.repositories.edges.length; i++) {
-										items.push({
-											"name": result.data.viewer.repositories.edges[i].node.name,
-											"description": result.data.viewer.repositories.edges[i].node.description,
-											"onclick": "" //TODO: yeah do the thing
-										});
-									}
+									ElementUtils.append(main, "<div id=\"repositories\" style=\"text-align: center;\"><h2>Select a Repository</h2></div><div style=\"text-align: center; margin-bottom: 2em;\"><button id=\"loadMoreRepositories\">Load More</button></div>");
+									var repositoriesElement = document.getElementById("repositories");
+									var loadMoreRepositoriesElement = document.getElementById("loadMoreRepositories");
 
-									ElementUtils.append(main, "<h2>Select a Repository</h2>" + ListMethods.grid({}, items, LinkMethods.largeButton));
+									var lastItemCursor;
+									var addRepositories = function(result) {
+										var items = [];
+										for (var i = 0; i < result.data.viewer.repositories.edges.length; i++) {
+											items.push({
+												"name": result.data.viewer.repositories.edges[i].node.name,
+												"description": result.data.viewer.repositories.edges[i].node.description,
+												"onclick": "" //TODO: yeah do the thing
+											});
+
+											lastItemCursor = result.data.viewer.repositories.edges[i].cursor;
+										}
+
+										ElementUtils.append(repositoriesElement, ListMethods.none({}, items, LinkMethods.largeButton));
+									};
+
+									addRepositories(result);
+
+									loadMoreRepositoriesElement.addEventListener("click", function() {
+										GitHub.getRepositories(lastItemCursor, addRepositories);
+									});
 								}, function(error) {
 
 								});
