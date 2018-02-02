@@ -282,7 +282,7 @@ function getSignedFileUrlPromise(path) {
 
     return gcs.bucket("ddstore-87442.appspot.com").file(path).getSignedUrl({
         "action": 'read',
-        "expires": Date.now() + 60000
+        "expires": Date.now() + 600000
     });
 }
 
