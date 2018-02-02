@@ -105,9 +105,14 @@ function getDownloadURL(path, fun, ignore) {
 }
 
 var FireFunctionCache = {};
+FireFunctionCache.prefix = "FireFunctionCache-";
 FireFunctionCache.data = {};
+
 FireFunctionCache.call = function(name, onComplete, onError) {
-	var localStorageItem = localStorage.getItem("FireFunctionCache-" + name);
+	var localStorageItem;
+	if (typeof(Storage) !== "undefined")
+		localStorageItem = localStorage.getItem(FireFunctionCache.prefix + name);
+
 	if (FireFunctionCache.data[name] && FireFunctionCache.data[name].timeout - Date.now() > 0) {
 		onComplete(JSON.parse(FireFunctionCache.data[name].response));
 	} else if (localStorageItem && JSON.parse(localStorageItem).timeout - Date.now() > 0) {
@@ -115,7 +120,8 @@ FireFunctionCache.call = function(name, onComplete, onError) {
 		onComplete(JSON.parse(FireFunctionCache.data[name].response));
 	} else {
 		FireFunctionCache.data[name] = null;
-		localStorage.removeItem("FireFunctionCache-" + name);
+		if (typeof(Storage) !== "undefined")
+			localStorage.removeItem(FireFunctionCache.prefix + name);
 
 		var requestContent = new XMLHttpRequest();
 		requestContent.onreadystatechange = function() {
@@ -125,7 +131,10 @@ FireFunctionCache.call = function(name, onComplete, onError) {
 						"timeout": Date.now() + 500000,
 						"response": requestContent.responseText
 					};
-					localStorage.setItem("FireFunctionCache-" + name, JSON.stringify(FireFunctionCache.data[name]));
+
+					if (typeof(Storage) !== "undefined")
+						localStorage.setItem(FireFunctionCache.prefix + name, JSON.stringify(FireFunctionCache.data[name]));
+
 					onComplete(JSON.parse(requestContent.responseText));
 				} else {
 					onError(requestContent.status, requestContent.responseText);
@@ -136,6 +145,19 @@ FireFunctionCache.call = function(name, onComplete, onError) {
 		requestContent.send(null);
 	}
 }
+
+FireFunctionCache.clear = function() {
+	if (typeof(Storage) !== "undefined") {
+		for (var i = 0; i < localStorage.length; i++) {
+			var key = localStorage.key(i);
+			var item = localStorage.getItem(key);
+			if (key.indexOf(FireFunctionCache.prefix) == 0 && item && JSON.parse(item).timeout - Date.now() <= 0)
+				localStorage.removeItem(key);
+		}
+	}
+};
+
+FireFunctionCache.clear();
 
 function getFirebaseStorageUrl(path, onComplete, onError) {
 	firebase.storage().child(path).getDownloadURL().then(onComplete).catch(onError);

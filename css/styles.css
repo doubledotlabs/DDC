@@ -113,7 +113,8 @@ img {
 	opacity: 0;
 }
 
-.loadingimage.loaded {
+.loadingimage.loaded,
+.loadingimage.slick-cloned {
 	animation-name: fadeIn;
 	animation-duration: .2s;
 	animation-timing-function: ease-out;
