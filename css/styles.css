@@ -113,8 +113,7 @@ img {
 	opacity: 0;
 }
 
-.loadingimage.loaded,
-.loadingimage.slick-cloned {
+.loadingimage.loaded {
 	animation-name: fadeIn;
 	animation-duration: .2s;
 	animation-timing-function: ease-out;
@@ -1245,4 +1244,9 @@ p.indented {
 	.grid > .download {
 		width: calc(25% - 4em);
 	}
+}
+
+.loadingimage.slick-cloned {
+	opacity: 1;
+	transform: scale(1);
 }

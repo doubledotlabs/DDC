@@ -181,7 +181,7 @@ LinkMethods.editable = function(link) {
 };
 
 LinkMethods.largeButton = function(link) {
-	return "<button class=\"outline\" style=\"width: 20em; margin: 1em;\"" + (link && link.onclick ? " onclick=\"" + link.onclick + "\"" : "") + ">"
+	return "<button style=\"width: 20em; margin: 1em;\"" + (link && link.onclick ? " onclick=\"" + link.onclick + "\"" : "") + ">"
 	    + (link && link.icon ? "<br><i class=\"material-icons\">" + link.icon + "</i><h4 style=\"margin-top: 0;\"" : "<h4")
 			+ ">" + (link && link.name ? link.name : "") + "</h4>"
 			+ (link && link.description ? "<p>" + link.description + "</p>" : "") + "</button>";

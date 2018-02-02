@@ -446,7 +446,7 @@
 								GitHub.getRepositories(null, function(result) {
 									ElementUtils.clearElement(main);
 
-									ElementUtils.append(main, "<div id=\"repositories\" style=\"text-align: center;\"><h2>Select a Repository</h2></div><div style=\"text-align: center; margin-bottom: 2em;\"><button id=\"loadMoreRepositories\">Load More</button></div>");
+									ElementUtils.append(main, "<div id=\"repositories\" style=\"text-align: center;\"><h2>Select a Repository</h2></div><div style=\"text-align: center; margin-bottom: 2em;\"><button id=\"loadMoreRepositories\" class=\"outline\">Load More</button></div>");
 									var repositoriesElement = document.getElementById("repositories");
 									var loadMoreRepositoriesElement = document.getElementById("loadMoreRepositories");
 
