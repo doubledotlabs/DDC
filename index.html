@@ -85,6 +85,7 @@
 			transform: translate(-50%, -50%);
 			color: rgba(0, 0, 0, 0.5);
 			color: var(--normal-color-half);
+			text-align: center;
 
 			animation-name: loadIn;
 			animation-duration: 1.5s;
@@ -1043,7 +1044,7 @@
 
 		function setLoading() {
 			ElementUtils.clearElement(main);
-			ElementUtils.append(main, "<h2 id=\"loading\">Loading...</h2>");
+			ElementUtils.append(main, "<div id=\"loading\"><img src=\"https://doubledotlabs.github.io/images/loading.svg\"><br><b>Loading...</b></div>");
 		}
 
 		function onSizeChange() {
