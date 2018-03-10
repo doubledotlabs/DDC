@@ -22,6 +22,16 @@ GitHub.getRepositories = function(lastCursor, onComplete, onError) {
   GitHub.makeRequest("query { viewer { repositories(first: 20" + (lastCursor ? " after: \\\"" + lastCursor + "\\\"" : "") + ") { edges { cursor node { name description } } } } }", onComplete, onError);
 };
 
+GitHub.getReleases = function(repoName, onComplete, onError) {
+  var names = repoName.split("/");
+  GitHub.makeRequest("query { repository(owner: \\\"" + names[0] + "\\\", name: \\\"" + names[1] + "\\\") { releases(last:50) { nodes { name description publishedAt releaseAssets(first: 50) { nodes { downloadUrl } } } } } }", onComplete, onError);
+};
+
+GitHub.getLatestRelease = function(repoName, onComplete, onError) {
+  var names = repoName.split("/");
+  GitHub.makeRequest("query { repository(owner: \\\"" + names[0] + "\\\", name: \\\"" + names[1] + "\\\") { releases(last:1) { nodes { name description publishedAt releaseAssets(first: 1) { nodes { downloadUrl } } } } } }", onComplete, onError);
+};
+
 GitHub.makeRequest = function(query, onComplete, onError) {
   if (GitHub.githubAccessToken) {
     var requestContent = new XMLHttpRequest();

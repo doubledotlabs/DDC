@@ -230,6 +230,33 @@ exports.notifyPublisherOfReview = functions.database.ref(
       });
   });
 
+function getApkInfoPromise(bucket, name, fileName) {
+  const tempFilePath = path.join(os.tmpdir(), fileName);
+
+  return bucket.file(name).download({
+    "destination": tempFilePath
+  }).then(function() {
+    return ApkReader.open(tempFilePath).then(function(reader) {
+      return reader.readManifest();
+    }).then(function(manifest) {
+      return {
+        "package": manifest.package,
+        "min": manifest.usesSdk.minSdkVersion,
+        "target": manifest.usesSdk.targetSdkVersion,
+        "max": (manifest.usesSdk.maxSdkVersion ? manifest.usesSdk.maxSdkVersion :
+          null),
+        "permissions": manifest.usesPermissions,
+        "features": manifest.usesFeatures,
+        "screens": manifest.supportsScreens,
+        "launcher": (manifest.application && manifest.application.launcherActivities[
+            0] ? manifest.application.launcherActivities[0].name :
+          null),
+        "url": event.data.name
+      };
+    });
+  });
+}
+
 exports.setStoragePath = functions.storage.object()
   .onChange(event => {
     const filePath = event.data.name.split("/");
@@ -246,37 +273,16 @@ exports.setStoragePath = functions.storage.object()
 
         if (event.data.resourceState == "exists") {
           //file exists, download & get info
-          const bucket = gcs.bucket(event.data.bucket);
-          const tempFilePath = path.join(os.tmpdir(), fileName);
+          return getApkInfoPromise(gcs.bucket(event.data.bucket), event.data.name,
+            fileName).then(function(download) {
+            var obj = {};
+            obj["apps/" + appPackage + "/releases/" + releaseName +
+              "/downloads/" + fileName.split(".")[0]] = download;
 
-          return bucket.file(event.data.name).download({
-            "destination": tempFilePath
-          }).then(function() {
-            return ApkReader.open(tempFilePath).then(function(reader) {
-              return reader.readManifest();
-            }).then(function(manifest) {
-              //set apk info
-              var obj = {};
-              obj["apps/" + appPackage + "/releases/" + releaseName +
-                "/downloads/" + fileName.split(".")[0]] = {
-                "min": manifest.usesSdk.minSdkVersion,
-                "target": manifest.usesSdk.targetSdkVersion,
-                "max": (manifest.usesSdk.maxSdkVersion ? manifest.usesSdk
-                  .maxSdkVersion : null),
-                "permissions": manifest.usesPermissions,
-                "features": manifest.usesFeatures,
-                "screens": manifest.supportsScreens,
-                "launcher": (manifest.application && manifest.application
-                  .launcherActivities[0] ? manifest.application.launcherActivities[
-                    0].name : null),
-                "url": event.data.name
-              };
-
-              return admin.database().ref().update(obj).then(function() {
-                //yay
-              }, function(error) {
-                console.log("Error adding file info: ", error);
-              });
+            return admin.database().ref().update(obj).then(function() {
+              //yay
+            }, function(error) {
+              console.log("Error adding file info: ", error);
             });
           });
         } else {
@@ -297,6 +303,17 @@ exports.setStoragePath = functions.storage.object()
             event.data.name;
         }
       }
+    } else if (filePath[0] = "pending") {
+      if (filePath.length < 4)
+        return null;
+
+      const author = filePath[1];
+
+      return getApkInfoPromise(gcs.bucket(event.data.bucket), event.data.name,
+        fileName).then(function(download) {
+        var obj = {};
+
+      });
     }
 
     return admin.database().ref().update(obj).then(function() {
