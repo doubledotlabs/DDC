@@ -376,7 +376,7 @@
 							+ "<a class=\"indented\" href=\"javascript:setPage(\'page=releases&package=" + args.package + "&edit=new\');\"><i class=\"material-icons\">add</i>NEW RELEASE</a><br><br><br>"
 							+ "<hr>"
 							+ "<div id=\"appDescContainer\" class=\"appdesc\"></div>"
-							+ "<div id=\"appReviewsContainer\"></div>"
+							+ "<h1 class=\"indented\">Reviews</h1><div id=\"appReviewsContainer\" class=\"row grid\"></div>"
 							+ "<a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + args.package + "\');\"><i class=\"material-icons\">open_in_new</i>ALL REVIEWS</a><br><br><br>");
 
 						editHeaderImageElement = document.getElementById("editHeaderImage");
@@ -398,10 +398,10 @@
 
 							var releaseHtml = (app.releases && app.releases[0] ? ReleaseMethods.console(app.releases[0]) : null);
 							ElementUtils.clearElement(appReleasesContainerElement);
-							ElementUtils.append(appReleasesContainerElement, releaseHtml ? "<hr>" + releaseHtml.substring(30, releaseHtml.length - 6) : "");
+							ElementUtils.append(appReleasesContainerElement, releaseHtml ? "<useless class=\"appinfo\"></useless><hr>" + releaseHtml.substring(30, releaseHtml.length - 6) : "");
 
 							ElementUtils.clearElement(appReviewsContainerElement);
-							ElementUtils.append(appReviewsContainerElement, app.reviews && app.reviews.length > 0 ? ListMethods.grid({"name": "Reviews"}, app.reviews, ReviewMethods.console) : "");
+							ElementUtils.append(appReviewsContainerElement, app.reviews && app.reviews.length > 0 ? ListMethods.none({}, app.reviews, ReviewMethods.console) : "");
 						});
 
 						editHeaderImageElement.addEventListener("click", function() {
