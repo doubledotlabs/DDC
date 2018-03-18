@@ -531,6 +531,7 @@
 							ElementUtils.append(appDescContainerElement, "<div id=\"editDescription\" class=\"input long\" contentEditable=\"true\" placeholder=\"Enter a description...\">"
 								+ app.description + "</div><button id=\"editDescriptionSubmit\" class=\"outline\" style=\"float: right;\">SAVE</button>");
 
+							var editDescriptionElement = document.getElementById("editDescription");
 							document.getElementById("editDescriptionSubmit").addEventListener("click", function() {
 								ElementUtils.clearElement(appDescContainerElement);
 								setAppDescription(args.package, editDescriptionElement.innerHTML, function() {
