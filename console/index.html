@@ -446,6 +446,7 @@
 					}
 
 					if (args.edit == "page") {
+						shouldScrollTop = false;
 						ElementUtils.clearElement(appInfoContainerElement);
 
 						getApp(args.package, function(app) {
@@ -519,6 +520,7 @@
 					}
 
 					if (args.edit == "description") {
+						shouldScrollTop = false;
 						ElementUtils.clearElement(appDescContainerElement);
 						getApp(args.package, function(app) {
 							if (!document.getElementById("app:" + args.package))
