@@ -23,9 +23,10 @@ function getApp(id, fun, ignore) {
 }
 
 function searchApps(query, fun, ignore) {
-	FireFunctionCache.call("searchApps?queryText=" + query.replace(/(^| )(\w)/g, function(x) {
-    return x.toUpperCase();
-  }), fun, function(error) {
+	FireFunctionCache.call("searchApps?queryText=" + query.replace(/(^| )(\w)/g,
+		function(x) {
+			return x.toUpperCase();
+		}), fun, function(error) {
 		if (ignore) {
 			fun();
 		} else {
@@ -81,16 +82,17 @@ function getReview(id, fun, ignore) {
 }
 
 function setReview(pkg, user, rating, review, fun, ignore) {
-	firebase.database().ref("reviews/" + pkg.split(".").join("_") + "-" + user.uid).set({
-		"app": pkg,
-		"author": user.uid,
-		"rating": rating,
-		"review": review
-	}).then(fun, function(error) {
-		console.log("You dun goofed");
-		if (!ignore)
-			setPage("page=404", true);
-	});
+	firebase.database().ref("reviews/" + pkg.split(".").join("_") + "-" + user.uid)
+		.set({
+			"app": pkg,
+			"author": user.uid,
+			"rating": rating,
+			"review": review
+		}).then(fun, function(error) {
+			console.log("You dun goofed");
+			if (!ignore)
+				setPage("page=404", true);
+		});
 }
 
 function getDownloadURL(path, fun, ignore) {
@@ -113,15 +115,15 @@ FireFunctionCache.call = function(name, onComplete, onError) {
 	if (typeof(Storage) !== "undefined")
 		localStorageItem = localStorage.getItem(FireFunctionCache.prefix + name);
 
-	if (FireFunctionCache.data[name] && FireFunctionCache.data[name].timeout - Date.now() > 0) {
+	if (FireFunctionCache.data[name] && FireFunctionCache.data[name].timeout -
+		Date.now() > 0) {
 		onComplete(JSON.parse(FireFunctionCache.data[name].response));
-	} else if (localStorageItem && JSON.parse(localStorageItem).timeout - Date.now() > 0) {
+	} else if (localStorageItem && JSON.parse(localStorageItem).timeout - Date.now() >
+		0) {
 		FireFunctionCache.data[name] = JSON.parse(localStorageItem);
 		onComplete(JSON.parse(FireFunctionCache.data[name].response));
 	} else {
-		FireFunctionCache.data[name] = null;
-		if (typeof(Storage) !== "undefined")
-			localStorage.removeItem(FireFunctionCache.prefix + name);
+		FireFunctionCache.clear(name);
 
 		var requestContent = new XMLHttpRequest();
 		requestContent.onreadystatechange = function() {
@@ -133,7 +135,8 @@ FireFunctionCache.call = function(name, onComplete, onError) {
 					};
 
 					if (typeof(Storage) !== "undefined")
-						localStorage.setItem(FireFunctionCache.prefix + name, JSON.stringify(FireFunctionCache.data[name]));
+						localStorage.setItem(FireFunctionCache.prefix + name, JSON.stringify(
+							FireFunctionCache.data[name]));
 
 					onComplete(JSON.parse(requestContent.responseText));
 				} else {
@@ -141,18 +144,26 @@ FireFunctionCache.call = function(name, onComplete, onError) {
 				}
 			}
 		}
-		requestContent.open("GET", "https://us-central1-ddstore-87442.cloudfunctions.net/" + name, true);
+		requestContent.open("GET",
+			"https://us-central1-ddstore-87442.cloudfunctions.net/" + name, true);
 		requestContent.send(null);
 	}
 }
 
-FireFunctionCache.clear = function() {
-	if (typeof(Storage) !== "undefined") {
-		for (var i = 0; i < localStorage.length; i++) {
-			var key = localStorage.key(i);
-			var item = localStorage.getItem(key);
-			if (key.indexOf(FireFunctionCache.prefix) == 0 && item && JSON.parse(item).timeout - Date.now() <= 0)
-				localStorage.removeItem(key);
+FireFunctionCache.clear = function(name) {
+	if (name) {
+		FireFunctionCache.data[name] = null;
+		if (typeof(Storage) !== "undefined")
+			localStorage.removeItem(FireFunctionCache.prefix + name);
+	} else {
+		if (typeof(Storage) !== "undefined") {
+			for (var i = 0; i < localStorage.length; i++) {
+				var key = localStorage.key(i);
+				var item = localStorage.getItem(key);
+				if (key.indexOf(FireFunctionCache.prefix) == 0 && item && JSON.parse(item)
+					.timeout - Date.now() <= 0)
+					localStorage.removeItem(key);
+			}
 		}
 	}
 };
