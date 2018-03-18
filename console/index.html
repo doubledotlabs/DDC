@@ -454,12 +454,12 @@
 								return;
 
 							ElementUtils.clearElement(appInfoContainerElement);
-							ElementUtils.append(appInfoContainerElement, "<h1><div id=\"editAppName\" class=\"input long\" contentEditable=\"true\" placeholder=\"App Name\">" + app.name + "</div></h1>"
+							ElementUtils.append(appInfoContainerElement, "<div class=\"editingclicked\"><h1><div id=\"editAppName\" class=\"input long\" contentEditable=\"true\" placeholder=\"App Name\">" + app.name + "</div></h1>"
 								+ "<div id=\"editAppSummary\" class=\"input long\" contentEditable=\"true\" placeholder=\"Summary\">" + app.summary + "</div>"
 								+ "<div id=\"editLinks\" class=\"row overflow\" style=\"text-align: center; justify-content: center;\">"
 								+ (app.links && app.links.length > 0 ? ListMethods.none({}, app.links, LinkMethods.editable) : LinkMethods.editable())
 								+ "<div style=\"width: 100%;\"><a id=\"editAddLink\"><i class=\"material-icons\">add</i></a><a id=\"editRemoveLink\"><i class=\"material-icons\">remove</i></a></div>"
-								+ "</div><br><button id=\"editAppSubmit\" class=\"outline indented\" style=\"float: right;\">SAVE</button><button class=\"outline\" style=\"float: right; margin-right: 1em;\" onclick=\"window.history.back();\">CANCEL</button><br><br><br>");
+								+ "</div><br><button id=\"editAppSubmit\" class=\"outline indented\" style=\"float: right;\">SAVE</button><button class=\"outline\" style=\"float: right; margin-right: 1em;\" onclick=\"window.history.back();\">CANCEL</button><br><br><br></div>");
 
 							var editLinksElement = document.getElementById("editLinks");
 							var editAddLinkElement = document.getElementById("editAddLink");
@@ -514,7 +514,7 @@
 								return;
 
 							ElementUtils.clearElement(appInfoContainerElement);
-							ElementUtils.append(appInfoContainerElement, "<div onclick=\"setPage('page=app&package=" + app.package + "&edit=page');\"><h1>" + app.name + "</h1><p>" + app.summary + "</p>"
+							ElementUtils.append(appInfoContainerElement, "<div class=\"editonclick\" onclick=\"setPage('page=app&package=" + app.package + "&edit=page');\"><h1>" + app.name + "</h1><p>" + app.summary + "</p>"
 									+ ListMethods.overflow({}, app.links, LinkMethods.normal) + "</div>");
 						});
 					}
@@ -528,8 +528,8 @@
 
 							ElementUtils.clearElement(appDescContainerElement);
 
-							ElementUtils.append(appDescContainerElement, "<div id=\"editDescription\" class=\"input long\" contentEditable=\"true\" placeholder=\"Enter a description...\">"
-								+ app.description + "</div><button id=\"editDescriptionSubmit\" class=\"outline\" style=\"float: right;\">SAVE</button><button class=\"outline\" style=\"float: right; margin-right: 1em;\" onclick=\"window.history.back();\">CANCEL</button>");
+							ElementUtils.append(appDescContainerElement, "<div class=\"editingclicked\"><br><div id=\"editDescription\" class=\"input long\" contentEditable=\"true\" placeholder=\"Enter a description...\">"
+								+ app.description + "</div><button id=\"editDescriptionSubmit\" class=\"outline\" style=\"float: right;\">SAVE</button><button class=\"outline\" style=\"float: right; margin-right: 1em;\" onclick=\"window.history.back();\">CANCEL</button><br><br></div>");
 
 							var editDescriptionElement = document.getElementById("editDescription");
 							document.getElementById("editDescriptionSubmit").addEventListener("click", function() {
@@ -546,7 +546,7 @@
 								return;
 
 							ElementUtils.clearElement(appDescContainerElement);
-							ElementUtils.append(appDescContainerElement, "<p onclick=\"setPage('page=app&package=" + app.package + "&edit=description');\">" + app.description + "</p>");
+							ElementUtils.append(appDescContainerElement, "<div class=\"editonclick\" onclick=\"setPage('page=app&package=" + app.package + "&edit=description');\"><p>" + app.description + "</p></div>");
 						});
 					}
 				} else if (args.new) {
