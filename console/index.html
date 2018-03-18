@@ -358,20 +358,107 @@
 					}
 				});
 			} else if (args.page == "app") {
-				ElementUtils.clearElement(main);
+				if (args.package) {
+					var editHeaderImageElement = document.getElementById("editHeaderImage");
+					var editIconImageElement = document.getElementById("editIconImage");
+					var appInfoContainerElement = document.getElementById("appInfoContainer");
+					var appReleasesContainerElement = document.getElementById("appReleasesContainer");
+					var appDescContainerElement = document.getElementById("appDescContainer");
+					var appReviewsContainerElement = document.getElementById("appReviewsContainer");
 
-				if (args.edit && args.package) {
-					if (args.edit == "page") {
+					if (!document.getElementById("app:" + args.package)) {
+						ElementUtils.clearElement(main);
+						ElementUtils.append(main, "<useless id=\"app:" + args.package + "\"></useless><div id=\"editHeaderImage\" class=\"header loadingimage editable\"></div>"
+							+ "<div class=\"appinfo\"><div class=\"appiconinfo\"><img id=\"editIconImage\" class=\"appicon editable\"></div>"
+							+ "<div id=\"appInfoContainer\" class=\"appnameinfo\" style=\"width: 100%;\"></div></div>"
+							+ "<div id=\"appReleasesContainer\"></div>"
+							+ "<a class=\"indented\" href=\"javascript:setPage(\'page=releases&package=" + args.package + "\');\"><i class=\"material-icons\">open_in_new</i>ALL RELEASES</a>"
+							+ "<a class=\"indented\" href=\"javascript:setPage(\'page=releases&package=" + args.package + "&edit=new\');\"><i class=\"material-icons\">add</i>NEW RELEASE</a><br><br><br>"
+							+ "<hr>"
+							+ "<div id=\"appDescContainer\" class=\"appdesc\"></div>"
+							+ "<div id=\"appReviewsContainer\"></div>"
+							+ "<a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + args.package + "\');\"><i class=\"material-icons\">open_in_new</i>ALL REVIEWS</a><br><br><br>");
+
+						editHeaderImageElement = document.getElementById("editHeaderImage");
+						editIconImageElement = document.getElementById("editIconImage");
+						appInfoContainerElement = document.getElementById("appInfoContainer");
+						appReleasesContainerElement = document.getElementById("appReleasesContainer");
+						appDescContainerElement = document.getElementById("appDescContainer");
+						appReviewsContainerElement = document.getElementById("appReviewsContainer");
+
 						getApp(args.package, function(app) {
-							ElementUtils.clearElement(main);
-							ElementUtils.append(main, "<div class=\"header\" style=\"height: 5em;\"></div>"
-								+ "<div class=\"appinfo\">"
-								+ "<div class=\"appnameinfo\" style=\"width: calc(100% - 4em);\"><h1><div id=\"editAppName\" class=\"input long\" contentEditable=\"true\" placeholder=\"App Name\">" + app.name + "</div></h1>"
+							if (!document.getElementById("app:" + args.package))
+								return;
+
+							document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
+							main.style.background = "rgb(20, 29, 38)";
+
+							editHeaderImageElement.style.background = "url(\'" + app.header + "\') center / cover no-repeat";
+							editIconImageElement.src = app.icon;
+
+							var releaseHtml = (app.releases && app.releases[0] ? ReleaseMethods.console(app.releases[0]) : null);
+							ElementUtils.clearElement(appReleasesContainerElement);
+							ElementUtils.append(appReleasesContainerElement, releaseHtml ? "<hr>" + releaseHtml.substring(30, releaseHtml.length - 6) : "");
+
+							ElementUtils.clearElement(appReviewsContainerElement);
+							ElementUtils.append(appReviewsContainerElement, app.reviews && app.reviews.length > 0 ? ListMethods.grid({"name": "Reviews"}, app.reviews, ReviewMethods.console) : "");
+						});
+
+						editHeaderImageElement.addEventListener("click", function() {
+							if (window.File && window.FileReader && window.FileList && window.Blob) {
+								var inputElement = ElementUtils.createElement("<input type=\"file\" accept=\"image/*\"></input>").childNodes[0];
+								inputElement.click();
+								inputElement.addEventListener("change", function() {
+									if (FileReader && inputElement.files && inputElement.files[0]) {
+										setAppHeader(args.package, inputElement.files[0], function() {
+											var reader = new FileReader();
+											reader.onload = function() {
+												editHeaderImageElement.style.background = "url(\'" + reader.result + "\') center / cover no-repeat";
+											}
+											reader.readAsDataURL(inputElement.files[0]);
+										});
+									}
+								});
+							} else {
+								//error
+							}
+						});
+
+						editIconImageElement.addEventListener("click", function() {
+							if (window.File && window.FileReader && window.FileList && window.Blob) {
+								var inputElement = ElementUtils.createElement("<input type=\"file\" accept=\"image/*\"></input>").childNodes[0];
+								inputElement.click();
+								inputElement.addEventListener("change", function() {
+									setAppIcon(args.package, inputElement.files[0], function() {
+										if (FileReader && inputElement.files && inputElement.files[0]) {
+											var reader = new FileReader();
+											reader.onload = function() {
+												editIconImageElement.src = reader.result;
+											}
+											reader.readAsDataURL(inputElement.files[0]);
+										}
+									});
+								});
+							} else {
+								//error
+							}
+						});
+					}
+
+					if (args.edit == "page") {
+						ElementUtils.clearElement(appInfoContainerElement);
+
+						getApp(args.package, function(app) {
+							if (!document.getElementById("app:" + args.package))
+								return;
+
+							ElementUtils.clearElement(appInfoContainerElement);
+							ElementUtils.append(appInfoContainerElement, "<h1><div id=\"editAppName\" class=\"input long\" contentEditable=\"true\" placeholder=\"App Name\">" + app.name + "</div></h1>"
 								+ "<div id=\"editAppSummary\" class=\"input long\" contentEditable=\"true\" placeholder=\"Summary\">" + app.summary + "</div>"
 								+ "<div id=\"editLinks\" class=\"row overflow\" style=\"text-align: center; justify-content: center;\">"
 								+ (app.links && app.links.length > 0 ? ListMethods.none({}, app.links, LinkMethods.editable) : LinkMethods.editable())
 								+ "<div style=\"width: 100%;\"><a id=\"editAddLink\"><i class=\"material-icons\">add</i></a><a id=\"editRemoveLink\"><i class=\"material-icons\">remove</i></a></div>"
-								+ "</div><br><button id=\"editAppSubmit\" class=\"outline indented\" style=\"float: right;\">SUBMIT</button></div></div><br>");
+								+ "</div><br><button id=\"editAppSubmit\" class=\"outline indented\" style=\"float: right;\">SAVE</button><br><br><br>");
 
 							var editLinksElement = document.getElementById("editLinks");
 							var editAddLinkElement = document.getElementById("editAddLink");
@@ -418,24 +505,46 @@
 								});
 							});
 						});
-					} else if (args.edit == "releases") {
-						//TODO: edit releases
-					} else if (args.edit == "description") {
-						getApp(args.package, function(app) {
-							ElementUtils.clearElement(main);
+					} else {
+						ElementUtils.clearElement(appInfoContainerElement);
 
-							ElementUtils.append(main, "<div style=\"margin: 2em;\"><h1>Edit Description</h1><div id=\"editDescription\" class=\"input long\" contentEditable=\"true\" placeholder=\"Enter a description...\">"
-								+ "</div><button id=\"editDescriptionSubmit\" class=\"outline\" style=\"float: right;\">SUBMIT</button></div>");
+						getApp(args.package, function(app) {
+							if (!document.getElementById("app:" + args.package))
+								return;
+
+							ElementUtils.clearElement(appInfoContainerElement);
+							ElementUtils.append(appInfoContainerElement, "<div onclick=\"setPage('page=app&package=" + app.package + "&edit=page');\"><h1>" + app.name + "</h1><p>" + app.summary + "</p>"
+									+ ListMethods.overflow({}, app.links, LinkMethods.normal) + "</div>");
+						});
+					}
+
+					if (args.edit == "description") {
+						ElementUtils.clearElement(appDescContainerElement);
+						getApp(args.package, function(app) {
+							if (!document.getElementById("app:" + args.package))
+								return;
+
+							ElementUtils.clearElement(appDescContainerElement);
+
+							ElementUtils.append(appDescContainerElement, "<div id=\"editDescription\" class=\"input long\" contentEditable=\"true\" placeholder=\"Enter a description...\">"
+								+ app.description + "</div><button id=\"editDescriptionSubmit\" class=\"outline\" style=\"float: right;\">SAVE</button>");
 
 							document.getElementById("editDescriptionSubmit").addEventListener("click", function() {
+								ElementUtils.clearElement(appDescContainerElement);
 								setAppDescription(args.package, editDescriptionElement.innerHTML, function() {
 									window.history.back();
 								});
 							});
 						});
 					} else {
-						setPage("page=404");
-						return;
+						ElementUtils.clearElement(appDescContainerElement);
+						getApp(args.package, function(app) {
+							if (!document.getElementById("app:" + args.package))
+								return;
+
+							ElementUtils.clearElement(appDescContainerElement);
+							ElementUtils.append(appDescContainerElement, "<p onclick=\"setPage('page=app&package=" + app.package + "&edit=description');\">" + app.description + "</p>");
+						});
 					}
 				} else if (args.new) {
 					if (currentUser) {
@@ -495,70 +604,8 @@
 					} else {
 						location.href = "../?page=signin";
 					}
-				} else if (args.package) {
-					getApp(args.package, function(app) {
-						ElementUtils.clearElement(main);
-
-						document.body.style.background = "url(\"" + app.header + "\") 100% 100% / 9999% 9999% no-repeat fixed";
-						main.style.background = "rgb(20, 29, 38)";
-
-						var releaseHtml = (app.releases && app.releases[0] ? ReleaseMethods.console(app.releases[0]) : null);
-
-						ElementUtils.append(main, "<div id=\"editHeaderImage\" class=\"header loadingimage editable\" style=\"background: url(\'" + app.header + "\') center / cover no-repeat;\"></div>"
-							+ "<div class=\"appinfo\"><div class=\"appiconinfo\"><img id=\"editIconImage\" class=\"appicon editable\" src=\"" + app.icon + "\"><button class=\"outline\" onclick=\"setPage(\'page=app&package=" + app.package + "&edit=page\');\">EDIT PAGE</button></div>"
-							+ "<div class=\"appnameinfo\"><h1>" + app.name + "</h1><p>" + app.summary + "</p>"
-							+ ListMethods.overflow({}, app.links, LinkMethods.normal) + "</div></div>"
-							+ (releaseHtml ? "<hr>" + releaseHtml.substring(30, releaseHtml.length - 6)
-							+ "<a class=\"indented\" href=\"javascript:setPage(\'page=releases&package=" + args.package + "\');\"><i class=\"material-icons\">open_in_new</i>ALL RELEASES</a>" : "")
-							+ "<a class=\"indented\" href=\"javascript:setPage(\'page=releases&package=" + args.package + "&edit=new\');\"><i class=\"material-icons\">add</i>NEW RELEASE</a><br><br><br>"
-							+ "<hr>"
-							+ "<div class=\"appdesc\"><p>" + app.description + "</p><a class=\"link\" href=\"javascript:setPage(\'page=app&package=" + app.package + "&edit=description\')\"><i class=\"material-icons\">edit</i>EDIT DESCRIPTION</a></div>"
-							+ (app.reviews && app.reviews.length > 0 ? ListMethods.grid({"name": "Reviews"}, app.reviews, ReviewMethods.console)
-						 	+ "<a class=\"indented\" href=\"javascript:setPage(\'page=reviews&package=" + app.package + "\');\"><i class=\"material-icons\">open_in_new</i>ALL REVIEWS</a>" : "") + "<br><br><br>");
-
-						var editHeaderImageElement = document.getElementById("editHeaderImage");
-						editHeaderImageElement.addEventListener("click", function() {
-							if (window.File && window.FileReader && window.FileList && window.Blob) {
-								var inputElement = ElementUtils.createElement("<input type=\"file\" accept=\"image/*\"></input>").childNodes[0];
-								inputElement.click();
-								inputElement.addEventListener("change", function() {
-									if (FileReader && inputElement.files && inputElement.files[0]) {
-										setAppHeader(app.package, inputElement.files[0], function() {
-											var reader = new FileReader();
-	        						reader.onload = function() {
-	            					editHeaderImageElement.style.background = "url(\'" + reader.result + "\') center / cover no-repeat";
-	        						}
-	        						reader.readAsDataURL(inputElement.files[0]);
-										});
-    							}
-								});
-							} else {
-								//error
-							}
-						});
-
-						var editIconImageElement = document.getElementById("editIconImage");
-						editIconImageElement.addEventListener("click", function() {
-							if (window.File && window.FileReader && window.FileList && window.Blob) {
-								var inputElement = ElementUtils.createElement("<input type=\"file\" accept=\"image/*\"></input>").childNodes[0];
-								inputElement.click();
-								inputElement.addEventListener("change", function() {
-									setAppIcon(app.package, inputElement.files[0], function() {
-										if (FileReader && inputElement.files && inputElement.files[0]) {
-	        						var reader = new FileReader();
-	        						reader.onload = function() {
-	            					editIconImageElement.src = reader.result;
-	        						}
-	        						reader.readAsDataURL(inputElement.files[0]);
-	    							}
-									});
-								});
-							} else {
-								//error
-							}
-						});
-					});
 				} else {
+					ElementUtils.clearElement(main);
 					setPage("page=404");
 					return;
 				}
