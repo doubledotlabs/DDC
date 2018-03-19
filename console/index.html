@@ -405,43 +405,42 @@
 						});
 
 						editHeaderImageElement.addEventListener("click", function() {
-							if (window.File && window.FileReader && window.FileList && window.Blob) {
-								var inputElement = ElementUtils.createElement("<input type=\"file\" accept=\"image/*\"></input>").childNodes[0];
-								inputElement.click();
-								inputElement.addEventListener("change", function() {
-									if (FileReader && inputElement.files && inputElement.files[0]) {
-										setAppHeader(args.package, inputElement.files[0], function() {
+							FileUtils.pick(function(files) {
+								if (files && files[0]) {
+									setAppHeader(args.package, files[0], function() {
+										if (FileReader) {
 											var reader = new FileReader();
 											reader.onload = function() {
 												editHeaderImageElement.style.background = "url(\'" + reader.result + "\') center / cover no-repeat";
 											}
-											reader.readAsDataURL(inputElement.files[0]);
-										});
-									}
-								});
-							} else {
-								//error
-							}
+											reader.readAsDataURL(files[0]);
+										} else {
+											FireFunctionCache.clear("getApp?appPackage=" + args.package);
+											location.reload();
+										}
+									});
+								}
+							});
 						});
 
 						editIconImageElement.addEventListener("click", function() {
-							if (window.File && window.FileReader && window.FileList && window.Blob) {
-								var inputElement = ElementUtils.createElement("<input type=\"file\" accept=\"image/*\"></input>").childNodes[0];
-								inputElement.click();
-								inputElement.addEventListener("change", function() {
-									setAppIcon(args.package, inputElement.files[0], function() {
-										if (FileReader && inputElement.files && inputElement.files[0]) {
+							FileUtils.pick(function(files) {
+								console.log(files);
+								if (files && files[0]) {
+									setAppIcon(args.package, files[0], function() {
+										if (FileReader) {
 											var reader = new FileReader();
 											reader.onload = function() {
 												editIconImageElement.src = reader.result;
 											}
-											reader.readAsDataURL(inputElement.files[0]);
+											reader.readAsDataURL(files[0]);
+										} else {
+											FireFunctionCache.clear("getApp?appPackage=" + args.package);
+											location.reload();
 										}
 									});
-								});
-							} else {
-								//error
-							}
+								}
+							});
 						});
 					}
 
