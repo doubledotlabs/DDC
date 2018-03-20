@@ -78,6 +78,25 @@
 			color: var(--normal-color);
 		}
 
+		#loading {
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			color: rgba(0, 0, 0, 0.5);
+			color: var(--normal-color-half);
+			text-align: center;
+
+			animation-name: loadIn;
+			animation-duration: 1.5s;
+			animation-timing-function: ease-out;
+			animation-fill-mode: forwards;
+		}
+
+		#loading img {
+			filter: brightness(100);
+		}
+
 		#logo {
 			position: absolute;
 			top: 50%;
@@ -345,7 +364,7 @@
 			}
 
 			if (args.page == "home") {
-				ElementUtils.clearElement(main);
+				setLoading();
 
 				getUser(currentUser.uid, function(user) {
 					if (user.apps && user.apps.length > 0) {
@@ -554,6 +573,7 @@
 
 						} else if (args.source == "github") {
 							if (GitHub.githubAccessToken) {
+								setLoading();
 								GitHub.getRepositories(null, function(result) {
 									ElementUtils.clearElement(main);
 
@@ -612,7 +632,7 @@
 					return;
 				}
 			} else if (args.page == "reviews") {
-				ElementUtils.clearElement(main);
+				setLoading();
 
 				if (args.id) {
 					getReview(args.id, function(review) {
@@ -626,7 +646,7 @@
 					});
 				}
 			} else if (args.page == "releases") {
-				ElementUtils.clearElement(main);
+				setLoading();
 
 				if (args.package) {
 					if (args.version) {
@@ -659,6 +679,7 @@
 									document.getElementById("editReleaseUpload").addEventListener("click", function() {
 										FileUtils.pick(function(files) {
 											if (files && files[0]) {
+												setLoading();
 												addReleaseFile(app.package, release.version, files[0], function() {
 													location.reload();
 												});
@@ -667,6 +688,7 @@
 									});
 
 									document.getElementById("editReleaseSave").addEventListener("click", function() {
+										setLoading();
 										setReleaseChangelog(app.package, release.version, editReleaseChangelogElement.innerText, function() {
 											window.history.back();
 										});
@@ -676,6 +698,7 @@
 									for (var i = 0; i < notDownloadIcons.length && i < release.downloads.length; i++) {
 										const download = release.downloads[i];
 										notDownloadIcons[i].addEventListener("click", function() {
+											setLoading();
 											removeReleaseFile(args.package, download.url, function() {
 												location.reload();
 											});
@@ -686,6 +709,7 @@
 								}
 							});
 						} else {
+							setLoading();
 							getApp(args.package, function(app) {
 								ElementUtils.clearElement(main);
 
@@ -703,6 +727,7 @@
 					} else if (args.edit == "new") {
 						//TODO: new release
 					} else {
+						setLoading();
 						getApp(args.package, function(app) {
 							ElementUtils.clearElement(main);
 							ElementUtils.append(main, "<div style=\"margin: 1em;\">" + ListMethods.none({}, app.releases, ReleaseMethods.console) + "</div>");
@@ -730,6 +755,11 @@
 		}
 
 		setPage(UrlUtils.getCurrentArguments(), true);
+
+		function setLoading() {
+			ElementUtils.clearElement(main);
+			ElementUtils.append(main, "<div id=\"loading\"><img src=\"https://doubledotlabs.github.io/images/loading.svg\"><br><b>Loading...</b></div>");
+		}
 
 		window.onpopstate = function() {
 			setPage(UrlUtils.getCurrentArguments(), true);
