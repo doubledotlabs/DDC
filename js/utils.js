@@ -180,10 +180,11 @@ FileUtils.uid = function() {
   });
 }
 
-FileUtils.pick = function(fun, ignore) {
+FileUtils.pick = function(fun, fileType, ignore) {
   if (window.File && window.FileReader && window.FileList && window.Blob) {
     var inputElement = ElementUtils.createElement(
-      "<input type=\"file\" accept=\"image/*\"></input>").childNodes[0];
+      "<input type=\"file\" accept=\"" + (fileType ? fileType : "image/*") +
+      "\"></input>").childNodes[0];
     inputElement.click();
     inputElement.addEventListener("change", function() {
       fun(inputElement.files);

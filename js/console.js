@@ -37,7 +37,7 @@ function setAppHeader(id, file, fun, ignore) {
 		FireFunctionCache.clear("getApp?appPackage=" + id);
 	}
 
-	firebase.storage().ref().child("apps/" + id.split(".").join("_") +
+	firebase.storage().ref("apps/" + id.split(".").join("_") +
 		"/images/header." + file.name.split('.').pop()).put(file).then(fun, function() {
 		if (ignore) {
 			fun(file);
@@ -52,7 +52,7 @@ function setAppIcon(id, file, fun, ignore) {
 		FireFunctionCache.clear("getApp?appPackage=" + id);
 	}
 
-	firebase.storage().ref().child("apps/" + id.split(".").join("_") +
+	firebase.storage().ref("apps/" + id.split(".").join("_") +
 		"/images/icon." + file.name.split('.').pop()).put(file).then(fun, function() {
 		if (ignore) {
 			fun(file);
@@ -60,4 +60,32 @@ function setAppIcon(id, file, fun, ignore) {
 			setPage("page=404", true);
 		}
 	});
+}
+
+function addReleaseFile(pkg, version, file, fun, ignore) {
+	firebase.storage().ref("apps/" + pkg.split(".").join("_") + "/releases/" +
+			version.split(".").join("_") + "/" + FileUtils.uid() + ".apk")
+		.put(file).then(fun, function() {
+			if (ignore) {
+				fun(file);
+			} else {
+				setPage("page=404", true);
+			}
+		});
+}
+
+function setReleaseChangelog(pkg, version, changelog, fun, ignore) {
+	if (FireFunctionCache != null && FireFunctionCache.data != null) {
+		FireFunctionCache.clear("getApp?appPackage=" + pkg);
+	}
+
+	firebase.database().ref("apps/" + pkg.split(".").join("_") + "/releases/" +
+		version.split(".").join("_") + "/changelog").set(changelog).then(fun,
+		function() {
+			if (ignore) {
+				fun();
+			} else {
+				setPage("page=404", true);
+			}
+		});
 }

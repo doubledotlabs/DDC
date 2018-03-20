@@ -628,56 +628,79 @@
 			} else if (args.page == "releases") {
 				ElementUtils.clearElement(main);
 
-				if (args.version) {
-					if (args.edit) {
-						getApp(args.package, function(app) {
-							ElementUtils.clearElement(main);
+				if (args.package) {
+					if (args.version) {
+						if (args.edit) {
+							getApp(args.package, function(app) {
+								ElementUtils.clearElement(main);
 
-							var release = null;
-							for (var i = 0; i < app.releases.length; i++) {
-								if (args.version == app.releases[i].version) {
-									release = app.releases[i];
-									break;
+								var release = null;
+								for (var i = 0; i < app.releases.length; i++) {
+									if (args.version == app.releases[i].version) {
+										release = app.releases[i];
+										break;
+									}
 								}
-							}
 
-							if (release != null) {
-								ElementUtils.append(main, "<div style=\"margin: 1em;\">"
-									+ "<h1 class=\"indented\">Release: " + release.version + "</h1><h3 class=\"indented\">Published on " + release.date + "</h3>"
-									+ "<div class=\"row grid\" style=\"padding: 0 1em;\">"
-									+ ListMethods.none({}, release.downloads, DownloadMethods.consoleEdit)
-									+ "<a><i class=\"material-icons\">file_upload</i>UPLOAD APK</a>"
-									+ "</div>"
-									+ "<h3 class=\"indented\">Changelog</h3>"
-									+ "<div style=\"padding: 1em 2em;\"><div class=\"input long\" contentEditable=\"true\" placeholder=\"Changelog\">" + release.changelog.split("\n").join("<br>") + "</div>"
-									+ "<button class=\"outline\" style=\"float: right;\">SUBMIT</button><br></div>"
-									+ "</div>");
-							} else {
-								setPage("page=404", true);
-							}
-						});
+								if (release != null) {
+									ElementUtils.append(main, "<div style=\"margin: 1em;\">"
+										+ "<h1 class=\"indented\">Release: " + release.version + "</h1><h3 class=\"indented\">Published on " + release.date + "</h3>"
+										+ "<div class=\"row grid\" style=\"padding: 0 1em;\">"
+										+ ListMethods.none({}, release.downloads, DownloadMethods.consoleEdit)
+										+ "<a id=\"editReleaseUpload\"><i class=\"material-icons\">file_upload</i>UPLOAD APK</a>"
+										+ "</div>"
+										+ "<h3 class=\"indented\">Changelog</h3>"
+										+ "<div style=\"padding: 1em 2em;\"><div id=\"editReleaseChangelog\" class=\"input long\" contentEditable=\"true\" placeholder=\"Changelog\">" + release.changelog.split("\n").join("<br>") + "</div>"
+										+ "<button id=\"editReleaseSave\" class=\"outline\" style=\"float: right;\">SAVE</button><button onclick=\"window.history.back();\" class=\"outline\" style=\"float: right; margin-right: 1em;\">CANCEL</button><br></div>"
+										+ "</div>");
+
+									var editReleaseChangelogElement = document.getElementById("editReleaseChangelog");
+
+									document.getElementById("editReleaseUpload").addEventListener("click", function() {
+										FileUtils.pick(function(files) {
+											if (files && files[0]) {
+												addReleaseFile(app.package, release.version, files[0], function() {
+													location.reload();
+												});
+											}
+										}, ".apk");
+									});
+
+									document.getElementById("editReleaseSave").addEventListener("click", function() {
+										setReleaseChangelog(app.package, release.version, editReleaseChangelogElement.innerText, function() {
+											window.history.back();
+										});
+									});
+								} else {
+									setPage("page=404", true);
+								}
+							});
+						} else {
+							getApp(args.package, function(app) {
+								ElementUtils.clearElement(main);
+
+								var release = null;
+								for (var i = 0; i < app.releases.length; i++) {
+									if (args.version == app.releases[i].version) {
+										release = app.releases[i];
+										break;
+									}
+								}
+
+								ElementUtils.append(main, ReleaseMethods.console(release).substring(4));
+							});
+						}
+					} else if (args.edit == "new") {
+						//TODO: new release
 					} else {
 						getApp(args.package, function(app) {
 							ElementUtils.clearElement(main);
-
-							var release = null;
-							for (var i = 0; i < app.releases.length; i++) {
-								if (args.version == app.releases[i].version) {
-									release = app.releases[i];
-									break;
-								}
-							}
-
-							ElementUtils.append(main, ReleaseMethods.console(release).substring(4));
+							ElementUtils.append(main, "<div style=\"margin: 1em;\">" + ListMethods.none({}, app.releases, ReleaseMethods.console) + "</div>");
 						});
 					}
-				} else if (args.edit == "new") {
-					//TODO: new release
 				} else {
-					getApp(args.package, function(app) {
-						ElementUtils.clearElement(main);
-						ElementUtils.append(main, "<div style=\"margin: 1em;\">" + ListMethods.none({}, app.releases, ReleaseMethods.console) + "</div>");
-					});
+					setPage("page=404");
+					return;
 				}
 			}
 
