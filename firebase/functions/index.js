@@ -251,7 +251,7 @@ function getApkInfoPromise(bucket, name, fileName) {
         "launcher": (manifest.application && manifest.application.launcherActivities[
             0] ? manifest.application.launcherActivities[0].name :
           null),
-        "url": event.data.name
+        "url": name
       };
     });
   });
