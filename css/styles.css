@@ -80,7 +80,8 @@ footer {
 }
 
 footer > * {
-	padding: 0 2em;
+	padding: 1em 2em;
+	display: block;
 }
 
 nav>span {
@@ -1282,6 +1283,11 @@ p.indented {
 		margin: 0 -2vw;
 		margin-top: calc(-6em - 1vw);
 		width: 104vw;
+	}
+
+	footer > * {
+		padding: 0 2em;
+		display: inline;
 	}
 }
 
