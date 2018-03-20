@@ -42,6 +42,10 @@ AndroidUtils.sdkToVersion = function(sdk) {
     return "7.1";
   else if (sdk == 26)
     return "8.0";
+  else if (sdk == 27)
+    return "8.1";
+  else if (sdk == 28)
+    return "8.2";
   else return sdk;
 };
 
