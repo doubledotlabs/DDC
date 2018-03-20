@@ -712,6 +712,10 @@
 					setPage("page=404");
 					return;
 				}
+			} else {
+				page = "page=404";
+				ElementUtils.clearElement(main);
+				ElementUtils.append(main, "<div class=\"indented\"><h1>Error 404</h1><p>Sorry, we couldn\'t find what you\'re looking for.</p><button class=\"outline\" onclick=\"window.history.back();\">GO BACK</button></div>");
 			}
 
 			if (replace)
