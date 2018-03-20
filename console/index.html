@@ -671,6 +671,16 @@
 											window.history.back();
 										});
 									});
+
+									var notDownloadIcons = document.getElementsByClassName("downloadicon");
+									for (var i = 0; i < notDownloadIcons.length && i < release.downloads.length; i++) {
+										const download = release.downloads[i];
+										notDownloadIcons[i].addEventListener("click", function() {
+											removeReleaseFile(args.package, download.url, function() {
+												location.reload();
+											});
+										});
+									}
 								} else {
 									setPage("page=404", true);
 								}

@@ -63,9 +63,28 @@ function setAppIcon(id, file, fun, ignore) {
 }
 
 function addReleaseFile(pkg, version, file, fun, ignore) {
+	if (FireFunctionCache != null && FireFunctionCache.data != null) {
+		FireFunctionCache.clear("getApp?appPackage=" + pkg);
+	}
+
 	firebase.storage().ref("apps/" + pkg.split(".").join("_") + "/releases/" +
 			version.split(".").join("_") + "/" + FileUtils.uid() + ".apk")
 		.put(file).then(fun, function() {
+			if (ignore) {
+				fun(file);
+			} else {
+				setPage("page=404", true);
+			}
+		});
+}
+
+function removeReleaseFile(pkg, filePath, fun, ignore) {
+	if (FireFunctionCache != null && FireFunctionCache.data != null) {
+		FireFunctionCache.clear("getApp?appPackage=" + pkg);
+	}
+
+	firebase.storage().ref(filePath)
+		.delete().then(fun, function() {
 			if (ignore) {
 				fun(file);
 			} else {
