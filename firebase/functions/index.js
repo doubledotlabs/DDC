@@ -90,10 +90,16 @@ exports.writeReview = functions.database.ref("/reviews/{reviewId}")
       obj[appPath] = true;
       obj[userPath] = true;
 
+      var dateObj = {};
+      if (event.data.previous.exists() && event.data.previous.child("reply").val() !=
+        event.data.child("reply").val()) {
+        dateObj["replyDate"] = new Date().toDateString();
+      } else {
+        dateObj["date"] = new Date().toDateString();
+      }
+
       return admin.database().ref().update(obj).then(function() {
-        return event.data.ref.update({
-          "date": new Date().toDateString()
-        });
+        return event.data.ref.update(dateObj);
       }, function(error) {
         console.log("Error adding reviews: ", error);
       });
@@ -474,7 +480,9 @@ function getReviewsPromise(reviews, options) {
               "date": review.date,
               "rating": review.rating,
               "summary": review.review.split(" ").slice(0, 30).join(" ") +
-                "..."
+                "...",
+              "reply": review.reply,
+              "replyDate": review.replyDate
             };
           });
         } else {
@@ -492,7 +500,9 @@ function getReviewsPromise(reviews, options) {
               "date": review.date,
               "rating": review.rating,
               "summary": review.review.split(" ").slice(0, 30).join(" ") +
-                "..."
+                "...",
+              "reply": review.reply != null,
+              "replyDate": review.replyDate
             };
           });
         }
