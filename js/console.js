@@ -108,3 +108,20 @@ function setReleaseChangelog(pkg, version, changelog, fun, ignore) {
 			}
 		});
 }
+
+function setReviewReply(pkg, author, reply, fun, ignore) {
+	var reviewId = pkg.split(".").join("_") + "-" + author;
+	if (FireFunctionCache != null && FireFunctionCache.data != null) {
+		FireFunctionCache.clear("getApp?appPackage=" + pkg);
+		FireFunctionCache.clear("getReview?reviewId=" + reviewId);
+	}
+
+	firebase.database().ref("reviews/" + reviewId + "/reply").set(reply).then(fun,
+		function() {
+			if (ignore) {
+				fun();
+			} else {
+				setPage("page=404", true);
+			}
+		});
+}

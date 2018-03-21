@@ -1,7 +1,7 @@
 var AppMethods = {};
 AppMethods.largeCard = function(app) {
 	return "<div class=\"largecard loadingimage\" onclick=\"setPage(\'page=app&package=" +
-	app.package + "\');\" " +
+		app.package + "\');\" " +
 		"style=\"background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent), url(" +
 		app.header +
 		"), #FFF; background-repeat: no-repeat; background-size: cover; background-position: center;\"" +
@@ -53,7 +53,7 @@ CategoryMethods.chip = function(category) {
 var ReviewMethods = {};
 ReviewMethods.normal = function(data) {
 	return "<div class=\"review\"><div class=\"reviewinfo\" onclick=\"setPage(\'page=user&id=" +
-	data.author.id + "\')\"><img src=\"" + data.author.image + "\"><div><b>" +
+		data.author.id + "\')\"><img src=\"" + data.author.image + "\"><div><b>" +
 		data.author.name + "</b><br>" + ratingMethod(data.rating) + "</div></div>" +
 		"<p>" + (data.review ? data.review : data.summary) + "</p>" +
 		"<p><small>Review " + (data.app ?
@@ -69,7 +69,7 @@ ReviewMethods.normal = function(data) {
 
 ReviewMethods.big = function(data) {
 	return "<div class=\"review\"><div class=\"reviewinfo\" onclick=\"setPage(\'page=user&id=" +
-	data.author.id + "\')\"><img src=\"" + data.author.image + "\"><div><b>" +
+		data.author.id + "\')\"><img src=\"" + data.author.image + "\"><div><b>" +
 		data.author.name + "</b><br>" + ratingMethod(data.rating) + "</div></div>" +
 		"<p>" + data.review + "</p>" +
 		"<p><small>Review of <a href=\"javascript:setPage(\'page=app&package=" +
@@ -82,9 +82,12 @@ ReviewMethods.console = function(data) {
 	return "<div class=\"review\"><div class=\"reviewinfo\"><img src=\"" + data.author
 		.image + "\"><div><b>" + data.author.name + "</b><br>" + ratingMethod(data.rating) +
 		"</div></div>" + "<p>" + (data.review ? data.review : data.summary) + "</p>" +
-		"<p><small>Published on " + data.date + "</small></p>" + (data.review ?
-			"<div class=\"input long\" contentEditable=\"true\" placeholder=\"Reply to review...\"></div>" +
-			"<button class=\"outline\">REPLY</button>" :
+		"<p><small>Published on " + data.date + "</small>" + (data.reply ?
+			"<br><small>Replied to on " + data.replyDate + "</small></p>" : "</p>") + (
+			data.review ?
+			"<div id=\"editReviewReply\" class=\"input long\" contentEditable=\"true\" placeholder=\"Reply to review...\">" +
+			(data.reply ? data.reply : "") + "</div>" +
+			"<button id=\"editReviewReplyButton\" class=\"outline\">REPLY</button>" :
 			"<a href=\"javascript:setPage(\'page=reviews&id=" + data.id +
 			"\')\">READ MORE / REPLY</a>") + "</div>";
 };

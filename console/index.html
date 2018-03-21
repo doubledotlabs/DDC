@@ -644,6 +644,14 @@
 					getReview(args.id, function(review) {
 						ElementUtils.clearElement(main);
 						ElementUtils.append(main, "<div class=\"single\">" + ReviewMethods.console(review) + "</div>");
+
+						var editReviewReplyElement = document.getElementById("editReviewReply");
+						document.getElementById("editReviewReplyButton").addEventListener("click", function() {
+							setLoading();
+							setReviewReply(review.app.package, review.author.id, editReviewReplyElement.innerText, function() {
+								window.history.back();
+							});
+						});
 					});
 				} else {
 					getAppReviews(args.package, function(reviews) {
