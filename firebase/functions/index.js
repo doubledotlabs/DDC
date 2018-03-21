@@ -444,7 +444,9 @@ function getReviewPromise(reviewId) {
               },
               "date": review.date,
               "rating": review.rating,
-              "review": review.review
+              "review": review.review,
+              "reply": review.reply,
+              "replyDate": review.replyDate
             };
           });
         });
