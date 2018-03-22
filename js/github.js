@@ -19,7 +19,7 @@ GitHub.signInToGithub = function() {
 };
 
 GitHub.getRepositories = function(lastCursor, onComplete, onError) {
-  GitHub.makeRequest("query { viewer { repositories(first: 20" + (lastCursor ? " after: \\\"" + lastCursor + "\\\"" : "") + ") { edges { cursor node { name description } } } } }", onComplete, onError);
+  GitHub.makeRequest("query { viewer { repositories(first: 20" + (lastCursor ? " after: \\\"" + lastCursor + "\\\"" : "") + ") { edges { cursor node { nameWithOwner name description } } } } }", onComplete, onError);
 };
 
 GitHub.getReleases = function(repoName, onComplete, onError) {
