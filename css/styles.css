@@ -305,21 +305,25 @@ select {
 	outline: none;
 	padding: 0.4em 0.8em;
 	padding-right: 30px;
+	margin-bottom: 0.8em;
 	min-width: 100%;
 	background-color: #FFF;
+	background-color: var(--normal-background);
 	color: #000;
+	color: var(--normal-color);
 	border: none;
 	border-radius: 0.25em;
 	box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.37);
 
 	-webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+  	-moz-appearance: none;
+  	appearance: none;
 
 	background: linear-gradient(45deg, transparent 50%, #000 50%), linear-gradient(135deg, #000 50%, transparent 50%), #FFF;
-  background-position: calc(100% - 17px) 1em, calc(100% - 12px) 1em;
-  background-size: 5px 5px, 5px 5px;
-  background-repeat: no-repeat;
+	background: linear-gradient(45deg, transparent 50%, var(--normal-color) 50%), linear-gradient(135deg, var(--normal-color) 50%, transparent 50%), var(--normal-background);
+  	background-position: calc(100% - 17px) 1em, calc(100% - 12px) 1em;
+  	background-size: 5px 5px, 5px 5px;
+  	background-repeat: no-repeat;
 }
 
 select::-ms-expand {

@@ -505,19 +505,24 @@
 
 								var links = [];
 								for (var i = 0; i < editLinksElement.childNodes.length; i++) {
-									var linkName = null, linkUrl = null;
+									var linkType = null, linkName = null, linkUrl = null;
 									var child = editLinksElement.childNodes[i];
 									if (child.tagName.toLowerCase() == "div") {
-										if (child.childNodes[0] && child.childNodes[0].tagName.toLowerCase() == "div") {
-											linkName = child.childNodes[0].innerText;
+										if (child.childNodes[0] && child.childNodes[0].tagName.toLowerCase() == "select") {
+											linkType = child.childNodes[0].value;
 										}
 
 										if (child.childNodes[1] && child.childNodes[1].tagName.toLowerCase() == "div") {
-											linkUrl = child.childNodes[1].innerText;
+											linkName = child.childNodes[1].innerText;
+										}
+
+										if (child.childNodes[2] && child.childNodes[2].tagName.toLowerCase() == "div") {
+											linkUrl = child.childNodes[2].innerText;
 										}
 
 										if (linkName && linkUrl) {
 											links.push({
+												"type": linkType,
 												"name": linkName,
 												"url": linkUrl
 											});

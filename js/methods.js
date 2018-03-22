@@ -192,26 +192,62 @@ DownloadMethods.consoleEdit = function(download) {
 };
 
 var LinkMethods = {};
+LinkMethods.types = [
+	{
+		"type": "website",
+		"icon": "public",
+		"name": "Website"
+	},
+	{
+		"type": "source",
+		"icon": "code",
+		"name": "Source Code"
+	},
+	{
+		"type": "donation",
+		"icon": "attach_money",
+		"name": "Donation"
+	},
+	{
+		"type": "email",
+		"icon": "email",
+		"name": "E-mail"
+	},
+	{
+		"type": "phone",
+		"icon": "phone",
+		"name": "Phone"
+	},
+	{
+		"type": "message",
+		"icon": "message",
+		"name": "Message"
+	},
+	{
+		"type": "forum",
+		"icon": "group_work",
+		"name": "Support Forum"
+	},
+	{
+		"type": "privacy_policy",
+		"icon": "visibility",
+		"name": "Privacy Policy"
+	},
+	{
+		"type": "tos",
+		"icon": "gavel",
+		"name": "Terms of Service"
+	}
+];
+
 LinkMethods.normal = function(link) {
 	var icon = "link";
-	if (link.type == "source")
-		icon = "code";
-	else if (link.type == "website")
-		icon = "public";
-	else if (link.type == "donation")
-		icon = "attach_money";
-	else if (link.type == "email")
-		icon = "email";
-	else if (link.type == "phone")
-		icon = "phone";
-	else if (link.type == "message")
-		icon = "message";
-	else if (link.type == "forum")
-		icon = "group_work";
-	else if (link.type == "privacy_policy")
-		icon = "visibility";
-	else if (link.type == "tos")
-		icon = "gavel";
+	for (var i = 0; i < LinkMethods.types.length; i++) {
+		if (link.type == LinkMethods.types[i].type) {
+			icon = LinkMethods.types[i].icon;
+			break;
+		}
+	}
 
 	return "<a class=\"link\" href=\"" + link.url +
 		"\"><i class=\"material-icons\">" + icon + "</i>" + link.name.toUpperCase() +
@@ -219,10 +255,19 @@ LinkMethods.normal = function(link) {
 };
 
 LinkMethods.editable = function(link) {
-	return "<div class=\"link editable\"><div class=\"input long\" contentEditable=\"true\" placeholder=\"Link Title\">" +
-	(link && link.name ? link.name : "") +
-	"</div><div class=\"input long\" contentEditable=\"true\" placeholder=\"Link URL\">" +
-	(link && link.url ? link.url : "") + "</div></div>";
+	var optionsHtml = "";
+	for (var i = 0; i < LinkMethods.types.length; i++) {
+		optionsHtml += "<option value=\"" + LinkMethods.types[i].type
+			+ "\"" + (link && link.type == LinkMethods.types[i].type ? " selected" : "") + ">"
+			+ LinkMethods.types[i].name + "</option>";
+	}
+
+	return "<div class=\"link editable\"><select>"
+		+ optionsHtml
+		+ "</select><div class=\"input long\" contentEditable=\"true\" placeholder=\"Link Title\">"
+		+ (link && link.name ? link.name : "")
+		+ "</div><div class=\"input long\" contentEditable=\"true\" placeholder=\"Link URL\">"
+		+ (link && link.url ? link.url : "") + "</div></div>";
 };
 
 LinkMethods.largeButton = function(link) {
