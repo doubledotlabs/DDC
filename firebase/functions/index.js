@@ -350,6 +350,14 @@ function getAppsPromise(apps) {
       function(snapshot) {
         const app = snapshot.val();
 
+        var downloads = 0;
+        for (var key in app.releases) {
+        	for (var key2 in app.releases[key].downloads) {
+        		if (app.releases[key].downloads[key2].downloads)
+        			downloads += app.releases[key].downloads[key2].downloads;
+        	}
+        }
+
         return getRatingPromise(app).then(function(rating) {
           return admin.database().ref("users/" + app.author).once(
             "value").then(function(snapshot) {
@@ -374,7 +382,8 @@ function getAppsPromise(apps) {
                       "id": app.author,
                       "name": author.name,
                       "image": author.image
-                    }
+                    },
+					"downloads": downloads
                   };
                 });
             });
@@ -559,6 +568,7 @@ exports.getApp = functions.https.onRequest((req, res) => {
           screenshots.push(app.screenshots[key]);
         }
 
+		var totalDownloads = 0;
         var releases = [];
         for (var key in app.releases) {
           var release = app.releases[key];
@@ -566,6 +576,8 @@ exports.getApp = functions.https.onRequest((req, res) => {
           var downloads = [];
           for (var key2 in release.downloads) {
             downloads.push(release.downloads[key2]);
+            if (release.downloads[key2].downloads)
+            	totalDownloads += release.downloads[key2].downloads;
           }
 
           release.downloads = downloads;
@@ -611,7 +623,8 @@ exports.getApp = functions.https.onRequest((req, res) => {
                       "rating": rating,
                       "ratings": reviews.length,
                       "reviews": reviews,
-                      "releases": releases
+                      "releases": releases,
+                      "downloads": totalDownloads
                     });
                   });
               });
