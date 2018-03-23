@@ -116,30 +116,26 @@ DownloadMethods.normal = function(data) {
 	else if (data.download.maxDpi)
 		dpi = "0 - " + data.download.maxDpi + "dpi";
 
-	return "<div class=\"download\">" + "<div class=\"downloadheader\">" +
-		"<span>" + data.release.date + "</span>" +
-		"<i class=\"material-icons downloadicon\" onclick=\"getDownloadURL(\'" +
-		data.download.url +
-		"\', function(url){location.href=url;});\">file_download</i>" + "</div><hr>" +
-		"<div class=\"releasecontent\">" + "<p><b>Version " + data.release.version +
-		"</b></p>" + data.release.changelog + "</div>" + "<div id=\"downloadContent" +
-		data.download.url + "\" class=\"downloadinfo content\">" +
-		"<i class=\"expand material-icons\" onclick=\"document.getElementById(\'downloadContent" +
-		data.download.url +
-		"\').classList.remove(\'active\');\">expand_more</i><hr>" +
-		"<span><b>Target SDK:</b> Android " + AndroidUtils.sdkToVersion(data.download
-			.target) + "</span>" + "<span><b>Required SDK:</b> Android " + AndroidUtils
-		.sdkToVersion(data.download.min) + (data.download.max ? " - " + AndroidUtils
-			.sdkToVersion(data.download.max) : "+") + "</span>" + (data.download.config ?
-			"<span><b>Configuration:</b> " + data.download.config + "</span>" : "") + (
-			data.download.arch ? "<span><b>Architecture:</b> " + data.download.arch +
-			"</span>" : "") + (dpi ? "<span><b>Screen Scale:</b> " + dpi + "</span>" :
-			"") + "<span><b>Download Size:</b> " + data.download.size + "</span>" +
-		"</div>" +
-		"<div class=\"expand\" onclick=\"document.getElementById(\'downloadContent" +
-		data.download.url + "\').classList.add(\'active\');\">" +
-		"<hr><div class=\"stat\"><i class=\"material-icons\">info</i><span>APK INFO</span></div>" +
-		"</div>" + "</div>";
+	return "<div class=\"download\">" + "<div class=\"downloadheader\">" 
+		+ "<span>" + data.release.date + "</span>" 
+		+ "<i class=\"material-icons downloadicon\" onclick=\"getDownloadURL(\'" + data.download.url + "\', function(url){location.href=url;});\">file_download</i>" 
+		+ "</div><hr>" + "<div class=\"releasecontent\">" 
+		+ "<p><b>Version " + data.release.version + "</b></p>" 
+		+ data.release.changelog + "</div>" 
+		+ "<div id=\"downloadContent" + data.download.url + "\" class=\"downloadinfo content\">" 
+		+ "<i class=\"expand material-icons\" onclick=\"document.getElementById(\'downloadContent" 
+		+ data.download.url + "\').classList.remove(\'active\');\">expand_more</i><hr>" 
+		+ "<span><b>Target SDK:</b> Android " + AndroidUtils.sdkToVersion(data.download.target) + "</span>" 
+		+ "<span><b>Required SDK:</b> Android " + AndroidUtils.sdkToVersion(data.download.min) + (data.download.max ? " - " + AndroidUtils.sdkToVersion(data.download.max) : "+") + "</span>" 
+		+ (data.download.config 
+			? "<span><b>Configuration:</b> " + data.download.config + "</span>" : "") + (data.download.arch ? "<span><b>Architecture:</b> " + data.download.arch + "</span>" : "") 
+		+ (dpi ? "<span><b>Screen Scale:</b> " + dpi + "</span>" : "") 
+		+ "<span><b>Download Size:</b> " + data.download.size + "</span>" 
+		+ "<span><b>Downloads:</b> " + (data.download.downloads ? data.download.downloads : "0") + "</span>"
+		+ "</div>" 
+		+ "<div class=\"expand\" onclick=\"document.getElementById(\'downloadContent" + data.download.url + "\').classList.add(\'active\');\">" 
+		+ "<hr><div class=\"stat\"><i class=\"material-icons\">info</i><span>APK INFO</span></div>" 
+		+ "</div>" + "</div>";
 };
 
 DownloadMethods.console = function(download) {
@@ -151,20 +147,18 @@ DownloadMethods.console = function(download) {
 	else if (download.maxDpi)
 		dpi = "0 - " + download.maxDpi + "dpi";
 
-	return "<div class=\"download\">" + "<div class=\"downloadheader\">" +
-		"<span>APK</span>" +
-		"<i class=\"material-icons downloadicon\" onclick=\"getDownloadURL(\'" +
-		download.url + "\', function(url){location.href=url;});\">file_download</i>" +
-		"</div><hr>" + "<div class=\"downloadinfo\">" +
-		"<span><b>Target SDK:</b> Android " + AndroidUtils.sdkToVersion(download.target) +
-		"</span>" + "<span><b>Required SDK:</b> Android " + AndroidUtils.sdkToVersion(
-			download.min) + (download.max ? " - " + AndroidUtils.sdkToVersion(download.max) :
-			"+") + "</span>" + (download.config ? "<span><b>Configuration:</b> " +
-			download.config + "</span>" : "") + (download.arch ?
-			"<span><b>Architecture:</b> " + download.arch + "</span>" : "") + (dpi ?
-			"<span><b>Screen Scale:</b> " + dpi + "</span>" : "") +
-		"<span><b>Download Size:</b> " + download.size + "</span>" + "</div>" +
-		"</div>";
+	return "<div class=\"download\">" + "<div class=\"downloadheader\">" + "<span>APK</span>" 
+		+ "<i class=\"material-icons downloadicon\" onclick=\"getDownloadURL(\'" + download.url + "\', function(url){location.href=url;});\">file_download</i>" 
+		+ "</div><hr>" + "<div class=\"downloadinfo\">" 
+		+ "<span><b>Target SDK:</b> Android " + AndroidUtils.sdkToVersion(download.target) + "</span>" 
+		+ "<span><b>Required SDK:</b> Android " + AndroidUtils.sdkToVersion(download.min) + (download.max 
+			? " - " + AndroidUtils.sdkToVersion(download.max) : "+") + "</span>" 
+		+ (download.config ? "<span><b>Configuration:</b> " + download.config + "</span>" : "") 
+		+ (download.arch ? "<span><b>Architecture:</b> " + download.arch + "</span>" : "") 
+		+ (dpi ? "<span><b>Screen Scale:</b> " + dpi + "</span>" : "") 
+		+ "<span><b>Download Size:</b> " + download.size + "</span>"
+		+ "<span><b>Downloads:</b> " + (download.downloads ? download.downloads : "0") + "</span>" 
+		+ "</div></div>";
 };
 
 DownloadMethods.consoleEdit = function(download) {
