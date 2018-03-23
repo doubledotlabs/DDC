@@ -490,13 +490,17 @@
 							var editRemoveLinkElement = document.getElementById("editRemoveLink");
 
 							editAddLinkElement.addEventListener("click", function() {
-								if (editLinksElement.childNodes.length < 10)
+								if (editLinksElement.childNodes.length < 10) {
 									editLinksElement.insertBefore(ElementUtils.createElement(LinkMethods.editable()), editLinksElement.lastChild);
+									onSizeChange();
+								}
 							});
 
 							editRemoveLinkElement.addEventListener("click", function() {
-								if (editLinksElement.childNodes.length >= 2)
+								if (editLinksElement.childNodes.length >= 2) {
 									editLinksElement.removeChild(editLinksElement.childNodes[editLinksElement.childNodes.length - 2]);
+									onSizeChange();
+								}
 							});
 
 							document.getElementById("editAppSubmit").addEventListener("click", function() {
@@ -593,7 +597,7 @@
 									+ "</div>"
 									+ "<button id=\"editAppUpload\" class=\"outline\" style=\"float: right;\">UPLOAD APK</button>"
 									+ "<button class=\"outline\" onclick=\"setPage('page=home');\" style=\"float: right; margin-right: 1em;\">CANCEL</button>")
-									+ "</div>";
+									+ "<br><br></div>";
 
 								var editAppNameElement = document.getElementById("editAppName");
 								var editAppSummaryElement = document.getElementById("editAppSummary");
@@ -604,13 +608,17 @@
 								var editAppUploadElement = document.getElementById("editAppUpload");
 
 								editAddLinkElement.addEventListener("click", function() {
-									if (editLinksElement.childNodes.length < 10)
+									if (editLinksElement.childNodes.length < 10) {
 										editLinksElement.insertBefore(ElementUtils.createElement(LinkMethods.editable()), editLinksElement.lastChild);
+										onSizeChange();
+									}
 								});
 
 								editRemoveLinkElement.addEventListener("click", function() {
-									if (editLinksElement.childNodes.length >= 3)
+									if (editLinksElement.childNodes.length >= 3) {
 										editLinksElement.removeChild(editLinksElement.childNodes[editLinksElement.childNodes.length - 2]);
+										onSizeChange();
+									}
 								});
 
 								editAppUploadElement.addEventListener("click", function() {
@@ -687,11 +695,15 @@
 										})), editLinksElement.lastChild);
 									}
 
+									onSizeChange();
+
 									var readmeRequest = new XMLHttpRequest();
 									readmeRequest.onreadystatechange = function() {
 										if (readmeRequest.readyState === 4) {
-											if (readmeRequest.status === 200 || readmeRequest.status == 0)
+											if (readmeRequest.status === 200 || readmeRequest.status == 0) {
 												editAppDescriptionElement.innerText = readmeRequest.responseText;
+												onSizeChange();
+											}
 										}
 									};
 									readmeRequest.open("GET", "https://raw.githubusercontent.com/" + args.repo + "/master/README.md", true);
