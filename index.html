@@ -652,13 +652,17 @@
 										var editRemoveLinkElement = document.getElementById("editRemoveLink");
 
 										editAddLinkElement.addEventListener("click", function() {
-											if (editLinksElement.childNodes.length < 10)
+											if (editLinksElement.childNodes.length < 10) {
 												editLinksElement.insertBefore(ElementUtils.createElement(LinkMethods.editable()), editLinksElement.lastChild);
+												onSizeChange();
+											}
 										});
 
 										editRemoveLinkElement.addEventListener("click", function() {
-											if (editLinksElement.childNodes.length >= 2)
+											if (editLinksElement.childNodes.length >= 2) {
 												editLinksElement.removeChild(editLinksElement.childNodes[editLinksElement.childNodes.length - 2]);
+												onSizeChange();
+											}
 										});
 
 										document.getElementById("editUserSubmit").addEventListener("click", function() {
