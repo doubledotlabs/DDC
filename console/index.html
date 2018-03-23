@@ -657,7 +657,48 @@
 							};
 
 							if (args.source == "github") {
-								//fetch data & populate layout
+								GitHub.getRepository(args.repo, function(result) {
+									addHtmlFunction();
+									console.log(result);
+									var editAppNameElement = document.getElementById("editAppName");
+									var editAppSummaryElement = document.getElementById("editAppSummary");
+									var editAppDescriptionElement = document.getElementById("editAppDescription");
+									var editLinksElement = document.getElementById("editLinks");
+
+									editAppNameElement.innerText = result.data.repository.name;
+									editAppSummaryElement.innerText = result.data.repository.description;
+									editAppDescriptionElement.innerText = result.data.repository.description;
+									
+									editLinksElement.removeChild(editLinksElement.childNodes[0]);
+
+									if (result.data.repository.url) {
+										editLinksElement.insertBefore(ElementUtils.createElement(LinkMethods.editable({
+											"type": "source",
+											"name": "GitHub",
+											"url": result.data.repository.url
+										})), editLinksElement.lastChild);
+									}
+
+									if (result.data.repository.homepageUrl) {
+										editLinksElement.insertBefore(ElementUtils.createElement(LinkMethods.editable({
+											"type": "website",
+											"name": "Website",
+											"url": result.data.repository.homepageUrl
+										})), editLinksElement.lastChild);
+									}
+
+									var readmeRequest = new XMLHttpRequest();
+									readmeRequest.onreadystatechange = function() {
+										if (readmeRequest.readyState === 4) {
+											if (readmeRequest.status === 200 || readmeRequest.status == 0)
+												editAppDescriptionElement.innerText = readmeRequest.responseText;
+										}
+									};
+									readmeRequest.open("GET", "https://raw.githubusercontent.com/" + args.repo + "/master/README.md", true);
+									readmeRequest.send();
+								}, function(error) {
+									
+								});
 							} else addHtmlFunction();
 						} else if (args.source == "github") {
 							if (GitHub.githubAccessToken) {
