@@ -1,6 +1,6 @@
 {
-  "short_name": "DDStore",
-  "name": "Double Dot Store",
+  "short_name": "DDC",
+  "name": "Dot Distribution Center",
   "start_url": "index.html?page=home",
   "gcm_sender_id": "103953800507"
 }
