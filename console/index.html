@@ -3,32 +3,32 @@
 <head>
 	<meta charset="utf-8">
 
-  <meta name="description" content="An app store for open source apps, developed and maintained by Double Dot Labs.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="generator" content="DDStore" />
-	<title>DDStore Console</title>
+  	<meta name="description" content="A distribution center for open source apps, developed and maintained by Double Dot Labs.">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<meta name="mobile-web-app-capable" content="yes">
+  	<meta name="generator" content="Dot Distribution Console" />
+	<title>Dot Distribution Console</title>
 
 	<meta name="theme-color" content="#FFFFFF">
-  <meta name="mobile-web-app-capable" content="yes">
-  <!-- <link rel="manifest" href="manifest.json"> -->
+ 	<meta name="mobile-web-app-capable" content="yes">
+  	<!-- <link rel="manifest" href="manifest.json"> -->
 
-  <meta name="application-name" content="DDStore">
-  <meta name="msapplication-TileColor" content="#FFFFFF">
-  <meta name="msapplication-tooltip" content="DDStore">
-  <!-- <meta name="msapplication-config" content="/ieconfig.xml"> -->
+  	<meta name="application-name" content="Dot Distribution Console">
+  	<meta name="msapplication-TileColor" content="#FFFFFF">
+  	<meta name="msapplication-tooltip" content="Dot Distribution Console">
+  	<!-- <meta name="msapplication-config" content="/ieconfig.xml"> -->
 
 	<!-- <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="icon" sizes="16x16" href="/favicon.ico">
-  <link rel="icon" sizes="24x24" href="/images/favicon-24.ico">
-  <link rel="icon" sizes="32x32" href="/images/favicon-32.ico">
-  <link rel="icon" sizes="48x48" href="/images/favicon-48.ico">
-  <link rel="icon" sizes="64x64" href="/images/favicon-48.ico"> -->
+  	<link rel="icon" sizes="16x16" href="/favicon.ico">
+  	<link rel="icon" sizes="24x24" href="/images/favicon-24.ico">
+  	<link rel="icon" sizes="32x32" href="/images/favicon-32.ico">
+  	<link rel="icon" sizes="48x48" href="/images/favicon-48.ico">
+  	<link rel="icon" sizes="64x64" href="/images/favicon-48.ico"> -->
 
 	<meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="white">
-  <meta name="apple-mobile-web-app-title" content="DDStore">
-  <!-- <link rel="apple-touch-icon-precomposed" href="/images/favicon-152.png"> -->
+  	<meta name="apple-mobile-web-app-status-bar-style" content="white">
+  	<meta name="apple-mobile-web-app-title" content="Dot Distribution Console">
+  	<!-- <link rel="apple-touch-icon-precomposed" href="/images/favicon-152.png"> -->
 
 	<!-- firebase stuff -->
 	<script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
@@ -118,8 +118,37 @@
 			height: 1.5em;
 		}
 
-		#logo>h1 {
+		#logo>div {
 			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+		
+		#logo>div>* {
+			margin: 0;
+			padding: 0;
+		}
+		
+		#logo>div>h1 {
+			font-size: 1.2em;
+			transform: translateY(16%);
+			transition: transform .25s;
+		}
+		
+		#logo:hover>div>h1 {
+			transform: translateY(0);
+		}
+		
+		#logo>div>h4 {
+			font-size: 0.6em;
+			transform: translateY(-50%);
+			opacity: 0;
+			transition: transform .25s, opacity .25s;
+		}
+		
+		#logo:hover>div>h4 {
+			transform: translateY(0);
+			opacity: 1;
 		}
 
 		#signin, #profile {
@@ -297,7 +326,13 @@
 </head>
 <body>
 	<header>
-		<div id="logo" onclick="setPage('page=home');"><img src="https://doubledotlabs.github.io/images/logo.svg"><h1>Console</h1></div>
+		<div id="logo" onclick="setPage('page=home');">
+			<img src="https://doubledotlabs.github.io/images/logo.svg">
+			<div>
+				<h1>DDC</h1>
+				<h4>Dot Distribution Console</h4>
+			</div>
+		</div>
 		<button id="signin" class="outline" onclick="location.href='../?page=signin';">
 			SIGN IN
 		</button>
@@ -323,9 +358,9 @@
 		</div>
 	</main>
 	<footer id="footer">
-		<span>DDStore is developed and maintained by <a href="https://doubledotlabs.github.io/">Double Dot Labs</a></span>
-		<a href="https://doubledotlabs.github.io/tos/?ddstore">Terms of Service</a>
-		<a href="https://doubledotlabs.github.io/policies/?ddstore">Privacy Policy</a>
+		<span>The Dot Distribution Center is developed and maintained by <a href="https://doubledotlabs.github.io/">Double Dot Labs</a></span>
+		<a href="https://doubledotlabs.github.io/tos/?ddc">Terms of Service</a>
+		<a href="https://doubledotlabs.github.io/policies/?ddc">Privacy Policy</a>
 	</footer>
 
 	<script type="text/javascript" src="../js/utils.js"></script>
