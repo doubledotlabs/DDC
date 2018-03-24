@@ -264,6 +264,13 @@ LinkMethods.editable = function(link) {
 		+ (link && link.url ? link.url : "") + "</div></div>";
 };
 
+LinkMethods.editableSansCategories = function(link) {
+	return "<div class=\"link editable\"><div class=\"input long\" contentEditable=\"true\" placeholder=\"Link Title\">"
+		+ (link && link.name ? link.name : "")
+		+ "</div><div class=\"input long\" contentEditable=\"true\" placeholder=\"Link URL\">"
+		+ (link && link.url ? link.url : "") + "</div></div>";
+};
+
 LinkMethods.largeButton = function(link) {
 	return "<button style=\"width: 20em; margin: 1em;\"" + (link && link.onclick ?
 		" onclick=\"" + link.onclick + "\"" : "") + ">" + (link && link.icon ?
