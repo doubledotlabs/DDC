@@ -70,7 +70,7 @@ header {
 
 footer {
 	background-color: #FFF;
-	background-color: var(--normal-background);
+	background-color: var(--normal-background-half);
 	clear: both;
 	padding: 2em;
 	text-align: center;
@@ -82,6 +82,11 @@ footer {
 footer > * {
 	padding: 1em 2em;
 	display: block;
+}
+
+footer a {
+	color: #000;
+	color: var(--normal-color);
 }
 
 nav>span {
