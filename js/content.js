@@ -44,6 +44,8 @@ function getUser(id, fun, ignore) {
 }
 
 function setUser(id, name, links, fun, ignore) {
+	FireFunctionCache.clear("getUser?userId=" + id);
+	
 	firebase.database().ref("users/" + id).update({
 		"name": name,
 		"links": links
@@ -82,7 +84,11 @@ function getReview(id, fun, ignore) {
 }
 
 function setReview(pkg, user, rating, review, fun, ignore) {
-	firebase.database().ref("reviews/" + pkg.split(".").join("_") + "-" + user.uid)
+	var reviewId = pkg.split(".").join("_") + "-" + user.uid;
+	FireFunctionCache.clear("getApp?appPackage=" + pkg);
+	FireFunctionCache.clear("getReview?reviewId=" + reviewId);
+	
+	firebase.database().ref("reviews/" + reviewId)
 		.set({
 			"app": pkg,
 			"author": user.uid,
