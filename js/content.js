@@ -121,13 +121,21 @@ FireFunctionCache.call = function(name, onComplete, onError) {
 	if (typeof(Storage) !== "undefined")
 		localStorageItem = localStorage.getItem(FireFunctionCache.prefix + name);
 
-	if (FireFunctionCache.data[name] && FireFunctionCache.data[name].timeout -
-		Date.now() > 0) {
-		onComplete(JSON.parse(FireFunctionCache.data[name].response));
-	} else if (localStorageItem && JSON.parse(localStorageItem).timeout - Date.now() >
-		0) {
+	if (FireFunctionCache.data[name] && FireFunctionCache.data[name].timeout - Date.now() > 0) {
+		try {
+			onComplete(JSON.parse(FireFunctionCache.data[name].response));
+		} catch (e) {
+			console.error(e, FireFunctionCache.data[name].response);
+			onError();
+		}
+	} else if (localStorageItem && JSON.parse(localStorageItem).timeout - Date.now() > 0) {
 		FireFunctionCache.data[name] = JSON.parse(localStorageItem);
-		onComplete(JSON.parse(FireFunctionCache.data[name].response));
+		try {
+			onComplete(JSON.parse(FireFunctionCache.data[name].response));
+		} catch (e) {
+			console.error(e, FireFunctionCache.data[name].response);
+			onError();
+		}
 	} else {
 		FireFunctionCache.clear(name);
 
@@ -144,14 +152,19 @@ FireFunctionCache.call = function(name, onComplete, onError) {
 						localStorage.setItem(FireFunctionCache.prefix + name, JSON.stringify(
 							FireFunctionCache.data[name]));
 
-					onComplete(JSON.parse(requestContent.responseText));
+					try {
+						onComplete(JSON.parse(requestContent.responseText));
+					} catch (e) {
+						console.error(e, requestContent.responseText);
+						onError();
+					}
 				} else {
-					onError(requestContent.status, requestContent.responseText);
+					console.error("Unexpected status: " + requestContent.status, requestContent.responseText);
+					onError();
 				}
 			}
 		}
-		requestContent.open("GET",
-			"https://us-central1-ddstore-87442.cloudfunctions.net/" + name, true);
+		requestContent.open("GET", "https://us-central1-ddstore-87442.cloudfunctions.net/" + name, true);
 		requestContent.send(null);
 	}
 }

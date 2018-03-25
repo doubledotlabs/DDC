@@ -43,11 +43,17 @@ GitHub.makeRequest = function(query, onComplete, onError) {
   	requestContent.onreadystatechange = function() {
   		if (requestContent.readyState === 4) {
   			if (requestContent.status === 200 || requestContent.status == 0) {
-  				onComplete(JSON.parse(requestContent.responseText));
+  				try {
+  					onComplete(JSON.parse(requestContent.responseText));
+  				} catch (e) {
+  					console.error(e, requestContent.responseText);
+  					onError();
+  				}
   			} else if (requestContent.status == 401) {
-          GitHub.signInToGithub();
-        } else {
-  				onError(requestContent.status, requestContent.responseText);
+          		GitHub.signInToGithub();
+        	} else {
+        		console.error("Unexpected status (GitHub): " + requestContent.status, requestContent.responseText);
+  				onError();
   			}
   		}
   	}
