@@ -105,52 +105,37 @@
 			cursor: pointer;
 			user-select: none;
 		}
-
+		
 		#logo>* {
 			font-weight: bolder;
-			font-size: 1.75em;
-			margin: 0;
-			display: inline-block;
-			margin-right: 0.5em;
-		}
-
-		#logo>img {
-			height: 1.5em;
-		}
-
-		#logo>div {
-			position: absolute;
-			top: 50%;
-			transform: translateY(-50%);
-		}
-		
-		#logo>div>* {
 			margin: 0;
 			padding: 0;
+			margin-right: 0.5em;
 		}
-		
-		#logo>div>h1 {
-			font-size: 1.2em;
-			transform: translateY(16%);
+				
+		#logo>h1 {
+			font-size: 2em;
+			transform: translateY(0);
 			transition: transform .25s;
 		}
 		
-		#logo:hover>div>h1 {
-			transform: translateY(0);
+		#logo:hover>h1 {
+			transform: translateY(-.5em);
 		}
 		
-		#logo>div>h4 {
-			font-size: 0.6em;
-			transform: translateY(-50%);
+		#logo>h4 {
+			height: 0;
+			font-size: 1em;
+			transform: translateY(-1.5em);
 			opacity: 0;
 			transition: transform .25s, opacity .25s;
 		}
 		
-		#logo:hover>div>h4 {
-			transform: translateY(0);
+		#logo:hover>h4 {
+			transform: translateY(-1em);
 			opacity: 1;
 		}
-
+		
 		#signin, #profile {
 			display: block;
 			position: absolute;
@@ -327,11 +312,8 @@
 <body>
 	<header>
 		<div id="logo" onclick="setPage('page=home');">
-			<img src="https://doubledotlabs.github.io/images/logo.svg">
-			<div>
-				<h1>DDC</h1>
-				<h4>Dot Distribution Console</h4>
-			</div>
+			<h1>DDC</h1>
+			<h4>Dot Distribution Console</h4>
 		</div>
 		<button id="signin" class="outline" onclick="location.href='../?page=signin';">
 			SIGN IN
