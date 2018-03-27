@@ -805,3 +805,24 @@ exports.getDownloadURL = functions.https.onRequest((req, res) => {
     }
   });
 });
+
+exports.getPending = functions.https.onRequest((req, res) => {
+  cors()(req, res, () => {
+  	admin.database().ref("pending")
+  		.orderByChild("author")
+  		.equalTo(req.query.authorId)
+  		.once("value")
+  		.then(function(snapshot) {
+  			var pending = snapshot.val();
+  			var apps = [];
+  			for (var key in pending) {
+  				pending[key]["package"] = key.split("_").join(".");
+  				apps.push(pending[key]);
+  			}
+
+  			res.status(200).send(apps);	
+  		}, function(error) {
+  			res.status(404).send(error);
+  		});
+  });	
+});
