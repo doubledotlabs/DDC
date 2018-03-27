@@ -112,6 +112,14 @@ function getDownloadURL(path, fun, ignore) {
 	});
 }
 
+function getPending(user, fun, ignore) {
+	FireFunctionCache.call("getPending?authorId=" + user, fun, function() {
+		if (ignore)
+			fun();
+		else setPage("page=404", true);	
+	});
+}
+
 var FireFunctionCache = {};
 FireFunctionCache.prefix = "FireFunctionCache-";
 FireFunctionCache.data = {};

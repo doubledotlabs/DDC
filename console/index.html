@@ -387,10 +387,23 @@
 					if (user.apps && user.apps.length > 0) {
 						ElementUtils.clearElement(main);
 
-						ElementUtils.append(main, "<div class=\"inset\">"
+						ElementUtils.append(main, "<h1 style=\"margin-left: 1em;\">Published Apps</h1><div class=\"inset\">"
 							+ "<div class=\"row grid\">"+ ListMethods.none({}, user.apps, AppMethods.consoleTinyCard)
 							+ "<a href=\"javascript:setPage(\'page=app&new\');\"><i class=\"material-icons\">add</i>NEW APPLICATION</a></div>"
 							+ "</div>");
+
+						getPending(currentUser.uid, function(pending) {
+							var apps = [];
+							for (var key in pending) {
+								apps.push(pending[key]);
+							}
+							
+							if (apps.length > 0) {
+								ElementUtils.append(main, "<h1 style=\"margin-left: 1em;\">Pending Submissions</h1><div class=\"inset\">"
+									+ "<div class=\"row grid\">" + ListMethods.none({}, apps, AppMethods.consolePendingTinyCard) + "</div>"
+									+ "</div>");			
+							}				
+						});
 					}
 				});
 			} else if (args.page == "app") {

@@ -29,12 +29,19 @@ AppMethods.tinyCard = function(app) {
 };
 
 AppMethods.consoleTinyCard = function(app) {
-	return "<div class=\"tinycard\" onclick=\"setPage(\'page=app&package=" + app.package +
-		"\');\">" + "<img src=\"" + app.icon + "\">" + "<p class=\"info\"><b>" + app
-		.name + "</b><br><small style=\"position: absolute;\">" + app.downloads +
-		" downloads" + "</small><small style=\"float: right;\"><b style=\"color: " +
-		SiteUtils.getRatingColor(app.rating) + ";\">" + (app.rating ? app.rating :
-			"-") + "&nbsp;&#9733;</b></small></p></div>";
+	return "<div class=\"tinycard\" onclick=\"setPage(\'page=app&package=" + app.package + "\');\">" 
+			+ "<img src=\"" + app.icon + "\">" 
+			+ "<p class=\"info\"><b>" + app.name + "</b><br>"
+			+ "<small style=\"position: absolute;\">" + app.downloads + " downloads</small>"
+			+ "<small style=\"float: right;\"><b style=\"color: " + SiteUtils.getRatingColor(app.rating) + ";\">" 
+			+ (app.rating ? app.rating : "-") + "&nbsp;&#9733;</b></small></p></div>";
+};
+
+AppMethods.consolePendingTinyCard = function(app) {
+	return "<div class=\"tinycard\" onclick=\"setPage(\'page=app&package=" + app.package + "&pending\');\">" 
+		+ "<img src=\"" + app.icon + "\">" 
+		+ "<p class=\"info\"><b>" + (app.name ? app.name : app.package) + "</b><br>"
+		+ "<small style=\"float: right;\">" + (app.status ? app.status : "Pending") + "</small></p></div>";
 };
 
 var ImageMethods = {};
