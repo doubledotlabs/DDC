@@ -364,7 +364,18 @@
 					getCategories(function(categories) {
 						ElementUtils.clearElement(main);
 
-						var html = ListMethods.carousel({
+						var html = "<div style=\"padding: calc(5vw + 1em);\"><p>"
+							+ "This is the Dot Distribution Center, a ridiculously large project that was obviously too much "
+							+ "for me to take on by myself. The aim of this project is to bring awareness to smaller open source "
+							+ "Android apps, and to not only provide a uniform way to distribute and access them but also the ability "
+							+ "for users to write reviews and provide feedback to developers without the need of any technical knowledge. "
+							+ "Since I started making it, the website has become somewhat disorganized "
+							+ "(mostly due to a lack of documentation) and many issues/inconveniences have been discovered in the "
+							+ "backend. In order to solve these problems, the project will likely need to be rebuilt from scratch. "
+							+ "Naturally, this project is open source and is published <a href=\"https://github.com/DoubleDotLabs/DDC\" style=\"text-transform: none;\">on GitHub</a>."
+							+ "</p></div>";
+						
+						html += ListMethods.carousel({
 							autoplay: true,
 		  				centerMode: true,
 		  				centerPadding: '80px',
@@ -594,25 +605,25 @@
 			} else if (args.page == "signin") {
 				ElementUtils.clearElement(main);
 				ElementUtils.append(main, "<div style=\"padding: calc(5vw + 1em);\">"
-					+ "<div id=\"auth-container\" style=\"margin-bottom: calc(5vw + 1em);\"></div>"
+					+ "<p>Sign-in has been disabled. See the notice on the homepage for more information.</p>"
 					+ "</div>");
 
-				if (firebaseUI) {
+				/*if (firebaseUI) {
 					firebaseUI.reset();
 				} else {
 					firebaseUI = new firebaseui.auth.AuthUI(firebase.auth());
 				}
 
-      	firebaseUI.start('#auth-container', {
-        	signInSuccessUrl: "javascript:setPage(\'page=home\');",
-        	signInOptions: [
-          	firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-          	firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-          	firebase.auth.GithubAuthProvider.PROVIDER_ID,
-          	firebase.auth.EmailAuthProvider.PROVIDER_ID
-        	],
-        	tosUrl: 'https://doubledotlabs.github.io/tos/?ddc'
-      	});
+      			firebaseUI.start('#auth-container', {
+        			signInSuccessUrl: "javascript:setPage(\'page=home\');",
+        			signInOptions: [
+          				firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+          				firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+          				firebase.auth.GithubAuthProvider.PROVIDER_ID,
+          				firebase.auth.EmailAuthProvider.PROVIDER_ID
+        			],
+        			tosUrl: 'https://doubledotlabs.github.io/tos/?ddc'
+      			});*/
 			} else if (args.page == "user") {
 				if (args.id && !(currentUser && args.id == currentUser.uid)) {
 					setLoading();
