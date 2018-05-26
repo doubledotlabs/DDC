@@ -32,7 +32,7 @@ The Android App would have all of the functionality of the website with the addi
 
 Since the Play Store guidelines prevent developers from publishing secondary "app stores" on it, our solution would be to remove the "distribution" functionality from the app to publish it, leaving only the ability to find and review apps.
 
-### Libraries
+### Tools / Libraries
 
 Several useful tools and libraries that make it easier to publish and maintain apps could be developed alongside this project. Ones that we are currently considering:
 
