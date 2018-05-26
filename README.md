@@ -1,8 +1,12 @@
-This is the Dot Distribution Center, a ridiculously large project that was obviously too much for me to take on by myself. The aim of this project is to bring awareness to smaller open source Android projects, and to not only provide a uniform way to distribute and access them but also the ability for users to write reviews and provide feedback to developers without the need of any technical knowledge. I originally started making it for a final project at school, which is why everything is written in vanilla JS and I have used as little libraries as possible. Since then, the website has become somewhat disorganized (mostly due to a lack of documentation) and many issues/inconveniences have been discovered in the [firebase spaghetti](firebase) that I wrote without much initial knowledge of how to use it. In order to solve these problems, the project will likely need to be rebuilt from scratch.
+This is the Dot Distribution Center, a ridiculously large and ambitious project that was obviously too much for me to take on by myself. The aim of this project is to bring awareness to smaller open source Android projects, and to not only provide a uniform way to distribute and access them but also the ability for users to write reviews and provide feedback to developers without the need of any technical knowledge. I originally started making it for a final project at school, which is why everything is written in vanilla JS and I have used as little libraries as possible. Since then, the website has become somewhat disorganized (mostly due to a lack of documentation) and many issues/inconveniences have been discovered in the [firebase spaghetti](firebase) that I wrote without much initial knowledge of how to use it. In order to solve these problems, much of the project will likely need to be rebuilt from scratch.
 
-Plans for different areas of this project are below:
+## Contributing
 
-## Parts
+Pull requests are welcome. If we haven't already started, we will likely begin rebuilding the project on a new branch, so any contributions should be made to that, whatever it happens to be (it will most likely be titled `develop` or something similarly obvious). If you are interested in becoming more involved with the development this project, I recommend contacting either [me](https://jfenn.me/?contact) or [Marlon](https://twitter.com/DezinKode) so that we can add you on slack.
+
+Some general plans for the different areas of this project are below:
+
+## Plans
 
 ### Website
 
